@@ -132,7 +132,7 @@
   margin-top: 20px;
   width: 87%;
   height: 3px;
-  background: red;
+  background: #009CDE;
   border-radius: 2px;
 
 }
@@ -194,7 +194,7 @@
 
 .layer {
   height: 300px;
-  width: 960px;
+  width: 1600px;
   margin-left: auto;
   margin-right: auto;
   padding-bottom: 20px;
