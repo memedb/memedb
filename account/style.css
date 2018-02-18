@@ -373,6 +373,8 @@ p {
   margin-top: 15px;
   margin-bottom: 15px;
   margin-right: 15px;
+  transition: transform 0.5s;
+  transition-timing-function: cubic-bezier(0.7, -0.02, 0.23, 0.99);
 }
 
 .l-edit {
@@ -391,6 +393,8 @@ p {
   margin-left: 400px;
   position: relative;
   background: red;
-
-
+  /*Change this for the curve*/
+  transition-timing-function: cubic-bezier(0.88, -0.01, 0.01, 1.01);
+  transition: height 1s;
+  z-index: -1000;
 }
