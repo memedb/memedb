@@ -2,6 +2,7 @@
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, Sans-Serif;
   margin: 0px;
   padding: 0px,0px,0px,0px;
+  z-index: 0;
 }
 
 p {
@@ -95,6 +96,8 @@ p {
   height: 100%;
   width: 400px;
   background: #eee;
+
+  overflow: hidden;
 }
 
 .image {
@@ -216,7 +219,7 @@ p {
 
 .div-line {
   height: 1px;
-  width: 37%;
+  width: 36.5%;
   margin: auto;
   background: #ccc;
   border-radius: 10px;
@@ -281,10 +284,16 @@ p {
 
 .result-box {
   width: 80%;
-  height: 100%;
   margin: auto;
   padding-top: 0.1px;
   margin-top: 10px;
+}
+
+.scroll-hide {
+  width: 100%;
+  height: 100%;
+  padding-right: 17px;
+  overflow-y: scroll;
 }
 
 .r-container {
@@ -469,4 +478,102 @@ p {
   margin-bottom: 5px;
   margin-right: 5px;
 
+}
+
+.l-img:hover {
+  background: #c6c6c6;
+}
+
+/* MESSAGE */
+
+.imp-bg-fade {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 10000;
+  background: #222;
+  opacity: 0.2;
+}
+
+.imp-message {
+  position: absolute;
+  right: 40%;
+  top: 50%;
+  width: 300px;
+  height: auto;
+  background: #fdfdfd;
+  border-radius: 2px;
+  padding: 8px 8px 8px 8px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  z-index: 100000;
+  cursor: default;
+
+}
+
+.imp-title-holder {
+  position: relative;
+  width: 100%;
+  height: 20px;
+  margin-bottom: 10px;
+
+}
+
+.imp-icon {
+  position: relative;
+  font: Roboto;
+  float: left;
+  color: #444;
+  margin-left: 10px;
+
+}
+
+.imp-title {
+  position: relative;
+  float: left;
+  font-size: 20px;
+  font-weight: 600;
+  margin-left: 10px;
+}
+
+.imp-p {
+  z-index: 100000;
+  text-align: left;
+  font-weight: 300;
+  margin-bottom: 7px;
+  margin-left: 10px;
+}
+
+.imp-op-1 {
+  position: relative;
+  text-decoration: none;
+  font-family: Roboto;
+  font-weight: 600;
+  color: #444;
+  background-color: inherit;
+  border: none;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 4px;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  z-index: 100000;
+}
+
+.imp-op-2 {
+  position: relative;
+  text-decoration: none;
+  right: 0px;
+  font-family: Roboto;
+  font-weight: 600;
+  color: #444;
+  background-color: inherit;
+  border: none;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 4px;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  z-index: 100000;
 }
