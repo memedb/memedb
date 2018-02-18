@@ -384,3 +384,13 @@ p {
   margin-bottom: 15px;
   margin-right: 15px;
 }
+
+.l-content {
+  width: auto;
+  height: 500px;
+  margin-left: 400px;
+  position: relative;
+  background: red;
+
+
+}
