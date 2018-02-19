@@ -997,10 +997,10 @@ body{
 /* LOGIN */
 
 .login-h1 {
-  font: Roboto;
+  font-family: 'Roboto', sans-serif;
   font-size: 60px;
   color: #fff;
-  font-weight: 500;
+  font-weight: 400;
   margin-left: 40px;
   margin-top: 10px;
 
@@ -1021,7 +1021,7 @@ body{
 
 .login-block {
   width: 400px;
-  height: 350px;
+  height: 400px;
   position:absolute;
   color:#fff;
   top:50%;
@@ -1060,24 +1060,6 @@ body{
 
 }
 
-.button {
-  position: relative;
-  text-decoration: none;
-  font-family: Roboto;
-  font-weight: 500;
-  color: #fff;
-  background: #222;
-  padding: 8px 16px 8px 16px;
-  margin: 3px 40px 3px 2px;
-  border-radius: 2px;
-  border: none;
-  text-align: center;
-  font-size: 16px;
-  cursor: pointer;
-  float: right;
-  bottom: 0px;
-}
-
 .alt {
   position: relative;
   text-decoration: none;
@@ -1103,16 +1085,6 @@ body{
 }
 
 /* LOGIN */
-
-.login-h1 {
-  font: Roboto;
-  font-size: 60px;
-  color: #fff;
-  font-weight: 300;
-  margin-left: 40px;
-  margin-top: 10px;
-
-}
 
 .color-block {
   width: 100%;
@@ -1186,10 +1158,18 @@ body{
   bottom: 0px;
 }
 
+.l-buttons {
+  width: 100%;
+  height: 50px;
+  position: relative;
+  bottom: 0px;
+  top: 50px;
+}
+
 .alt {
   position: relative;
   text-decoration: none;
-  font-family: Roboto;
+  font-family: 'Roboto';
   font-weight: 500;
   color: #222;
   background: inherit;
