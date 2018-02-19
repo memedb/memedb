@@ -466,8 +466,8 @@ p {
   height: auto;
   position: relative;
   /*Change this for the curve*/
-  transition-timing-function: cubic-bezier(0.88, -0.01, 0.01, 1.01);
-  transition: height 1s;
+  transition-timing-function: cubic-bezier(0, 0.98, 0.21, 0.99);
+  transition: height 0.3s;
   overflow: hidden;
 }
 
