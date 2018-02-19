@@ -777,7 +777,7 @@ body{
   border-radius: 2px;
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
   position: absolute;
-  right: 50px;
+  right: 130px;
   top: 70px;
   z-index: 100;
   cursor: default;

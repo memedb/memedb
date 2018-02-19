@@ -28,7 +28,7 @@ $(document).ready(function() {
   $("#imp-bg-fade").click(function() {
     $(".l-sett-opt").css({
       opacity: "0",
-      right: "0"
+      right: "120px"
     });
     $("#imp-message, #imp-bg-fade").css("opacity", "0");
     setTimeout(function() {
@@ -40,9 +40,9 @@ $(document).ready(function() {
 function openOptions(id) {
   console.log(id);
   $(".l-sett-opt").css({
-    marginTop: (parseInt(id) * 60) + "px",
+    marginTop: (parseInt(id) * 62) + "px",
     opacity: "0",
-    right: "40px",
+    right: "120px",
     display: ""
   });
   $("#imp-bg-fade").css("display", "");

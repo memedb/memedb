@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 require('sql.php');
 
 $server = "localhost";
@@ -51,9 +53,4 @@ class user {
   }
 
 }
-
-$img = image::loadFromId(1);
-
-echo $img->tags[0];
-$img->printImage();
  ?>
