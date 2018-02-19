@@ -59,5 +59,5 @@ function showError(message) {
   elmt = $("#imp-bg-fade, #imp-message");
   elmt.css("display","");
   setTimeout(function() {elmt.css("opacity", "")}, 10);
-  $(".imp-message .imp-p").innerHTML = message;
+  $("#imp-message .imp-p").text(message);
 }
