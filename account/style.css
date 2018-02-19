@@ -10,8 +10,12 @@ p {
   font-weight: 500;
 }
 
-.body{
-  background: #F5F5F6;
+html {
+  height: 100%;
+  width: 100%;
+}
+
+body{
   position: relative;
   height: 100%;
   width: 100%;
@@ -75,11 +79,6 @@ p {
   background-color: #eee;
   z-index: 100;
 
-}
-
-.search-g {
-  position: relative;
-  top: -10px;
 }
 
 .pepe {
@@ -362,6 +361,7 @@ p {
   width: auto;
   height: auto;
   margin-left: 400px;
+  margin-right: 71px;
 }
 
 .library {
@@ -588,7 +588,36 @@ p {
 
 .material-icons {
   color: #222;
-  font-size: 30px;
+  font-size: 27px;
   position: relative;
   top: 2px;
+}
+
+/* EDIT MENU */
+
+.edit-menu {
+  position: fixed;
+  right: 0px;
+  height: 100%;
+  width: 70px;
+  background: #f5f5f5;
+  border-left: 1px #ddd solid;
+}
+
+.edit-icons {
+  position: relative;
+  font-size: 29px;
+  width: auto;
+  height: auto;
+  margin-left: 21px;
+  margin-right: 21px;
+  margin-top: 9px;
+  margin-bottom: 9px;
+  color: #444;
+  cursor: pointer;
+
+}
+
+.edit-icons:hover {
+  color: #333;
 }
