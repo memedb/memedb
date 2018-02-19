@@ -415,6 +415,9 @@ p {
   top: 70px;
   z-index: 100;
   cursor: default;
+  transition: right 0.2s, opacity 0.2s;
+  transition-timing-function: cubic-bezier(0.88, -0.01, 0.01, 1.01);
+  z-index: 100000;
 }
 
 .l-sett-button {
@@ -487,7 +490,7 @@ p {
 /* MESSAGE */
 
 .imp-bg-fade {
-  position: absolute;
+  position: fixed;
   width: 100%;
   height: 100%;
   top: 0;

@@ -2,6 +2,7 @@
 <html>
 
 <head>
+  <script src="../js/jquery-3.3.1.min.js"></script>
   <script src="../js/main.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic|Roboto+Mono:400|Material+Icons" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Lato:400,900,400italic,700italic" rel="stylesheet">
@@ -11,7 +12,7 @@
   <title>memedb</title>
 </head>
 
-<body onload="load();">
+<body>
 
   <div class="top-bar">
     <div class="logo">memedb</div>
@@ -207,6 +208,17 @@
 
   <div class="content">
 
+    <div class="l-sett-opt" style="display: none;">
+      <button class="l-sett-button">Rename</button>
+      <button class="l-sett-button">Info</button>
+      <button class="l-sett-button">Settings</button>
+
+      <div class="l-line"></div>
+
+      <button class="l-sett-button" style="color: #f44242;">Delete</button>
+
+    </div>
+
     <!-- MAKE SURE TO CHANGE imp-bg-fade ALONG WITH THIS -->
 
     <div class="imp-message" id="imp-message" style="display: none; opacity: 0;">
@@ -221,17 +233,6 @@
 
     <div class="library">
       <h1 class="l-title">Library 1</h1>
-
-      <div class="l-sett-opt" style="display: none;">
-        <button class="l-sett-button">Rename</button>
-        <button class="l-sett-button">Info</button>
-        <button class="l-sett-button">Settings</button>
-
-        <div class="l-line"></div>
-
-        <button class="l-sett-button" style="color: #f44242;">Delete</button>
-
-      </div>
 
       <div class="l-settings">
         <i class="material-icons">keyboard_arrow_down</i>
@@ -319,17 +320,6 @@
 
     <div class="library">
       <h1 class="l-title">Library 2</h1>
-
-      <!-- <div class="l-sett-opt">
-        <button class="l-sett-button">Rename</button>
-        <button class="l-sett-button">Info</button>
-        <button class="l-sett-button">Settings</button>
-
-        <div class="l-line"></div>
-
-        <button class="l-sett-button" style="color: #f44242;">Delete</button>
-
-      </div> -->
 
       <div class="l-settings">
         <i class="material-icons">keyboard_arrow_down</i>

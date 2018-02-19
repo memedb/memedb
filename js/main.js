@@ -1,41 +1,63 @@
 toggled = new Array();
 
-function load() {
-	console.log("load");
-	buttons = document.querySelectorAll(".library");
-	for (i = 0; i < buttons.length; i++) {
-		buttons[i].id = i.toString();
-		buttons[i].onclick = function() {
-			console.log(this.id);
-			if(toggled[this.id]) {
-				this.children[1].style.transform = "";
-				this.nextElementSibling.style.height = "0px";
-			} else {
-				this.children[1].style.transform = "rotate(180deg)";
-				content = this.nextElementSibling;
-				content.style.height = "";
-				height = content.clientHeight;
-				content.style.height = "0px";
-				setTimeout(function() {
-					content.style.height = height.toString() + "px";
-				}, 10);
-			}
-			toggled[this.id] = !toggled[this.id];
-    };
-  }
-};
+$(document).ready(function() {
+  libs = $(".library");
+  for (i = 0; i < libs.length; i++) libs[i].id = i.toString();
+  libs.click(function(event) {
+    if(toggled[this.id]) {
+			this.querySelector(".l-settings").style.transform = "";
+			this.nextElementSibling.style.height = "0px";
+		} else {
+			this.querySelector(".l-settings").style.transform = "rotate(180deg)";
+			content = this.nextElementSibling;
+			content.style.height = "";
+			height = content.clientHeight;
+			content.style.height = "0px";
+			setTimeout(function() {
+				content.style.height = height.toString() + "px";
+			}, 10);
+		}
+		toggled[this.id] = !toggled[this.id];
+  });
+
+  $(".l-drop").click(function(event) {
+    openOptions(this.parentElement.id);
+    event.stopPropagation();
+  });
+
+  $("#imp-bg-fade").click(function() {
+    $(".l-sett-opt").css({
+      opacity: "0",
+      right: "0"
+    });
+    $("#imp-message, #imp-bg-fade").css("opacity", "0");
+    setTimeout(function() {
+      $("#imp-message, #imp-bg-fade, .l-sett-opt").css("display", "none");
+    }, 100);
+  });
+});
+
+function openOptions(id) {
+  console.log(id);
+  $(".l-sett-opt").css({
+    marginTop: (parseInt(id) * 60) + "px",
+    opacity: "0",
+    right: "40px",
+    display: ""
+  });
+  $("#imp-bg-fade").css("display", "");
+  setTimeout(function() {
+    $(".l-sett-opt").css({
+      opacity: "",
+      right: ""
+    });
+    $("#imp-bg-fade").css("opacity", "");
+  }, 10);
+}
 
 function showError(message) {
-	bg = document.getElementById("imp-bg-fade");
-	msg = document.getElementById("imp-message");
-
-	bg.style.display = "";
-	msg.style.display = "";
-
-	setTimeout(function() {
-		bg.style.opacity = "";
-		msg.style.opacity = "";
-	}, 10);
-
-	document.querySelectorAll(".imp-message .imp-p")[0].innerHTML = message;
+  elmt = $("#imp-bg-fade, #imp-message");
+  elmt.css("display","");
+  setTimeout(function() {elmt.css("opacity", "")}, 10);
+  $(".imp-message .imp-p").innerHTML = message;
 }
