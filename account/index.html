@@ -8,7 +8,7 @@
   <link href="https://fonts.googleapis.com/css?family=Lato:400,900,400italic,700italic" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab:700" rel="stylesheet">
   <meta charset="utf-8">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="../style/main.css">
   <title>memedb</title>
 </head>
 
@@ -27,41 +27,38 @@
   <div class="imp-bg-fade" id="imp-bg-fade" style="display: none; opacity 0;"></div>
 
   <div class="edit-menu">
-    <div class="e-add">
+    <div class="e-add" title="Add Library">
       <i class="material-icons edit-icons">add</i>
     </div>
-    <div class="e-edit">
+    <div class="e-edit" title="Edit Library">
       <i class="material-icons edit-icons">edit</i>
     </div>
-    <div class="e-fs">
+    <div class="e-fs" title="Share Library">
       <i class="material-icons edit-icons">folder_shared</i>
     </div>
     <div class="l-line"></div>
-    <div class="e-library-add">
-      <i class="material-icons edit-icons">playlist_add</i>
-    </div>
-    <div class="e-sort">
+    <div class="e-sort" title="Sort by">
       <i class="material-icons edit-icons">sort</i>
     </div>
-    <div class="e-lock-lib">
+    <div class="e-lock-lib" title="Lock Library">
       <i class="material-icons edit-icons">vpn_key</i>
     </div>
-    <div class="e-timeln">
+    <div class="e-timeln" title="Statistics">
       <i class="material-icons edit-icons">timeline</i>
     </div>
-    <div class="e-share">
+    <div class="e-share" title="Share">
       <i class="material-icons edit-icons">share</i>
     </div>
     <div class="l-line">
     </div>
-    <div class="e-settings">
+    <div class="e-settings" title="Settings">
       <i class="material-icons edit-icons">settings</i>
     </div>
   </div>
 
   <div class="sidenav">
     <div class="scroll-hide">
-      <div class="user-info">
+      <div class="a-user-info">
         <div class="image"></div>
         <div class="name">
           <h1 class="n-name">Gaetan Almela</h1>
@@ -75,7 +72,7 @@
             Karma: 0
           </div>
           <!--  -->
-          <div class="followers">
+          <div class="rank">
             Rank: NaN
           </div>
         </div>
@@ -254,11 +251,13 @@
 
     <!-- MAKE SURE TO CHANGE imp-bg-fade ALONG WITH THIS -->
 
-    <div class="imp-message" id="imp-message" style="display: block; opacity: 1;">
+    <div class="imp-message" id="imp-message" style="display: none; opacity: 0;">
       <div class="imp-title-holder">
         <h1 class="imp-title">Settings</h1>
       </div>
+      <div class="s-op">
 
+      </div>
       <button class="imp-op-2" style="color: #222;">Save</button>
       <button class="imp-op-1">Cancel</button>
     </div>
