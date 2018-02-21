@@ -1,8 +1,9 @@
 /*Please use one global stylesheet and also get the minify package in atom. Thank you. :D*/
+
 * {
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, Sans-Serif;
   margin: 0px;
-  padding: 0px,0px,0px,0px;
+  padding: 0px, 0px, 0px, 0px;
 }
 
 .l-body {
@@ -21,12 +22,7 @@
   display: grid;
   grid-template-columns: 50px 90px 90px 1fr 90px;
   grid-template-rows: 10px 35px 10px;
-  grid-template-areas:
-  ". . . . ."
-  ". logo . s si"
-  ". . . . ."
-  ;
-
+  grid-template-areas: ". . . . ." ". logo . s si" ". . . . .";
 }
 
 .logo {
@@ -38,18 +34,6 @@
   font-weight: bold;
   font-size: 25px;
   cursor: pointer;
-}
-
-.sign-in {
-  grid-area: si;
-  position: relative;
-  justify-self: center;
-  top: 9px;
-  color: #fff;
-  cursor: pointer;
-  font-family: Roboto, sans-serif;
-  font-weight: medium;
-  font-size: 15px;
 }
 
 .searchbar {
@@ -64,7 +48,6 @@
   border-radius: 2px;
   background-color: #eee;
   z-index: 100;
-
 }
 
 .search-g {
@@ -90,7 +73,6 @@
   font-family: Roboto;
   font-weight: lighter;
   font-size: 30px;
-
 }
 
 .section {
@@ -117,7 +99,6 @@
   top: 10.5px;
   margin-left: 20px;
   font-size: 16px;
-
 }
 
 .s-notes {
@@ -173,7 +154,6 @@
   width: 700px;
   height: 112px;
   padding: 5px 5px 5px 5px;
-
 }
 
 .s-title {
@@ -197,7 +177,6 @@
   height: 3px;
   background: #009CDE;
   border-radius: 2px;
-
 }
 
 .s-percent {
@@ -212,7 +191,6 @@
   margin-top: 10px;
   width: 100%;
   height: 30px;
-
 }
 
 .donate {
@@ -220,8 +198,6 @@
   margin-top: 30px;
   float: right;
   cursor: pointer;
-
-
 }
 
 .paypal {
@@ -244,7 +220,6 @@
   height: 100%;
   width: 400px;
   background: #eee;
-
   overflow: hidden;
 }
 
@@ -264,7 +239,6 @@
   background: #999;
   border-radius: 50%;
   float: left;
-
 }
 
 .n-name {
@@ -290,18 +264,17 @@
   position: relative;
   margin: none;
   float: left;
-
 }
 
-.info{
+.info {
   position: relative;
   top: -5px;
   margin-left: 10px;
   float: left;
-
 }
 
 /* CHANGE NAME LATER */
+
 .karma {
   width: 130px;
   height: 20px;
@@ -311,7 +284,6 @@
   font-family: Roboto;
   font-size: 16px;
   font-weight: lighter;
-
 }
 
 .rank {
@@ -323,7 +295,6 @@
   font-family: Roboto;
   font-size: 16px;
   font-weight: lighter;
-
 }
 
 .followers {
@@ -389,7 +360,7 @@
 * {
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, Sans-Serif;
   margin: 0px;
-  padding: 0px,0px,0px,0px;
+  padding: 0px, 0px, 0px, 0px;
   z-index: 0;
 }
 
@@ -403,7 +374,7 @@ html {
   width: 100%;
 }
 
-body{
+body {
   position: relative;
   height: 100%;
   width: 100%;
@@ -422,12 +393,7 @@ body{
   display: grid;
   grid-template-columns: 50px 90px 90px 1fr 90px;
   grid-template-rows: 10px 35px 10px;
-  grid-template-areas:
-  ". . . . ."
-  ". logo . s si"
-  ". . . . ."
-  ;
-
+  grid-template-areas: ". . . . ." ". logo . s si" ". . . . .";
 }
 
 .logo {
@@ -454,6 +420,57 @@ body{
   font-size: 15px;
 }
 
+/* SEARCH RESULT BOX */
+
+.search-result-box {
+  width: 100%;
+  height: auto;
+  background: #fff;
+  padding: 8px 8px 8px 25px;
+  position: relative;
+  border-radius: 2px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  left: -25px;
+  top: 30px;
+}
+
+.search-op {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.res-p {
+  font-family: 'Roboto', sans-serif;
+}
+
+.search-featured-box {
+  width: 100%;
+  height: auto;
+  position: relative;
+  top: 50px;
+}
+
+.s-box-holder {
+  width: auto;
+  height: 117px;
+  margin-top: 5px;
+  overflow-y: hidden;
+  overflow-x: scroll;
+  /* make box holder scroll horizontally */
+}
+
+.s-box {
+  width: 100px;
+  height: 100px;
+  background-color: #ccc;
+  margin-right: 10px;
+  position: relative;
+  float: left;
+}
+
+/* END OF SEARCH BAR */
+
 .searchbar {
   grid-area: s;
   position: relative;
@@ -466,7 +483,6 @@ body{
   border-radius: 2px;
   background-color: #eee;
   z-index: 100;
-
 }
 
 .pepe {
@@ -483,7 +499,6 @@ body{
   height: 100%;
   width: 400px;
   background: #eee;
-
   overflow: hidden;
 }
 
@@ -496,7 +511,6 @@ body{
   background: #999;
   border-radius: 50%;
   float: left;
-
 }
 
 .n-name {
@@ -522,18 +536,17 @@ body{
   position: relative;
   margin: none;
   float: left;
-
 }
 
-.info{
+.info {
   position: relative;
   top: -5px;
   margin-left: 10px;
   float: left;
-
 }
 
 /* CHANGE NAME LATER */
+
 .karma {
   width: 130px;
   height: 20px;
@@ -543,7 +556,6 @@ body{
   font-family: Roboto;
   font-size: 16px;
   font-weight: lighter;
-
 }
 
 .follow {
@@ -579,7 +591,6 @@ body{
   margin: auto;
   margin-bottom: 10px;
   margin-top: 30px;
-
 }
 
 .div-line {
@@ -642,7 +653,6 @@ body{
   border-radius: 2px;
   background-color: #eee;
   z-index: 100;
-
 }
 
 /* RESULTS */
@@ -675,7 +685,6 @@ body{
   border-radius: 2px;
   position: relative;
   float: left;
-
 }
 
 .r-desc {
@@ -691,7 +700,6 @@ body{
   font-size: 15px;
   font-weight: lighter;
   margin-left: 2px;
-
 }
 
 .r-tags {
@@ -763,9 +771,13 @@ body{
 }
 
 /* set coordinates through JS */
+
 /* As a result of this we may only ever need one on the HTML side */
+
 /* Just to be safe I put two, just remove it if it's redundant */
+
 /* if screen is clicked anywhere else = quit */
+
 /* scrolling works perfectly though */
 
 /* Also please give it a cool animation */
@@ -775,7 +787,7 @@ body{
   height: auto;
   background: #fdfdfd;
   border-radius: 2px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   position: absolute;
   right: 130px;
   top: 70px;
@@ -800,7 +812,6 @@ body{
   margin-top: 5px;
   margin-left: 10px;
   margin-bottom: 5px;
-
 }
 
 .l-line {
@@ -846,7 +857,6 @@ body{
   cursor: pointer;
   margin-bottom: 5px;
   margin-right: 5px;
-
 }
 
 .l-img:hover {
@@ -876,7 +886,7 @@ body{
   background: #fdfdfd;
   border-radius: 2px;
   padding: 8px 8px 8px 8px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   z-index: 100000;
   cursor: default;
   opacity: 1;
@@ -889,7 +899,6 @@ body{
   width: 100%;
   height: 20px;
   margin-bottom: 10px;
-
 }
 
 .imp-icon {
@@ -898,7 +907,6 @@ body{
   float: left;
   color: #444;
   margin-left: 10px;
-
 }
 
 .imp-title {
@@ -981,7 +989,6 @@ body{
   margin-bottom: 9px;
   color: #444;
   cursor: pointer;
-
 }
 
 .edit-icons:hover {
@@ -991,7 +998,7 @@ body{
 * {
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, Sans-Serif;
   margin: 0px;
-  padding: 0px,0px,0px,0px;
+  padding: 0px, 0px, 0px, 0px;
 }
 
 /* LOGIN */
@@ -1003,14 +1010,13 @@ body{
   font-weight: 400;
   margin-left: 40px;
   margin-top: 10px;
-
 }
 
 .color-block {
   width: 100%;
   height: 100px;
   background: #222;
-  padding:15px;
+  padding: 15px;
   position: relative;
   top: -15px;
   left: -15px;
@@ -1022,20 +1028,17 @@ body{
 .login-block {
   width: 400px;
   height: 400px;
-  position:absolute;
-  color:#fff;
-  top:50%;
-  left:50%;
-  padding:15px;
+  position: absolute;
+  color: #fff;
+  top: 50%;
+  left: 50%;
+  padding: 15px;
   background: #fff;
-
   -ms-transform: translateX(-50%) translateY(-50%);
-  -webkit-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
-
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   border-radius: 2px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 .login-sub {
@@ -1057,7 +1060,6 @@ body{
   border-radius: 2px;
   z-index: 100;
   margin-bottom: 8px;
-
 }
 
 .alt {
@@ -1081,7 +1083,7 @@ body{
 * {
   font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, Sans-Serif;
   margin: 0px;
-  padding: 0px,0px,0px,0px;
+  padding: 0px, 0px, 0px, 0px;
 }
 
 /* LOGIN */
@@ -1090,7 +1092,7 @@ body{
   width: 100%;
   height: 100px;
   background: #222;
-  padding:15px;
+  padding: 15px;
   position: relative;
   top: -15px;
   left: -15px;
@@ -1102,20 +1104,17 @@ body{
 .signup-block {
   width: 400px;
   height: 500px;
-  position:absolute;
-  color:#fff;
-  top:50%;
-  left:50%;
-  padding:15px;
+  position: absolute;
+  color: #fff;
+  top: 50%;
+  left: 50%;
+  padding: 15px;
   background: #fff;
-
   -ms-transform: translateX(-50%) translateY(-50%);
-  -webkit-transform: translate(-50%,-50%);
-  transform: translate(-50%,-50%);
-
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
   border-radius: 2px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
-
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 .login-sub {
@@ -1137,7 +1136,6 @@ body{
   border-radius: 2px;
   z-index: 100;
   margin-bottom: 8px;
-
 }
 
 .button {
