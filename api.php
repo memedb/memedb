@@ -14,32 +14,18 @@ if ($GLOBALS['conn']->connect_error) {
   die("Database connection failed: " . $conn->connect_error);
 }
 
-if($_SERVER['REQUEST_METHOD'] === 'GET') {
-  if (isset($_GET['function'])) {
-    if ($_GET['function'] == 'check_name') {
-      $conn = $GLOBALS['conn'];
-      $stmt = $conn->prepare("SELECT name FROM users WHERE name=?");
-      $stmt->bind_param("s", $_GET['name']);
-      $stmt->execute();
-      $result = $stmt->get_result();
-      echo ($result->num_rows === 0) ? 'true' : 'false';
-      exit();
-    }
-    if ($_GET['function'] == 'check_email') {
-      $conn = $GLOBALS['conn'];
-      $stmt = $conn->prepare("SELECT email FROM users WHERE email=?");
-      $stmt->bind_param("s", $_GET['email']);
-      $stmt->execute();
-      $result = $stmt->get_result();
-      echo ($result->num_rows === 0) ? 'true' : 'false';
-      exit();
-    }
-  }
-}
-
 if($_SERVER["HTTPS"] != "on") {
   header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
   exit();
+}
+
+function exists($value, $table, $column) {
+  $conn = $GLOBALS['conn'];
+  $stmt = $conn->prepare("SELECT $column FROM $table WHERE $column=?");
+  $stmt->bind_param("s", $value);
+  $stmt->execute();
+  $result = $stmt->get_result();
+  return ($result->num_rows === 0);
 }
 
 function imports() {
