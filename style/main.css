@@ -1181,3 +1181,27 @@ body {
   float: left;
   bottom: 0px;
 }
+
+.meme-preview-box {
+  position: relative;
+  height: 650px;
+  width: 1000px;
+  background: #f3f3f3;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  top: 50%;
+  left: 50%;
+  padding: 15px;
+  -ms-transform: translateX(-50%) translateY(-50%);
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+.meme-img {
+  height: 650px;
+  position: relative;
+  /* Change to auto when img bg is changed */
+  width: 650px;
+  background: #ddd;
+  position: relative;
+  float: left;
+}
