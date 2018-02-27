@@ -3,11 +3,6 @@ session_start();
 
 require('sql.php');
 
-if($_SERVER["HTTPS"] != "on") {
-  header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
-  exit();
-}
-
 $server = "localhost";
 $user = $GLOBALS['sql_user'];
 $pass = $GLOBALS['sql_pass'];
@@ -17,6 +12,20 @@ $GLOBALS['conn'] = new mysqli($server, $user, $pass, $db);
 
 if ($GLOBALS['conn']->connect_error) {
   die("Database connection failed: " . $conn->connect_error);
+}
+
+if($_SERVER["HTTPS"] != "on") {
+  header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
+  exit();
+}
+
+function exists($value, $table, $column) {
+  $conn = $GLOBALS['conn'];
+  $stmt = $conn->prepare("SELECT $column FROM $table WHERE $column=?");
+  $stmt->bind_param("s", $value);
+  $stmt->execute();
+  $result = $stmt->get_result();
+  return ($result->num_rows === 0);
 }
 
 function imports() {
