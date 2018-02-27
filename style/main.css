@@ -823,6 +823,12 @@ body {
   margin-right: 71px;
 }
 
+.c-box {
+  width: 100%;
+  height: 200px;
+  background: red;
+}
+
 .library {
   width: auto;
   height: 60px;
