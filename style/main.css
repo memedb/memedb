@@ -694,7 +694,7 @@ body {
 
 .div-line {
   height: 1px;
-  width: 35%;
+  width: 37%;
   margin: auto;
   background: #ccc;
   border-radius: 10px;
@@ -758,15 +758,17 @@ body {
 
 .result-box {
   width: 80%;
-  height: auto;
   margin: auto;
   padding-top: 0.1px;
-  margin-top: 10px;
 }
 
 .result-scroll {
+  position: relative;
+  overflow-y: scroll;
+  overflow-x: none;
+  height: 55%;
   width: 100%;
-  overflow: auto;
+  margin-top: 10px;
 }
 
 .r-container {
@@ -838,12 +840,6 @@ body {
 
 .c-box {
   width: 100%;
-<<<<<<< HEAD
-=======
-  <<<<<<< HEAD height: 200px;
-  background: red;
-  =======height: 300px;
->>>>>>> b046b97bb079b95895d6fa0df35064f6f67e0081
 }
 
 .c-popular {
@@ -859,10 +855,6 @@ body {
   height: 200px;
   overflow: none;
   padding-bottom: 17px solid #eee;
-<<<<<<< HEAD
-=======
-  >>>>>>>a6dc2814300f2815bf5d68aef1b5424190cdd5a0
->>>>>>> b046b97bb079b95895d6fa0df35064f6f67e0081
 }
 
 .library {
