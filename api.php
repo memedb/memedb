@@ -21,11 +21,13 @@ if($_SERVER["HTTPS"] != "on") {
 
 function exists($value, $table, $column) {
   $conn = $GLOBALS['conn'];
-  $stmt = $conn->prepare("SELECT $column FROM $table WHERE $column=?");
+  $value = strtolower($value);
+  $sql = "SELECT $column FROM $table WHERE LOWER($column) LIKE ?";
+  $stmt = $conn->prepare($sql);
   $stmt->bind_param("s", $value);
   $stmt->execute();
   $result = $stmt->get_result();
-  return ($result->num_rows === 0);
+  return ($result->num_rows === 1);
 }
 
 function imports() {
@@ -82,7 +84,7 @@ class user {
     $conn = $GLOBALS['conn'];
     $stmt = $conn->prepare("INSERT INTO `users`
       (`id`, `name`, `email`, `pwd`, `salt`, `confirmed`, `priv`, `joined`, `lastSeen`, `favorites`, `karma`, `rank`, `following`)
-      VALUES (NULL, '?', '?', '?', '?', 0, 1, '?', '?', '', 0, 0, '')");
+      VALUES (NULL, ?, ?, ?, ?, 0, 1, ?, ?, '', 0, 0, '')");
     $stmt->bind_param("ssssss", $name, $email, $hPass, $salt, $now, $now);
     $salt = uniqid();
     $hPass = hash("sha256", $password.$salt);
@@ -113,8 +115,6 @@ class user {
     $headers[] = 'From: MemeDB Confirmation <support@meme-db.com>';
 
     mail($email, $subject, $message, implode("\r\n", $headers));
-
-    echo "Thank you for registering! We've sent an email to confirm your account!";
   }
 
 }
