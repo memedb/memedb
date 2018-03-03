@@ -599,8 +599,6 @@ body {
 
 /* ACCOUNT */
 
-
-
 .image {
   width: 60px;
   height: 60px;
@@ -726,6 +724,7 @@ body {
 
 .type {
   position: relative;
+  float: left;
   text-decoration: none;
   font-family: Roboto;
   font-weight: 500;
@@ -738,6 +737,28 @@ body {
   text-align: center;
   font-size: 16px;
   cursor: pointer;
+}
+
+.t-cross {
+  display: none;
+  position: relative;
+  float: right;
+  text-decoration: none;
+  font-family: Roboto;
+  font-weight: 700;
+  color: #666;
+  margin-left: 5px;
+  margin-top: 1.5px;
+  padding: 0px;
+  background: none;
+  border: none;
+  text-align: center;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.type:hover .t-cross {
+  display: block;
 }
 
 .s-searchbar {
