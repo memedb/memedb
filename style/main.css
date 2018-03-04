@@ -614,8 +614,6 @@ body {
 
 /* ACCOUNT */
 
-
-
 .image {
   width: 60px;
   height: 60px;
@@ -741,6 +739,7 @@ body {
 
 .type {
   position: relative;
+  float: left;
   text-decoration: none;
   font-family: Roboto;
   font-weight: 500;
@@ -753,6 +752,28 @@ body {
   text-align: center;
   font-size: 16px;
   cursor: pointer;
+}
+
+.t-cross {
+  display: none;
+  position: relative;
+  float: right;
+  text-decoration: none;
+  font-family: Roboto;
+  font-weight: 700;
+  color: #666;
+  margin-left: 5px;
+  margin-top: 1.5px;
+  padding: 0px;
+  background: none;
+  border: none;
+  text-align: center;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.type:hover .t-cross {
+  display: block;
 }
 
 .s-searchbar {
@@ -1162,7 +1183,7 @@ body {
 
 .login-block {
   width: 400px;
-  height: 400px;
+  height: 450px;
   position: absolute;
   color: #fff;
   top: 50%;
@@ -1179,7 +1200,7 @@ body {
 .login-sub {
   font: Roboto;
   font-size: 10px;
-  color: #999;
+  color: #ff8e8e;
   margin-left: 40px;
 }
 
@@ -1195,24 +1216,6 @@ body {
   border-radius: 2px;
   z-index: 100;
   margin-bottom: 8px;
-}
-
-.alt {
-  position: relative;
-  text-decoration: none;
-  font-family: Roboto;
-  font-weight: 500;
-  color: #222;
-  background: inherit;
-  padding: 8px 0px 8px 0px;
-  margin: 3px 2px 3px 40px;
-  border-radius: 2px;
-  border: none;
-  text-align: center;
-  font-size: 16px;
-  cursor: pointer;
-  float: left;
-  bottom: 0px;
 }
 
 * {
@@ -1296,7 +1299,7 @@ body {
   height: 50px;
   position: relative;
   bottom: 0px;
-  top: 50px;
+  top: 25px;
 }
 
 .alt {
@@ -1313,7 +1316,6 @@ body {
   text-align: center;
   font-size: 16px;
   cursor: pointer;
-  float: left;
   bottom: 0px;
 }
 
@@ -1341,6 +1343,7 @@ body {
   float: left;
 }
 
+<<<<<<< HEAD
 /* D O N A T E */
 
 .donate-bar {
@@ -1385,4 +1388,8 @@ body {
   cursor: pointer;
   float: right;
 
+=======
+.g-signin2 {
+  margin: 10px 0 0 40px;
+>>>>>>> a9e0ed957e163a4214e913cbf875b2dbadabdbf0
 }
