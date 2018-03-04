@@ -220,8 +220,21 @@
   height: 100%;
   width: 400px;
   background: #eee;
-  overflow: hidden;
   border-right: 1px solid #ddd;
+
+
+    overflow-y: auto;
+    overflow-x: none;
+}
+
+.s-scroll {
+  position: relative;
+  top: -50px;
+  height: auto;
+  margin-top: 105px;
+}
+
+.scroll-hide {
 }
 
 .image {
@@ -421,6 +434,8 @@
 .h-search-tools {
   width: 100%;
   height: 50px;
+  position: relative;
+  top: -1px;
   border-bottom: 1px solid #ccc;
   background: #eee;
 }
@@ -1324,4 +1339,50 @@ body {
   background: #ddd;
   position: relative;
   float: left;
+}
+
+/* D O N A T E */
+
+.donate-bar {
+  width: 100%;
+  height: 50px;
+  top: 55px;
+  position: relative;
+  background: #fff;
+  z-index: 1000;
+
+}
+
+.d-para {
+  position: relative;
+  top: 13.5px;
+  margin-left: 13.5px;
+  width: auto;
+  float: left;
+}
+
+.d-icon {
+  position: relative;
+  float: right;
+  top: 12.5px;
+  margin-right: 12.5px;
+  cursor: pointer;
+}
+
+.d-button {
+  position: relative;
+  text-decoration: none;
+  font-family: Roboto;
+  font-weight: 500;
+  color: #eee;
+  background: #4167f4;
+  padding: 8px 16px 8px 16px;
+  margin: 10px 12px 3px 2px;
+  border-radius: 2px;
+  border: none;
+  text-align: center;
+  font-size: 12px;
+  cursor: pointer;
+  float: right;
+
 }
