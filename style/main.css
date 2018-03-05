@@ -231,11 +231,9 @@
   position: relative;
   top: -50px;
   height: auto;
-  margin-top: 105px;
+  margin-top: 155px;
 }
 
-.scroll-hide {
-}
 
 .image {
   width: 60px;
@@ -370,10 +368,6 @@
   cursor: pointer;
 }
 
-.h-post:hover .h-post-info {
-  display: block;
-}
-
 .h-op {
   width: 100%;
   height: 30px;
@@ -403,10 +397,10 @@
 }
 
 .h-post-info {
-  display: none;
+  display: display;
   width: 100%;
-  height: 50px;
-  background: rgba(34, 34, 34, 0.2);
+  height: 30px;
+  background: rgba(34, 34, 34, 0.1);
   position: absolute;
   bottom: 0;
   cursor: default;
@@ -415,7 +409,7 @@
 .h-upcount {
   position: relative;
   float: left;
-  top: 10px;
+  top: 2px;
   margin-left: 10px;
   cursor: pointer;
 }
@@ -423,11 +417,11 @@
 .h-p-likes {
   opacity: 1;
   position: relative;
-  color: #222;
+  color: #333;
   float: left;
-  top: 14px;
+  top: 8px;
   margin-left: 10px;
-  font-size: 16px;
+  font-size: 12px;
   cursor: default;
 }
 
@@ -756,20 +750,46 @@ body {
 
 .t-cross {
   display: none;
-  position: relative;
-  float: right;
+  position: absolute;
+  right: 1px;
+  top: 0px;
   text-decoration: none;
   font-family: Roboto;
   font-weight: 700;
-  color: #666;
+  color: #7a2929;
   margin-left: 5px;
   margin-top: 1.5px;
-  padding: 0px;
-  background: none;
+  padding: 2px 8px 2px 8px;
+  box-shadow: 0 0 1px 1px #ccc;
+  background: #ccc;
+  border-radius: 2px;
   border: none;
   text-align: center;
   font-size: 14px;
   cursor: pointer;
+  z-index: 100;
+}
+
+.t-add {
+  display: none;
+  position: relative;
+  float: left;
+  text-decoration: none;
+  font-family: Roboto;
+  font-weight: 500;
+  color: #666;
+  background: #ccc;
+  padding: 2px 8px 2px 8px;
+  margin: 3px 2px 3px 2px;
+  border-radius: 2px;
+  border: none;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.meme-type:hover .t-add {
+  display: block;
 }
 
 .type:hover .t-cross {
@@ -1342,17 +1362,15 @@ body {
   position: relative;
   float: left;
 }
-
-<<<<<<< HEAD
 /* D O N A T E */
 
 .donate-bar {
   width: 100%;
   height: 50px;
   top: 55px;
-  position: relative;
+  position: fixed;
   background: #fff;
-  z-index: 1000;
+  z-index: 10;
 
 }
 
