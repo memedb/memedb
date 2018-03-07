@@ -91,6 +91,13 @@ class user {
     $now = gmdate(DATE_ATOM);
     $stmt->execute();
 
+    $stmt = $conn-prepare("SELECT id FROM users WHERE email=?");
+    $stmt->bind_param('s', $email);
+    $stmt->execute();
+    $result = $stmt->get();
+
+    $id = $result->fetch_assoc()['id'];
+
     $subject = 'MemeDB Confirmation';
     $message = "<html>
     <head>
@@ -115,6 +122,7 @@ class user {
     $headers[] = 'From: MemeDB Confirmation <support@meme-db.com>';
 
     mail($email, $subject, $message, implode("\r\n", $headers));
+    return $id;
   }
 
 }

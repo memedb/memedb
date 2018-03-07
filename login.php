@@ -1,5 +1,38 @@
 <?php
 require('api.php');
+
+$redirect = $_GET['red'];
+
+$name = $_POST['name'];
+$pass = $_POST['password'];
+
+if ($_SESSION['id'] !== null)
+  header("Location: https://www.memed-db.com/".urldecode($redirect));
+
+if ($name !== null && $pass !== null && ) {
+  $conn = $GLOBALS['conn'];
+
+  $stmt = $conn->prepare("SELECT salt FROM users WHERE (name=? OR email=?)");
+  $stmt->bind_param('ss', $name, $pass);
+  $stmt->execute();
+  $result = $stmt->get_result();
+  $salt = $result->fetch_assoc()['salt'];
+
+  $pass = hash("sha256", $pass.$salt);
+
+  $stmt = $conn->prepare("SELECT id FROM users WHERE (name=? OR email=?) AND pwd=?");
+  $stmt->bind_param('sss', $name, $email, $pass);
+  $stmt->execute();
+  $result = $stmt->get_result();
+
+  if ($result->num_rows > 0) {
+    $row = $result->fetch_assoc();
+    $_SESSION['id'] = $row['id'];
+  } else {
+    $_SESSION['id'] = null;
+  }
+
+}
  ?>
 
 <!DOCTYPE html>
@@ -38,14 +71,14 @@ require('api.php');
     <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
       <div style="margin-bottom:20px;">
         <div class="input">
-          <input name="email" type="text" placeholder="Email" style="all: unset; width: 100%;position: relative; border-bottom: 2px solid #ddd;" />
+          <input name="name" type="text" placeholder="Username or Email" style="all: unset; width: 100%;position: relative; border-bottom: 2px solid #ddd;" required/>
         </div>
         <p class="login-sub">Potential error message.</p>
       </div>
 
       <div style="margin-bottom:20px;">
         <div class="input">
-          <input name="password" type="password" placeholder="Password" style="all: unset; width: 100%;position: relative; border-bottom: 2px solid #ddd;" />
+          <input name="password" type="password" placeholder="Password" style="all: unset; width: 100%;position: relative; border-bottom: 2px solid #ddd;" required/>
         </div>
         <p class="login-sub">Password does not match email.</p>
       </div>
