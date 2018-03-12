@@ -11,7 +11,7 @@ if ($name !== null && $email !== null && $pass1 !== null && $pass2 !== null) {
   $email_exists = exists($email, 'users', 'email');
 
   if (!($name_exists || $email_exists)) {
-    user::create($name, $email, $pass1);
+    $_SESSION['id'] = user::create($name, $email, $pass1);
     header("Location: /account.php?new");
   }
 }

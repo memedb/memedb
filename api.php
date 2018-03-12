@@ -32,13 +32,13 @@ function exists($value, $table, $column) {
 
 function imports() {
   ?>
-    <script src="../js/jquery-3.3.1.min.js"></script>
-    <script src="../js/main.js"></script>
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script src="/js/main.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic|Roboto+Mono:400|Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,900,400italic,700italic" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab:700" rel="stylesheet">
     <meta charset="utf-8">
-    <link rel="stylesheet" href="../style/main.css">
+    <link rel="stylesheet" href="/style/main.min.css">
   <?php
 }
 
@@ -91,6 +91,13 @@ class user {
     $now = gmdate(DATE_ATOM);
     $stmt->execute();
 
+    $stmt = $conn-prepare("SELECT id FROM users WHERE email=?");
+    $stmt->bind_param('s', $email);
+    $stmt->execute();
+    $result = $stmt->get();
+
+    $id = $result->fetch_assoc()['id'];
+
     $subject = 'MemeDB Confirmation';
     $message = "<html>
     <head>
@@ -115,6 +122,7 @@ class user {
     $headers[] = 'From: MemeDB Confirmation <support@meme-db.com>';
 
     mail($email, $subject, $message, implode("\r\n", $headers));
+    return $id;
   }
 
 }
