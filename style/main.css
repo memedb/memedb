@@ -348,32 +348,133 @@ input:checked+.slider:before {
   overflow-x: scroll;
 }
 
-.s-c-tab {
+.s-c-wrapper {
   position: relative;
-  float: right;
+  width: 100%;
+  height: 100%;
+}
+
+.s-c-tab {
+  display: table-column;
+  display: none;
+  position: absolute;
   height: 100%;
   width: 100%;
 }
 
-.s-c-tab2 {
-  position: relative;
-  float: right;
-  height: 100%;
-  width: 100%;
-  vertical-align: top;
+.s-c-tab.account{
+  display: block;
+  /* transform: translateX(100%); */
 }
 
 .s-section-title {
   font-family: 'Roboto', sans-serif;
-  font-weight: 400;
+  font-weight: 500;
   font-size: 16px;
   margin-left: 20px;
+  margin-top: 10px;
 }
 
 .s-text {
   font-family: 'Roboto', sans-serif;
   font-weight: 400;
   font-size: 10px;
+}
+
+.p-holder {
+  height: 100px;
+  width: auto;
+  margin-left: 55px;
+  margin-top: 10px;
+}
+
+.image.edit {
+  width: 80px;
+  height: 80px;
+  margin-top: 5px;
+  background: #ddd;
+}
+
+.input.s {
+  position: relative;
+  font-family: Roboto;
+  padding: 0px 8px 0px 8px;
+  font-size: 17px;
+  width: 80%;
+  margin: auto;
+  color: #222;
+  border: none;
+  border-radius: 2px;
+  z-index: 100;
+  margin-top: 6px;
+  margin-bottom: 2px;
+}
+
+.input-bar {
+  all: unset;
+  width: auto;
+  position: relative;
+  height: 20px;
+  border-bottom: 2px solid #ddd;
+  margin-left: 10px;
+  font-weight: 400;
+}
+
+.input-sub {
+  font: Roboto;
+  font-size: 10px;
+  color: #ff8e8e;
+  position: relative;
+  left: 10px;
+}
+
+.i-edit {
+  position: relative;
+  top: 36%;
+  left: 33%;
+  font-weight: 200;
+  color: #333;
+  cursor: pointer;
+}
+
+.s-bottom-buttons {
+  display: table-row;
+  width: 100%;
+  height: 1px;
+}
+
+.s-op-1 {
+  position: relative;
+  text-decoration: none;
+  font-family: Roboto;
+  font-weight: 600;
+  color: #444;
+  background-color: inherit;
+  border: none;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 4px;
+  margin-right: 10px;
+  margin-bottom: 5px;
+}
+
+.s-op-2 {
+  position: relative;
+  float: right;
+  text-decoration: none;
+  right: 0px;
+  font-family: Roboto;
+  font-weight: 600;
+  color: #444;
+  background-color: inherit;
+  border: none;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 4px;
+  margin-right: 10px;
+  margin-bottom: 5px;
 }
 
 /*   */
