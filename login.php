@@ -1,18 +1,27 @@
 <?php
 require('api.php');
 
+if ($_SESSION['id'] == null) {
+  header("Location: https://meme-db.com");
+}
+
+function location($url) {
+  ?>
+  <script>
+    window.location.href = "<?php echo $url; ?>";
+  </script>
+  <?php
+}
+
 $redirect = $_GET['red'];
 
 $name = $_POST['name'];
 $pass = $_POST['password'];
 
-if ($_SESSION['id'] !== null)
-  header("Location: https://www.memed-db.com/".urldecode($redirect));
-
-if ($name !== null && $pass !== null && ) {
+if ($name !== null && $pass !== null) {
   $conn = $GLOBALS['conn'];
 
-  $stmt = $conn->prepare("SELECT salt FROM users WHERE (name=? OR email=?)");
+  $stmt = $conn->prepare("SELECT salt FROM users WHERE (handle=? OR email=?)");
   $stmt->bind_param('ss', $name, $pass);
   $stmt->execute();
   $result = $stmt->get_result();
@@ -20,7 +29,7 @@ if ($name !== null && $pass !== null && ) {
 
   $pass = hash("sha256", $pass.$salt);
 
-  $stmt = $conn->prepare("SELECT id FROM users WHERE (name=? OR email=?) AND pwd=?");
+  $stmt = $conn->prepare("SELECT id FROM users WHERE (handle=? OR email=?) AND pwd=?");
   $stmt->bind_param('sss', $name, $email, $pass);
   $stmt->execute();
   $result = $stmt->get_result();
@@ -28,6 +37,11 @@ if ($name !== null && $pass !== null && ) {
   if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $_SESSION['id'] = $row['id'];
+    ?>
+    <script>
+      window.location.href = "https://meme-db.com/" + "<?php echo ($redirect ? $redirect : ""); ?>";
+    </script>
+    <?php
   } else {
     $_SESSION['id'] = null;
   }
@@ -46,16 +60,20 @@ if ($name !== null && $pass !== null && ) {
   ?>
   <script>
     function onSignIn(googleUser) {
-      var profile = googleUser.getBasicProfile();
       var id_token = googleUser.getAuthResponse().id_token;
-      console.log(id_token);
-      console.log('ID: ' + profile.getId()); // Do not send to your backend! Use an ID token instead.
-      console.log('Name: ' + profile.getName());
-      console.log('Image URL: ' + profile.getImageUrl());
-      console.log('Email: ' + profile.getEmail()); // This is null if the 'email' scope is not present.
-      gapi.auth2.getAuthInstance().signOut().then(function() {
-        console.log('User signed out.');
-      });
+
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', 'https://meme-db.com/tokenlogin.php');
+      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+      xhr.onreadystatechange = function () {
+        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+          console.log(xhr.responseText);
+          if (xhr.responseText == "true")
+            window.location.href = "https://meme-db.com/" + "<?php echo ($redirect ? $redirect : ""); ?>";
+        }
+      };
+      xhr.send('idtoken=' + id_token);
+      gapi.auth2.getAuthInstance().signOut();
     }
   </script>
   <title>memedb</title>
@@ -73,14 +91,13 @@ if ($name !== null && $pass !== null && ) {
         <div class="input">
           <input name="name" type="text" placeholder="Username or Email" style="all: unset; width: 100%;position: relative; border-bottom: 2px solid #ddd;" required/>
         </div>
-        <p class="login-sub">Potential error message.</p>
+        <p class="login-sub" style="display: none">Potential error message.</p>
       </div>
 
       <div style="margin-bottom:20px;">
         <div class="input">
           <input name="password" type="password" placeholder="Password" style="all: unset; width: 100%;position: relative; border-bottom: 2px solid #ddd;" required/>
         </div>
-        <p class="login-sub">Password does not match email.</p>
       </div>
 
       <button class="alt" style="font-size: 12px;">Forgot Password?</button>

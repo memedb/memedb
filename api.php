@@ -80,12 +80,23 @@ class user {
     return $usr;
   }
 
-  public static function create($name, $email, $password) {
+  public static function loadFromEmail($email) {
+    $usr = loadDBObject("users", "email=$email", "user");
+    if ($usr != null) {
+      $usr->favorites = explode(",",$usr->favorites);
+      $usr->following = explode(",",$usr->following);
+    }
+    return $usr;
+  }
+
+  public static function create($name, $email, $password, $google) {
+    if ($google)
+      $password = uniqid();
     $conn = $GLOBALS['conn'];
     $stmt = $conn->prepare("INSERT INTO `users`
-      (`id`, `name`, `email`, `pwd`, `salt`, `confirmed`, `priv`, `joined`, `lastSeen`, `favorites`, `karma`, `rank`, `following`)
-      VALUES (NULL, ?, ?, ?, ?, 0, 1, ?, ?, '', 0, 0, '')");
-    $stmt->bind_param("ssssss", $name, $email, $hPass, $salt, $now, $now);
+      (`id`, `name`, `handle`, `email`, `pwd`, `salt`, `confirmed`, `priv`, `joined`, `lastSeen`, `favorites`, `karma`, `rank`, `following`)
+      VALUES (NULL, ?, ?, ?, ?, ?, 0, 1, ?, ?, '', 0, 0, '')");
+    $stmt->bind_param("sssssss", $name, $name, $email, $hPass, $salt, $now, $now);
     $salt = uniqid();
     $hPass = hash("sha256", $password.$salt);
     $now = gmdate(DATE_ATOM);
