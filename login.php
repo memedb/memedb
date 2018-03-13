@@ -1,7 +1,7 @@
 <?php
 require('api.php');
 
-if ($_SESSION['id'] == null) {
+if ($_SESSION['id'] !== null) {
   header("Location: https://meme-db.com");
 }
 
@@ -13,10 +13,10 @@ function location($url) {
   <?php
 }
 
-$redirect = $_GET['red'];
-
 $name = $_POST['name'];
 $pass = $_POST['password'];
+
+$GLOBALS['valid'] = true;
 
 if ($name !== null && $pass !== null) {
   $conn = $GLOBALS['conn'];
@@ -37,6 +37,7 @@ if ($name !== null && $pass !== null) {
   if ($result->num_rows > 0) {
     $row = $result->fetch_assoc();
     $_SESSION['id'] = $row['id'];
+    $GLOBALS['valid'] = true;
     ?>
     <script>
       window.location.href = "https://meme-db.com/" + "<?php echo ($redirect ? $redirect : ""); ?>";
@@ -44,6 +45,7 @@ if ($name !== null && $pass !== null) {
     <?php
   } else {
     $_SESSION['id'] = null;
+    $GLOBALS['valid'] = false;
   }
 
 }
@@ -75,6 +77,55 @@ if ($name !== null && $pass !== null) {
       xhr.send('idtoken=' + id_token);
       gapi.auth2.getAuthInstance().signOut();
     }
+
+    var showError = false;
+    function setValidationMessage(input, message) {
+      var err = input.parentElement.nextElementSibling;
+      input.addEventListener('invalid', function(event) {
+        event.preventDefault();
+      });
+      input.addEventListener('input', function(event){
+        if (showError) {
+          if (input.validity.valueMissing) {
+            err.innerHTML = message;
+            err.style.opacity = 1;
+            err.style.color = "#ff8e8e";
+            this.style.borderBottom = "2px solid #ff8e8e";
+          } else if (err.style.opacity == 1) {
+            err.style.opacity = 0;
+            err.style.color = "";
+            this.style.borderBottom = "2px solid #ddd";
+          }
+        }
+      });
+    }
+
+    $(document).ready(function() {
+      var name = document.getElementById('name');
+      var pwd = document.getElementById('pwd');
+
+      setValidationMessage(name, "Please enter a username.", "Name cannot contain any special characters.");
+      setValidationMessage(pwd, "Please enter a password.", "Password must be at least 8 characters.", "Password must be at least 8 characters.");
+
+      <?php if (!$GLOBALS['valid']) { ?>
+        var err = name.parentElement.nextElementSibling;
+        err.innerHTML = "Invalid username or password";
+        err.style.opacity = 1;
+        err.style.color = "#ff8e8e";
+        name.style.borderBottom = "2px solid #ff8e8e";
+        showError = true;
+      <?php } ?>
+
+      $("#submit").click(function() {
+        showError = true;
+        var event = new Event('input', {
+          'bubbles': true,
+          'cancelable': true
+        });
+        name.dispatchEvent(event);
+        pwd.dispatchEvent(event);
+      });
+    });
   </script>
   <title>memedb</title>
 </head>
@@ -86,18 +137,19 @@ if ($name !== null && $pass !== null) {
       <h1 class="login-h1">Login</h1>
     </div>
 
-    <form method="post" action="<?php echo $_SERVER['PHP_SELF'];?>">
+    <form method="POST" action="<?php echo $_SERVER['PHP_SELF'];?>">
       <div style="margin-bottom:20px;">
         <div class="input">
-          <input name="name" type="text" placeholder="Username or Email" style="all: unset; width: 100%;position: relative; border-bottom: 2px solid #ddd;" required/>
+          <input id="name" name="name" type="text" value="<?php echo $_POST['name']; ?>" placeholder="Username or Email" style="all: unset; width: 100%;position: relative; border-bottom: 2px solid #ddd;" required/>
         </div>
-        <p class="login-sub" style="display: none">Potential error message.</p>
+        <p class="login-sub" style="opacity:0;">Potential error message.</p>
       </div>
 
       <div style="margin-bottom:20px;">
         <div class="input">
-          <input name="password" type="password" placeholder="Password" style="all: unset; width: 100%;position: relative; border-bottom: 2px solid #ddd;" required/>
+          <input id="pwd" name="password" type="password" placeholder="Password" style="all: unset; width: 100%;position: relative; border-bottom: 2px solid #ddd;" required/>
         </div>
+        <p class="login-sub" style="opacity:0;">Potential error message.</p>
       </div>
 
       <button class="alt" style="font-size: 12px;">Forgot Password?</button>
@@ -105,7 +157,7 @@ if ($name !== null && $pass !== null) {
       <div class="g-signin2" data-onsuccess="onSignIn"></div>
 
       <div class="l-buttons">
-        <input type="submit" class="button" value="LOGIN"></input>
+        <input id="submit" type="submit" class="button" value="LOGIN"></input>
         <a href="/signup"><button class="alt">SIGN UP</button></a>
       </div>
     </form>
