@@ -17,14 +17,15 @@ $client->setAuthConfig('client_secrets.json');
 
 $payload = $client->verifyIdToken($id_token);
 if ($payload) {
-  echo "true";
+  header("Location: https://meme-db.com");
   $usr = user::loadFromEmail($payload['email']);
   if ($usr) {
     $_SESSION['id'] = $usr->id;
   } else {
     $_SESSION['id'] = user::create($payload['name'], $payload['email'], null, true);
   }
+  var_dump($usr);
 } else {
-  echo "false";
+  header("Location: https://meme-db.com/login");
 }
 ?>

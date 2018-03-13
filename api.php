@@ -10,6 +10,8 @@ $db = "zerentha_meme";
 
 $GLOBALS['conn'] = new mysqli($server, $user, $pass, $db);
 
+$user = null;
+
 if ($GLOBALS['conn']->connect_error) {
   die("Database connection failed: " . $conn->connect_error);
 }
@@ -48,9 +50,23 @@ function loadDBObject($table, $selector, $classname) {
   $stmt->execute();
   $result = $stmt->get_result();
   if ($result->num_rows > 0) {
-    return $result->fetch_object("image");
+    return $result->fetch_object($classname);
   }
   return null;
+}
+
+function getUser() {
+  if ($user)
+    return $user;
+  if ($_SESSION['id']) {
+    $user = user::loadFromId($_SESSION['id']);
+    return $user;
+  }
+  return null;
+}
+
+function loggedIn() {
+  return $_SESSION !== null;
 }
 
 class image {
@@ -81,7 +97,7 @@ class user {
   }
 
   public static function loadFromEmail($email) {
-    $usr = loadDBObject("users", "email=$email", "user");
+    $usr = loadDBObject("users", "email='$email'", "user");
     if ($usr != null) {
       $usr->favorites = explode(",",$usr->favorites);
       $usr->following = explode(",",$usr->following);

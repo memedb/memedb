@@ -64,17 +64,9 @@ if ($name !== null && $pass !== null) {
     function onSignIn(googleUser) {
       var id_token = googleUser.getAuthResponse().id_token;
 
-      var xhr = new XMLHttpRequest();
-      xhr.open('POST', 'https://meme-db.com/tokenlogin.php');
-      xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-      xhr.onreadystatechange = function () {
-        if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-          console.log(xhr.responseText);
-          if (xhr.responseText == "true")
-            window.location.href = "https://meme-db.com/" + "<?php echo ($redirect ? $redirect : ""); ?>";
-        }
-      };
-      xhr.send('idtoken=' + id_token);
+      $('#inset_form').html('<form action="https://meme-db.com/tokenlogin.php" name="google_login" method="post"><input type="text" name="idtoken" value="' + id_token + '" /></form>');
+
+      document.forms['google_login'].submit();
       gapi.auth2.getAuthInstance().signOut();
     }
 
@@ -131,6 +123,10 @@ if ($name !== null && $pass !== null) {
 </head>
 
 <body class="l-body">
+
+  <div id="inset_form" style="display:none;">
+
+  </div>
 
   <div class="login-block">
     <div class="color-block">

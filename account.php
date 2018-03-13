@@ -1,12 +1,24 @@
+<?php
+require('api.php');
+
+$account = $_GET['id'];
+
+if ($account != null)
+  $account = user::loadFromId($account);
+
+if (loggedIn() && !$account) {
+  $account = getUser();
+}
+
+if ($account == null)
+  header("Location: https://meme-db.com");
+?>
+
 <!DOCTYPE html>
 <html>
 
 <head>
-  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic|Roboto+Mono:400|Material+Icons" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Lato:400,900,400italic,700italic" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab:700" rel="stylesheet">
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="style.css">
+  <?php imports(); ?>
   <title>memedb</title>
 </head>
 
@@ -15,18 +27,1081 @@
   <div class="top-bar">
     <div class="logo">memedb</div>
     <div class="searchbar">
-      <i class="material-icons seach-g" style="float: left; padding-right: 25px;position:relative; top: -1px;">search</i><input type="text" placeholder="Search" style="all: unset; width: 150px;position: relative; left: 11px;" />
+      <i class="material-icons search-g" style="float: left; padding-right: 25px;position:relative; top: -4px;">search</i><input type="text" placeholder="Search" style="all: unset; width: 150px;position: relative; left: 11px;" />
+
+      <div class="search-result-box" style="display:none;">
+        <div class="search-op">
+          <p class="res-p">This is option 1</p>
+        </div>
+        <div class="search-op">
+          <p class="res-p">This is option 2</p>
+        </div>
+        <div class="search-op">
+          <p class="res-p">This is option 3</p>
+        </div>
+        <div class="search-op">
+          <p class="res-p">This is option 1</p>
+        </div>
+        <div class="search-op">
+          <p class="res-p">This is option 2</p>
+        </div>
+        <div class="search-op">
+          <p class="res-p">This is option 3</p>
+        </div>
+      </div>
+
+      <div class="search-featured-box" style="display:none;">
+        <h1>Featured Users</h1>
+        <div class="s-box-holder">
+          <div class="s-box">
+
+          </div>
+          <div class="s-box">
+
+          </div>
+          <div class="s-box">
+
+          </div>
+          <div class="s-box">
+
+          </div>
+          <div class="s-box">
+
+          </div>
+          <div class="s-box">
+
+          </div>
+          <div class="s-box">
+
+          </div>
+          <div class="s-box">
+
+          </div>
+          <div class="s-box">
+
+          </div>
+        </div>
+      </div>
+
     </div>
     <div class="sign-in">SIGN IN</div>
   </div>
 
   <div class="pepe"></div>
 
+  <div class="imp-bg-fade" id="imp-bg-fade" style="display: none; opacity 0;"></div>
+
+  <div class="l-sett-opt" style="display: none;">
+    <button class="l-sett-button">Rename</button>
+    <button class="l-sett-button">Info</button>
+    <button class="l-sett-button">Settings</button>
+
+    <div class="l-line"></div>
+
+    <button class="l-sett-button" style="color: #f44242;">Delete</button>
+
   </div>
 
-  <div class="account">
-    <div class="image"></div>
-    <h1>Gaetan Almela</h1>
+  <div class="imp-message" id="imp-message" style="display: none; opacity: 0;">
+    <div class="imp-title-holder">
+      <h1 class="imp-title">Warning!</h1>
+    </div>
+    <p class="imp-p">Are you sure you want to permanently delete this library and all of its content?</p>
+    <button class="imp-op-2" style="color: #f44242;">Delete</button>
+    <button class="imp-op-1">Cancel</button>
+  </div>
+
+  <div class="edit-menu">
+    <div class="e-add" title="Add Library">
+      <i class="material-icons edit-icons">add</i>
+    </div>
+    <div class="e-edit" title="Edit Library">
+      <i class="material-icons edit-icons">edit</i>
+    </div>
+    <div class="e-fs" title="Share Library">
+      <i class="material-icons edit-icons">folder_shared</i>
+    </div>
+    <div class="l-line"></div>
+    <div class="e-sort" title="Sort by">
+      <i class="material-icons edit-icons">sort</i>
+    </div>
+    <div class="e-lock-lib" title="Lock Library">
+      <i class="material-icons edit-icons">vpn_key</i>
+    </div>
+    <div class="e-timeln" title="Statistics">
+      <i class="material-icons edit-icons">timeline</i>
+    </div>
+    <div class="e-share" title="Share">
+      <i class="material-icons edit-icons">share</i>
+    </div>
+    <div class="l-line">
+    </div>
+    <div class="e-settings" title="Settings">
+      <i class="material-icons edit-icons">settings</i>
+    </div>
+  </div>
+
+  <div class="sidenav">
+    <div class="a-user-info">
+      <div class="image"></div>
+      <div class="name">
+        <h1 class="n-name"><?php echo $account->name; ?></h1>
+      </div>
+      <div class="username">
+        @<?php echo $account->handle; ?>
+      </div>
+      <div class="info">
+        <!-- CHANGE NAME LATER -->
+        <div class="karma">
+          Karma: 0
+        </div>
+        <!--  -->
+        <div class="rank">
+          Elo: NaN
+        </div>
+      </div>
+      <button class="follow">Follow
+        <span style="font-family: Roboto;font-weight: 500;color: #ccc;">0
+        </span></button>
+      <!-- <button class="follow" style="background:#ccc; color:#222;">Unfollow <span style="font-family: Roboto;font-weight: 500;color: #555;">0
+      </span></button> -->
+    </div>
+
+    <div class="fav-holder">
+      <div class="div-line"></div>
+      <h1 class="div-text">Favorites</h1>
+      <div class="div-line"></div>
+    </div>
+
+    <div class="meme-type">
+      <div class="type">META IRONIC<button class="t-cross">X</button></div>
+      <div class="type">IRONIC<button class="t-cross">X</button></div>
+      <div class="type">SHITPOSTING<button class="t-cross">X</button></div>
+      <div class="type">PHILOSOPHY<button class="t-cross">X</button></div>
+      <div class="type">DEEP FRIED<button class="t-cross">X</button></div>
+      <div class="type">REACTION IMAGES<button class="t-cross">X</button></div>
+      <div class="type">CURSED IMAGES<button class="t-cross">X</button></div>
+      <div class="type">NONSENSICAL<button class="t-cross">X</button></div>
+      <button class="t-add">+</button>
+    </div>
+
+    <div class="line"></div>
+
+    <div class="s-searchbar">
+      <i class="material-icons seach-g" style="float: left;position:relative; top: -1px; color: #666;">search</i><input type="text" placeholder="Search User" style="all: unset; width: 88.5%;position: relative; left: 11px; border-bottom: 2px solid #ddd;"
+      />
+    </div>
+
+    <div class="result-scroll">
+      <div class="result-box">
+        <div class="r-container">
+          <div class="r-image-preview"></div>
+          <div class="r-desc">
+            <h1 class="r-title-text">Meme Title</h1>
+            <div class="r-tags">
+              <button class="r-type">SHITPOSTING</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="r-container">
+          <div class="r-image-preview"></div>
+          <div class="r-desc">
+            <h1 class="r-title-text">Meme Title</h1>
+            <div class="r-tags">
+              <button class="r-type">IRONIC</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="r-container">
+          <div class="r-image-preview"></div>
+          <div class="r-desc">
+            <h1 class="r-title-text">Meme Title</h1>
+            <div class="r-tags">
+              <button class="r-type">IRONIC</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="r-container">
+          <div class="r-image-preview"></div>
+          <div class="r-desc">
+            <h1 class="r-title-text">Meme Title</h1>
+            <div class="r-tags">
+              <button class="r-type">IRONIC</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="r-container">
+          <div class="r-image-preview"></div>
+          <div class="r-desc">
+            <h1 class="r-title-text">Meme Title</h1>
+            <div class="r-tags">
+              <button class="r-type">IRONIC</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="r-container">
+          <div class="r-image-preview"></div>
+          <div class="r-desc">
+            <h1 class="r-title-text">Meme Title</h1>
+            <div class="r-tags">
+              <button class="r-type">IRONIC</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="r-container">
+          <div class="r-image-preview"></div>
+          <div class="r-desc">
+            <h1 class="r-title-text">Meme Title</h1>
+            <div class="r-tags">
+              <button class="r-type">IRONIC</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="r-container">
+          <div class="r-image-preview"></div>
+          <div class="r-desc">
+            <h1 class="r-title-text">Meme Title</h1>
+            <div class="r-tags">
+              <button class="r-type">IRONIC</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="r-container">
+          <div class="r-image-preview"></div>
+          <div class="r-desc">
+            <h1 class="r-title-text">Meme Title</h1>
+            <div class="r-tags">
+              <button class="r-type">IRONIC</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="r-container">
+          <div class="r-image-preview"></div>
+          <div class="r-desc">
+            <h1 class="r-title-text">Meme Title</h1>
+            <div class="r-tags">
+              <button class="r-type">IRONIC</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="r-container">
+          <div class="r-image-preview"></div>
+          <div class="r-desc">
+            <h1 class="r-title-text">Meme Title</h1>
+            <div class="r-tags">
+              <button class="r-type">IRONIC</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="r-container">
+          <div class="r-image-preview"></div>
+          <div class="r-desc">
+            <h1 class="r-title-text">Meme Title</h1>
+            <div class="r-tags">
+              <button class="r-type">META IRONIC</button>
+              <button class="r-type">SHITPOSTING</button>
+              <button class="r-type">IRONIC</button>
+              <button class="r-type">IRONIC</button>
+              <button class="r-type">IRONIC</button>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="content">
+    <div class="c-box">
+      <h1 style="margin-left: 20px; font-weight: 200; font-family: 'Roboto', sans-serif;">Most Popular</h1>
+      <div class="c-popular">
+        <div class="h-post" style="width: 150px; height: 150px">
+          <div class="h-post-info">
+            <div class="h-upcount">
+              <i class="material-icons" style="font-size: 18px; top: 5px;">keyboard_arrow_up</i>
+            </div>
+            <div class="h-p-likes">
+              16384
+            </div>
+            <div class="h-more">
+              <i class="material-icons" style="font-size: 18px; top: -3px;">more_horiz</i>
+            </div>
+          </div>
+        </div>
+        <div class="h-post" style="width: 150px; height: 150px">
+          <div class="h-post-info">
+            <div class="h-upcount">
+              <i class="material-icons" style="font-size: 18px; top: 5px;">keyboard_arrow_up</i>
+            </div>
+            <div class="h-p-likes">
+              16384
+            </div>
+            <div class="h-more">
+              <i class="material-icons" style="font-size: 18px; top: -3px;">more_horiz</i>
+            </div>
+          </div>
+        </div>
+        <div class="h-post" style="width: 150px; height: 150px">
+          <div class="h-post-info">
+            <div class="h-upcount">
+              <i class="material-icons" style="font-size: 18px; top: 5px;">keyboard_arrow_up</i>
+            </div>
+            <div class="h-p-likes">
+              16384
+            </div>
+            <div class="h-more">
+              <i class="material-icons" style="font-size: 18px; top: -3px;">more_horiz</i>
+            </div>
+          </div>
+        </div>
+        <div class="h-post" style="width: 150px; height: 150px">
+          <div class="h-post-info">
+            <div class="h-upcount">
+              <i class="material-icons" style="font-size: 18px; top: 5px;">keyboard_arrow_up</i>
+            </div>
+            <div class="h-p-likes">
+              16384
+            </div>
+            <div class="h-more">
+              <i class="material-icons" style="font-size: 18px; top: -3px;">more_horiz</i>
+            </div>
+          </div>
+        </div>
+        <div class="h-post" style="width: 150px; height: 150px">
+          <div class="h-post-info">
+            <div class="h-upcount">
+              <i class="material-icons" style="font-size: 18px; top: 5px;">keyboard_arrow_up</i>
+            </div>
+            <div class="h-p-likes">
+              16384
+            </div>
+            <div class="h-more">
+              <i class="material-icons" style="font-size: 18px; top: -3px;">more_horiz</i>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="library l-l1">
+      <i class="material-icons l-icon">photo_library</i>
+      <h1 class="l-title">Posts</h1>
+
+      <div class="l-settings">
+        <i class="material-icons">keyboard_arrow_down</i>
+      </div>
+      <div class="l-drop">
+        <i class="material-icons">more_horiz</i>
+      </div>
+    </div>
+    <div class="l-content" style="height: 0px;">
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+    </div>
+
+    <div class="library l-l1">
+      <i class="material-icons l-icon">repeat</i>
+      <h1 class="l-title">Reposts</h1>
+      <div class="l-settings">
+        <i class="material-icons">keyboard_arrow_down</i>
+      </div>
+      <div class="l-drop">
+        <i class="material-icons">more_horiz</i>
+      </div>
+    </div>
+    <div class="l-content" style="height: 0px;">
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+    </div>
+
+    <div class="library l-l1">
+      <i class="material-icons l-icon">star</i>
+      <h1 class="l-title">Favorites</h1>
+
+      <div class="l-settings">
+        <i class="material-icons">keyboard_arrow_down</i>
+      </div>
+      <div class="l-drop">
+        <i class="material-icons">more_horiz</i>
+      </div>
+    </div>
+    <div class="l-content" style="height: 0px;">
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+    </div>
+
+
+    <div class="library">
+      <h1 class="l-title">Library</h1>
+
+      <div class="l-settings">
+        <i class="material-icons">keyboard_arrow_down</i>
+      </div>
+      <div class="l-drop">
+        <i class="material-icons">more_horiz</i>
+      </div>
+    </div>
+    <div class="l-content" style="height: 0px;">
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+    </div>
+
+    <div class="library">
+      <h1 class="l-title">Library</h1>
+
+      <div class="l-settings">
+        <i class="material-icons">keyboard_arrow_down</i>
+      </div>
+      <div class="l-drop">
+        <i class="material-icons">more_horiz</i>
+      </div>
+    </div>
+    <div class="l-content" style="height: 0px;">
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+    </div>
+
+    <div class="library l-selected">
+      <h1 class="l-title">Selected Library</h1>
+
+      <div class="l-settings">
+        <i class="material-icons">keyboard_arrow_down</i>
+      </div>
+      <div class="l-drop">
+        <i class="material-icons">more_horiz</i>
+      </div>
+    </div>
+    <div class="l-content" style="height: 0px;">
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+    </div>
+
+    <div class="library">
+      <h1 class="l-title">Library</h1>
+
+      <div class="l-settings">
+        <i class="material-icons">keyboard_arrow_down</i>
+      </div>
+      <div class="l-drop">
+        <i class="material-icons">more_horiz</i>
+      </div>
+    </div>
+    <div class="l-content" style="height: 0px;">
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+    </div>
+
+    <div class="library">
+      <h1 class="l-title">Library</h1>
+
+      <div class="l-settings">
+        <i class="material-icons">keyboard_arrow_down</i>
+      </div>
+      <div class="l-drop">
+        <i class="material-icons">more_horiz</i>
+      </div>
+    </div>
+    <div class="l-content" style="height: 0px;">
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+      <div class="l-img"></div>
+    </div>
   </div>
 
 
