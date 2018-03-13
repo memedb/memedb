@@ -50,6 +50,131 @@
   z-index: 100;
 }
 
+.t-settings {
+  grid-area: si;
+  position: relative;
+  justify-self: center;
+  top: 3px;
+  font-weight: 500;
+  color: #fff;
+  cursor: pointer;
+  font-weight: medium;
+  font-size: 15px;
+}
+
+/* when pressed call a floating message */
+
+/* Settings */
+
+.s-settings {
+  position: absolute;
+  z-index: 100;
+  width: 500px;
+  height: 80%;
+  background: #fff;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 2px;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  padding: 16px 16px 24px 16px;
+  display: table;
+}
+
+.s-tab-box {
+  width: auto;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  height: 48px;
+  display: table-row;
+}
+
+.s-tab-holder {
+  width: auto;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  height: 48px;
+  display: table;
+}
+
+.s-tab {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  text-align: center;
+  position: relative;
+  float: left;
+  padding: 12px 12px 12px 12px;
+  cursor: pointer;
+  display: table-row;
+}
+
+.s-selected {
+  border-bottom: 2px solid #ccc;
+}
+
+.s-title-box {
+  width: 100%;
+  height: 30px;
+  display: table-row;
+}
+
+.s-title {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  font-size: 22px;
+  padding-left: 6px;
+  width: 200px;
+  margin-left: none;
+  float: left;
+}
+
+.s-delete {
+  position: relative;
+  float: left;
+  top: 12.5px;
+  margin-right: 12.5px;
+  cursor: pointer;
+  float: right;
+}
+
+.s-content {
+  width: auto;
+  display: table-row;
+  overflow-x: scroll;
+}
+
+.s-c-tab {
+  position: relative;
+  float: right;
+  height: 100%;
+  width: 100%;
+}
+
+.s-c-tab2 {
+  position: relative;
+  float: right;
+  height: 100%;
+  width: 100%;
+  vertical-align: top;
+}
+
+.s-section-title {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+  margin-left: 20px;
+}
+
+.s-text {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+  font-size: 10px;
+}
+
+/*   */
+
 .search-g {
   position: relative;
   top: -10px;
@@ -227,9 +352,8 @@
 
 .s-scroll {
   position: relative;
-  top: -50px;
   height: auto;
-  margin-top: 155px;
+  margin-top: 55px;
 }
 
 .image {
@@ -1199,10 +1323,13 @@ body {
 }
 
 .material-icons {
-  color: #222;
   font-size: 27px;
   position: relative;
   top: 2px;
+}
+
+.black {
+  color: #222;
 }
 
 /* EDIT MENU */
@@ -1568,6 +1695,7 @@ body {
   position: fixed;
   background: #fff;
   z-index: 10;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 .d-para {

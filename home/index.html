@@ -15,7 +15,7 @@
   <div class="top-bar">
     <div class="logo">memedb</div>
     <div class="searchbar">
-      <i class="material-icons seach-g" style="float: left; padding-right: 25px;position:relative; top: -4px;">search</i><input type="text" placeholder="Search" style="all: unset; height: 20px; width: 600px; position: relative; left: 11px;" />
+      <i class="material-icons black seach-g" style="float: left; padding-right: 25px;position:relative; top: -4px;">search</i><input type="text" placeholder="Search" style="all: unset; height: 20px; width: 600px; position: relative; left: 11px;" />
 
       <div class="search-result-box" style="display: none;">
         <div class="search-op">
@@ -72,16 +72,40 @@
       </div>
 
     </div>
-    <div class="sign-in">SIGN IN</div>
+    <!-- <div class="sign-in" style="display: none;">SIGN IN</div> -->
+    <div class="t-settings"><i class="material-icons t-settings">more_horiz</i></div>
   </div>
 
-  <div class="donate-bar">
-    <div class="d-para">Please consider donating to help keep this service running. This website is brought to you by two broke kids.</div>
+  <div class="donate-bar" style="display: none;">
+    <div class="d-para">Please consider donating to help keep this service shutting down.</div>
 
-    <i class="material-icons d-icon">clear</i>
+    <i class="material-icons black d-icon">clear</i>
 
     <button class="d-button">Donate w/ Paypal</button>
 
+  </div>
+
+  <div class="s-settings">
+    <div class="s-title-box">
+      <h1 class="s-title">Settings</h1>
+      <i class="material-icons black s-delete">clear</i>
+    </div>
+    <div class="s-tab-box">
+      <div class="s-tab-holder">
+        <div class="s-tab s-selected">
+          GENERAL
+        </div>
+        <div class="s-tab">
+          ACCOUNT
+        </div>
+      </div>
+    </div>
+    <div class="s-content">
+      <div class="s-c-tab">
+        <h1 class="s-section-title">Notifications</h1>
+        <input type="checkbox" name="vehicle" value="Bike">Turn on notifications from selected pages<br>
+      </div>
+    </div>
   </div>
 
   <div class="sidenav">
@@ -116,7 +140,7 @@
         <div class="line"></div>
 
         <div class="section" style="background: #ddd;">
-          <i class="material-icons s-icon">supervisor_account</i>
+          <i class="material-icons black s-icon">supervisor_account</i>
           <div class="s-txt">
             Following
           </div>
@@ -124,14 +148,14 @@
         </div>
 
         <div class="section">
-          <i class="material-icons s-icon">functions</i>
+          <i class="material-icons black s-icon">functions</i>
           <div class="s-txt">
             Recommended
           </div>
         </div>
 
         <div class="section">
-          <i class="material-icons s-icon">trending_up</i>
+          <i class="material-icons black s-icon">trending_up</i>
           <div class="s-txt">
             Top
           </div>
@@ -382,7 +406,7 @@
   <div class="h-content">
     <div class="h-search-tools">
       <div class="e-sort" title="Sort by" style="float: left;">
-        <i class="material-icons edit-icons">sort</i>
+        <i class="material-icons black edit-icons">sort</i>
       </div>
       <div class="h-s-txt">
         Oldest
@@ -402,13 +426,13 @@
       </div>
       <div class="h-post-info">
         <div class="h-upcount">
-          <i class="material-icons" style="font-size: 18px; top: 5px;">keyboard_arrow_up</i>
+          <i class="material-icons black" style="font-size: 18px; top: 5px;">keyboard_arrow_up</i>
         </div>
         <div class="h-p-likes">
           16384
         </div>
         <div class="h-more">
-          <i class="material-icons" style="font-size: 18px; top: -3px;">more_horiz</i>
+          <i class="material-icons black" style="font-size: 18px; top: -3px;">more_horiz</i>
         </div>
       </div>
     </div>
@@ -420,13 +444,13 @@
       </div>
       <div class="h-post-info">
         <div class="h-upcount">
-          <i class="material-icons" style="color: #4167f4; font-size: 18px; top: 5px;">keyboard_arrow_down</i>
+          <i class="material-icons black" style="color: #4167f4; font-size: 18px; top: 5px;">keyboard_arrow_down</i>
         </div>
         <div class="h-p-likes" style="color: #4167f4">
           16384
         </div>
         <div class="h-more">
-          <i class="material-icons" style="font-size: 18px; top: -3px;">more_horiz</i>
+          <i class="material-icons black" style="font-size: 18px; top: -3px;">more_horiz</i>
         </div>
       </div>
     </div>
