@@ -64,6 +64,138 @@
 
 /* when pressed call a floating message */
 
+/* The container */
+.container {
+    display: block;
+    position: relative;
+    height: 20px;
+    margin-left: 55px;
+    margin-bottom: 12px;
+    margin-top: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: relative;
+    float: left;
+    height: 16px;
+    width: 16px;
+    background-color: #eee;
+    border-radius: 2px;
+    margin-right: 10px;
+    border: 2px solid #ccc;
+    transition: 0.2s;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+    background-color: #4167f4;
+    border: 2px solid #4167f4;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+    left: 4.9px;
+    top: 1.5px;
+    width: 4px;
+    height: 8px;
+    border: solid white;
+    border-width: 0 2.7px 2.7px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.switch {
+  position: relative;
+  float: left;
+  display: inline-block;
+  width: 32px;
+  height: 16px;
+  margin-right: 10px;
+}
+
+.switch input {display:none;}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: -4px;
+  bottom: 0;
+  background-color: #BDBDBD;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 21px;
+  width: 21px;
+  left: -1px;
+  top: -1.8px;
+  bottom: 4px;
+  background-color: white;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #819eef;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(17px);
+  -ms-transform: translateX(17px);
+  transform: translateX(17px);
+  background-color: #4167f4;
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
 /* Settings */
 
 .s-settings {
