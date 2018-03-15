@@ -657,6 +657,7 @@ input:checked+.slider:before {
 /* SIDENAV */
 
 .sidenav {
+  display: table;
   position: fixed;
   float: left;
   height: 100%;
@@ -1196,6 +1197,25 @@ body {
   margin: auto;
 }
 
+.s-user {
+  height: 140px;
+  display: table-row;
+}
+
+.s-favorites {
+  display: table-row;
+}
+
+.s-results {
+  display: table-row;
+  overflow-y: scroll;
+  height: 740px;
+}
+
+.s-r-scroll {
+  height: 1000px;
+}
+
 /*  */
 
 .fav-holder {
@@ -1204,12 +1224,11 @@ body {
   position: relative;
   margin: auto;
   margin-bottom: 10px;
-  margin-top: 30px;
 }
 
 .div-line {
   height: 1px;
-  width: 37%;
+  width: 36.5%;
   margin: auto;
   background: #ccc;
   border-radius: 10px;
