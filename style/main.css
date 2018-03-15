@@ -580,15 +580,21 @@ input:checked+.slider:before {
   background: #ddd;
 }
 
+.sub-box {
+  display: table-cell;
+  height: 0;
+  overflow-y: scroll;
+}
+
 .subscriptions {
   margin: auto;
   position: relative;
-  display: table-row;
+  height: inherit;
   top: -10px;
-  overflow: scroll;
 }
 
 .sections {
+  height: 0;
   display: table-row;
 }
 
@@ -666,7 +672,7 @@ input:checked+.slider:before {
   display: table;
   position: fixed;
   float: left;
-  height: inherit;
+  height: 100%;
   width: 400px;
   background: #eee;
   border-right: 1px solid #ddd;
@@ -759,6 +765,7 @@ u-stat.rank {
 }
 
 .user {
+  height: 0;
   display: table-row;
 }
 
@@ -1194,22 +1201,23 @@ body {
 }
 
 .s-user {
-  height: 140px;
+  height: 0px;
   display: table-row;
 }
 
 .s-favorites {
+  height: 0px;
   display: table-row;
 }
 
 .s-results {
-  display: table-row;
-  overflow-y: scroll;
-  height: 740px;
+  display: table-cell;
+  height: 0px;
 }
 
 .s-r-scroll {
-  height: 1000px;
+  display: table-cell;
+  height: 0px;
 }
 
 /*  */
@@ -1336,6 +1344,7 @@ body {
 /* RESULTS */
 
 .result-box {
+  display: table-cell;
   width: 80%;
   margin: auto;
   padding-top: 0.1px;
