@@ -1,7 +1,7 @@
 /*Please use one global stylesheet and also get the minify package in atom. Thank you. :D*/
 
 * {
-  font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, Sans-Serif;
+  font-family: "Roboto", sans-serif;
   margin: 0px;
   padding: 0px, 0px, 0px, 0px;
 }
@@ -362,7 +362,7 @@ input:checked+.slider:before {
   width: 100%;
 }
 
-.s-c-tab.account{
+.s-c-tab.account {
   display: block;
   /* transform: translateX(100%); */
 }
@@ -421,6 +421,14 @@ input:checked+.slider:before {
 }
 
 .input-sub {
+  font: Roboto;
+  font-size: 10px;
+  color: #ff8e8e;
+  position: relative;
+  left: 10px;
+}
+
+.input-sub.i-handle {
   font: Roboto;
   font-size: 10px;
   color: #ff8e8e;
@@ -510,7 +518,7 @@ input:checked+.slider:before {
   position: relative;
   text-decoration: none;
   font-family: Roboto;
-  font-weight: lighter;
+  font-weight: 400;
   color: #222;
   border: none;
   font-size: 18px;
@@ -552,7 +560,7 @@ input:checked+.slider:before {
   position: relative;
   float: left;
   margin-left: 55px;
-  top: 7px;
+  top: 7px !important;
   color: #444;
 }
 
@@ -833,11 +841,17 @@ input:checked+.slider:before {
   left: 5px;
   float: left;
   height: 200px;
-  /* set to auto later */
   width: 200px;
   background: #ddd;
   margin: 5px;
   cursor: pointer;
+  border-radius: 3px;
+}
+
+.h-post.small {
+  width: 150px;
+  height: 150px;
+
 }
 
 .h-op {
@@ -876,9 +890,11 @@ input:checked+.slider:before {
   position: absolute;
   bottom: 0;
   cursor: default;
+  border-top-left-radius: 3px;
+  border-top-right-radius: 3px;
 }
 
-.h-upcount {
+.h-icon {
   position: relative;
   float: left;
   top: 2px;
@@ -886,15 +902,36 @@ input:checked+.slider:before {
   cursor: pointer;
 }
 
-.h-p-likes {
+.h-p-stat {
   opacity: 1;
   position: relative;
   color: #333;
   float: left;
   top: 8px;
-  margin-left: 10px;
+  margin-left: 5px;
   font-size: 12px;
   cursor: default;
+  font-weight: 600;
+}
+
+.h-post-info.big{
+  height: 50px;
+}
+
+.h-p-stat.big {
+  top: 14.5px;
+  margin-left: 5px;
+  font-size: 16px;
+}
+
+.h-icon.big {
+  top: 10px;
+}
+
+.h-more.big{
+  top: 18.5px;
+  font-weight: 600;
+  right: 5px;
 }
 
 .h-search-tools {
@@ -942,13 +979,6 @@ input:checked+.slider:before {
   margin-left: auto;
   margin-right: auto;
   padding-bottom: 20px;
-}
-
-* {
-  font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, Sans-Serif;
-  margin: 0px;
-  padding: 0px, 0px, 0px, 0px;
-  z-index: 0;
 }
 
 p {
@@ -1095,6 +1125,7 @@ body {
   font-size: 20px;
   margin-right: auto;
   margin-top: 2px;
+  font-weight: 600;
 }
 
 .username {
@@ -1665,12 +1696,6 @@ body {
   color: #333;
 }
 
-* {
-  font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, Sans-Serif;
-  margin: 0px;
-  padding: 0px, 0px, 0px, 0px;
-}
-
 /* LOGIN */
 
 .login-h1 {
@@ -1730,12 +1755,6 @@ body {
   border-radius: 2px;
   z-index: 100;
   margin-bottom: 8px;
-}
-
-* {
-  font-family: "Lato", "Lucida Grande", "Lucida Sans Unicode", Tahoma, Sans-Serif;
-  margin: 0px;
-  padding: 0px, 0px, 0px, 0px;
 }
 
 /* LOGIN */
