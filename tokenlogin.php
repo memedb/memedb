@@ -9,7 +9,7 @@ if ($id_token == null) {
 }
 
 $client = new Google_Client();
-$client->setAuthConfig('client_secrets.json');
+$client->setAuthConfig('secret/client_secrets.json');
 // $client->setAccessType("offline");
 // $client->setIncludeGrantedScopes(true);
 // $client->addScope(Google_Service_Drive::DRIVE_METADATA_READONLY);

@@ -2,3 +2,4 @@
 sql.php
 vendor/
 client_secrets.json
+secret/.htaccess
