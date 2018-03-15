@@ -87,8 +87,6 @@ if ($account == null)
     <div class="sign-in">SIGN IN</div>
   </div>
 
-  <div class="pepe"></div>
-
   <div class="imp-bg-fade" id="imp-bg-fade" style="display: none; opacity 0;"></div>
 
   <div class="l-sett-opt" style="display: none;">
@@ -142,58 +140,58 @@ if ($account == null)
   </div>
 
   <div class="sidenav">
-    <div class="a-user-info">
-      <div class="image"></div>
-      <div class="name">
-        <h1 class="n-name"><?php echo $account->name; ?></h1>
-      </div>
-      <div class="username">
-        @<?php echo $account->handle; ?>
-      </div>
-      <div class="info">
-        <!-- CHANGE NAME LATER -->
-        <div class="karma">
-          Karma: 0
+    <div class="s-user">
+      <div class="a-user-info">
+        <div class="image"></div>
+        <div class="name">
+          <h1 class="n-name"><?php echo $account->name; ?></h1>
         </div>
-        <!--  -->
-        <div class="rank">
-          Elo: NaN
+        <div class="username">@<?php echo $account->handle; ?></div>
+        <div class="info">
+          <!-- CHANGE NAME LATER -->
+          <div class="u-stat karma">Karma
+            <span style="font-family: Roboto;font-weight: lighter;color: #222;"><?php echo $account->karma; ?>
+            </span>
+          </div>
+          <!--  -->
+          <div class="u-stat rank">Elo
+            <span style="font-family: Roboto;font-weight: lighter;color: #222;"><?php echo ($account->rank ? $account->rank : "NaN"); ?>
+            </span>
+          </div>
         </div>
+        <button class="follow">Follow
+          <span style="font-family: Roboto;font-weight: 500;color: #ccc;">0
+          </span></button>
+        <!-- <button class="follow" style="background:#ccc; color:#222;">Unfollow <span style="font-family: Roboto;font-weight: 500;color: #555;">0
+        </span></button> -->
       </div>
-      <button class="follow">Follow
-        <span style="font-family: Roboto;font-weight: 500;color: #ccc;">0
-        </span></button>
-      <!-- <button class="follow" style="background:#ccc; color:#222;">Unfollow <span style="font-family: Roboto;font-weight: 500;color: #555;">0
-      </span></button> -->
     </div>
 
-    <div class="fav-holder">
-      <div class="div-line"></div>
-      <h1 class="div-text">Favorites</h1>
-      <div class="div-line"></div>
+    <div class="s-favorites">
+      <div class="fav-holder">
+        <div class="div-line"></div>
+        <h1 class="div-text">Favorites</h1>
+        <div class="div-line"></div>
+      </div>
+      <div class="meme-type">
+        <?php
+        foreach ($account->favorites as $favorite) {
+         ?>
+        <div class="type"><?php echo $favorite; ?><button class="t-cross">X</button></div>
+        <?php } ?>
+        <button class="t-add">+</button>
+      </div>
+      <div class="line"></div>
     </div>
 
-    <div class="meme-type">
-      <div class="type">META IRONIC<button class="t-cross">X</button></div>
-      <div class="type">IRONIC<button class="t-cross">X</button></div>
-      <div class="type">SHITPOSTING<button class="t-cross">X</button></div>
-      <div class="type">PHILOSOPHY<button class="t-cross">X</button></div>
-      <div class="type">DEEP FRIED<button class="t-cross">X</button></div>
-      <div class="type">REACTION IMAGES<button class="t-cross">X</button></div>
-      <div class="type">CURSED IMAGES<button class="t-cross">X</button></div>
-      <div class="type">NONSENSICAL<button class="t-cross">X</button></div>
-      <button class="t-add">+</button>
-    </div>
 
-    <div class="line"></div>
+    <div class="sub-box">
+      <div class="subscriptions">
+        <div class="s-searchbar">
+          <i class="material-icons seach-g" style="float: left;position:relative; top: -1px; color: #666;">search</i><input type="text" placeholder="Search User" style="all: unset; width: 88.5%;position: relative; left: 11px; border-bottom: 2px solid #ddd;"
+          />
+        </div>
 
-    <div class="s-searchbar">
-      <i class="material-icons seach-g" style="float: left;position:relative; top: -1px; color: #666;">search</i><input type="text" placeholder="Search User" style="all: unset; width: 88.5%;position: relative; left: 11px; border-bottom: 2px solid #ddd;"
-      />
-    </div>
-
-    <div class="result-scroll">
-      <div class="result-box">
         <div class="r-container">
           <div class="r-image-preview"></div>
           <div class="r-desc">
@@ -320,71 +318,102 @@ if ($account == null)
         </div>
       </div>
     </div>
+
   </div>
 
   <div class="content">
     <div class="c-box">
-      <h1 style="margin-left: 20px; font-weight: 200; font-family: 'Roboto', sans-serif;">Most Popular</h1>
+      <h1 style="margin-left: 10px;">Most Popular</h1>
       <div class="c-popular">
-        <div class="h-post" style="width: 150px; height: 150px">
+        <div class="h-post small">
           <div class="h-post-info">
-            <div class="h-upcount">
+            <div class="h-icon">
               <i class="material-icons" style="font-size: 18px; top: 5px;">keyboard_arrow_up</i>
             </div>
-            <div class="h-p-likes">
-              16384
+            <div class="h-p-stat" title="16472">
+              16K
+            </div>
+            <div class="h-icon">
+              <i class="material-icons black" style="font-size: 18px; top: 5px;font-weight: 600;">repeat</i>
+            </div>
+            <div class="h-p-stat">
+              4K
             </div>
             <div class="h-more">
               <i class="material-icons" style="font-size: 18px; top: -3px;">more_horiz</i>
             </div>
           </div>
         </div>
-        <div class="h-post" style="width: 150px; height: 150px">
+        <div class="h-post small">
           <div class="h-post-info">
-            <div class="h-upcount">
+            <div class="h-icon">
               <i class="material-icons" style="font-size: 18px; top: 5px;">keyboard_arrow_up</i>
             </div>
-            <div class="h-p-likes">
-              16384
+            <div class="h-p-stat">
+              16K
+            </div>
+            <div class="h-icon">
+              <i class="material-icons black" style="font-size: 18px; top: 5px;font-weight: 600;">repeat</i>
+            </div>
+            <div class="h-p-stat">
+              4K
             </div>
             <div class="h-more">
               <i class="material-icons" style="font-size: 18px; top: -3px;">more_horiz</i>
             </div>
           </div>
         </div>
-        <div class="h-post" style="width: 150px; height: 150px">
+        <div class="h-post small">
           <div class="h-post-info">
-            <div class="h-upcount">
+            <div class="h-icon">
               <i class="material-icons" style="font-size: 18px; top: 5px;">keyboard_arrow_up</i>
             </div>
-            <div class="h-p-likes">
-              16384
+            <div class="h-p-stat">
+              16K
+            </div>
+            <div class="h-icon">
+              <i class="material-icons black" style="font-size: 18px; top: 5px;font-weight: 600;">repeat</i>
+            </div>
+            <div class="h-p-stat">
+              4K
             </div>
             <div class="h-more">
               <i class="material-icons" style="font-size: 18px; top: -3px;">more_horiz</i>
             </div>
           </div>
         </div>
-        <div class="h-post" style="width: 150px; height: 150px">
+        <div class="h-post small">
           <div class="h-post-info">
-            <div class="h-upcount">
+            <div class="h-icon">
               <i class="material-icons" style="font-size: 18px; top: 5px;">keyboard_arrow_up</i>
             </div>
-            <div class="h-p-likes">
-              16384
+            <div class="h-p-stat">
+              16K
+            </div>
+            <div class="h-icon">
+              <i class="material-icons black" style="font-size: 18px; top: 5px;font-weight: 600;">repeat</i>
+            </div>
+            <div class="h-p-stat">
+              4K
             </div>
             <div class="h-more">
               <i class="material-icons" style="font-size: 18px; top: -3px;">more_horiz</i>
             </div>
           </div>
         </div>
-        <div class="h-post" style="width: 150px; height: 150px">
+        <div class="h-post small">
           <div class="h-post-info">
-            <div class="h-upcount">
+            <div class="h-icon">
               <i class="material-icons" style="font-size: 18px; top: 5px;">keyboard_arrow_up</i>
             </div>
-            <div class="h-p-likes">
-              16384
+            <div class="h-p-stat">
+              16K
+            </div>
+            <div class="h-icon">
+              <i class="material-icons black" style="font-size: 18px; top: 5px;font-weight: 600;">repeat</i>
+            </div>
+            <div class="h-p-stat">
+              4K
             </div>
             <div class="h-more">
               <i class="material-icons" style="font-size: 18px; top: -3px;">more_horiz</i>
