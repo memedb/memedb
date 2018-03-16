@@ -1330,8 +1330,12 @@ body {
   display: block;
 }
 
+.s-search-box {
+  height: 0;
+  display: table-row;
+}
+
 .s-searchbar {
-  display: table;
   position: relative;
   font-family: Roboto;
   padding: 8px 8px 8px 8px;
