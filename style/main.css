@@ -580,10 +580,21 @@ input:checked+.slider:before {
   background: #ddd;
 }
 
+.sub-box {
+  display: table-cell;
+  height: 0;
+  overflow-y: auto;
+}
+
 .subscriptions {
   margin: auto;
   position: relative;
-  top: -10px;
+  height: inherit;
+}
+
+.sections {
+  height: 0;
+  display: table-row;
 }
 
 /* SUPPORT */
@@ -664,8 +675,7 @@ input:checked+.slider:before {
   width: 400px;
   background: #eee;
   border-right: 1px solid #ddd;
-  overflow-y: auto;
-  overflow-x: none;
+  overflow-y: hidden;
 }
 
 .s-scroll {
@@ -712,52 +722,55 @@ input:checked+.slider:before {
 
 .info {
   position: relative;
-  top: -5px;
+  margin-top: 18px;
   margin-left: 10px;
   float: left;
+  display: table;
 }
 
 /* CHANGE NAME LATER */
 
-.karma {
-  width: 130px;
-  height: 20px;
-  position: relative;
-  float: left;
-  margin-top: 5px;
-  font-family: Roboto;
-  font-size: 16px;
-  font-weight: lighter;
-}
-
-.rank {
+.u-stat {
   width: 100px;
-  height: 20px;
-  position: relative;
-  float: left;
-  margin-top: 5px;
-  font-family: Roboto;
-  font-size: 16px;
-  font-weight: lighter;
-}
-
-.followers {
+  display: table-column;
   position: relative;
   text-decoration: none;
   font-family: Roboto;
-  font-weight: 600;
+  font-weight: 600 !important;
   color: #222;
-  padding: 5px 16px 0px 75px;
+  /* padding: 5px 16px 0px 75px; */
   border-radius: 2px;
   border: none;
-  text-align: center;
+  text-align: left;
   font-size: 16px;
   float: left;
+}
+
+.u-stat.karma {
+  position: relative;
+  float: left;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: lighter;
+}
+
+u-stat.rank {
+  position: relative;
+  float: left;
+  margin-top: 5px;
+  font-family: "Roboto", sans-serif;
+  font-size: 16px;
+  font-weight: lighter;
+}
+
+.user {
+  height: 0;
+  display: table-row;
 }
 
 .user-info {
   width: 80%;
-  height: 100px;
+  height: 120px;
   position: relative;
   margin: auto;
   margin-top: 55px;
@@ -861,13 +874,17 @@ input:checked+.slider:before {
 .h-post.small {
   width: 150px;
   height: 150px;
-
 }
 
 .h-post.tiny {
   width: 92px;
   height: 92px;
+}
 
+.h-post-row {
+  width: 100%;
+  height: 92px;
+  display: table;
 }
 
 .h-op {
@@ -930,13 +947,14 @@ input:checked+.slider:before {
   font-weight: 600;
 }
 
-.h-post-info.big{
+.h-post-info.big {
   height: 50px;
 }
 
 .h-p-stat.big {
   top: 14.5px;
   margin-left: 5px;
+  margin-right: 5px;
   font-size: 16px;
 }
 
@@ -944,7 +962,7 @@ input:checked+.slider:before {
   top: 10px;
 }
 
-.h-more.big{
+.h-more.big {
   top: 18.5px;
   font-weight: 600;
   right: 5px;
@@ -1172,17 +1190,6 @@ body {
 
 /* CHANGE NAME LATER */
 
-.karma {
-  width: 130px;
-  height: 20px;
-  position: relative;
-  float: left;
-  margin-top: 5px;
-  font-family: Roboto;
-  font-size: 16px;
-  font-weight: lighter;
-}
-
 .follow {
   position: relative;
   text-decoration: none;
@@ -1204,7 +1211,9 @@ body {
   width: 80%;
   height: 100px;
   position: relative;
-  margin: auto;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 55px;
 }
 
 .s-user {
@@ -1222,16 +1231,19 @@ body {
   display: table-row;
 }
 
-.s-results {
-  height: 0;
-  display: table-cell;
-  overflow-y: scroll;
-}
-
 .s-r-scroll {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
   position: relative;
   height: inherit;
   margin: auto;
+}
+
+.s-results {
+  display: table-cell;
+  height: 0;
+  overflow-y: auto;
 }
 
 /*  */
@@ -1341,6 +1353,11 @@ body {
   display: block;
 }
 
+.s-search-box {
+  height: 0;
+  display: table-row;
+}
+
 .s-searchbar {
   position: relative;
   font-family: Roboto;
@@ -1375,8 +1392,9 @@ body {
 .r-container {
   width: 300px;
   height: 50px;
-  margin: 10px 0px 10px 10px;
+  margin: 10px 0px 10px 40px;
   cursor: pointer;
+  display: table;
 }
 
 .r-image-preview {
@@ -1433,10 +1451,12 @@ body {
 /* CONTENT */
 
 .content {
+  position: relative;
   width: auto;
   height: auto;
   margin-left: 400px;
   margin-right: 71px;
+  top: 55px;
 }
 
 .c-box {
@@ -1719,6 +1739,7 @@ body {
   background: #f5f5f5;
   border-left: 1px #ddd solid;
   z-index: 10;
+  margin-top: 55px;
 }
 
 .edit-icons {
