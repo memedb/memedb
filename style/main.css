@@ -854,9 +854,19 @@ input:checked+.slider:before {
   border-radius: 3px;
 }
 
+.h-post-info.tiny {
+  height: 20px;
+}
+
 .h-post.small {
   width: 150px;
   height: 150px;
+
+}
+
+.h-post.tiny {
+  width: 92px;
+  height: 92px;
 
 }
 
@@ -1198,22 +1208,30 @@ body {
 }
 
 .s-user {
-  height: 140px;
+  height: 0;
   display: table-row;
 }
 
 .s-favorites {
+  height: 0;
+  display: table-row;
+}
+
+.s-searchbox {
+  height: 0;
   display: table-row;
 }
 
 .s-results {
-  display: table-row;
+  height: 0;
+  display: table-cell;
   overflow-y: scroll;
-  height: 740px;
 }
 
 .s-r-scroll {
-  height: 1000px;
+  position: relative;
+  height: inherit;
+  margin: auto;
 }
 
 /*  */

@@ -19,6 +19,7 @@ if ($account == null)
 
 <head>
   <?php imports(); ?>
+  <link rel="icon" href="https://i.imgur.com/h0t0THj.png" type="image" sizes="16x16">
   <title>memedb</title>
 </head>
 
@@ -142,182 +143,114 @@ if ($account == null)
   </div>
 
   <div class="sidenav">
-    <div class="a-user-info">
-      <div class="image"></div>
-      <div class="name">
-        <h1 class="n-name"><?php echo $account->name; ?></h1>
+    <div class="s-user">
+      <div class="a-user-info">
+        <div class="image"></div>
+        <div class="name">
+          <h1 class="n-name"><?php echo $account->name; ?></h1>
+        </div>
+        <div class="username">
+          @<?php echo $account->handle; ?>
+        </div>
+        <div class="info">
+          <!-- CHANGE NAME LATER -->
+          <div class="karma">
+            Karma: 0
+          </div>
+          <!--  -->
+          <div class="rank">
+            Elo: NaN
+          </div>
+        </div>
+        <button class="follow">Follow
+          <span style="font-family: Roboto;font-weight: 500;color: #ccc;">0
+          </span></button>
+        <!-- <button class="follow" style="background:#ccc; color:#222;">Unfollow <span style="font-family: Roboto;font-weight: 500;color: #555;">0
+        </span></button> -->
       </div>
-      <div class="username">
-        @<?php echo $account->handle; ?>
+    </div>
+
+    <div class="s-favorites">
+      <div class="fav-holder">
+        <div class="div-line"></div>
+        <h1 class="div-text">Favorites</h1>
+        <div class="div-line"></div>
       </div>
-      <div class="info">
-        <!-- CHANGE NAME LATER -->
-        <div class="karma">
-          Karma: 0
-        </div>
-        <!--  -->
-        <div class="rank">
-          Elo: NaN
-        </div>
+
+      <div class="meme-type">
+        <div class="type">META IRONIC<button class="t-cross">X</button></div>
+        <div class="type">IRONIC<button class="t-cross">X</button></div>
+        <div class="type">SHITPOSTING<button class="t-cross">X</button></div>
+        <div class="type">PHILOSOPHY<button class="t-cross">X</button></div>
+        <div class="type">DEEP FRIED<button class="t-cross">X</button></div>
+        <div class="type">REACTION IMAGES<button class="t-cross">X</button></div>
+        <div class="type">CURSED IMAGES<button class="t-cross">X</button></div>
+        <div class="type">NONSENSICAL<button class="t-cross">X</button></div>
+        <button class="t-add">+</button>
       </div>
-      <button class="follow">Follow
-        <span style="font-family: Roboto;font-weight: 500;color: #ccc;">0
-        </span></button>
-      <!-- <button class="follow" style="background:#ccc; color:#222;">Unfollow <span style="font-family: Roboto;font-weight: 500;color: #555;">0
-      </span></button> -->
+
+      <div class="line"></div>
     </div>
 
-    <div class="fav-holder">
-      <div class="div-line"></div>
-      <h1 class="div-text">Favorites</h1>
-      <div class="div-line"></div>
+    <div class="s-searchbox">
+      <div class="s-searchbar">
+        <i class="material-icons seach-g" style="float: left;position:relative; top: -1px; color: #666;">search</i><input type="text" placeholder="Search User" style="all: unset; width: 88.5%;position: relative; left: 11px; border-bottom: 2px solid #ddd;"
+        />
+      </div>
     </div>
 
-    <div class="meme-type">
-      <div class="type">META IRONIC<button class="t-cross">X</button></div>
-      <div class="type">IRONIC<button class="t-cross">X</button></div>
-      <div class="type">SHITPOSTING<button class="t-cross">X</button></div>
-      <div class="type">PHILOSOPHY<button class="t-cross">X</button></div>
-      <div class="type">DEEP FRIED<button class="t-cross">X</button></div>
-      <div class="type">REACTION IMAGES<button class="t-cross">X</button></div>
-      <div class="type">CURSED IMAGES<button class="t-cross">X</button></div>
-      <div class="type">NONSENSICAL<button class="t-cross">X</button></div>
-      <button class="t-add">+</button>
-    </div>
 
-    <div class="line"></div>
+    <div class="s-results">
+      <div class="s-r-scroll">
 
-    <div class="s-searchbar">
-      <i class="material-icons seach-g" style="float: left;position:relative; top: -1px; color: #666;">search</i><input type="text" placeholder="Search User" style="all: unset; width: 88.5%;position: relative; left: 11px; border-bottom: 2px solid #ddd;"
-      />
-    </div>
-
-    <div class="result-scroll">
-      <div class="result-box">
-        <div class="r-container">
-          <div class="r-image-preview"></div>
-          <div class="r-desc">
-            <h1 class="r-title-text">Meme Title</h1>
-            <div class="r-tags">
-              <button class="r-type">SHITPOSTING</button>
+        <div class="h-post tiny">
+          <div class="h-post-info tiny">
+            <div class="h-more">
+              <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
             </div>
           </div>
         </div>
 
-        <div class="r-container">
-          <div class="r-image-preview"></div>
-          <div class="r-desc">
-            <h1 class="r-title-text">Meme Title</h1>
-            <div class="r-tags">
-              <button class="r-type">IRONIC</button>
+        <div class="h-post tiny">
+          <div class="h-post-info tiny">
+            <div class="h-more">
+              <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
             </div>
           </div>
         </div>
 
-        <div class="r-container">
-          <div class="r-image-preview"></div>
-          <div class="r-desc">
-            <h1 class="r-title-text">Meme Title</h1>
-            <div class="r-tags">
-              <button class="r-type">IRONIC</button>
+        <div class="h-post tiny">
+          <div class="h-post-info tiny">
+            <div class="h-more">
+              <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
             </div>
           </div>
         </div>
 
-        <div class="r-container">
-          <div class="r-image-preview"></div>
-          <div class="r-desc">
-            <h1 class="r-title-text">Meme Title</h1>
-            <div class="r-tags">
-              <button class="r-type">IRONIC</button>
+        <div class="h-post tiny">
+          <div class="h-post-info tiny">
+            <div class="h-more">
+              <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
             </div>
           </div>
         </div>
 
-        <div class="r-container">
-          <div class="r-image-preview"></div>
-          <div class="r-desc">
-            <h1 class="r-title-text">Meme Title</h1>
-            <div class="r-tags">
-              <button class="r-type">IRONIC</button>
+        <div class="h-post tiny">
+          <div class="h-post-info tiny">
+            <div class="h-more">
+              <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
             </div>
           </div>
         </div>
 
-        <div class="r-container">
-          <div class="r-image-preview"></div>
-          <div class="r-desc">
-            <h1 class="r-title-text">Meme Title</h1>
-            <div class="r-tags">
-              <button class="r-type">IRONIC</button>
+        <div class="h-post tiny">
+          <div class="h-post-info tiny">
+            <div class="h-more">
+              <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
             </div>
           </div>
         </div>
 
-        <div class="r-container">
-          <div class="r-image-preview"></div>
-          <div class="r-desc">
-            <h1 class="r-title-text">Meme Title</h1>
-            <div class="r-tags">
-              <button class="r-type">IRONIC</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="r-container">
-          <div class="r-image-preview"></div>
-          <div class="r-desc">
-            <h1 class="r-title-text">Meme Title</h1>
-            <div class="r-tags">
-              <button class="r-type">IRONIC</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="r-container">
-          <div class="r-image-preview"></div>
-          <div class="r-desc">
-            <h1 class="r-title-text">Meme Title</h1>
-            <div class="r-tags">
-              <button class="r-type">IRONIC</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="r-container">
-          <div class="r-image-preview"></div>
-          <div class="r-desc">
-            <h1 class="r-title-text">Meme Title</h1>
-            <div class="r-tags">
-              <button class="r-type">IRONIC</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="r-container">
-          <div class="r-image-preview"></div>
-          <div class="r-desc">
-            <h1 class="r-title-text">Meme Title</h1>
-            <div class="r-tags">
-              <button class="r-type">IRONIC</button>
-            </div>
-          </div>
-        </div>
-
-        <div class="r-container">
-          <div class="r-image-preview"></div>
-          <div class="r-desc">
-            <h1 class="r-title-text">Meme Title</h1>
-            <div class="r-tags">
-              <button class="r-type">META IRONIC</button>
-              <button class="r-type">SHITPOSTING</button>
-              <button class="r-type">IRONIC</button>
-              <button class="r-type">IRONIC</button>
-              <button class="r-type">IRONIC</button>
-
-            </div>
-          </div>
-        </div>
       </div>
     </div>
   </div>
@@ -326,71 +259,102 @@ if ($account == null)
     <div class="c-box">
       <h1 style="margin-left: 20px; font-weight: 200; font-family: 'Roboto', sans-serif;">Most Popular</h1>
       <div class="c-popular">
-        <div class="h-post" style="width: 150px; height: 150px">
+        <div class="h-post small">
           <div class="h-post-info">
-            <div class="h-upcount">
+            <div class="h-icon">
               <i class="material-icons" style="font-size: 18px; top: 5px;">keyboard_arrow_up</i>
             </div>
-            <div class="h-p-likes">
-              16384
+            <div class="h-p-stat" title="16472">
+              16K
+            </div>
+            <div class="h-icon">
+              <i class="material-icons black" style="font-size: 18px; top: 5px;font-weight: 600;">repeat</i>
+            </div>
+            <div class="h-p-stat">
+              4K
             </div>
             <div class="h-more">
               <i class="material-icons" style="font-size: 18px; top: -3px;">more_horiz</i>
             </div>
           </div>
         </div>
-        <div class="h-post" style="width: 150px; height: 150px">
+        <div class="h-post small">
           <div class="h-post-info">
-            <div class="h-upcount">
+            <div class="h-icon">
               <i class="material-icons" style="font-size: 18px; top: 5px;">keyboard_arrow_up</i>
             </div>
-            <div class="h-p-likes">
-              16384
+            <div class="h-p-stat">
+              16K
+            </div>
+            <div class="h-icon">
+              <i class="material-icons black" style="font-size: 18px; top: 5px;font-weight: 600;">repeat</i>
+            </div>
+            <div class="h-p-stat">
+              4K
             </div>
             <div class="h-more">
               <i class="material-icons" style="font-size: 18px; top: -3px;">more_horiz</i>
             </div>
           </div>
         </div>
-        <div class="h-post" style="width: 150px; height: 150px">
+        <div class="h-post small">
           <div class="h-post-info">
-            <div class="h-upcount">
+            <div class="h-icon">
               <i class="material-icons" style="font-size: 18px; top: 5px;">keyboard_arrow_up</i>
             </div>
-            <div class="h-p-likes">
-              16384
+            <div class="h-p-stat">
+              16K
+            </div>
+            <div class="h-icon">
+              <i class="material-icons black" style="font-size: 18px; top: 5px;font-weight: 600;">repeat</i>
+            </div>
+            <div class="h-p-stat">
+              4K
             </div>
             <div class="h-more">
               <i class="material-icons" style="font-size: 18px; top: -3px;">more_horiz</i>
             </div>
           </div>
         </div>
-        <div class="h-post" style="width: 150px; height: 150px">
+        <div class="h-post small">
           <div class="h-post-info">
-            <div class="h-upcount">
+            <div class="h-icon">
               <i class="material-icons" style="font-size: 18px; top: 5px;">keyboard_arrow_up</i>
             </div>
-            <div class="h-p-likes">
-              16384
+            <div class="h-p-stat">
+              16K
+            </div>
+            <div class="h-icon">
+              <i class="material-icons black" style="font-size: 18px; top: 5px;font-weight: 600;">repeat</i>
+            </div>
+            <div class="h-p-stat">
+              4K
             </div>
             <div class="h-more">
               <i class="material-icons" style="font-size: 18px; top: -3px;">more_horiz</i>
             </div>
           </div>
         </div>
-        <div class="h-post" style="width: 150px; height: 150px">
+        <div class="h-post small">
           <div class="h-post-info">
-            <div class="h-upcount">
+            <div class="h-icon">
               <i class="material-icons" style="font-size: 18px; top: 5px;">keyboard_arrow_up</i>
             </div>
-            <div class="h-p-likes">
-              16384
+            <div class="h-p-stat">
+              16K
+            </div>
+            <div class="h-icon">
+              <i class="material-icons black" style="font-size: 18px; top: 5px;font-weight: 600;">repeat</i>
+            </div>
+            <div class="h-p-stat">
+              4K
             </div>
             <div class="h-more">
               <i class="material-icons" style="font-size: 18px; top: -3px;">more_horiz</i>
             </div>
           </div>
         </div>
+
       </div>
     </div>
 
