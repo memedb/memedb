@@ -731,36 +731,43 @@ input:checked+.slider:before {
 /* CHANGE NAME LATER */
 
 .u-stat {
-  width: 100px;
+  width: 250px;
   display: table-column;
   position: relative;
   text-decoration: none;
   font-family: Roboto;
   font-weight: 600 !important;
   color: #222;
-  /* padding: 5px 16px 0px 75px; */
   border-radius: 2px;
   border: none;
   text-align: left;
   font-size: 16px;
   float: left;
+  margin-top: 2px;
 }
 
 .u-stat.karma {
+  margin: 0;
+  width: 100px;
   position: relative;
   float: left;
   font-family: Roboto;
   font-size: 16px;
   font-weight: lighter;
+  text-align: left;
+  padding-left: 10px;
 }
 
-u-stat.rank {
+.u-stat.rank {
+  margin: 0;
+  width: 100px;
   position: relative;
   float: left;
-  margin-top: 5px;
   font-family: "Roboto", sans-serif;
   font-size: 16px;
   font-weight: lighter;
+  text-align: left;
+  padding-left: 10px;
 }
 
 .user {
@@ -877,8 +884,8 @@ u-stat.rank {
 }
 
 .h-post.tiny {
-  width: 92px;
-  height: 92px;
+  width: 87px;
+  height: 87px;
 }
 
 .h-post-row {
@@ -1167,24 +1174,23 @@ body {
   height: 18px;
   position: relative;
   float: left;
-  margin-left: 10px;
   font-family: Roboto;
   font-size: 14px;
   font-weight: lighter;
+  text-align: left;
+  margin: 0;
 }
 
 .name {
-  padding-top: 10px;
-  padding-left: 10px;
-  position: relative;
-  margin: none;
-  float: left;
+  width: 200px;
+
 }
 
 .info {
   position: relative;
   top: -5px;
   margin-left: 10px;
+  width: 100%;
   float: left;
 }
 
@@ -1198,18 +1204,19 @@ body {
   color: #eee;
   background: #4167f4;
   padding: 8px 16px 8px 16px;
-  margin: 10px 2px 3px 2px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 75px;
   border-radius: 2px;
   border: none;
   text-align: center;
   font-size: 16px;
   cursor: pointer;
-  float: left;
 }
 
 .a-user-info {
   width: 80%;
-  height: 100px;
+  height: 120px;
   position: relative;
   margin-right: auto;
   margin-left: auto;
@@ -1232,12 +1239,17 @@ body {
 }
 
 .s-r-scroll {
-  width: 80%;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
   position: relative;
   height: inherit;
   margin: auto;
+}
+
+.s-margin {
+  width: 76%;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .s-results {
@@ -1313,7 +1325,7 @@ body {
   text-decoration: none;
   font-family: Roboto;
   font-weight: 700;
-  color: #7a2929;
+  color: #222;
   margin-left: 5px;
   margin-top: 1.5px;
   padding: 2px 8px 2px 8px;
