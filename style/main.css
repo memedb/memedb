@@ -580,21 +580,10 @@ input:checked+.slider:before {
   background: #ddd;
 }
 
-.sub-box {
-  display: table-cell;
-  height: 0;
-  overflow-y: auto;
-}
-
 .subscriptions {
   margin: auto;
   position: relative;
-  height: inherit;
-}
-
-.sections {
-  height: 0;
-  display: table-row;
+  top: -10px;
 }
 
 /* SUPPORT */
@@ -675,7 +664,8 @@ input:checked+.slider:before {
   width: 400px;
   background: #eee;
   border-right: 1px solid #ddd;
-  overflow-y: hidden;
+  overflow-y: auto;
+  overflow-x: none;
 }
 
 .s-scroll {
@@ -722,55 +712,52 @@ input:checked+.slider:before {
 
 .info {
   position: relative;
-  margin-top: 18px;
+  top: -5px;
   margin-left: 10px;
   float: left;
-  display: table;
 }
 
 /* CHANGE NAME LATER */
 
-.u-stat {
-  width: 100px;
-  display: table-column;
-  position: relative;
-  text-decoration: none;
-  font-family: Roboto;
-  font-weight: 600 !important;
-  color: #222;
-  /* padding: 5px 16px 0px 75px; */
-  border-radius: 2px;
-  border: none;
-  text-align: left;
-  font-size: 16px;
-  float: left;
-}
-
-.u-stat.karma {
-  position: relative;
-  float: left;
-  font-family: Roboto;
-  font-size: 16px;
-  font-weight: lighter;
-}
-
-u-stat.rank {
+.karma {
+  width: 130px;
+  height: 20px;
   position: relative;
   float: left;
   margin-top: 5px;
-  font-family: "Roboto", sans-serif;
+  font-family: Roboto;
   font-size: 16px;
   font-weight: lighter;
 }
 
-.user {
-  height: 0;
-  display: table-row;
+.rank {
+  width: 100px;
+  height: 20px;
+  position: relative;
+  float: left;
+  margin-top: 5px;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: lighter;
+}
+
+.followers {
+  position: relative;
+  text-decoration: none;
+  font-family: Roboto;
+  font-weight: 600;
+  color: #222;
+  padding: 5px 16px 0px 75px;
+  border-radius: 2px;
+  border: none;
+  text-align: center;
+  font-size: 16px;
+  float: left;
 }
 
 .user-info {
   width: 80%;
-  height: 120px;
+  height: 100px;
   position: relative;
   margin: auto;
   margin-top: 55px;
@@ -874,6 +861,7 @@ u-stat.rank {
 .h-post.small {
   width: 150px;
   height: 150px;
+
 }
 
 .h-post.tiny {
@@ -942,14 +930,13 @@ u-stat.rank {
   font-weight: 600;
 }
 
-.h-post-info.big {
+.h-post-info.big{
   height: 50px;
 }
 
 .h-p-stat.big {
   top: 14.5px;
   margin-left: 5px;
-  margin-right: 5px;
   font-size: 16px;
 }
 
@@ -957,7 +944,7 @@ u-stat.rank {
   top: 10px;
 }
 
-.h-more.big {
+.h-more.big{
   top: 18.5px;
   font-weight: 600;
   right: 5px;
@@ -1185,6 +1172,17 @@ body {
 
 /* CHANGE NAME LATER */
 
+.karma {
+  width: 130px;
+  height: 20px;
+  position: relative;
+  float: left;
+  margin-top: 5px;
+  font-family: Roboto;
+  font-size: 16px;
+  font-weight: lighter;
+}
+
 .follow {
   position: relative;
   text-decoration: none;
@@ -1206,9 +1204,7 @@ body {
   width: 80%;
   height: 100px;
   position: relative;
-  margin-right: auto;
-  margin-left: auto;
-  margin-top: 55px;
+  margin: auto;
 }
 
 .s-user {
@@ -1217,20 +1213,25 @@ body {
 }
 
 .s-favorites {
-  height: 0px;
+  height: 0;
+  display: table-row;
+}
+
+.s-searchbox {
+  height: 0;
   display: table-row;
 }
 
 .s-results {
+  height: 0;
   display: table-cell;
-  height: 0 !important;
-  overflow-y: auto;
+  overflow-y: scroll;
 }
 
 .s-r-scroll {
-  margin: auto;
   position: relative;
   height: inherit;
+  margin: auto;
 }
 
 /*  */
@@ -1340,11 +1341,6 @@ body {
   display: block;
 }
 
-.s-search-box {
-  height: 0;
-  display: table-row;
-}
-
 .s-searchbar {
   position: relative;
   font-family: Roboto;
@@ -1379,9 +1375,8 @@ body {
 .r-container {
   width: 300px;
   height: 50px;
-  margin: 10px 0px 10px 40px;
+  margin: 10px 0px 10px 10px;
   cursor: pointer;
-  display: table;
 }
 
 .r-image-preview {
@@ -1438,12 +1433,10 @@ body {
 /* CONTENT */
 
 .content {
-  position: relative;
   width: auto;
   height: auto;
   margin-left: 400px;
   margin-right: 71px;
-  top: 55px;
 }
 
 .c-box {
@@ -1726,7 +1719,6 @@ body {
   background: #f5f5f5;
   border-left: 1px #ddd solid;
   z-index: 10;
-  margin-top: 55px;
 }
 
 .edit-icons {
