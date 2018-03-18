@@ -783,6 +783,13 @@ input:checked+.slider:before {
   margin-top: 55px;
 }
 
+.followers {
+  width: 100%;
+  height: 50;
+
+
+}
+
 .line {
   height: 1px;
   width: 80%;

@@ -166,18 +166,18 @@
         <div class="user-info">
           <div class="image"></div>
           <div class="name">
-            <h1 class="n-name">Gaetan Almela</h1>
+            <h1 class="n-name"><?php echo $account->name; ?></h1>
+            <div class="username">
+              @<?php echo $account->handle; ?>
+            </div>
           </div>
-          <div class="username">
-            @Al
-          </div>
-          <div class="info">
+          <div class="u-stat">
             <!-- CHANGE NAME LATER -->
-            <div class="karma">
+            <div class="u-stat karma">
               Karma: 0
             </div>
             <!--  -->
-            <div class="rank">
+            <div class="u-stat rank">
               Elo: NaN
             </div>
           </div>
