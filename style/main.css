@@ -2135,7 +2135,10 @@ body {
   font-size: 12px;
   cursor: pointer;
   float: right;
-  =======.g-signin2 {
+
+}
+
+.g-signin2 {
     margin: 10px 0 0 40px;
-    >>>>>>>a9e0ed957e163a4214e913cbf875b2dbadabdbf0
-  }
+    position: relative;
+}
