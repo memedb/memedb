@@ -143,8 +143,9 @@ if ($account == null)
   <div class="sidenav">
     <div class="s-user">
       <div class="a-user-info">
-        <div class="image"></div>
-<<<<<<< HEAD
+        <div class="image">
+          <img src="<?php echo $account->getImage(); ?>" style="border: inherit; border-radius: inherit;" width="60" height="60">
+        </div>
         <div class="s-namebox">
           <div class="name">
             <h1 class="n-name"><?php echo $account->name; ?></h1>
@@ -152,22 +153,13 @@ if ($account == null)
           <div class="username">@<?php echo $account->handle; ?></div>
         </div>
         <div class="info">
-=======
-        <div class="name">
-          <h1 class="n-name"><?php echo $account->name; ?></h1>
-          <div class="username">
-            @<?php echo $account->handle; ?>
-          </div>
-        </div>
-        <div class="u-stat">
->>>>>>> 341a3db86b1b80a0de8db049acfd3aaecfd16376
           <!-- CHANGE NAME LATER -->
           <div class="u-stat karma">
-            Karma: 0
+            Karma: <?php echo $account->karma; ?>
           </div>
           <!--  -->
           <div class="u-stat rank">
-            Elo: NaN
+            Elo: <?php echo ($account->rank ? $account->rank : "NaN"); ?>
           </div>
         </div>
         <button class="follow">Follow

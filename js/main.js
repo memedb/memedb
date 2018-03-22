@@ -39,8 +39,9 @@ $(document).ready(function() {
 
 function openOptions(id) {
   console.log(id);
+  var offset = $("#" + id).offset();
   $(".l-sett-opt").css({
-    marginTop: (parseInt(id) * 62) + "px",
+    top: (offset.top + 15) + "px",
     opacity: "0",
     right: "120px",
     display: ""

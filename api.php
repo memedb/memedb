@@ -107,11 +107,16 @@ class image {
 
 class user {
 
+  public function getImage() {
+    return "/userimg.php?handle=" . $this->handle;
+  }
+
   public static function loadFromId($id) {
     $usr = loadDBObject("users", "id=$id", "user");
     if ($usr != null) {
       $usr->favorites = explode(",",$usr->favorites);
       $usr->following = explode(",",$usr->following);
+      $usr->image = "/userimg.php?handle=" + $usr->handle;
     }
     return $usr;
   }
@@ -121,6 +126,7 @@ class user {
     if ($usr != null) {
       $usr->favorites = explode(",",$usr->favorites);
       $usr->following = explode(",",$usr->following);
+      $usr->image = "/userimg.php?handle=" + $usr->handle;
     }
     return $usr;
   }
