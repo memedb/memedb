@@ -1,14 +1,28 @@
+<?php
+require('api.php');
+
+$account = $_GET['id'];
+
+if ($account != null)
+  $account = user::loadFromId($account);
+
+if (loggedIn() && !$account) {
+  $account = getUser();
+}
+
+if ($account == null)
+  header("Location: https://meme-db.com");
+ ?>
+
 <!DOCTYPE html>
 <html>
 
 <head>
-  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic|Roboto+Mono:400|Material+Icons" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Lato:400,900,400italic,700italic" rel="stylesheet">
-  <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab:700" rel="stylesheet">
-  <meta charset="utf-8">
-  <link rel="stylesheet" href="../style/main.css">
+
+  <?php imports(); ?>
   <link rel="icon" href="https://i.imgur.com/h0t0THj.png" type="image" sizes="16x16">
   <title>memedb</title>
+
 </head>
 
 <body>
@@ -224,92 +238,6 @@
             <button class="s-notes">4</button>
           </div>
 
-<<<<<<< HEAD
-        <div class="section">
-          <div class="s-avatar"></div>
-          <div class="s-txt">
-            Justin Fernald
-          </div>
-          <button class="s-notes">99+</button>
-        </div>
-
-        <div class="section">
-          <div class="s-avatar"></div>
-          <div class="s-txt">
-            Justin Fernald
-          </div>
-          <button class="s-notes">99+</button>
-        </div>
-
-        <div class="section">
-          <div class="s-avatar"></div>
-          <div class="s-txt">
-            Justin Fernald
-          </div>
-          <button class="s-notes">99+</button>
-        </div>
-
-        <div class="section">
-          <div class="s-avatar"></div>
-          <div class="s-txt">
-            Justin Fernald
-          </div>
-          <button class="s-notes">99+</button>
-        </div>
-
-        <div class="section">
-          <div class="s-avatar"></div>
-          <div class="s-txt">
-            Justin Fernald
-          </div>
-          <button class="s-notes">99+</button>
-        </div>
-
-        <div class="section">
-          <div class="s-avatar"></div>
-          <div class="s-txt">
-            Justin Fernald
-          </div>
-          <button class="s-notes">99+</button>
-        </div>
-
-        <div class="section">
-          <div class="s-avatar"></div>
-          <div class="s-txt">
-            Justin Fernald
-          </div>
-          <button class="s-notes">99+</button>
-        </div>
-
-        <div class="section">
-          <div class="s-avatar"></div>
-          <div class="s-txt">
-            Justin Fernald
-          </div>
-          <button class="s-notes">99+</button>
-        </div>
-
-        <div class="section">
-          <div class="s-avatar"></div>
-          <div class="s-txt">
-            Justin Fernald
-          </div>
-          <button class="s-notes">99+</button>
-        </div>
-
-        <div class="section">
-          <div class="s-avatar"></div>
-          <div class="s-txt">
-            Justin Fernald
-          </div>
-          <button class="s-notes">99+</button>
-        </div>
-
-        <div class="section">
-          <div class="s-avatar"></div>
-          <div class="s-txt">
-            Last one
-=======
           <div class="section">
             <div class="s-avatar"></div>
             <div class="s-txt">
@@ -339,7 +267,6 @@
               Will Garrett
             </div>
             <button class="s-notes">4</button>
->>>>>>> 341a3db86b1b80a0de8db049acfd3aaecfd16376
           </div>
 
           <div class="section">

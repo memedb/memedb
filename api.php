@@ -10,7 +10,13 @@ $db = "zerentha_meme";
 
 $GLOBALS['conn'] = new mysqli($server, $user, $pass, $db);
 
-$user = null;
+if ($_SESSION['id']) {
+  $GLOBALS['user'] = user::loadFromId($_SESSION['id']);
+  $conn = $GLOBALS['conn'];
+  $ip = get_client_ip();
+  $stmt = $conn->prepare("UPDATE users SET ip = '$ip' WHERE id = ".$user->id);
+  $stmt->execute();
+}
 
 if ($GLOBALS['conn']->connect_error) {
   die("Database connection failed: " . $conn->connect_error);
@@ -35,13 +41,12 @@ function exists($value, $table, $column) {
 function imports() {
   ?>
     <script src="/js/jquery-3.3.1.min.js"></script>
-    <script src="/js/main.js"></script>
+    <script src="/js/main.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,400italic|Roboto+Mono:400|Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Lato:400,900,400italic,700italic" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto|Roboto+Slab:700" rel="stylesheet">
     <meta charset="utf-8">
     <link rel="stylesheet" href="/style/main.min.css">
-    <link rel="icon" href="https://i.imgur.com/h0t0THj.png" type="image" sizes="16x16">
   <?php
 }
 
@@ -57,13 +62,27 @@ function loadDBObject($table, $selector, $classname) {
 }
 
 function getUser() {
-  if ($user)
-    return $user;
-  if ($_SESSION['id']) {
-    $user = user::loadFromId($_SESSION['id']);
-    return $user;
-  }
-  return null;
+  return $GLOBALS['user'];
+}
+
+function get_client_ip() {
+    $ipaddress = '';
+    if ($_SERVER['HTTP_CLIENT_IP'])
+        $ipaddress = $_SERVER['HTTP_CLIENT_IP'];
+    else if($_SERVER['HTTP_X_FORWARDED_FOR'])
+        $ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
+    else if($_SERVER['HTTP_X_FORWARDED'])
+        $ipaddress = $_SERVER['HTTP_X_FORWARDED'];
+    else if($_SERVER['HTTP_FORWARDED_FOR'])
+        $ipaddress = $_SERVER['HTTP_FORWARDED_FOR'];
+    else if($_SERVER['HTTP_FORWARDED'])
+        $ipaddress = $_SERVER['HTTP_FORWARDED'];
+    else if($_SERVER['REMOTE_ADDR'])
+        $ipaddress = $_SERVER['REMOTE_ADDR'];
+    else
+        $ipaddress = 'UNKNOWN';
+
+    return $ipaddress;
 }
 
 function loggedIn() {
@@ -151,6 +170,29 @@ class user {
 
     mail($email, $subject, $message, implode("\r\n", $headers));
     return $id;
+  }
+
+  public function addFollowing($id) {
+    if(!in_array($id, $this->following)) {
+      array_push($this->following, $id);
+    }
+    $this->updateFollowing();
+  }
+
+  public function removeFollowing($id) {
+    if(in_array($id, $this->following)) {
+      $index = array_search($id, $this->following);
+      unset($this->following[$index]);
+    }
+    $this->updateFollowing();
+  }
+
+  private function updateFollowing() {
+    $conn = $GLOBALS['conn'];
+    $stmt = $conn->prepare("UPDATE user SET following=? WHERE id=?");
+    $stmt->prepare("si",$this->id, $imploded);
+    $imploded = implode(",", $this->following);
+    $stmt->execute();
   }
 
 }
