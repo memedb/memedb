@@ -1,0 +1,539 @@
+<?php
+require('api.php');
+
+$account = $_GET['id'];
+
+if ($account != null)
+  $account = user::loadFromId($account);
+
+if (loggedIn() && !$account) {
+  $account = getUser();
+}
+
+if ($account == null)
+  header("Location: https://meme-db.com");
+ ?>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <?php imports(); ?>
+  <link rel="icon" href="https://i.imgur.com/h0t0THj.png" type="image" sizes="16x16">
+  <title>memedb</title>
+
+</head>
+
+<body>
+
+  <div class="top-bar">
+    <div class="logo">memedb</div>
+    <div class="searchbar">
+      <i class="material-icons black seach-g" style="float: left; padding-right: 25px;position:relative; top: -4px;">search</i><input type="text" placeholder="Search" style="all: unset; height: 20px; width: 600px; position: relative; left: 11px;" />
+
+      <div class="search-result-box" style="display: none;">
+        <div class="search-op">
+          <p class="res-p">This is option 1</p>
+        </div>
+        <div class="search-op">
+          <p class="res-p">This is option 2</p>
+        </div>
+        <div class="search-op">
+          <p class="res-p">This is option 3</p>
+        </div>
+        <div class="search-op">
+          <p class="res-p">This is option 1</p>
+        </div>
+        <div class="search-op">
+          <p class="res-p">This is option 2</p>
+        </div>
+        <div class="search-op">
+          <p class="res-p">This is option 3</p>
+        </div>
+      </div>
+
+      <div class="search-featured-box" style="display: none;">
+        <h1>Featured Users</h1>
+        <div class="s-box-holder">
+          <div class="s-box">
+
+          </div>
+          <div class="s-box">
+
+          </div>
+          <div class="s-box">
+
+          </div>
+          <div class="s-box">
+
+          </div>
+          <div class="s-box">
+
+          </div>
+          <div class="s-box">
+
+          </div>
+          <div class="s-box">
+
+          </div>
+          <div class="s-box">
+
+          </div>
+          <div class="s-box">
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <!-- <div class="sign-in" style="display: none;">SIGN IN</div> -->
+    <div class="t-settings"><i class="material-icons t-settings">more_horiz</i></div>
+  </div>
+
+  <div class="donate-bar" style="display: none;">
+    <div class="d-para">Please consider donating to help keep this service shutting down.</div>
+
+    <i class="material-icons black d-icon">clear</i>
+
+    <button class="d-button">Donate w/ Paypal</button>
+
+  </div>
+
+  <div class="s-settings" style="display: none;">
+    <div class="s-title-box">
+      <h1 class="s-title">Settings</h1>
+      <i class="material-icons black s-delete">clear</i>
+    </div>
+    <div class="s-tab-box">
+      <div class="s-tab-holder">
+        <div class="s-tab s-selected">
+          GENERAL
+        </div>
+        <div class="s-tab">
+          ACCOUNT
+        </div>
+      </div>
+    </div>
+    <div class="s-content">
+      <div class="s-c-wrapper">
+        <div class="s-c-tab">
+          <h1 class="s-section-title">Notifications</h1>
+          <label class="container">Enable Notifications
+            <label class="switch">
+              <input type="checkbox">
+              <span class="slider round"></span>
+            </label>
+          </label>
+          <div class="line"></div>
+          <label class="container">Checkmark
+            <input type="checkbox">
+            <span class="checkmark"></span>
+          </label>
+          <label class="container">Radio
+            <input type="radio" name="radio" checked="checked">
+            <span class="radio"></span>
+          </label>
+          <label class="container">Buttons
+            <input type="radio" name="radio">
+            <span class="radio"></span>
+          </label>
+
+        </div>
+        <div class="s-c-tab account">
+          <h1 class="s-section-title">Personalisation</h1>
+          <div class="p-holder">
+            <div class="image edit">
+              <p class="i-edit">Edit</p>
+            </div>
+            <div style="margin-bottom:20px;">
+              <div class="input s">
+                <input type="text" placeholder="Change name" value="Gaetan A." class="input-bar" />
+              </div>
+              <p class="input-sub">Name may only contain </p>
+              <div class="input s">
+                <input type="text" placeholder="Change handle" value="@Al" class="input-bar i-handle" />
+              </div>
+              <p class="input-sub">_______ is already taken</p>
+            </div>
+          </div>
+          <h1 class="s-section-title">Other</h1>
+          <label class="container">Lock Account
+            <label class="switch">
+              <input type="checkbox">
+              <span class="slider round"></span>
+            </label>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="s-bottom-buttons">
+      <button class="s-op-1">Cancel</button>
+      <button class="s-op-2" style="color: #4167f4;">Save</button>
+    </div>
+  </div>
+
+  <div class="sidenav">
+    <div class="s-scroll">
+      <div class="scroll-hide">
+
+        <div class="user-info">
+          <div class="image"></div>
+          <div class="name">
+            <h1 class="n-name"><?php echo $account->name; ?></h1>
+            <div class="username">
+              @<?php echo $account->handle; ?>
+            </div>
+          </div>
+          <div class="u-stat">
+            <!-- CHANGE NAME LATER -->
+            <div class="u-stat karma">
+              Karma: 0
+            </div>
+            <!--  -->
+            <div class="u-stat rank">
+              Elo: NaN
+            </div>
+          </div>
+
+          <div class="followers">Followers
+            <span style="font-family: Roboto;font-weight: lighter;color: #222;">0
+        </span>
+          </div>
+        </div>
+
+        <div class="line"></div>
+
+        <div class="section" style="background: #ddd;">
+          <i class="material-icons black s-icon">supervisor_account</i>
+          <div class="s-txt">
+            Following
+          </div>
+          <button class="s-notes">+156</button>
+        </div>
+
+        <div class="section">
+          <i class="material-icons black s-icon">functions</i>
+          <div class="s-txt">
+            Recommended
+          </div>
+        </div>
+
+        <div class="section">
+          <i class="material-icons black s-icon">trending_up</i>
+          <div class="s-txt">
+            Top
+          </div>
+        </div>
+
+        <div class="line"></div>
+
+        <div class="subscriptions">
+
+          <div class="section">
+            <div class="s-avatar"></div>
+            <div class="s-txt">
+              Will Garrett
+            </div>
+            <button class="s-notes">4</button>
+          </div>
+
+          <div class="section">
+            <div class="s-avatar"></div>
+            <div class="s-txt">
+              Asher Bearce
+            </div>
+            <button class="s-notes">6</button>
+          </div>
+
+          <div class="section">
+            <div class="s-avatar"></div>
+            <div class="s-txt">
+              Bryan Scott
+            </div>
+          </div>
+
+          <div class="section">
+            <div class="s-avatar"></div>
+            <div class="s-txt">
+              Justin Fernald
+            </div>
+            <button class="s-notes">99+</button>
+          </div>
+
+          <div class="section">
+            <div class="s-avatar"></div>
+            <div class="s-txt">
+              Will Garrett
+            </div>
+            <button class="s-notes">4</button>
+          </div>
+
+          <div class="section">
+            <div class="s-avatar"></div>
+            <div class="s-txt">
+              Asher Bearce
+            </div>
+            <button class="s-notes">6</button>
+          </div>
+
+          <div class="section">
+            <div class="s-avatar"></div>
+            <div class="s-txt">
+              Bryan Scott
+            </div>
+          </div>
+
+          <div class="section">
+            <div class="s-avatar"></div>
+            <div class="s-txt">
+              Justin Fernald
+            </div>
+            <button class="s-notes">99+</button>
+          </div>
+
+          <div class="section">
+            <div class="s-avatar"></div>
+            <div class="s-txt">
+              Will Garrett
+            </div>
+            <button class="s-notes">4</button>
+          </div>
+
+          <div class="section">
+            <div class="s-avatar"></div>
+            <div class="s-txt">
+              Asher Bearce
+            </div>
+            <button class="s-notes">6</button>
+          </div>
+
+          <div class="section">
+            <div class="s-avatar"></div>
+            <div class="s-txt">
+              Bryan Scott
+            </div>
+          </div>
+
+          <div class="section">
+            <div class="s-avatar"></div>
+            <div class="s-txt">
+              Justin Fernald
+            </div>
+            <button class="s-notes">99+</button>
+          </div>
+
+          <div class="section">
+            <div class="s-avatar"></div>
+            <div class="s-txt">
+              Will Garrett
+            </div>
+            <button class="s-notes">4</button>
+          </div>
+
+          <div class="section">
+            <div class="s-avatar"></div>
+            <div class="s-txt">
+              Asher Bearce
+            </div>
+            <button class="s-notes">6</button>
+          </div>
+
+          <div class="section">
+            <div class="s-avatar"></div>
+            <div class="s-txt">
+              Bryan Scott
+            </div>
+          </div>
+
+          <div class="section">
+            <div class="s-avatar"></div>
+            <div class="s-txt">
+              Justin Fernald
+            </div>
+            <button class="s-notes">99+</button>
+          </div>
+
+          <div class="section">
+            <div class="s-avatar"></div>
+            <div class="s-txt">
+              Will Garrett
+            </div>
+            <button class="s-notes">4</button>
+          </div>
+
+          <div class="section">
+            <div class="s-avatar"></div>
+            <div class="s-txt">
+              Asher Bearce
+            </div>
+            <button class="s-notes">6</button>
+          </div>
+
+          <div class="section">
+            <div class="s-avatar"></div>
+            <div class="s-txt">
+              Bryan Scott
+            </div>
+          </div>
+
+          <div class="section">
+            <div class="s-avatar"></div>
+            <div class="s-txt">
+              Justin Fernald
+            </div>
+            <button class="s-notes">99+</button>
+          </div>
+
+          <div class="section">
+            <div class="s-avatar"></div>
+            <div class="s-txt">
+              Will Garrett
+            </div>
+            <button class="s-notes">4</button>
+          </div>
+
+          <div class="section">
+            <div class="s-avatar"></div>
+            <div class="s-txt">
+              Asher Bearce
+            </div>
+            <button class="s-notes">6</button>
+          </div>
+
+          <div class="section">
+            <div class="s-avatar"></div>
+            <div class="s-txt">
+              Bryan Scott
+            </div>
+          </div>
+
+          <div class="section">
+            <div class="s-avatar"></div>
+            <div class="s-txt">
+              Justin Fernald
+            </div>
+            <button class="s-notes">99+</button>
+          </div>
+
+          <div class="section">
+            <div class="s-avatar"></div>
+            <div class="s-txt">
+              Asher Bearce
+            </div>
+            <button class="s-notes">6</button>
+          </div>
+
+          <div class="section">
+            <div class="s-avatar"></div>
+            <div class="s-txt">
+              Bryan Scott
+            </div>
+          </div>
+
+          <div class="section">
+            <div class="s-avatar"></div>
+            <div class="s-txt">
+              Last one
+            </div>
+            <button class="s-notes">99+</button>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="context" style="display: none;">
+    <div class="support">
+
+      <h1 class="s-title">Support Us</h1>
+
+      <div class="s-bar">
+        <div class="s-b"></div>
+        <div class="s-percent">$100/100</div>
+      </div>
+
+      <div class="s-text">
+        This service is community funded, and we'll need all the help we can get to keep it going. Thanks for being a part of this awesome community!
+      </div>
+
+      <div class="donate">
+        <button class="paypal">PAYPAL</button>
+      </div>
+
+    </div>
+
+
+    <h1 class="title">Latest</h1>
+  </div> -->
+
+  <div class="h-content">
+    <div class="h-search-tools">
+      <div class="e-sort" title="Sort by" style="float: left;">
+        <i class="material-icons black edit-icons">sort</i>
+      </div>
+      <div class="h-s-txt">
+        Oldest
+      </div>
+      <div class="h-s-txt">
+        Newest
+      </div>
+      <div class="h-s-txt">
+        Most Popular
+      </div>
+    </div>
+
+    <div class="h-post">
+      <div class="h-op">
+        <div class="op-pp"></div>
+        <p class="h-p" title="@LongUsernameExample">@LongUsernameExa...</p>
+      </div>
+      <div class="h-post-info big">
+        <div class="h-icon big">
+          <i class="material-icons black" style="font-size: 18px; top: 5px;font-weight: 600;">keyboard_arrow_up</i>
+        </div>
+        <div class="h-p-stat big">
+          69K
+        </div>
+        <div class="h-icon big">
+          <i class="material-icons black" style="font-size: 18px; top: 5px;font-weight: 600;">repeat</i>
+        </div>
+        <div class="h-p-stat big">
+          4K
+        </div>
+        <div class="h-more big">
+          <i class="material-icons black" style="font-size: 20px; top: -4px;">more_horiz</i>
+        </div>
+      </div>
+    </div>
+
+    <div class="h-post">
+      <div class="h-op">
+        <div class="op-pp"></div>
+        <p class="h-p">@bobmandude9889</p>
+      </div>
+      <div class="h-post-info big">
+        <div class="h-icon big">
+          <i class="material-icons black" style="color: #4167f4; font-size: 18px; top: 5px;font-weight: 600;">keyboard_arrow_down</i>
+        </div>
+        <div class="h-p-stat big" style="color: #4167f4">
+          16K
+        </div>
+        <div class="h-icon big">
+          <i class="material-icons black" style="font-size: 18px; top: 5px;font-weight: 600;">repeat</i>
+        </div>
+        <div class="h-p-stat big">
+          4K
+        </div>
+        <div class="h-more big">
+          <i class="material-icons black" style="font-size: 20px; top: -4px;">more_horiz</i>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+
+</html>

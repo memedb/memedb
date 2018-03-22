@@ -785,9 +785,8 @@ input:checked+.slider:before {
 
 .followers {
   width: 100%;
-  height: 50;
-
-
+  height: 50px !important;
+  margin-left: 70px;
 }
 
 .line {
@@ -1044,7 +1043,6 @@ body {
   height: 100%;
   width: 100%;
   overflow-x: hidden;
-
 }
 
 /* TOP BAR */
@@ -1191,7 +1189,6 @@ body {
 
 .name {
   width: 200px;
-
 }
 
 .info {
@@ -2135,10 +2132,9 @@ body {
   font-size: 12px;
   cursor: pointer;
   float: right;
-
 }
 
 .g-signin2 {
-    margin: 10px 0 0 40px;
-    position: relative;
+  margin: 10px 0 0 40px;
+  position: relative;
 }
