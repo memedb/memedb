@@ -143,10 +143,12 @@ if ($account == null)
     <div class="s-user">
       <div class="a-user-info">
         <div class="image"></div>
-        <div class="name">
-          <h1 class="n-name"><?php echo $account->name; ?></h1>
+        <div class="s-namebox">
+          <div class="name">
+            <h1 class="n-name"><?php echo $account->name; ?></h1>
+          </div>
+          <div class="username">@<?php echo $account->handle; ?></div>
         </div>
-        <div class="username">@<?php echo $account->handle; ?></div>
         <div class="info">
           <!-- CHANGE NAME LATER -->
           <div class="u-stat karma">Karma

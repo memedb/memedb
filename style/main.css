@@ -701,6 +701,12 @@ input:checked+.slider:before {
   margin-top: 2px;
 }
 
+.s-namebox {
+  width: 100%;
+  height: 50px;
+  background: red;
+}
+
 .username {
   width: 130px;
   height: 18px;
