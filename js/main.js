@@ -25,15 +25,12 @@ $(document).ready(function() {
     event.stopPropagation();
   });
 
-  $("#imp-bg-fade").click(function() {
-    $(".l-sett-opt").css({
-      opacity: "0",
-      right: "120px"
-    });
-    $("#imp-message, #imp-bg-fade").css("opacity", "0");
-    setTimeout(function() {
-      $("#imp-message, #imp-bg-fade, .l-sett-opt").css("display", "none");
-    }, 100);
+  $(".e-settings").click(function() {
+    openSettings();
+  });
+
+  $(".material-icons.black.s-delete").click(function() {
+    closeSettings();
   });
 });
 
@@ -63,14 +60,34 @@ function showError(message) {
   $("#imp-message .imp-p").text(message);
 }
 
-$(".e-settings").click(function() {
-  console.log("it works! ");
-  openSettings();
-});
-
 function openSettings(){
-  console.log("bihhhhhhhh :joy: :joy: :joy: :joy: :joy: :joy: :joy: :joy: :joy: :joy: ");
     $(".s-settings").css({
       display: "table"
     });
+}
+
+function closeSettings(){
+    $(".s-settings").css({
+      display: "none"
+    });
+}
+
+function settingsGeneral(){
+    //Make border bottom blue
+
+    //Make blue border from other section
+
+    //Hide Other Section
+
+    //Show this one
+}
+
+function settingsAccount(){
+  //Make border bottom blue
+
+  //Make blue border from other section
+
+  //Hide Other Section
+
+  //Show this one
 }
