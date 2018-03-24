@@ -202,31 +202,33 @@ if ($account == null)
           </div>
         </div>
 
-        <div class="line"></div>
+        <div class="sections">
+          <div class="line"></div>
 
-        <div class="section" style="background: #ddd;">
-          <i class="material-icons black s-icon">supervisor_account</i>
-          <div class="s-txt">
-            Following
+          <div class="section" style="background: #ddd;">
+            <i class="material-icons black s-icon">supervisor_account</i>
+            <div class="s-txt">
+              Following
+            </div>
+            <button class="s-notes">+156</button>
           </div>
-          <button class="s-notes">+156</button>
-        </div>
 
-        <div class="section">
-          <i class="material-icons black s-icon">functions</i>
-          <div class="s-txt">
-            Recommended
+          <div class="section">
+            <i class="material-icons black s-icon">functions</i>
+            <div class="s-txt">
+              Recommended
+            </div>
           </div>
-        </div>
 
-        <div class="section">
-          <i class="material-icons black s-icon">trending_up</i>
-          <div class="s-txt">
-            Top
+          <div class="section">
+            <i class="material-icons black s-icon">trending_up</i>
+            <div class="s-txt">
+              Top
+            </div>
           </div>
-        </div>
 
-        <div class="line"></div>
+          <div class="line"></div>
+        </div>
 
         <div class="subscriptions">
 

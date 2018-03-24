@@ -130,7 +130,7 @@ if ($name !== null && $pass !== null) {
 
   <div class="login-block">
     <div class="color-block">
-      <h1 class="login-h1">Login</h1>
+      <h1 class="login-h1">Sign In</h1>
     </div>
 
     <form method="POST" action="<?php echo $_SERVER['PHP_SELF'];?>">
@@ -153,7 +153,7 @@ if ($name !== null && $pass !== null) {
       <div class="g-signin2" data-onsuccess="onSignIn"></div>
 
       <div class="l-buttons">
-        <input id="submit" type="submit" class="button" value="LOGIN"></input>
+        <input id="submit" type="submit" class="button" value="SIGN IN"></input>
         <a href="/signup"><button class="alt">SIGN UP</button></a>
       </div>
     </form>

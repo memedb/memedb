@@ -142,29 +142,31 @@ if ($account == null)
 
   <div class="sidenav">
     <div class="s-user">
-      <div class="a-user-info">
+      <div class="user-wrapper">
         <div class="image"></div>
-        <div class="name">
-          <h1 class="n-name"><?php echo $account->name; ?></h1>
-          <div class="username">
-            @<?php echo $account->handle; ?>
+        <div class="a-user-info">
+          <div class="name">
+            <h1 class="n-name"><?php echo $account->name; ?></h1>
+            <div class="username">
+              @<?php echo $account->handle; ?>
+            </div>
           </div>
+          <div class="u-stat">
+            <!-- CHANGE NAME LATER -->
+            <div class="u-stat karma">
+              Karma: 0
+            </div>
+            <!--  -->
+            <div class="u-stat rank">
+              Elo: NaN
+            </div>
+          </div>
+          <button class="follow">Follow
+            <span style="font-family: Roboto;font-weight: 500;color: #ccc;">0
+            </span></button>
+          <!-- <button class="follow" style="background:#ccc; color:#222;">Unfollow <span style="font-family: Roboto;font-weight: 500;color: #555;">0
+          </span></button> -->
         </div>
-        <div class="u-stat">
-          <!-- CHANGE NAME LATER -->
-          <div class="u-stat karma">
-            Karma: 0
-          </div>
-          <!--  -->
-          <div class="u-stat rank">
-            Elo: NaN
-          </div>
-        </div>
-        <button class="follow">Follow
-          <span style="font-family: Roboto;font-weight: 500;color: #ccc;">0
-          </span></button>
-        <!-- <button class="follow" style="background:#ccc; color:#222;">Unfollow <span style="font-family: Roboto;font-weight: 500;color: #555;">0
-        </span></button> -->
       </div>
     </div>
 
@@ -523,102 +525,103 @@ if ($account == null)
     <div class="c-box">
       <h1 style="margin-left: 20px; font-weight: 200; font-family: 'Roboto', sans-serif;">Most Popular</h1>
       <div class="c-popular">
-        <div class="h-post small">
-          <div class="h-post-info">
-            <div class="h-icon">
-              <i class="material-icons" style="font-size: 18px; top: 5px;">keyboard_arrow_up</i>
+        <div class="c-pop-wrapper">
+          <div class="h-post small">
+            <div class="h-post-info">
+              <div class="h-icon">
+                <i class="material-icons" style="font-size: 18px; top: 5px;">keyboard_arrow_up</i>
+              </div>
+              <div class="h-p-stat" title="16472">
+                16K
+              </div>
+              <div class="h-icon">
+                <i class="material-icons black" style="font-size: 18px; top: 5px;font-weight: 600;">repeat</i>
+              </div>
+              <div class="h-p-stat">
+                4K
+              </div>
+              <div class="h-more">
+                <i class="material-icons" style="font-size: 18px; top: -3px;">more_horiz</i>
+              </div>
             </div>
-            <div class="h-p-stat" title="16472">
-              16K
+          </div>
+          <div class="h-post small">
+            <div class="h-post-info">
+              <div class="h-icon">
+                <i class="material-icons" style="font-size: 18px; top: 5px;">keyboard_arrow_up</i>
+              </div>
+              <div class="h-p-stat">
+                16K
+              </div>
+              <div class="h-icon">
+                <i class="material-icons black" style="font-size: 18px; top: 5px;font-weight: 600;">repeat</i>
+              </div>
+              <div class="h-p-stat">
+                4K
+              </div>
+              <div class="h-more">
+                <i class="material-icons" style="font-size: 18px; top: -3px;">more_horiz</i>
+              </div>
             </div>
-            <div class="h-icon">
-              <i class="material-icons black" style="font-size: 18px; top: 5px;font-weight: 600;">repeat</i>
+          </div>
+          <div class="h-post small">
+            <div class="h-post-info">
+              <div class="h-icon">
+                <i class="material-icons" style="font-size: 18px; top: 5px;">keyboard_arrow_up</i>
+              </div>
+              <div class="h-p-stat">
+                16K
+              </div>
+              <div class="h-icon">
+                <i class="material-icons black" style="font-size: 18px; top: 5px;font-weight: 600;">repeat</i>
+              </div>
+              <div class="h-p-stat">
+                4K
+              </div>
+              <div class="h-more">
+                <i class="material-icons" style="font-size: 18px; top: -3px;">more_horiz</i>
+              </div>
             </div>
-            <div class="h-p-stat">
-              4K
+          </div>
+          <div class="h-post small">
+            <div class="h-post-info">
+              <div class="h-icon">
+                <i class="material-icons" style="font-size: 18px; top: 5px;">keyboard_arrow_up</i>
+              </div>
+              <div class="h-p-stat">
+                16K
+              </div>
+              <div class="h-icon">
+                <i class="material-icons black" style="font-size: 18px; top: 5px;font-weight: 600;">repeat</i>
+              </div>
+              <div class="h-p-stat">
+                4K
+              </div>
+              <div class="h-more">
+                <i class="material-icons" style="font-size: 18px; top: -3px;">more_horiz</i>
+              </div>
             </div>
-            <div class="h-more">
-              <i class="material-icons" style="font-size: 18px; top: -3px;">more_horiz</i>
+          </div>
+          <div class="h-post small">
+            <div class="h-post-info">
+              <div class="h-icon">
+                <i class="material-icons" style="font-size: 18px; top: 5px;">keyboard_arrow_up</i>
+              </div>
+              <div class="h-p-stat">
+                16K
+              </div>
+              <div class="h-icon">
+                <i class="material-icons black" style="font-size: 18px; top: 5px;font-weight: 600;">repeat</i>
+              </div>
+              <div class="h-p-stat">
+                4K
+              </div>
+              <div class="h-more">
+                <i class="material-icons" style="font-size: 18px; top: -3px;">more_horiz</i>
+              </div>
             </div>
           </div>
         </div>
-        <div class="h-post small">
-          <div class="h-post-info">
-            <div class="h-icon">
-              <i class="material-icons" style="font-size: 18px; top: 5px;">keyboard_arrow_up</i>
-            </div>
-            <div class="h-p-stat">
-              16K
-            </div>
-            <div class="h-icon">
-              <i class="material-icons black" style="font-size: 18px; top: 5px;font-weight: 600;">repeat</i>
-            </div>
-            <div class="h-p-stat">
-              4K
-            </div>
-            <div class="h-more">
-              <i class="material-icons" style="font-size: 18px; top: -3px;">more_horiz</i>
-            </div>
-          </div>
-        </div>
-        <div class="h-post small">
-          <div class="h-post-info">
-            <div class="h-icon">
-              <i class="material-icons" style="font-size: 18px; top: 5px;">keyboard_arrow_up</i>
-            </div>
-            <div class="h-p-stat">
-              16K
-            </div>
-            <div class="h-icon">
-              <i class="material-icons black" style="font-size: 18px; top: 5px;font-weight: 600;">repeat</i>
-            </div>
-            <div class="h-p-stat">
-              4K
-            </div>
-            <div class="h-more">
-              <i class="material-icons" style="font-size: 18px; top: -3px;">more_horiz</i>
-            </div>
-          </div>
-        </div>
-        <div class="h-post small">
-          <div class="h-post-info">
-            <div class="h-icon">
-              <i class="material-icons" style="font-size: 18px; top: 5px;">keyboard_arrow_up</i>
-            </div>
-            <div class="h-p-stat">
-              16K
-            </div>
-            <div class="h-icon">
-              <i class="material-icons black" style="font-size: 18px; top: 5px;font-weight: 600;">repeat</i>
-            </div>
-            <div class="h-p-stat">
-              4K
-            </div>
-            <div class="h-more">
-              <i class="material-icons" style="font-size: 18px; top: -3px;">more_horiz</i>
-            </div>
-          </div>
-        </div>
-        <div class="h-post small">
-          <div class="h-post-info">
-            <div class="h-icon">
-              <i class="material-icons" style="font-size: 18px; top: 5px;">keyboard_arrow_up</i>
-            </div>
-            <div class="h-p-stat">
-              16K
-            </div>
-            <div class="h-icon">
-              <i class="material-icons black" style="font-size: 18px; top: 5px;font-weight: 600;">repeat</i>
-            </div>
-            <div class="h-p-stat">
-              4K
-            </div>
-            <div class="h-more">
-              <i class="material-icons" style="font-size: 18px; top: -3px;">more_horiz</i>
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
 
