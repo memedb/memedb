@@ -1,0 +1,18 @@
+<div class="a-user-info">
+  <div class="image">
+    <img src="<?php echo $account->getImage(); ?>" style="border: inherit; border-radius: inherit;" width="60" height="60">
+  </div>
+  <div class="s-namebox">
+    <div class="name">
+      <h1 class="n-name"><?php echo $account->name; ?></h1>
+    </div>
+    <div class="username">@<?php echo $account->handle; ?></div>
+  </div>
+  <div class="info">
+    <!-- CHANGE NAME LATER -->
+    <div class="u-stat karma">
+      Karma: <?php echo $account->karma; ?>
+    </div>
+    <!--  -->
+    <div class="u-stat rank">
+      Elo: <?php echo ($account->rank ? $account->rank : "NaN"); ?>

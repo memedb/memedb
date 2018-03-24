@@ -140,10 +140,85 @@ if ($account == null)
     </div>
   </div>
 
+  <div class="s-settings">
+    <div class="s-title-box">
+      <h1 class="s-title">Settings</h1>
+      <i class="material-icons black s-delete">clear</i>
+    </div>
+    <div class="s-tab-box">
+      <div class="s-tab-holder">
+        <div class="s-tab s-selected">
+          GENERAL
+        </div>
+        <div class="s-tab">
+          ACCOUNT
+        </div>
+      </div>
+    </div>
+    <div class="s-content">
+      <div class="s-c-wrapper">
+        <div class="s-c-tab">
+          <h1 class="s-section-title">Notifications</h1>
+          <label class="container">Enable Notifications
+            <label class="switch">
+              <input type="checkbox">
+              <span class="slider round"></span>
+            </label>
+          </label>
+          <div class="line"></div>
+          <label class="container">Checkmark
+            <input type="checkbox">
+            <span class="checkmark"></span>
+          </label>
+          <label class="container">Radio
+            <input type="radio" name="radio" checked="checked">
+            <span class="radio"></span>
+          </label>
+          <label class="container">Buttons
+            <input type="radio" name="radio">
+            <span class="radio"></span>
+          </label>
+
+        </div>
+        <div class="s-c-tab account">
+          <h1 class="s-section-title">Personalisation</h1>
+          <div class="p-holder">
+            <div class="image edit">
+              <p class="i-edit">Edit</p>
+            </div>
+            <div style="margin-bottom:20px;">
+              <div class="input s">
+                <input type="text" placeholder="Change name" value="Gaetan A." class="input-bar" />
+              </div>
+              <p class="input-sub">Name may only contain </p>
+              <div class="input s">
+                <input type="text" placeholder="Change handle" value="@Al" class="input-bar i-handle" />
+              </div>
+              <p class="input-sub">_______ is already taken</p>
+            </div>
+          </div>
+          <h1 class="s-section-title">Other</h1>
+          <label class="container">Lock Account
+            <label class="switch">
+              <input type="checkbox">
+              <span class="slider round"></span>
+            </label>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="s-bottom-buttons">
+      <button class="s-op-1">Cancel</button>
+      <button class="s-op-2" style="color: #4167f4;">Save</button>
+    </div>
+  </div>
+
   <div class="sidenav">
     <div class="s-user">
       <div class="user-wrapper">
-        <div class="image"></div>
+        <div class="image">
+          <img src="<?php echo $account->getImage(); ?>" style="border: inherit; border-radius: inherit;" width="60" height="60">
+        </div>
         <div class="a-user-info">
           <div class="name">
             <h1 class="n-name"><?php echo $account->name; ?></h1>
