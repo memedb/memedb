@@ -86,7 +86,7 @@ function get_client_ip() {
 }
 
 function loggedIn() {
-  return $_SESSION !== null;
+  return $_SESSION['id'] !== null;
 }
 
 class image {
@@ -127,6 +127,15 @@ class user {
       $usr->favorites = explode(",",$usr->favorites);
       $usr->following = explode(",",$usr->following);
       $usr->image = "/userimg.php?handle=" + $usr->handle;
+    }
+    return $usr;
+  }
+
+  public static function loadFromHandle($handle) {
+    $usr = loadDBObject("users", "handle='$handle'", "user");
+    if ($usr != null) {
+      $usr->favorites = explode(",",$usr->favorites);
+      $usr->following = explode(",",$usr->following);
     }
     return $usr;
   }

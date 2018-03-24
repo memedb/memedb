@@ -1,10 +1,10 @@
 <?php
 require('api.php');
 
-$account = $_GET['id'];
+$account = $_GET['handle'];
 
 if ($account != null)
-  $account = user::loadFromId($account);
+  $account = user::loadFromHandle($account);
 
 if (loggedIn() && !$account) {
   $account = getUser();
