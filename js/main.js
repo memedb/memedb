@@ -25,12 +25,34 @@ $(document).ready(function() {
     event.stopPropagation();
   });
 
-  $(".e-settings").click(function() {
-    openSettings();
+  $("#imp-bg-fade").click(function() {
+    $(".l-sett-opt").css({
+      opacity: "0",
+      right: "120px"
+    });
+    $("#imp-message, #imp-bg-fade").css("opacity", "0");
+    setTimeout(function() {
+      $("#imp-message, #imp-bg-fade, .l-sett-opt").css("display", "none");
+    }, 100);
+    closeSettings();
   });
 
-  $(".material-icons.black.s-delete").click(function() {
+  $(".openSettings").click(function() {
+    openSettings();
+    $("#imp-bg-fade").css("opacity", "");
+  });
+
+  $(".closeSettings").click(function() {
     closeSettings();
+    $("#imp-message, #imp-bg-fade").css("opacity", "0");
+  });
+
+  $(".s-tab").click(function() {
+    if(!(this.classList.contains("s-selected"))){
+      $(".s-tab").toggleClass("s-selected");
+      $(".s-c-wrapper").toggleClass("s-slide")
+
+    }
   });
 });
 
@@ -64,12 +86,21 @@ function openSettings(){
     $(".s-settings").css({
       display: "table"
     });
+    $("#imp-bg-fade").css("display", "");
+    setTimeout(function() {
+      $(".l-sett-opt").css({
+        opacity: "",
+        right: ""
+      });
+      $("#imp-bg-fade").css("opacity", "");
+    }, 10);
 }
 
 function closeSettings(){
     $(".s-settings").css({
       display: "none"
     });
+    $("#imp-bg-fade").css("display", "none");
 }
 
 function settingsGeneral(){

@@ -101,6 +101,72 @@ if ($account == null)
 
   </div>
 
+  <div class="category-blk" style="opacity: 1;">
+    <div class="c-title-holder">
+      <div class="searchbar category">
+        <i class="material-icons search-g" style="float: left; padding-right: 25px;position:relative; top: -4px;">search</i><input type="text" placeholder="Search Tags" style="all: unset; width: 330px;position: relative; left: -10px;" />
+      </div>
+    </div>
+
+    <div class="c-b-results">
+      <div class="c-b-wrapper">
+        <div class="c-result">
+          <h1 class="c-r-title">Tag Name</h1>
+          <div class="type c">+</div>
+        </div>
+        <div class="c-result">
+          <h1 class="c-r-title">Tag Name</h1>
+          <div class="type c">+</div>
+        </div>
+        <div class="c-result">
+          <h1 class="c-r-title">Tag Name</h1>
+          <div class="type c">+</div>
+        </div>
+        <div class="c-result">
+          <h1 class="c-r-title">Tag Name</h1>
+          <div class="type c">+</div>
+        </div>
+        <div class="c-result">
+          <h1 class="c-r-title">Tag Name</h1>
+          <div class="type c">+</div>
+        </div>
+        <div class="c-result">
+          <h1 class="c-r-title">Tag Name</h1>
+          <div class="type c">+</div>
+        </div>
+        <div class="c-result">
+          <h1 class="c-r-title">Tag Name</h1>
+          <div class="type c">+</div>
+        </div>
+        <div class="c-result">
+          <h1 class="c-r-title">Tag Name</h1>
+          <div class="type c">+</div>
+        </div>
+        <div class="c-result">
+          <h1 class="c-r-title">Tag Name</h1>
+          <div class="type c">+</div>
+        </div>
+        <div class="c-result">
+          <h1 class="c-r-title">Tag Name</h1>
+          <div class="type c">+</div>
+        </div>
+        <div class="c-result">
+          <h1 class="c-r-title">Tag Name</h1>
+          <div class="type c">+</div>
+        </div>
+        <div class="c-result">
+          <h1 class="c-r-title">Tag Name</h1>
+          <div class="type c">+</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-button-hold">
+      <button class="c-op-1">Cancel</button>
+      <button class="c-op-2" style="color: #4167f4;">Save</button>
+    </div>
+  </div>
+
   <div class="imp-message" id="imp-message" style="display: none; opacity: 0;">
     <div class="imp-title-holder">
       <h1 class="imp-title">Warning!</h1>
@@ -124,26 +190,26 @@ if ($account == null)
     <div class="e-sort" title="Sort by">
       <i class="material-icons edit-icons">sort</i>
     </div>
-    <div class="e-lock-lib" title="Lock Library">
-      <i class="material-icons edit-icons">vpn_key</i>
-    </div>
     <div class="e-timeln" title="Statistics">
       <i class="material-icons edit-icons">timeline</i>
     </div>
     <div class="e-share" title="Share">
       <i class="material-icons edit-icons">share</i>
     </div>
+    <div class="e-lock-lib" title="Lock Library">
+      <i class="material-icons edit-icons">vpn_key</i>
+    </div>
     <div class="l-line">
     </div>
     <div class="e-settings" title="Settings">
-      <i class="material-icons edit-icons">settings</i>
+      <i class="material-icons edit-icons openSettings" >settings</i>
     </div>
   </div>
 
   <div class="s-settings">
     <div class="s-title-box">
       <h1 class="s-title">Settings</h1>
-      <i class="material-icons black s-delete">clear</i>
+      <i class="material-icons black s-delete closeSettings">clear</i>
     </div>
     <div class="s-tab-box">
       <div class="s-tab-holder">
@@ -157,7 +223,7 @@ if ($account == null)
     </div>
     <div class="s-content">
       <div class="s-c-wrapper">
-        <div class="s-c-tab">
+        <div class="s-c-tab general">
           <h1 class="s-section-title">Notifications</h1>
           <label class="container">Enable Notifications
             <label class="switch">
@@ -208,7 +274,7 @@ if ($account == null)
       </div>
     </div>
     <div class="s-bottom-buttons">
-      <button class="s-op-1">Cancel</button>
+      <button class="s-op-1 closeSettings">Cancel</button>
       <button class="s-op-2" style="color: #4167f4;">Save</button>
     </div>
   </div>
@@ -216,10 +282,10 @@ if ($account == null)
   <div class="sidenav">
     <div class="s-user">
       <div class="user-wrapper">
-        <div class="image">
-          <img src="<?php echo $account->getImage(); ?>" style="border: inherit; border-radius: inherit;" width="60" height="60">
-        </div>
         <div class="a-user-info">
+          <div class="image">
+            <img src="<?php echo $account->getImage(); ?>" style="border: inherit; border-radius: inherit;" width="60" height="60">
+          </div>
           <div class="name">
             <h1 class="n-name"><?php echo $account->name; ?></h1>
             <div class="username">
@@ -236,12 +302,12 @@ if ($account == null)
               Elo: NaN
             </div>
           </div>
-          <button class="follow">Follow
-            <span style="font-family: Roboto;font-weight: 500;color: #ccc;">0
-            </span></button>
-          <!-- <button class="follow" style="background:#ccc; color:#222;">Unfollow <span style="font-family: Roboto;font-weight: 500;color: #555;">0
-          </span></button> -->
         </div>
+        <button class="follow">Follow
+          <span style="font-family: Roboto;font-weight: 500;color: #ccc;">0
+          </span></button>
+        <!-- <button class="follow" style="background:#ccc; color:#222;">Unfollow <span style="font-family: Roboto;font-weight: 500;color: #555;">0
+        </span></button> -->
       </div>
     </div>
 
