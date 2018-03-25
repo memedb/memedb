@@ -1198,8 +1198,8 @@ if ($account == null)
       <div class="l-img"></div>
     </div>
 
-    <div class="library l-selected">
-      <h1 class="l-title">Selected Library</h1>
+    <div class="library">
+      <h1 class="l-title">Library</h1>
 
       <div class="l-settings">
         <i class="material-icons">keyboard_arrow_down</i>

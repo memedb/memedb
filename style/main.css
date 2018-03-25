@@ -1519,15 +1519,15 @@ body {
   margin-left: 1px;
 }
 
-.l-l1 {
-  background: #cfcfcf;
-  border-bottom: 2px #bfbfbf solid;
-}
-
-.l-selected {
+.library.is-dragover {
   background: #7ba4e5;
   border: 2.5px solid #4167f4;
   border-radius: 2px;
+}
+
+.l-l1 {
+  background: #cfcfcf;
+  border-bottom: 2px #bfbfbf solid;
 }
 
 .l-icon {
@@ -2154,6 +2154,12 @@ body {
 }
 
 /* ADD TYPE */
+
+/* NOTE:
+
+  please add suggestions
+
+ */
 
 .category-blk {
   display: none;
