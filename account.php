@@ -101,22 +101,37 @@ if ($account == null)
 
   </div>
 
+  <div class="category-blk stats">
+    <div class="c-title-holder">
+      <h1 class="imp-title">Statistics</h1>
+    </div>
+
+    <div class="c-content">
+
+    </div>
+
+    <div class="c-button-hold">
+      <button class="c-op-1 closeStats">Cancel</button>
+      <button class="c-op-2" style="color: #4167f4;">Save</button>
+    </div>
+  </div>
+
   <div class="category-blk sharing">
     <div class="c-title-holder">
       <h1 class="imp-title">Sharing</h1>
     </div>
 
     <div class="c-content">
-      
+
     </div>
 
     <div class="c-button-hold">
-      <button class="c-op-1 closeTagSearch">Cancel</button>
+      <button class="c-op-1 closeSharing">Cancel</button>
       <button class="c-op-2" style="color: #4167f4;">Save</button>
     </div>
   </div>
 
-  <div class="category-blk">
+  <div class="category-blk tagFinder">
     <div class="c-title-holder">
       <div class="searchbar category">
         <i class="material-icons search-g" style="float: left; padding-right: 25px;position:relative; top: -4px;">search</i><input type="text" placeholder="Search Tags" style="all: unset; width: 330px;position: relative; left: -10px;" />
@@ -187,13 +202,13 @@ if ($account == null)
     </div>
     <div class="l-line"></div>
     <div class="e-sort" title="Sort by">
-      <i class="material-icons edit-icons">sort</i>
+      <i class="material-icons edit-icons l-drop">sort</i>
     </div>
     <div class="e-timeln" title="Statistics">
-      <i class="material-icons edit-icons">timeline</i>
+      <i class="material-icons edit-icons openStats">timeline</i>
     </div>
     <div class="e-share" title="Share">
-      <i class="material-icons edit-icons">share</i>
+      <i class="material-icons edit-icons openSharing">share</i>
     </div>
     <div class="l-line">
     </div>

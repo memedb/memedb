@@ -287,7 +287,6 @@ input:checked+.slider:before {
   border-radius: 2px;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   padding: 16px 16px 24px 16px;
-  /* display: table; */
 }
 
 .s-tab-box {
@@ -2285,6 +2284,11 @@ body {
 /* SHARING */
 
 .category-blk.sharing {
-  display: block;
+  display: none;
+
+}
+
+.category-blk.stats {
+  display: none;
 
 }
