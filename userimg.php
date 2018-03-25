@@ -44,6 +44,8 @@ if ($handle == null) {
 
 if (file_exists($_SERVER['DOCUMENT_ROOT']."/images/users/".$handle.".png")) {
   header("Location: /images/users/".$handle.".png");
+} else if (file_exists($_SERVER['DOCUMENT_ROOT']."/images/users/".$handle.".jpg")) {
+  header("Location: /images/users/".$handle.".jpg");
 } else {
   $seed = base_convert($handle, 36, 10);
   mt_srand((int)$seed);

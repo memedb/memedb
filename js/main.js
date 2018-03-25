@@ -33,7 +33,7 @@ $(document).ready(function() {
   $("#imp-bg-fade").click(function() {
     $(".l-sett-opt").css({
       opacity: "0",
-      right: "120px"
+      right: "50px"
     });
     $("#imp-message, #imp-bg-fade").css("opacity", "0");
     setTimeout(function() {
@@ -100,7 +100,7 @@ function openOptions(id) {
   $(".l-sett-opt").css({
     top: (offset.top + 15) + "px",
     opacity: "0",
-    right: "120px",
+    right: "50px",
     display: ""
   });
   $("#imp-bg-fade").css("display", "");
