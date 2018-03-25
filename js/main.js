@@ -25,6 +25,11 @@ $(document).ready(function() {
     event.stopPropagation();
   });
 
+  $(".h-more").click(function(event) {
+    openOptions(this.parentElement.id);
+    event.stopPropagation();
+  });
+
   $("#imp-bg-fade").click(function() {
     $(".l-sett-opt").css({
       opacity: "0",

@@ -2275,3 +2275,16 @@ body {
   top: 5px;
   margin-right: 8px;
 }
+
+.c-content {
+  height: 200px;
+  width: 100%;
+
+}
+
+/* SHARING */
+
+.category-blk.sharing {
+  display: block;
+
+}

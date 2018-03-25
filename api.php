@@ -89,6 +89,8 @@ function loggedIn() {
   return $_SESSION['id'] !== null;
 }
 
+// -------------------------------------------------------------------------------------
+
 class image {
 
   public static function loadFromId($id) {

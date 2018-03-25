@@ -101,6 +101,21 @@ if ($account == null)
 
   </div>
 
+  <div class="category-blk sharing">
+    <div class="c-title-holder">
+      <h1 class="imp-title">Sharing</h1>
+    </div>
+
+    <div class="c-content">
+      
+    </div>
+
+    <div class="c-button-hold">
+      <button class="c-op-1 closeTagSearch">Cancel</button>
+      <button class="c-op-2" style="color: #4167f4;">Save</button>
+    </div>
+  </div>
+
   <div class="category-blk">
     <div class="c-title-holder">
       <div class="searchbar category">
@@ -179,9 +194,6 @@ if ($account == null)
     </div>
     <div class="e-share" title="Share">
       <i class="material-icons edit-icons">share</i>
-    </div>
-    <div class="e-lock-lib" title="Lock Library">
-      <i class="material-icons edit-icons">vpn_key</i>
     </div>
     <div class="l-line">
     </div>
@@ -1199,7 +1211,7 @@ if ($account == null)
     </div>
 
     <div class="library">
-      <h1 class="l-title">Library</h1>
+      <h1 class="l-title">Selected Library</h1>
 
       <div class="l-settings">
         <i class="material-icons">keyboard_arrow_down</i>
