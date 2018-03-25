@@ -221,8 +221,8 @@ if ($account == null)
     <div class="floating-button openAddLib">
       <i class="material-icons floating">add</i>
     </div>
-    <div class="floating-button openSettings">
-      <i class="material-icons floating" >settings</i>
+    <div class="floating-button secondary openSettings">
+      <i class="material-icons floating secondary" >settings</i>
     </div>
   </div>
 
