@@ -142,22 +142,6 @@ if ($account == null)
           <h1 class="c-r-title">Tag Name</h1>
           <div class="type c">+</div>
         </div>
-        <div class="c-result">
-          <h1 class="c-r-title">Tag Name</h1>
-          <div class="type c">+</div>
-        </div>
-        <div class="c-result">
-          <h1 class="c-r-title">Tag Name</h1>
-          <div class="type c">+</div>
-        </div>
-        <div class="c-result">
-          <h1 class="c-r-title">Tag Name</h1>
-          <div class="type c">+</div>
-        </div>
-        <div class="c-result">
-          <h1 class="c-r-title">Tag Name</h1>
-          <div class="type c">+</div>
-        </div>
       </div>
     </div>
 

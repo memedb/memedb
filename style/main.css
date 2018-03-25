@@ -2186,7 +2186,7 @@ body {
 }
 
 .c-b-results{
-  height: 250px;
+  max-height: 250px;
   overflow-y: auto;
   width: 100%;
   z-index: 100;
@@ -2246,7 +2246,6 @@ body {
 .c-b-wrapper {
   width: 100%;
   position: relative;
-  height: inherit;
   margin: auto;
   z-index: 1000;
   border-right: 17px;
