@@ -41,8 +41,8 @@ $(document).ready(function() {
     }, 100);
     closeSettings();
     closeTagSearch();
-    closeSharing();
     closeStats();
+    closeAddLib();
   });
 
   $(".openSettings").click(function() {
@@ -65,16 +65,6 @@ $(document).ready(function() {
     $("#imp-message, #imp-bg-fade").css("opacity", "0");
   });
 
-  $(".openSharing").click(function() {
-    openSharing();
-    $("#imp-bg-fade").css("opacity", "");
-  });
-
-  $(".closeSharing").click(function() {
-    closeSharing();
-    $("#imp-message, #imp-bg-fade").css("opacity", "0");
-  });
-
   $(".openStats").click(function() {
     openStats();
     $("#imp-bg-fade").css("opacity", "");
@@ -82,6 +72,16 @@ $(document).ready(function() {
 
   $(".closeStats").click(function() {
     closeStats();
+    $("#imp-message, #imp-bg-fade").css("opacity", "0");
+  });
+
+  $(".openAddLib").click(function() {
+    openAddLib();
+    $("#imp-bg-fade").css("opacity", "");
+  });
+
+  $(".closeAddLib").click(function() {
+    closeAddLib();
     $("#imp-message, #imp-bg-fade").css("opacity", "0");
   });
 
@@ -162,27 +162,6 @@ function closeTagSearch(){
     $("#imp-bg-fade").css("display", "none");
 }
 
-function openSharing(){
-    $(".sharing").css({
-      display: "block"
-    });
-    $("#imp-bg-fade").css("display", "");
-    setTimeout(function() {
-      $(".l-sett-opt").css({
-        opacity: "",
-        right: ""
-      });
-      $("#imp-bg-fade").css("opacity", "");
-    }, 10);
-}
-
-function closeSharing(){
-    $(".sharing").css({
-      display: "none"
-    });
-    $("#imp-bg-fade").css("display", "none");
-}
-
 function openStats(){
     $(".stats").css({
       display: "block"
@@ -199,6 +178,27 @@ function openStats(){
 
 function closeStats(){
     $(".stats").css({
+      display: "none"
+    });
+    $("#imp-bg-fade").css("display", "none");
+}
+
+function openAddLib(){
+    $(".addLib").css({
+      display: "block"
+    });
+    $("#imp-bg-fade").css("display", "");
+    setTimeout(function() {
+      $(".l-sett-opt").css({
+        opacity: "",
+        right: ""
+      });
+      $("#imp-bg-fade").css("opacity", "");
+    }, 10);
+}
+
+function closeAddLib(){
+    $(".addLib").css({
       display: "none"
     });
     $("#imp-bg-fade").css("display", "none");

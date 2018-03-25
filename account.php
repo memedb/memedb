@@ -101,6 +101,48 @@ if ($account == null)
 
   </div>
 
+  <div class="category-blk addLib">
+    <div class="c-title-holder">
+      <h1 class="imp-title">Add Library</h1>
+    </div>
+
+    <div class="c-content">
+      <div>
+        <div class="input">
+          <input id="name" name="name" type="text" placeholder="Name" style="all: unset; width: 100%;position: relative; border-bottom: 2px solid #ddd;" required/>
+        </div>
+      </div>
+
+      <label class="container">Lock Library
+        <label class="switch">
+          <input type="checkbox">
+          <span class="slider round"></span>
+        </label>
+      </label>
+
+      <h1 class="s-section-title">Visibility</h1>
+
+      <label class="container">Everyone
+        <input type="radio" name="radio">
+        <span class="radio"></span>
+      </label>
+      <label class="container">Followers Only
+        <input type="radio" name="radio" checked="checked">
+        <span class="radio"></span>
+      </label>
+      <label class="container">Only Me
+        <input type="radio" name="radio">
+        <span class="radio"></span>
+      </label>
+
+    </div>
+
+    <div class="c-button-hold">
+      <button class="c-op-1 closeAddLib">Cancel</button>
+      <button class="c-op-2" style="color: #4167f4;">Add</button>
+    </div>
+  </div>
+
   <div class="category-blk stats">
     <div class="c-title-holder">
       <h1 class="imp-title">Statistics</h1>
@@ -112,21 +154,6 @@ if ($account == null)
 
     <div class="c-button-hold">
       <button class="c-op-1 closeStats">Cancel</button>
-      <button class="c-op-2" style="color: #4167f4;">Save</button>
-    </div>
-  </div>
-
-  <div class="category-blk sharing">
-    <div class="c-title-holder">
-      <h1 class="imp-title">Sharing</h1>
-    </div>
-
-    <div class="c-content">
-
-    </div>
-
-    <div class="c-button-hold">
-      <button class="c-op-1 closeSharing">Cancel</button>
       <button class="c-op-2" style="color: #4167f4;">Save</button>
     </div>
   </div>
@@ -190,15 +217,21 @@ if ($account == null)
     <button class="imp-op-1">Cancel</button>
   </div>
 
-  <div class="edit-menu">
+  <div class="floating-box">
+    <div class="floating-button openAddLib">
+      <i class="material-icons floating">add</i>
+    </div>
+    <div class="floating-button openSettings">
+      <i class="material-icons floating" >settings</i>
+    </div>
+  </div>
+
+  <!-- <div class="edit-menu">
     <div class="e-add" title="Add Library">
-      <i class="material-icons edit-icons">add</i>
+      <i class="material-icons edit-icons openAddLib">add</i>
     </div>
     <div class="e-edit" title="Edit Library">
       <i class="material-icons edit-icons">edit</i>
-    </div>
-    <div class="e-fs" title="Share Library">
-      <i class="material-icons edit-icons">folder_shared</i>
     </div>
     <div class="l-line"></div>
     <div class="e-sort" title="Sort by">
@@ -206,16 +239,7 @@ if ($account == null)
     </div>
     <div class="e-timeln" title="Statistics">
       <i class="material-icons edit-icons openStats">timeline</i>
-    </div>
-    <div class="e-share" title="Share">
-      <i class="material-icons edit-icons openSharing">share</i>
-    </div>
-    <div class="l-line">
-    </div>
-    <div class="e-settings" title="Settings">
-      <i class="material-icons edit-icons openSettings" >settings</i>
-    </div>
-  </div>
+  </div> -->
 
   <div class="s-settings">
     <div class="s-title-box">
