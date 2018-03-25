@@ -101,7 +101,7 @@ if ($account == null)
 
   </div>
 
-  <div class="category-blk" style="opacity: 1;">
+  <div class="category-blk">
     <div class="c-title-holder">
       <div class="searchbar category">
         <i class="material-icons search-g" style="float: left; padding-right: 25px;position:relative; top: -4px;">search</i><input type="text" placeholder="Search Tags" style="all: unset; width: 330px;position: relative; left: -10px;" />
@@ -146,7 +146,7 @@ if ($account == null)
     </div>
 
     <div class="c-button-hold">
-      <button class="c-op-1">Cancel</button>
+      <button class="c-op-1 closeTagSearch">Cancel</button>
       <button class="c-op-2" style="color: #4167f4;">Save</button>
     </div>
   </div>
@@ -311,7 +311,7 @@ if ($account == null)
         <div class="type">REACTION IMAGES<button class="t-cross">X</button></div>
         <div class="type">CURSED IMAGES<button class="t-cross">X</button></div>
         <div class="type">NONSENSICAL<button class="t-cross">X</button></div>
-        <button class="t-add">+</button>
+        <button class="t-add openTagSearch">+</button>
       </div>
 
       <div class="line" style="margin-top: 0;"></div>

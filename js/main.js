@@ -35,6 +35,7 @@ $(document).ready(function() {
       $("#imp-message, #imp-bg-fade, .l-sett-opt").css("display", "none");
     }, 100);
     closeSettings();
+    closeTagSearch();
   });
 
   $(".openSettings").click(function() {
@@ -44,6 +45,16 @@ $(document).ready(function() {
 
   $(".closeSettings").click(function() {
     closeSettings();
+    $("#imp-message, #imp-bg-fade").css("opacity", "0");
+  });
+
+  $(".openTagSearch").click(function() {
+    openTagSearch();
+    $("#imp-bg-fade").css("opacity", "");
+  });
+
+  $(".closeTagSearch").click(function() {
+    closeTagSearch();
     $("#imp-message, #imp-bg-fade").css("opacity", "0");
   });
 
@@ -103,22 +114,23 @@ function closeSettings(){
     $("#imp-bg-fade").css("display", "none");
 }
 
-function settingsGeneral(){
-    //Make border bottom blue
-
-    //Make blue border from other section
-
-    //Hide Other Section
-
-    //Show this one
+function openTagSearch(){
+    $(".category-blk").css({
+      display: "block"
+    });
+    $("#imp-bg-fade").css("display", "");
+    setTimeout(function() {
+      $(".l-sett-opt").css({
+        opacity: "",
+        right: ""
+      });
+      $("#imp-bg-fade").css("opacity", "");
+    }, 10);
 }
 
-function settingsAccount(){
-  //Make border bottom blue
-
-  //Make blue border from other section
-
-  //Hide Other Section
-
-  //Show this one
+function closeTagSearch(){
+    $(".category-blk").css({
+      display: "none"
+    });
+    $("#imp-bg-fade").css("display", "none");
 }

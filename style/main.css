@@ -2156,7 +2156,7 @@ body {
 /* ADD TYPE */
 
 .category-blk {
-  display: block;
+  display: none;
   position: fixed;
   right: 40%;
   top: 40%;
