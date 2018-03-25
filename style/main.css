@@ -2084,8 +2084,7 @@ body {
   color: #222;
   position: relative;
   float: right;
-  margin-top: 26px;
-  margin-right: 10px;
+  margin-top: 10.7px;
 }
 
 .m-desc {
@@ -2110,7 +2109,7 @@ body {
 }
 
 .m-likes {
-  width: 100px;
+  width: 80px;
   height: 30px;
   position: relative;
   float: left;
@@ -2118,7 +2117,7 @@ body {
 }
 
 .m-comments {
-  width: 100px;
+  width: 80px;
   height: 30px;
   position: relative;
   float: left;
@@ -2126,7 +2125,7 @@ body {
 }
 
 .m-reposts {
-  width: 100px;
+  width: 80px;
   height: 30px;
   position: relative;
   float: left;
@@ -2134,24 +2133,24 @@ body {
 }
 
 .m-save {
-  width: 100px;
+  width: 80px;
   height: 30px;
   position: relative;
-  float: right;
+  float: left;
   top: 5px;
 }
 
 .m-header {
   font-size: 16px;
-  font-weight: lighter;
+  font-weight: 600;
   color: #333;
   margin-top: 5px;
-  margin-left: 30px;
+  margin-left: 26px;
 }
 
 .m-icon {
   font-size: 25px;
-  font-weight: lighter;
+  font-weight: 600;
   position: relative;
   float: left;
   color: #333;
@@ -2168,6 +2167,16 @@ body {
   height: 20px;
   margin-top: 10px;
   margin-left: 18px;
+}
+
+.follow.mp {
+  margin-top: 18px;
+  margin-bottom: 5px;
+  margin-left: 42px;
+  margin-right: 16px;
+  float: right;
+  padding: 6px 10px 6px 10px;
+  font-size: 12px;
 }
 
 /* D O N A T E */
