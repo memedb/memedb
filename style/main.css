@@ -295,7 +295,7 @@ input:checked+.slider:before {
 .s-settings {
   display: none;
   position: absolute;
-  z-index: 10000;
+  z-index: 100000;
   width: 500px;
   height: 80%;
   background: #fff;
@@ -1626,7 +1626,7 @@ body {
   -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
           box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   position: absolute;
-  right: 130px;
+  right: 60px;
   top: 70px;
   z-index: 100;
   cursor: default;
