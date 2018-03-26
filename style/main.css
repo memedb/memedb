@@ -2055,11 +2055,10 @@ body {
 .meme-img {
   height: 300px;
   position: relative;
-  /* Change to auto when img bg is changed */
   width: 100%;
-  background: #ddd;
+  background: #ccc;
   position: relative;
-  display: table-row;
+  display: block;
 }
 
 .m-names {
@@ -2151,14 +2150,9 @@ body {
   display: table-row;
   width: inherit;
   height: 0px;
-  background: red;
   position: relative;
   bottom: 0;
 
-}
-
-.comment-box {
-  margin-top: 50px;
 }
 
 .m-comments {
