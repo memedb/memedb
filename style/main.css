@@ -2037,11 +2037,19 @@ body {
 
 }
 
+.m-comment-wrapper {
+  display: table-cell;
+  height: 0;
+  overflow-y: auto;
+
+}
+
 .m-comment-bar {
   position: relative;
   float: left;
-  height: auto;
+  height: inherit;
   width: 400px;
+  display: table;
 }
 
 .meme-img {
@@ -2140,12 +2148,17 @@ body {
 }
 
 .m-post-comment {
+  display: table-row;
   width: inherit;
-  height: 60px;
+  height: 0px;
   background: red;
-  position: fixed;
+  position: relative;
   bottom: 0;
 
+}
+
+.comment-box {
+  margin-top: 50px;
 }
 
 .m-comments {
@@ -2190,6 +2203,8 @@ body {
 
 .m-comments-s {
   width: 100%;
+  position: relative;
+  height: inherit;
   padding-bottom: 18px;
   margin-top: 10px;
 }
