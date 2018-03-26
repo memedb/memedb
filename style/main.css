@@ -2014,7 +2014,8 @@ body {
 
 .meme-preview-box {
   position: relative;
-  width: 700px;
+  width: 1100px;
+  height: 500px;
   background: #f3f3f3;
   -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
           box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
@@ -2026,6 +2027,23 @@ body {
   padding-bottom: 18px;
 }
 
+.m-main-content {
+  position: relative;
+  float: left;
+  height: auto;
+  width:  700px;
+  height: auto;
+  display: table;
+
+}
+
+.m-comment-bar {
+  position: relative;
+  float: left;
+  height: auto;
+  width: 400px;
+}
+
 .meme-img {
   height: 300px;
   position: relative;
@@ -2033,6 +2051,7 @@ body {
   width: 100%;
   background: #ddd;
   position: relative;
+  display: table-row;
 }
 
 .m-names {
@@ -2074,6 +2093,7 @@ body {
 .m-text-box {
   width: 100%;
   height: 68px;
+  display: table-row;
 }
 
 .m-date {
@@ -2094,18 +2114,21 @@ body {
   margin-top: 5px;
   margin-left: 18px;
   margin-right: 18px;
+  display: table-row;
 }
 
 .m-para {
   font-family: 'Roboto', sans-serif;
   font-weight: lighter;
   font-size: 13px;
+  display: block;
 }
 
 .m-post-info {
   width: 100%;
   height: 40px;
   position: relative;
+  display: block;
 }
 
 .m-likes {
@@ -2114,6 +2137,15 @@ body {
   position: relative;
   float: left;
   top: 5px;
+}
+
+.m-post-comment {
+  width: inherit;
+  height: 60px;
+  background: red;
+  position: fixed;
+  bottom: 0;
+
 }
 
 .m-comments {
