@@ -2171,6 +2171,30 @@ body {
   margin-right: 10px;
 }
 
+.m-tags {
+  display: block;
+  margin-left: 18px;
+  margin-right: 10px;
+}
+
+.type.m {
+  position: relative;
+  float: left;
+  text-decoration: none;
+  font-family: Roboto;
+  font-weight: 500;
+  color: #666;
+  background: #ccc;
+  padding: 2px 8px 2px 8px;
+  margin: 3px 2px 3px 2px;
+  border-radius: 2px;
+  border: none;
+  text-align: center;
+  font-size: 12px;
+  cursor: pointer;
+
+}
+
 .m-post-info {
   width: auto;
   height: 40px;
