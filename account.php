@@ -285,6 +285,7 @@ if ($account == null)
           <h1 class="s-section-title">Personalisation</h1>
           <div class="p-holder">
             <div class="image edit">
+              <img src="<?php echo $account->getImage(); ?>" style="border: inherit; border-radius: inherit; z-index: 1000; opacity: .7;" width="80" height="80">
               <p class="i-edit">Edit</p>
             </div>
             <div style="margin-bottom:20px;">
@@ -305,6 +306,15 @@ if ($account == null)
               <span class="slider round"></span>
             </label>
           </label>
+          <p class="setting-desc">You will need to accept follow requests for people to view your content</p>
+          <label class="container">Ghost Account
+            <label class="switch">
+              <input type="checkbox">
+              <span class="slider round"></span>
+            </label>
+          </label>
+          <p class="setting-desc">People won't find you unless they have the link to your account.</p>
+          <p class="setting-desc">Upvoting and Sharing posts will be counted but your account will not be linked to them</p>
         </div>
       </div>
     </div>
