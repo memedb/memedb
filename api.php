@@ -117,7 +117,6 @@ class user {
     $usr = loadDBObject("users", "id=$id", "user");
     if ($usr != null) {
       $usr->favorites = explode(",",$usr->favorites);
-      $usr->following = explode(",",$usr->following);
       $usr->image = "/userimg.php?handle=" + $usr->handle;
     }
     return $usr;
@@ -127,7 +126,6 @@ class user {
     $usr = loadDBObject("users", "email='$email'", "user");
     if ($usr != null) {
       $usr->favorites = explode(",",$usr->favorites);
-      $usr->following = explode(",",$usr->following);
       $usr->image = "/userimg.php?handle=" + $usr->handle;
     }
     return $usr;
@@ -137,7 +135,6 @@ class user {
     $usr = loadDBObject("users", "handle='$handle'", "user");
     if ($usr != null) {
       $usr->favorites = explode(",",$usr->favorites);
-      $usr->following = explode(",",$usr->following);
     }
     return $usr;
   }
@@ -147,8 +144,8 @@ class user {
       $password = uniqid();
     $conn = $GLOBALS['conn'];
     $stmt = $conn->prepare("INSERT INTO `users`
-      (`id`, `name`, `handle`, `email`, `pwd`, `salt`, `confirmed`, `priv`, `joined`, `lastSeen`, `favorites`, `karma`, `rank`, `following`)
-      VALUES (NULL, ?, ?, ?, ?, ?, 0, 1, ?, ?, '', 0, 0, '')");
+      (`id`, `name`, `handle`, `email`, `pwd`, `salt`, `confirmed`, `priv`, `joined`, `lastSeen`, `favorites`, `karma`, `rank`)
+      VALUES (NULL, ?, ?, ?, ?, ?, 0, 1, ?, ?, '', 0, 0)");
     $stmt->bind_param("sssssss", $name, $name, $email, $hPass, $salt, $now, $now);
     $salt = uniqid();
     $hPass = hash("sha256", $password.$salt);
@@ -158,7 +155,7 @@ class user {
     $stmt = $conn-prepare("SELECT id FROM users WHERE email=?");
     $stmt->bind_param('s', $email);
     $stmt->execute();
-    $result = $stmt->get();
+    $result = $stmt->get_result();
 
     $id = $result->fetch_assoc()['id'];
 
@@ -189,26 +186,39 @@ class user {
     return $id;
   }
 
-  public function addFollowing($id) {
-    if(!in_array($id, $this->following)) {
-      array_push($this->following, $id);
+  public function getFollowerCount() {
+    $conn = $GLOBALS['conn'];
+    $stmt = $conn->prepare("SELECT count(following) as followers FROM `following` WHERE `following`=?");
+    $stmt->bind_param("i",$this->id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_assoc()['followers'];
+  }
+
+  public function getFollowers() {
+    $conn = $GLOBALS['conn'];
+    $stmt = $conn->prepare("SELECT user FROM `following` WHERE `following`=?");
+    $stmt->bind_param("i",$this->id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $followers = array();
+    while ($row = $result->fetch_assoc()) {
+      array_push($followers, $row['user']);
     }
-    $this->updateFollowing();
+    return $followers;
+  }
+
+  public function addFollowing($id) {
+    $conn = $GLOBALS['conn'];
+    $stmt = $conn->prepare("INSERT INTO `following` (`user`, `following`) VALUES (?, ?)");
+    $stmt->bind_param("ii", $this->id, $id);
+    $stmt->execute();
   }
 
   public function removeFollowing($id) {
-    if(in_array($id, $this->following)) {
-      $index = array_search($id, $this->following);
-      unset($this->following[$index]);
-    }
-    $this->updateFollowing();
-  }
-
-  private function updateFollowing() {
     $conn = $GLOBALS['conn'];
-    $stmt = $conn->prepare("UPDATE user SET following=? WHERE id=?");
-    $stmt->prepare("si",$this->id, $imploded);
-    $imploded = implode(",", $this->following);
+    $stmt = $conn->prepare("DELETE FROM `following` WHERE user=? AND following=?");
+    $stmt->bind_param("ii", $this->id, $id);
     $stmt->execute();
   }
 

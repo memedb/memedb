@@ -340,16 +340,16 @@ if ($account == null)
           <div class="u-stat">
             <!-- CHANGE NAME LATER -->
             <div class="u-stat karma">
-              Karma: 0
+              Karma: <?php echo $account->karma; ?>
             </div>
             <!--  -->
             <div class="u-stat rank">
-              Elo: NaN
+              Elo: <?php echo ($account->rank ? $account->rank : "NaN"); ?>
             </div>
           </div>
         </div>
         <button class="follow">Follow
-          <span style="font-family: Roboto;font-weight: 500;color: #ccc;">0
+          <span style="font-family: Roboto;font-weight: 500;color: #ccc;"><?php echo ($account->getFollowerCount()); ?>
           </span></button>
         <!-- <button class="follow" style="background:#ccc; color:#222;">Unfollow <span style="font-family: Roboto;font-weight: 500;color: #555;">0
         </span></button> -->
