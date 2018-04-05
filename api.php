@@ -222,5 +222,14 @@ class user {
     $stmt->execute();
   }
 
+  public function isFollowing($id) {
+    $conn = $GLOBALS['conn'];
+    $stmt = $conn->prepare("SELECT * FROM `following` WHERE user=? AND following=?");
+    $stmt->bind_param("ii", $this->id, $id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->num_rows > 0;
+  }
+
 }
  ?>

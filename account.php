@@ -1,13 +1,22 @@
 <?php
 require('api.php');
 
+// The account object being displayed
 $account = $_GET['handle'];
+// true if the user is looking at their own account false otherwise
+$is_self = false;
+// The user logged in
+$self = getUser();
 
-if ($account != null)
+
+if ($account != null) {
   $account = user::loadFromHandle($account);
+  $is_self = (loggedIn() && $self->id == $account->id);
+}
 
 if (loggedIn() && !$account) {
-  $account = getUser();
+  header("Location: https://meme-db.com/account/" . getUser()->handle);
+  exit;
 }
 
 if ($account == null)
@@ -348,11 +357,9 @@ if ($account == null)
             </div>
           </div>
         </div>
-        <button class="follow">Follow
-          <span style="font-family: Roboto;font-weight: 500;color: #ccc;"><?php echo ($account->getFollowerCount()); ?>
-          </span></button>
-        <!-- <button class="follow" style="background:#ccc; color:#222;">Unfollow <span style="font-family: Roboto;font-weight: 500;color: #555;">0
-        </span></button> -->
+        <button class="<?php echo ($is_self ? "follow-self" : ($self->isFollowing($account->id) ? "unfollow" : "follow")) ?>">
+          <span><?php echo ($account->getFollowerCount()); ?></span>
+        </button>
       </div>
     </div>
 
