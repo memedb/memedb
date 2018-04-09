@@ -14,7 +14,7 @@ if ($_SESSION['id']) {
   $GLOBALS['user'] = user::loadFromId($_SESSION['id']);
   $conn = $GLOBALS['conn'];
   $ip = get_client_ip();
-  $stmt = $conn->prepare("UPDATE users SET ip = '$ip' WHERE id = ".$user->id);
+  $stmt = $conn->prepare("UPDATE users SET ip = '$ip', session='".session_id()."' WHERE id = ".$user->id);
   $stmt->execute();
 }
 
@@ -25,6 +25,131 @@ if ($GLOBALS['conn']->connect_error) {
 if($_SERVER["HTTPS"] != "on") {
   header("Location: https://" . $_SERVER["HTTP_HOST"] . $_SERVER["REQUEST_URI"]);
   exit();
+}
+
+// REST api:
+
+$commands = array();
+$GLOBALS['commands'] = $commands;
+
+class Command {
+
+  var $name;
+  var $action;
+
+  function __construct($name, $action) {
+    $this->name = $name;
+    $this->action = $action;
+  }
+
+  static function register($name, $action) {
+    array_push($GLOBALS['commands'], new Command($name, $action));
+  }
+
+}
+
+$conn = $GLOBALS['conn'];
+
+Command::register("start_session", function($user) {
+  $name = $_POST['username'];
+  $pass = $_POST['password'];
+
+  if ($id = checkLogin($name, $pass)) {
+    $stmt = $conn->prepare("INSERT INTO `sessions` (`id`, `user`) VALUES (?, ?);");
+    $stmt->bind_param("si", $sid, $id);
+    $sid = uniqid('', true);
+    $stmt->execute();
+  } else {
+    jsonError("Incorrect username or password");
+  }
+});
+
+Command::register("follow", function($user) {
+  $account = user::loadFromHandle($_POST['handle']);
+  $user->addFollowing($account->id);
+});
+
+Command::register("unfollow", function($user) {
+  $account = user::loadFromHandle($_POST['handle']);
+  $user->removeFollowing($account->id);
+});
+
+$action = $_GET['action'];
+
+if ($action) {
+  $user = null;
+  $session = $_POST['session'];
+
+  if ($session == session_id()) {
+    $user = getUser();
+  }
+
+  if ($session) {
+    $stmt = $conn->prepare("SELECT user FROM `sessions` WHERE id=?");
+    $stmt->bind_param("s", $session);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($result->num_rows > 0) {
+      $row = $result->fetch_assoc();
+      $user = user::loadFromId($row['user']);
+    }
+  }
+
+  foreach ($commands as $command) {
+    if ($command->name == $action) {
+      call_user_func($command->action, $user);
+    }
+  }
+}
+
+// Functions:
+
+function jsonMessage($data) {
+  $data['status'] = 'success';
+  echo json_encode($data);
+}
+
+function jsonError($message) {
+  echo json_encode(array('status' => 'error', 'msg' => $message));
+}
+
+function checkLogin($name, $pass) {
+  if ($name == null || $pass == null)
+    return false;
+
+  $conn = $GLOBALS['conn'];
+
+  $stmt = $conn->prepare("SELECT salt FROM users WHERE (handle=? OR email=?)");
+  $stmt->bind_param('ss', $name, $pass);
+  $stmt->execute();
+  $result = $stmt->get_result();
+  $salt = $result->fetch_assoc()['salt'];
+
+  $pass = hash("sha256", $pass.$salt);
+
+  $stmt = $conn->prepare("SELECT id FROM users WHERE (handle=? OR email=?) AND pwd=?");
+  $stmt->bind_param('sss', $name, $email, $pass);
+  $stmt->execute();
+  $result = $stmt->get_result();
+
+  if ($result->num_rows > 0) {
+    return $result->fetch_assoc()['id'];
+  } else {
+    return false;
+  }
+}
+
+function varToString($input) {
+  return(var_export($input, true));
+}
+
+function logger($input) {
+  $myfile = fopen("./logger.txt", "a+") or die("Unable to open file!");
+  $dbgt=debug_backtrace();
+  $date = date('m/d/Y h:i:s a', time());
+  $txt = $date . "UTC | " . $dbgt[0]['file'] . " [" . $dbgt[0]['line'] . "] : " . $input . "\n";
+  fwrite($myfile, $txt);
+  fclose($myfile);
 }
 
 function exists($value, $table, $column) {
@@ -144,8 +269,8 @@ class user {
       $password = uniqid();
     $conn = $GLOBALS['conn'];
     $stmt = $conn->prepare("INSERT INTO `users`
-      (`id`, `name`, `handle`, `email`, `pwd`, `salt`, `confirmed`, `priv`, `joined`, `lastSeen`, `favorites`, `karma`, `rank`)
-      VALUES (NULL, ?, ?, ?, ?, ?, 0, 1, ?, ?, '', 0, 0)");
+      (`id`, `name`, `handle`, `email`, `pwd`, `salt`, `confirmed`, `priv`, `joined`, `lastSeen`, `favorites`, `karma`, `rank`, `session`)
+      VALUES (NULL, ?, ?, ?, ?, ?, 0, 1, ?, ?, '', 0, 0, '')");
     $stmt->bind_param("sssssss", $name, $name, $email, $hPass, $salt, $now, $now);
     $salt = uniqid();
     $hPass = hash("sha256", $password.$salt);
