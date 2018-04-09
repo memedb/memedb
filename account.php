@@ -357,7 +357,7 @@ if ($account == null)
             </div>
           </div>
         </div>
-        <button class="<?php echo ($is_self ? "follow-self" : ($self->isFollowing($account->id) ? "unfollow" : "follow")) ?>">
+        <button id="follow-btn" onclick="followAction()" data-handle="<?= $account->handle?>" class="<?php echo ($is_self ? "follow-self" : ($self->isFollowing($account->id) ? "unfollow" : "follow")) ?>">
           <span><?php echo ($account->getFollowerCount()); ?></span>
         </button>
       </div>

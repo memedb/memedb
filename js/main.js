@@ -94,6 +94,46 @@ $(document).ready(function() {
   });
 });
 
+function sendCommand(name, session, data, callback) {
+  var dataString = "";
+  for (var key in data) {
+    if (data.hasOwnProperty(key)) {
+      dataString += key + "=" + data[key] + "&";
+    }
+  }
+  dataString += "session=" + session;
+
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status ==  200) {
+      callback(JSON.parse(this.responseText));
+    }
+  }
+  xhttp.open("POST", "/api/" + name, true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send(dataString);
+}
+
+function followAction() {
+  var cookies = document.cookie.split("; ");
+  var session_id = null;
+  for (i = 0; i < cookies.length; i++) {
+    var cookie = cookies[i];
+    if (cookie.startsWith("PHPSESSID")) {
+      session_id = cookie.split("=")[1];
+      break;
+    }
+  }
+
+  var elmt = document.getElementById("follow-btn");
+
+  if (elmt.className == "follow" || elmt.className == "unfollow") {
+    sendCommand(elmt.className, session_id, {handle: elmt.dataset.handle}, function(response) {
+      console.log("response: \n\n" + response);
+    });
+  }
+}
+
 function openOptions(id) {
   console.log(id);
   var offset = $("#" + id).offset();

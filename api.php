@@ -67,11 +67,13 @@ Command::register("start_session", function($user) {
 Command::register("follow", function($user) {
   $account = user::loadFromHandle($_POST['handle']);
   $user->addFollowing($account->id);
+  jsonMessage(array());
 });
 
 Command::register("unfollow", function($user) {
   $account = user::loadFromHandle($_POST['handle']);
   $user->removeFollowing($account->id);
+  jsonMessage(array());
 });
 
 $action = $_GET['action'];
