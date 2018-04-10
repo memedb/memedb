@@ -92,6 +92,10 @@ $(document).ready(function() {
 
     }
   });
+
+  $(".t-cross").click(function() {
+    
+  });
 });
 
 function sendCommand(name, session, data, callback) {
@@ -129,7 +133,12 @@ function followAction() {
 
   if (elmt.className == "follow" || elmt.className == "unfollow") {
     sendCommand(elmt.className, session_id, {handle: elmt.dataset.handle}, function(response) {
-      console.log("response: \n\n" + response);
+      if (response.following) {
+        elmt.className = "unfollow";
+      } else {
+        elmt.className = "follow";
+      }
+      elmt.innerHTML = "<span>" + response.followers + "</span>";
     });
   }
 }

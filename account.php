@@ -371,15 +371,17 @@ if ($account == null)
       </div>
 
       <div class="meme-type">
-        <div class="type">META IRONIC<button class="t-cross">X</button></div>
-        <div class="type">IRONIC<button class="t-cross">X</button></div>
-        <div class="type">SHITPOSTING<button class="t-cross">X</button></div>
-        <div class="type">PHILOSOPHY<button class="t-cross">X</button></div>
-        <div class="type">DEEP FRIED<button class="t-cross">X</button></div>
-        <div class="type">REACTION IMAGES<button class="t-cross">X</button></div>
-        <div class="type">CURSED IMAGES<button class="t-cross">X</button></div>
-        <div class="type">NONSENSICAL<button class="t-cross">X</button></div>
-        <button class="t-add openTagSearch">+</button>
+        <?php
+          for ($i = 0; $i < count($account->favorites); $i++) {
+            $type = $account->favorites[$i];
+            ?>
+            <div class="type"><?=$type?><?php if ($is_self) {?><button class="t-cross" data-type="<?=$type?>">X</button><?php } ?></div>
+            <?php
+          }
+          if ($is_self) { ?>
+            <button class="t-add openTagSearch">+</button>
+          <?php }
+        ?>
       </div>
 
       <div class="line" style="margin-top: 0;"></div>

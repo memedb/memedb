@@ -67,13 +67,17 @@ Command::register("start_session", function($user) {
 Command::register("follow", function($user) {
   $account = user::loadFromHandle($_POST['handle']);
   $user->addFollowing($account->id);
-  jsonMessage(array());
+  jsonMessage(array("following"=>true, "followers"=>$account->getFollowerCount()));
 });
 
 Command::register("unfollow", function($user) {
   $account = user::loadFromHandle($_POST['handle']);
   $user->removeFollowing($account->id);
-  jsonMessage(array());
+  jsonMessage(array("following"=>false, "followers"=>$account->getFollowerCount()));
+});
+
+Command::register("delete_favorite", function($user) {
+  
 });
 
 $action = $_GET['action'];
@@ -83,7 +87,7 @@ if ($action) {
   $session = $_POST['session'];
 
   if ($session == session_id()) {
-    $user = getUser();
+    $user = user::loadFromSession($session);
   }
 
   if ($session) {
@@ -260,6 +264,14 @@ class user {
 
   public static function loadFromHandle($handle) {
     $usr = loadDBObject("users", "handle='$handle'", "user");
+    if ($usr != null) {
+      $usr->favorites = explode(",",$usr->favorites);
+    }
+    return $usr;
+  }
+
+  public static function loadFromSession($session) {
+    $usr = loadDBObject("users", "session='$session'", "user");
     if ($usr != null) {
       $usr->favorites = explode(",",$usr->favorites);
     }
