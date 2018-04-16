@@ -85,7 +85,9 @@ if ($account == null)
       </div>
 
     </div>
-    <div class="sign-in">SIGN IN</div>
+    <div class="sign-in-user">
+      <img src="<?php echo $account->getImage(); ?>" style="border: inherit; border-radius: inherit;" width="35" height="35">
+    </div>
   </div>
 
   <div class="imp-bg-fade" id="imp-bg-fade" style="display: none; opacity 0;"></div>
@@ -336,15 +338,8 @@ if ($account == null)
             <div class="username">
               @<?php echo $account->handle; ?>
             </div>
-          </div>
-          <div class="u-stat">
-            <!-- CHANGE NAME LATER -->
-            <div class="u-stat karma">
+            <div class="username">
               Karma: 0
-            </div>
-            <!--  -->
-            <div class="u-stat rank">
-              Elo: NaN
             </div>
           </div>
         </div>

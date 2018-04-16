@@ -1,3 +1,27 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, hr, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video, active, hover, selected {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    outline: none;
+    text-decoration: none;
+}
+
+ol,ul {
+    list-style: none;
+}
+
 /*Please use one global stylesheet and also get the minify package in atom. Thank you. :D*/
 
 * {
@@ -711,14 +735,14 @@ input:checked+.slider:before {
 /* SIDENAV */
 
 .sidenav {
-  display: table;
+  display: block;
   position: fixed;
   float: left;
   height: 100%;
   width: 400px;
   background: #eee;
   border-right: 1px solid #ddd;
-  overflow-y: hidden;
+  overflow-y: auto;
 }
 
 .s-scroll {
@@ -1152,20 +1176,19 @@ body {
   cursor: pointer;
 }
 
-.sign-in {
+.sign-in-user {
   -ms-grid-row: 2;
   -ms-grid-column: 5;
   grid-area: si;
   position: relative;
   -ms-grid-column-align: center;
-  justify-self: center;
-  top: 9px;
+  justify-self: center;\
   font-weight: 500;
-  color: #fff;
+  background-color: #fff;
   cursor: pointer;
-  font-family: Roboto, sans-serif;
-  font-weight: medium;
-  font-size: 15px;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
 }
 
 /* SEARCH RESULT BOX */
@@ -1346,8 +1369,7 @@ body {
 
 .s-results {
   display: table-cell;
-  height: 0;
-  overflow-y: auto;
+  overflow-y: hidden;
 }
 
 /*  */
@@ -1378,7 +1400,8 @@ body {
   float: left;
   font-family: Roboto;
   font-size: 15px;
-  font-weight: lighter;
+  font-weight: 400;
+  color: #aaa;
 }
 
 /* MEME TYPE */
