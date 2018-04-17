@@ -1,13 +1,22 @@
 <?php
 require('api.php');
 
+// The account object being displayed
 $account = $_GET['handle'];
+// true if the user is looking at their own account false otherwise
+$is_self = false;
+// The user logged in
+$self = getUser();
 
-if ($account != null)
+
+if ($account != null) {
   $account = user::loadFromHandle($account);
+  $is_self = (loggedIn() && $self->id == $account->id);
+}
 
 if (loggedIn() && !$account) {
-  $account = getUser();
+  header("Location: https://meme-db.com/account/" . getUser()->handle);
+  exit;
 }
 
 if ($account == null)
@@ -343,11 +352,9 @@ if ($account == null)
             </div>
           </div>
         </div>
-        <button class="follow">Follow
-          <span style="font-family: Roboto;font-weight: 500;color: #ccc;">0
-          </span></button>
-        <!-- <button class="follow" style="background:#ccc; color:#222;">Unfollow <span style="font-family: Roboto;font-weight: 500;color: #555;">0
-        </span></button> -->
+        <button id="follow-btn" onclick="followAction()" data-handle="<?= $account->handle?>" class="<?php echo ($is_self ? "follow-self" : ($self->isFollowing($account->id) ? "unfollow" : "follow")) ?>">
+          <span><?php echo ($account->getFollowerCount()); ?></span>
+        </button>
       </div>
     </div>
 
@@ -359,15 +366,17 @@ if ($account == null)
       </div>
 
       <div class="meme-type">
-        <div class="type">META IRONIC<button class="t-cross">X</button></div>
-        <div class="type">IRONIC<button class="t-cross">X</button></div>
-        <div class="type">SHITPOSTING<button class="t-cross">X</button></div>
-        <div class="type">PHILOSOPHY<button class="t-cross">X</button></div>
-        <div class="type">DEEP FRIED<button class="t-cross">X</button></div>
-        <div class="type">REACTION IMAGES<button class="t-cross">X</button></div>
-        <div class="type">CURSED IMAGES<button class="t-cross">X</button></div>
-        <div class="type">NONSENSICAL<button class="t-cross">X</button></div>
-        <button class="t-add openTagSearch">+</button>
+        <?php
+          for ($i = 0; $i < count($account->favorites); $i++) {
+            $type = $account->favorites[$i];
+            ?>
+            <div class="type"><?=$type?><?php if ($is_self) {?><button class="t-cross" data-type="<?=$type?>">X</button><?php } ?></div>
+            <?php
+          }
+          if ($is_self) { ?>
+            <button class="t-add openTagSearch">+</button>
+          <?php }
+        ?>
       </div>
 
       <div class="line" style="margin-top: 0;"></div>

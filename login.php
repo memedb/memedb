@@ -19,24 +19,8 @@ $pass = $_POST['password'];
 $GLOBALS['valid'] = true;
 
 if ($name !== null && $pass !== null) {
-  $conn = $GLOBALS['conn'];
-
-  $stmt = $conn->prepare("SELECT salt FROM users WHERE (handle=? OR email=?)");
-  $stmt->bind_param('ss', $name, $pass);
-  $stmt->execute();
-  $result = $stmt->get_result();
-  $salt = $result->fetch_assoc()['salt'];
-
-  $pass = hash("sha256", $pass.$salt);
-
-  $stmt = $conn->prepare("SELECT id FROM users WHERE (handle=? OR email=?) AND pwd=?");
-  $stmt->bind_param('sss', $name, $email, $pass);
-  $stmt->execute();
-  $result = $stmt->get_result();
-
-  if ($result->num_rows > 0) {
-    $row = $result->fetch_assoc();
-    $_SESSION['id'] = $row['id'];
+  if ($id = checkLogin($name, $pass)) {
+    $_SESSION['id'] = $id;
     $GLOBALS['valid'] = true;
     ?>
     <script>
@@ -47,7 +31,6 @@ if ($name !== null && $pass !== null) {
     $_SESSION['id'] = null;
     $GLOBALS['valid'] = false;
   }
-
 }
  ?>
 

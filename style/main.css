@@ -1316,7 +1316,7 @@ body {
   text-decoration: none;
   font-family: Roboto;
   font-weight: 500;
-  color: #eee;
+  color: #ccc;
   background: #4167f4;
   padding: 8px 16px 8px 16px;
   margin-top: 5px;
@@ -1327,6 +1327,57 @@ body {
   text-align: center;
   font-size: 16px;
   cursor: pointer;
+}
+
+.unfollow {
+  position: relative;
+  text-decoration: none;
+  font-family: Roboto;
+  font-weight: 500;
+  color: #555;
+  background: #ccc;
+  padding: 8px 16px 8px 16px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 42px;
+  border-radius: 2px;
+  border: none;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.follow-self {
+  position: relative;
+  text-decoration: none;
+  font-family: Roboto;
+  font-weight: 500;
+  color: #666;
+  background: #ccc;
+  padding: 8px 16px 8px 16px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  margin-left: 42px;
+  border-radius: 2px;
+  border: none;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.follow span::before {
+  content: "Follow ";
+  color: #eee;
+}
+
+.unfollow span::before {
+  content: "Unfollow ";
+  color: #222;
+}
+
+.follow-self span::after {
+  content: " Followers";
+  color: #444;
 }
 
 .a-user-info {
