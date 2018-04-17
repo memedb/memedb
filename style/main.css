@@ -1390,18 +1390,15 @@ body {
 }
 
 .s-user {
-  height: 0;
-  display: table-row;
+  display: block;
 }
 
 .s-favorites {
-  height: 0;
-  display: table-row;
+  display: block;
 }
 
 .s-searchbox {
-  height: 0;
-  display: table-row;
+  display: block;
 }
 
 .s-r-scroll {
@@ -1419,7 +1416,7 @@ body {
 }
 
 .s-results {
-  display: table-cell;
+  display: block;
   overflow-y: hidden;
 }
 
