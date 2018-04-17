@@ -98,6 +98,19 @@ if ($account == null)
       <img src="<?php echo $account->getImage(); ?>" style="border: inherit; border-radius: inherit;" width="35" height="35">
     </div>
   </div>
+  <div class="s-dropdown">
+    <div class="s-d-titlebox">
+      <div class="sd-img">
+        <img src="<?php echo $account->getImage(); ?>" style="border: inherit; border-radius: inherit;" width="40" height="40">
+      </div>
+      <div class="sd-infoholder">
+        <h1 class="n-name sdname"><?php echo $account->name; ?></h1>
+        <div class="username">
+          @<?php echo $account->handle; ?>
+        </div>
+      </div>
+    </div>
+  </div>
 
   <div class="imp-bg-fade" id="imp-bg-fade" style="display: none; opacity 0;"></div>
 
@@ -713,7 +726,6 @@ if ($account == null)
 
   <div class="content">
     <div class="c-box">
-      <h1 style="margin-left: 20px; font-weight: 200; font-family: 'Roboto', sans-serif;">Most Popular</h1>
       <div class="c-popular">
         <div class="c-pop-wrapper">
           <div class="h-post small">

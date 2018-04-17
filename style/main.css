@@ -1182,13 +1182,57 @@ body {
   grid-area: si;
   position: relative;
   -ms-grid-column-align: center;
-  justify-self: center;\
+  justify-self: center;
   font-weight: 500;
   background-color: #fff;
   cursor: pointer;
   width: 35px;
   height: 35px;
   border-radius: 50%;
+}
+
+.sign-in-user:active {
+
+}
+
+.s-dropdown {
+  display: none;
+  z-index: 10000;
+  position: absolute;
+  top: 65px;
+  right: 10px;
+  width: 300px;
+  height: 200px;
+  background: #fff;
+  border-radius: 2px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+
+}
+
+.s-d-titlebox {
+  width: auto;
+  height: 40px;
+  background: #eee;
+  padding: 16px;
+}
+
+.sdname {
+  margin: 0px !important;
+  font-size: 18px !important;
+}
+
+.sd-img {
+  border-radius: 50%;
+  margin-right: 10px;
+  position: relative;
+  float: left;
+}
+
+.sd-infoholder {
+  width: auto;
+  position: relative;
+  float: left;
+
 }
 
 /* SEARCH RESULT BOX */
@@ -1431,7 +1475,7 @@ body {
 }
 
 .div-line {
-  height: 1px;
+  height: 2px;
   width: 36.5%;
   margin: auto;
   background: #ccc;
@@ -1456,6 +1500,7 @@ body {
 
 .meme-type {
   width: 80%;
+  height: 50px;
   max-height: 400px;
   margin: auto;
   position: relative;
@@ -1655,7 +1700,7 @@ body {
 
 .library {
   width: auto;
-  height: 60px;
+  height: 45px;
   background: #f5f5f5;
   border-bottom: 2px #ddd solid;
   cursor: pointer;
@@ -1678,16 +1723,17 @@ body {
 }
 
 .l-icon {
-  margin-top: 15px;
+  margin-top: 10px;
   margin-left: 13px;
   float: left;
+  font-size: 23px !important;
 }
 
 .l-title {
   font-family: Roboto;
   font-weight: 200;
   color: #444;
-  font-size: 30px;
+  font-size: 20px;
   margin: 0px 0px 8px 18px;
   position: relative;
   top: 10px;
@@ -1699,9 +1745,8 @@ body {
   width: 30px;
   height: 30px;
   float: right;
-  margin-top: 15px;
-  margin-bottom: 15px;
-  margin-right: 15px;
+  margin-top: 8px;
+  margin-right: 9px;
   -webkit-transition: -webkit-transform 0.5s;
   transition: -webkit-transform 0.5s;
   -o-transition: transform 0.5s;
@@ -1778,8 +1823,7 @@ body {
   width: 30px;
   height: 30px;
   float: right;
-  margin-top: 15px;
-  margin-bottom: 15px;
+  margin-top: 8px;
   margin-right: 15px;
   z-index: 1;
 }
