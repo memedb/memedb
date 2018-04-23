@@ -991,8 +991,8 @@ input:checked+.slider:before {
 }
 
 .h-post.tiny {
-  width: 118px;
-  height: 118px;
+  width: 115px;
+  height: 115px;
 }
 
 .h-post-row {
@@ -1509,8 +1509,7 @@ body {
 
 .meme-type {
   width: 80%;
-  height: 50px;
-  max-height: 400px;
+  min-height: 100px;
   margin: auto;
   position: relative;
   top: -10px;
@@ -2523,6 +2522,20 @@ box-shadow: 0 3px 6px rgba(0,0,0,0.16),0 3px 6px rgba(0,0,0,0.23);
   width: auto;
   height: auto;
   margin-left: 30px;
+}
+
+.m-textarea {
+  width: 83%;
+  position: relative;
+  border: none;
+  border-bottom: 2px solid #62717b;
+  background: none;
+  position: relative;
+  float: left;
+  overflow-y: hidden;
+  resize: none;
+  height: 35px;
+
 }
 
 .reply-comment {
