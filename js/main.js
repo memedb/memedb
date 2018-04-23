@@ -43,6 +43,7 @@ $(document).ready(function() {
     closeTagSearch();
     closeStats();
     closeAddLib();
+    closeAccount();
   });
 
   $(".openSettings").click(function() {
@@ -85,6 +86,16 @@ $(document).ready(function() {
     $("#imp-message, #imp-bg-fade").css("opacity", "0");
   });
 
+  $(".openAccount").click(function() {
+    openAccount();
+    $("#imp-bg-fade").css("opacity", "");
+  });
+
+  $(".closeAccount").click(function() {
+    closeAccount();
+    $("#imp-message, #imp-bg-fade").css("opacity", "0");
+  });
+
   $(".s-tab").click(function() {
     if(!(this.classList.contains("s-selected"))){
       $(".s-tab").toggleClass("s-selected");
@@ -94,7 +105,7 @@ $(document).ready(function() {
   });
 
   $(".t-cross").click(function() {
-    
+
   });
 });
 
@@ -248,6 +259,27 @@ function openAddLib(){
 
 function closeAddLib(){
     $(".addLib").css({
+      display: "none"
+    });
+    $("#imp-bg-fade").css("display", "none");
+}
+
+function openAccount(){
+    $(".s-dropdown").css({
+      display: "block"
+    });
+    $("#imp-bg-fade").css("display", "");
+    setTimeout(function() {
+      $(".l-sett-opt").css({
+        opacity: "",
+        right: ""
+      });
+      $("#imp-bg-fade").css("opacity", "");
+    }, 10);
+}
+
+function closeAccount(){
+    $(".s-dropdown").css({
       display: "none"
     });
     $("#imp-bg-fade").css("display", "none");
