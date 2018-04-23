@@ -44,6 +44,7 @@ $(document).ready(function() {
     closeStats();
     closeAddLib();
     closeAccount();
+    closePost();
   });
 
   $(".openSettings").click(function() {
@@ -93,6 +94,16 @@ $(document).ready(function() {
 
   $(".closeAccount").click(function() {
     closeAccount();
+    $("#imp-message, #imp-bg-fade").css("opacity", "0");
+  });
+
+  $(".openPost").click(function() {
+    openPost();
+    $("#imp-bg-fade").css("opacity", "");
+  });
+
+  $(".closePost").click(function() {
+    closePost();
     $("#imp-message, #imp-bg-fade").css("opacity", "0");
   });
 
@@ -280,6 +291,27 @@ function openAccount(){
 
 function closeAccount(){
     $(".s-dropdown").css({
+      display: "none"
+    });
+    $("#imp-bg-fade").css("display", "none");
+}
+
+function openPost(){
+    $(".m-post").css({
+      display: "block"
+    });
+    $("#imp-bg-fade").css("display", "");
+    setTimeout(function() {
+      $(".l-sett-opt").css({
+        opacity: "",
+        right: ""
+      });
+      $("#imp-bg-fade").css("opacity", "");
+    }, 10);
+}
+
+function closePost(){
+    $(".m-post").css({
       display: "none"
     });
     $("#imp-bg-fade").css("display", "none");

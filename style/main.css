@@ -1417,6 +1417,47 @@ body {
   cursor: pointer;
 }
 
+.post-btn {
+  position: relative;
+  text-decoration: none;
+  font-family: Roboto;
+  font-weight: 500;
+  float: right;
+  color: #fff;
+  background: #4167f4;
+  padding: 8px 16px 8px 16px;
+  border-radius: 2px;
+  border: none;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  -webkit-transition-duration: .3s;
+-o-transition-duration: .3s;
+transition-duration: .3s;
+}
+
+.post-btn:hover {
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16),0 3px 6px rgba(0,0,0,0.23);
+}
+
+.post-btn.cancel {
+  position: relative;
+  text-decoration: none;
+  font-family: Roboto;
+  font-weight: 500;
+  float: left;
+  color: #222;
+  background: none;
+  padding: 8px 16px 8px 16px;
+  border-radius: 2px;
+  border: none;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.post-btn.cancel:hover {}
+
 .follow span::before {
   content: "Follow ";
   color: #eee;
@@ -2534,7 +2575,20 @@ box-shadow: 0 3px 6px rgba(0,0,0,0.16),0 3px 6px rgba(0,0,0,0.23);
   float: left;
   overflow-y: hidden;
   resize: none;
-  height: 35px;
+  height: 21px;
+  margin-top: 13px;
+
+}
+
+.post-textarea {
+  width: 90%;
+  position: relative;
+  border: none;
+  background: #eee;
+  overflow-y: auto;
+  resize: none;
+  height: 90%;
+  margin-top: 13px;
 
 }
 
@@ -2632,6 +2686,27 @@ box-shadow: 0 3px 6px rgba(0,0,0,0.16),0 3px 6px rgba(0,0,0,0.23);
   overflow-y: hidden;
 }
 
+.post-blk {
+  display: none;
+  position: fixed;
+  width: 800px;
+  background: #fdfdfd;
+  border-radius: 2px;
+  padding: 8px 8px 8px 8px;
+  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  z-index: 100000;
+  cursor: default;
+  opacity: 1;
+  -webkit-transition-timing-function: linear;
+  -o-transition-timing-function: linear;
+  transition-timing-function: linear;
+  -webkit-transition: opacity 0.2s;
+  -o-transition: opacity 0.2s;
+  transition: opacity 0.2s;
+  overflow-y: hidden;
+}
+
 .c-title-holder {
   position: relative;
   width: 100%;
@@ -2668,6 +2743,24 @@ box-shadow: 0 3px 6px rgba(0,0,0,0.16),0 3px 6px rgba(0,0,0,0.23);
   top: 6px !important;
 }
 
+.c-op-1.post {
+  position: relative;
+  text-decoration: none;
+  font-family: Roboto;
+  font-weight: 600;
+  color: #444;
+  background-color: inherit;
+  border: none;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  margin-left: 4px;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  z-index: 100;
+  top: 12px !important;
+}
+
 .c-op-2 {
   position: relative;
   text-decoration: none;
@@ -2689,7 +2782,8 @@ box-shadow: 0 3px 6px rgba(0,0,0,0.16),0 3px 6px rgba(0,0,0,0.23);
 
 .c-button-hold {
   position: relative;
-  height: 30px;
+  display: inline-block;
+  height: auto;
   width: 100%;
 }
 
