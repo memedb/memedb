@@ -94,11 +94,34 @@ $(document).ready(function() {
   });
 
   $(".t-cross").click(function() {
-    
+    var elmt = this.parentElement;
+    sendCommand("delete_favorite", null, {type: this.dataset.type}, function(response) {
+      elmt.parentNode.removeChild(elmt);
+    });
+  });
+
+  $(".t-add").click(function() {
+    type = prompt("Enter a meme type");
+    if (type != null) {
+      sendCommand("add_favorite", null, {type: type}, function(response) {
+        console.log(response.favorites);
+      });
+    }
   });
 });
 
 function sendCommand(name, session, data, callback) {
+  if (session == null) {
+    var cookies = document.cookie.split("; ");
+    for (i = 0; i < cookies.length; i++) {
+      var cookie = cookies[i];
+      if (cookie.startsWith("PHPSESSID")) {
+        session = cookie.split("=")[1];
+        break;
+      }
+    }
+  }
+
   var dataString = "";
   for (var key in data) {
     if (data.hasOwnProperty(key)) {
@@ -110,7 +133,9 @@ function sendCommand(name, session, data, callback) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status ==  200) {
-      callback(JSON.parse(this.responseText));
+      response = JSON.parse(this.responseText);
+      if (response.status == "success")
+        callback(response);
     }
   }
   xhttp.open("POST", "/api/" + name, true);
@@ -119,20 +144,10 @@ function sendCommand(name, session, data, callback) {
 }
 
 function followAction() {
-  var cookies = document.cookie.split("; ");
-  var session_id = null;
-  for (i = 0; i < cookies.length; i++) {
-    var cookie = cookies[i];
-    if (cookie.startsWith("PHPSESSID")) {
-      session_id = cookie.split("=")[1];
-      break;
-    }
-  }
-
   var elmt = document.getElementById("follow-btn");
 
   if (elmt.className == "follow" || elmt.className == "unfollow") {
-    sendCommand(elmt.className, session_id, {handle: elmt.dataset.handle}, function(response) {
+    sendCommand(elmt.className, null, {handle: elmt.dataset.handle}, function(response) {
       if (response.following) {
         elmt.className = "unfollow";
       } else {
