@@ -30,9 +30,9 @@ if ($account == null)
   <div class="top-bar">
     <div class="logo">memedb</div>
     <div class="searchbar">
-      <i class="material-icons black seach-g" style="float: left; padding-right: 25px;position:relative; top: -4px;">search</i><input type="text" placeholder="Search" style="all: unset; height: 20px; width: 600px; position: relative; left: 11px;" />
+      <i class="material-icons search-g" style="float: left; padding-right: 25px;position:relative; top: -4px;">search</i><input type="text" placeholder="Search" style="all: unset; width: 150px;position: relative; left: 11px;" />
 
-      <div class="search-result-box" style="display: none;">
+      <div class="search-result-box" style="display:none;">
         <div class="search-op">
           <p class="res-p">This is option 1</p>
         </div>
@@ -53,7 +53,7 @@ if ($account == null)
         </div>
       </div>
 
-      <div class="search-featured-box" style="display: none;">
+      <div class="search-featured-box" style="display:none;">
         <h1>Featured Users</h1>
         <div class="s-box-holder">
           <div class="s-box">
@@ -87,9 +87,32 @@ if ($account == null)
       </div>
 
     </div>
-    <!-- <div class="sign-in" style="display: none;">SIGN IN</div> -->
-    <div class="t-settings"><i class="material-icons t-settings">more_horiz</i></div>
+    <div class="sign-in-user openAccount">
+      <img src="<?php echo $account->getImage(); ?>" style="border: inherit; border-radius: inherit;" width="35" height="35">
+    </div>
   </div>
+  <div class="s-dropdown">
+    <div class="s-d-titlebox">
+      <div class="sd-img">
+        <img src="<?php echo $account->getImage(); ?>" style="border: inherit; border-radius: inherit;" width="40" height="40">
+      </div>
+      <div class="sd-infoholder">
+        <h1 class="n-name sdname"><?php echo $account->name; ?></h1>
+        <div class="username">
+          @<?php echo $account->handle; ?>
+        </div>
+      </div>
+    </div>
+    <div class="sd-content">
+      <div class="sd-option">
+
+      </div>
+      <div class="sd-option">
+
+      </div>
+    </div>
+  </div>
+  <div class="imp-bg-fade" id="imp-bg-fade" style="display: none; opacity 0;"></div>
 
   <div class="donate-bar" style="display: none;">
     <div class="d-para">Please consider donating to help keep this service shutting down.</div>
@@ -177,33 +200,7 @@ if ($account == null)
     <div class="s-scroll">
       <div class="scroll-hide">
 
-        <div class="user-info">
-          <div class="image"></div>
-          <div class="name">
-            <h1 class="n-name"><?php echo $account->name; ?></h1>
-            <div class="username">
-              @<?php echo $account->handle; ?>
-            </div>
-          </div>
-          <div class="u-stat">
-            <!-- CHANGE NAME LATER -->
-            <div class="u-stat karma">
-              Karma: 0
-            </div>
-            <!--  -->
-            <div class="u-stat rank">
-              Elo: NaN
-            </div>
-          </div>
-
-          <div class="followers">Followers
-            <span style="font-family: Roboto;font-weight: lighter;color: #222;">0
-        </span>
-          </div>
-        </div>
-
         <div class="sections">
-          <div class="line"></div>
 
           <div class="section" style="background: #ddd;">
             <i class="material-icons black s-icon">supervisor_account</i>
@@ -471,7 +468,7 @@ if ($account == null)
   </div> -->
 
   <div class="h-content">
-    <div class="h-search-tools">
+    <!-- <div class="h-search-tools">
       <div class="e-sort" title="Sort by" style="float: left;">
         <i class="material-icons black edit-icons">sort</i>
       </div>
@@ -484,55 +481,812 @@ if ($account == null)
       <div class="h-s-txt">
         Most Popular
       </div>
-    </div>
+    </div> -->
 
-    <div class="h-post">
-      <div class="h-op">
-        <div class="op-pp"></div>
-        <p class="h-p" title="@LongUsernameExample">@LongUsernameExa...</p>
+  <div class="post-blk m-post">
+      <div class="c-title-holder">
+        <h1 class="imp-title">New Post</h1>
       </div>
-      <div class="h-post-info big">
-        <div class="h-icon big">
-          <i class="material-icons black" style="font-size: 18px; top: 5px;font-weight: 600;">keyboard_arrow_up</i>
-        </div>
-        <div class="h-p-stat big">
-          69K
-        </div>
-        <div class="h-icon big">
-          <i class="material-icons black" style="font-size: 18px; top: 5px;font-weight: 600;">repeat</i>
-        </div>
-        <div class="h-p-stat big">
-          4K
-        </div>
-        <div class="h-more big">
-          <i class="material-icons black" style="font-size: 20px; top: -4px;">more_horiz</i>
-        </div>
+
+      <div class="c-content">
+
+        <textarea name="name" class="post-textarea" wrap="hard"></textarea>
+
+      </div>
+
+      <div class="c-button-hold">
+        <button class="post-btn cancel closePost">Cancel</button>
+        <button class="post-btn">Post</button>
       </div>
     </div>
 
-    <div class="h-post">
-      <div class="h-op">
-        <div class="op-pp"></div>
-        <p class="h-p">@bobmandude9889</p>
+  <div class="floating-box">
+    <div class="floating-button openPost">
+      <i class="material-icons floating">add</i>
+    </div>
+  </div>
+
+<div class="post-corridor">
+  <div class="meme-preview-box">
+    <div class="m-text-box">
+      <div class="m-pp">
+
       </div>
-      <div class="h-post-info big">
-        <div class="h-icon big">
-          <i class="material-icons black" style="color: #4167f4; font-size: 18px; top: 5px;font-weight: 600;">keyboard_arrow_down</i>
+      <div class="m-names">
+        <h1 class="m-OP">Gaetan Almela</h1>
+        <h1 class="m-handle">@Al</h1>
+      </div>
+      <button class="follow mp">
+        <span style="font-family: Roboto;font-weight: 500;color: #444;">0
+        </span></button>
+    </div>
+
+    <div class="m-new-container">
+      <div class="m-main-content">
+        <div class="meme-img">
+
         </div>
-        <div class="h-p-stat big" style="color: #4167f4">
-          16K
+        <div class="m-desc">
+          <div class="m-post-info">
+            <div class="m-likes">
+              <i class="material-icons m-icon">keyboard_arrow_up</i>
+              <h1 class="m-header">16K</h1>
+            </div>
+            <div class="m-reposts">
+              <i class="material-icons m-icon" style="font-size: 23px; margin-top: 1px;">repeat</i>
+              <h1 class="m-header">69</h1>
+            </div>
+            <div class="m-comments">
+              <i class="material-icons m-icon" style="font-size: 22px; position: relative; top: 4px;">chat_bubble_outline</i>
+              <h1 class="m-header">572</h1>
+            </div>
+            <div class="m-save">
+              <i class="material-icons m-icon" style="float: left;">save</i>
+            </div>
+            <h1 class="m-date">dd/mm/yyyy</h1>
+          </div>
+
+          <p class="m-para">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          <div class="m-tags">
+            <div class="type m">META IRONIC</div>
+            <div class="type m">IRONIC</div>
+            <div class="type m">SHITPOSTING</div>
+            <div class="type m">PHILOSOPHY</div>
+            <div class="type m">DEEP FRIED</div>
+            <div class="type m">REACTION IMAGES</div>
+            <div class="type m">CURSED IMAGES</div>
+            <div class="type m">NONSENSICAL</div>
+          </div>
+
         </div>
-        <div class="h-icon big">
-          <i class="material-icons black" style="font-size: 18px; top: 5px;font-weight: 600;">repeat</i>
+      </div>
+      <div class="m-comment-wrapper">
+        <div class="m-comments-s">
+
+
+          <div class="m-comment">
+            <div class="m-c-text-box">
+              <div class="c-pp">
+              </div>
+              <div class="c-names">
+                <h1 class="c-OP">Gaetan Almela</h1>
+                <h1 class="c-handle">@Al</h1>
+              </div>
+            </div>
+            <div class="m-c-para">
+              <p class="c-para">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+            </div>
+            <div class="comment-image"></div>
+            <div class="m-c-reviews">
+              <div class="m-comment-likes">
+                <i class="material-icons m-comment-icon">keyboard_arrow_up</i>
+                <h1 class="m-header-comment">522</h1>
+              </div>
+              <button class="c-op-1 c-reply" style="top: 5px; margin-left: 7px; color: #62717b;">REPLY</button>
+              <i class="material-icons" style="top: 3px; color: #62717b;">more_horiz</i>
+            </div>
+            <div class="comment-replies">
+              <div class="reply-comment">
+                <h1 class="c-OP">Gaetan Almela</h1>
+                <p class="c-para small">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <div class="m-c-reviews reply">
+                  <div class="m-comment-likes">
+                    <i class="material-icons m-comment-icon reply">keyboard_arrow_up</i>
+                    <h1 class="m-header-comment reply">522</h1>
+                  </div>
+                  <button class="c-op-1 c-reply reply" style="top: 5px; margin-left: 7px; color: #62717b;">REPLY</button>
+                  <i class="material-icons" style="top: 2px; color: #62717b; font-size: 24px;">more_horiz</i>
+                </div>
+              </div>
+              <div class="reply-comment">
+                <h1 class="c-OP">Gaetan Almela</h1>
+                <p class="c-para small">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p>
+                <div class="comment-image reply"></div>
+                <div class="m-c-reviews reply">
+                  <div class="m-comment-likes">
+                    <i class="material-icons m-comment-icon reply">keyboard_arrow_up</i>
+                    <h1 class="m-header-comment reply">522</h1>
+                  </div>
+                  <button class="c-op-1 c-reply reply" style="top: 5px; margin-left: 7px; color: #62717b;">REPLY</button>
+                  <i class="material-icons" style="top: 2px; color: #62717b; font-size: 24px;">more_horiz</i>
+                </div>
+              </div>
+              <div class="m-c-reviews" style="margin-left: 0px;">
+                <button class="c-op-1 c-reply" style="top: 5px; margin-left: 0px; color: #62717b;">SHOW MORE</button>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="m-comment">
+
+            <div class="m-c-text-box">
+              <div class="c-pp">
+
+              </div>
+              <div class="c-names">
+                <h1 class="c-OP">Gaetan Almela</h1>
+                <h1 class="c-handle">@Al</h1>
+              </div>
+            </div>
+
+            <div class="m-c-para">
+              <p class="c-para">
+                <span style="font-family: Roboto;font-weight: 700;color: #222;">@bobmandude9889
+                </span> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat. Duis aute irure dolor.</p>
+
+            </div>
+            <div class="m-c-reviews">
+              <div class="m-comment-likes">
+                <i class="material-icons m-comment-icon">keyboard_arrow_up</i>
+                <h1 class="m-header-comment">522</h1>
+              </div>
+              <button class="c-op-1 c-reply" style="top: 5px; margin-left: 7px; color: #62717b;">REPLY</button>
+              <i class="material-icons" style="top: 3px; color: #62717b;">more_horiz</i>
+            </div>
+          </div>
+          <div class="m-comment">
+
+            <div class="m-c-text-box">
+              <div class="c-pp">
+
+              </div>
+              <div class="c-names">
+                <h1 class="c-OP">Gaetan Almela</h1>
+                <h1 class="c-handle">@Al</h1>
+              </div>
+            </div>
+
+            <div class="m-c-para">
+              <p class="c-para">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p>
+
+            </div>
+            <div class="m-c-reviews">
+              <div class="m-comment-likes">
+                <i class="material-icons m-comment-icon">keyboard_arrow_up</i>
+                <h1 class="m-header-comment">522</h1>
+              </div>
+              <button class="c-op-1 c-reply" style="top: 5px; margin-left: 7px; color: #62717b;">REPLY</button>
+              <i class="material-icons" style="top: 3px; color: #62717b;">more_horiz</i>
+            </div>
+          </div>
+          <div class="m-comment">
+
+            <div class="m-c-text-box">
+              <div class="c-pp">
+
+              </div>
+              <div class="c-names">
+                <h1 class="c-OP">Gaetan Almela</h1>
+                <h1 class="c-handle">@Al</h1>
+              </div>
+            </div>
+
+            <div class="m-c-para">
+              <p class="c-para">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p>
+
+            </div>
+            <div class="m-c-reviews">
+              <div class="m-comment-likes">
+                <i class="material-icons m-comment-icon">keyboard_arrow_up</i>
+                <h1 class="m-header-comment">522</h1>
+              </div>
+              <button class="c-op-1 c-reply" style="top: 5px; margin-left: 7px; color: #62717b;">REPLY</button>
+              <i class="material-icons" style="top: 3px; color: #62717b;">more_horiz</i>
+            </div>
+          </div>
+          <div class="m-comment">
+
+            <div class="m-c-text-box">
+              <div class="c-pp">
+
+              </div>
+              <div class="c-names">
+                <h1 class="c-OP">Gaetan Almela</h1>
+                <h1 class="c-handle">@Al</h1>
+              </div>
+            </div>
+
+            <div class="m-c-para">
+              <p class="c-para">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p>
+
+            </div>
+            <div class="m-c-reviews">
+              <div class="m-comment-likes">
+                <i class="material-icons m-comment-icon">keyboard_arrow_up</i>
+                <h1 class="m-header-comment">522</h1>
+              </div>
+              <button class="c-op-1 c-reply" style="top: 5px; margin-left: 7px; color: #62717b;">REPLY</button>
+              <i class="material-icons" style="top: 3px; color: #62717b;">more_horiz</i>
+            </div>
+          </div>
+          <div class="m-comment">
+
+            <div class="m-c-text-box">
+              <div class="c-pp">
+
+              </div>
+              <div class="c-names">
+                <h1 class="c-OP">Gaetan Almela</h1>
+                <h1 class="c-handle">@Al</h1>
+              </div>
+            </div>
+
+            <div class="m-c-para">
+              <p class="c-para">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p>
+
+            </div>
+            <div class="m-c-reviews">
+              <div class="m-comment-likes">
+                <i class="material-icons m-comment-icon">keyboard_arrow_up</i>
+                <h1 class="m-header-comment">522</h1>
+              </div>
+              <button class="c-op-1 c-reply" style="top: 5px; margin-left: 7px; color: #62717b;">REPLY</button>
+              <i class="material-icons" style="top: 3px; color: #62717b;">more_horiz</i>
+            </div>
+          </div>
         </div>
-        <div class="h-p-stat big">
-          4K
-        </div>
-        <div class="h-more big">
-          <i class="material-icons black" style="font-size: 20px; top: -4px;">more_horiz</i>
+      </div>
+      <div class="m-post-comment">
+        <div class="comment-box">
+          <i class="material-icons m-meme-icon">add_a_photo</i>
+          <textarea name="name" class="m-textarea" rows="1" cols="10" wrap="hard"></textarea>
+          <button class="c-op-1 post" style="top: 5px; margin-left: 7px; color: #62717b;">POST</button>
         </div>
       </div>
     </div>
+
+  </div>
+
+  <div class="meme-preview-box">
+    <div class="m-text-box">
+      <div class="m-pp">
+
+      </div>
+      <div class="m-names">
+        <h1 class="m-OP">Gaetan Almela</h1>
+        <h1 class="m-handle">@Al</h1>
+      </div>
+      <button class="follow mp">
+        <span style="font-family: Roboto;font-weight: 500;color: #444;">0
+        </span></button>
+    </div>
+
+    <div class="m-new-container">
+      <div class="m-main-content">
+        <div class="meme-img">
+
+        </div>
+        <div class="m-desc">
+          <div class="m-post-info">
+            <div class="m-likes">
+              <i class="material-icons m-icon">keyboard_arrow_up</i>
+              <h1 class="m-header">16K</h1>
+            </div>
+            <div class="m-reposts">
+              <i class="material-icons m-icon" style="font-size: 23px; margin-top: 1px;">repeat</i>
+              <h1 class="m-header">69</h1>
+            </div>
+            <div class="m-comments">
+              <i class="material-icons m-icon" style="font-size: 22px; position: relative; top: 4px;">chat_bubble_outline</i>
+              <h1 class="m-header">572</h1>
+            </div>
+            <div class="m-save">
+              <i class="material-icons m-icon" style="float: left;">save</i>
+            </div>
+            <h1 class="m-date">dd/mm/yyyy</h1>
+          </div>
+
+          <p class="m-para">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          <div class="m-tags">
+            <div class="type m">META IRONIC</div>
+            <div class="type m">IRONIC</div>
+            <div class="type m">SHITPOSTING</div>
+            <div class="type m">PHILOSOPHY</div>
+            <div class="type m">DEEP FRIED</div>
+            <div class="type m">REACTION IMAGES</div>
+            <div class="type m">CURSED IMAGES</div>
+            <div class="type m">NONSENSICAL</div>
+          </div>
+
+        </div>
+      </div>
+      <div class="m-comment-wrapper">
+        <div class="m-comments-s">
+
+
+          <div class="m-comment">
+            <div class="m-c-text-box">
+              <div class="c-pp">
+              </div>
+              <div class="c-names">
+                <h1 class="c-OP">Gaetan Almela</h1>
+                <h1 class="c-handle">@Al</h1>
+              </div>
+            </div>
+            <div class="m-c-para">
+              <p class="c-para">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+            </div>
+            <div class="comment-image"></div>
+            <div class="m-c-reviews">
+              <div class="m-comment-likes">
+                <i class="material-icons m-comment-icon">keyboard_arrow_up</i>
+                <h1 class="m-header-comment">522</h1>
+              </div>
+              <button class="c-op-1 c-reply" style="top: 5px; margin-left: 7px; color: #62717b;">REPLY</button>
+              <i class="material-icons" style="top: 3px; color: #62717b;">more_horiz</i>
+            </div>
+            <div class="comment-replies">
+              <div class="reply-comment">
+                <h1 class="c-OP">Gaetan Almela</h1>
+                <p class="c-para small">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <div class="m-c-reviews reply">
+                  <div class="m-comment-likes">
+                    <i class="material-icons m-comment-icon reply">keyboard_arrow_up</i>
+                    <h1 class="m-header-comment reply">522</h1>
+                  </div>
+                  <button class="c-op-1 c-reply reply" style="top: 5px; margin-left: 7px; color: #62717b;">REPLY</button>
+                  <i class="material-icons" style="top: 2px; color: #62717b; font-size: 24px;">more_horiz</i>
+                </div>
+              </div>
+              <div class="reply-comment">
+                <h1 class="c-OP">Gaetan Almela</h1>
+                <p class="c-para small">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p>
+                <div class="comment-image reply"></div>
+                <div class="m-c-reviews reply">
+                  <div class="m-comment-likes">
+                    <i class="material-icons m-comment-icon reply">keyboard_arrow_up</i>
+                    <h1 class="m-header-comment reply">522</h1>
+                  </div>
+                  <button class="c-op-1 c-reply reply" style="top: 5px; margin-left: 7px; color: #62717b;">REPLY</button>
+                  <i class="material-icons" style="top: 2px; color: #62717b; font-size: 24px;">more_horiz</i>
+                </div>
+              </div>
+              <div class="m-c-reviews" style="margin-left: 0px;">
+                <button class="c-op-1 c-reply" style="top: 5px; margin-left: 0px; color: #62717b;">SHOW MORE</button>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="m-comment">
+
+            <div class="m-c-text-box">
+              <div class="c-pp">
+
+              </div>
+              <div class="c-names">
+                <h1 class="c-OP">Gaetan Almela</h1>
+                <h1 class="c-handle">@Al</h1>
+              </div>
+            </div>
+
+            <div class="m-c-para">
+              <p class="c-para">
+                <span style="font-family: Roboto;font-weight: 700;color: #222;">@bobmandude9889
+                </span> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat. Duis aute irure dolor.</p>
+
+            </div>
+            <div class="m-c-reviews">
+              <div class="m-comment-likes">
+                <i class="material-icons m-comment-icon">keyboard_arrow_up</i>
+                <h1 class="m-header-comment">522</h1>
+              </div>
+              <button class="c-op-1 c-reply" style="top: 5px; margin-left: 7px; color: #62717b;">REPLY</button>
+              <i class="material-icons" style="top: 3px; color: #62717b;">more_horiz</i>
+            </div>
+          </div>
+          <div class="m-comment">
+
+            <div class="m-c-text-box">
+              <div class="c-pp">
+
+              </div>
+              <div class="c-names">
+                <h1 class="c-OP">Gaetan Almela</h1>
+                <h1 class="c-handle">@Al</h1>
+              </div>
+            </div>
+
+            <div class="m-c-para">
+              <p class="c-para">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p>
+
+            </div>
+            <div class="m-c-reviews">
+              <div class="m-comment-likes">
+                <i class="material-icons m-comment-icon">keyboard_arrow_up</i>
+                <h1 class="m-header-comment">522</h1>
+              </div>
+              <button class="c-op-1 c-reply" style="top: 5px; margin-left: 7px; color: #62717b;">REPLY</button>
+              <i class="material-icons" style="top: 3px; color: #62717b;">more_horiz</i>
+            </div>
+          </div>
+          <div class="m-comment">
+
+            <div class="m-c-text-box">
+              <div class="c-pp">
+
+              </div>
+              <div class="c-names">
+                <h1 class="c-OP">Gaetan Almela</h1>
+                <h1 class="c-handle">@Al</h1>
+              </div>
+            </div>
+
+            <div class="m-c-para">
+              <p class="c-para">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p>
+
+            </div>
+            <div class="m-c-reviews">
+              <div class="m-comment-likes">
+                <i class="material-icons m-comment-icon">keyboard_arrow_up</i>
+                <h1 class="m-header-comment">522</h1>
+              </div>
+              <button class="c-op-1 c-reply" style="top: 5px; margin-left: 7px; color: #62717b;">REPLY</button>
+              <i class="material-icons" style="top: 3px; color: #62717b;">more_horiz</i>
+            </div>
+          </div>
+          <div class="m-comment">
+
+            <div class="m-c-text-box">
+              <div class="c-pp">
+
+              </div>
+              <div class="c-names">
+                <h1 class="c-OP">Gaetan Almela</h1>
+                <h1 class="c-handle">@Al</h1>
+              </div>
+            </div>
+
+            <div class="m-c-para">
+              <p class="c-para">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p>
+
+            </div>
+            <div class="m-c-reviews">
+              <div class="m-comment-likes">
+                <i class="material-icons m-comment-icon">keyboard_arrow_up</i>
+                <h1 class="m-header-comment">522</h1>
+              </div>
+              <button class="c-op-1 c-reply" style="top: 5px; margin-left: 7px; color: #62717b;">REPLY</button>
+              <i class="material-icons" style="top: 3px; color: #62717b;">more_horiz</i>
+            </div>
+          </div>
+          <div class="m-comment">
+
+            <div class="m-c-text-box">
+              <div class="c-pp">
+
+              </div>
+              <div class="c-names">
+                <h1 class="c-OP">Gaetan Almela</h1>
+                <h1 class="c-handle">@Al</h1>
+              </div>
+            </div>
+
+            <div class="m-c-para">
+              <p class="c-para">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p>
+
+            </div>
+            <div class="m-c-reviews">
+              <div class="m-comment-likes">
+                <i class="material-icons m-comment-icon">keyboard_arrow_up</i>
+                <h1 class="m-header-comment">522</h1>
+              </div>
+              <button class="c-op-1 c-reply" style="top: 5px; margin-left: 7px; color: #62717b;">REPLY</button>
+              <i class="material-icons" style="top: 3px; color: #62717b;">more_horiz</i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="m-post-comment">
+        <div class="comment-box">
+          <i class="material-icons m-meme-icon">add_a_photo</i>
+          <textarea name="name" class="m-textarea" rows="1" cols="10" wrap="hard"></textarea>
+          <button class="c-op-1 post" style="top: 5px; margin-left: 7px; color: #62717b;">POST</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="meme-preview-box">
+    <div class="m-text-box">
+      <div class="m-pp">
+
+      </div>
+      <div class="m-names">
+        <h1 class="m-OP">Gaetan Almela</h1>
+        <h1 class="m-handle">@Al</h1>
+      </div>
+      <button class="follow mp">
+        <span style="font-family: Roboto;font-weight: 500;color: #444;">0
+        </span></button>
+    </div>
+
+    <div class="m-new-container">
+      <div class="m-main-content">
+        <div class="meme-img">
+
+        </div>
+        <div class="m-desc">
+          <div class="m-post-info">
+            <div class="m-likes">
+              <i class="material-icons m-icon">keyboard_arrow_up</i>
+              <h1 class="m-header">16K</h1>
+            </div>
+            <div class="m-reposts">
+              <i class="material-icons m-icon" style="font-size: 23px; margin-top: 1px;">repeat</i>
+              <h1 class="m-header">69</h1>
+            </div>
+            <div class="m-comments">
+              <i class="material-icons m-icon" style="font-size: 22px; position: relative; top: 4px;">chat_bubble_outline</i>
+              <h1 class="m-header">572</h1>
+            </div>
+            <div class="m-save">
+              <i class="material-icons m-icon" style="float: left;">save</i>
+            </div>
+            <h1 class="m-date">dd/mm/yyyy</h1>
+          </div>
+
+          <p class="m-para">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+          <div class="m-tags">
+            <div class="type m">META IRONIC</div>
+            <div class="type m">IRONIC</div>
+            <div class="type m">SHITPOSTING</div>
+            <div class="type m">PHILOSOPHY</div>
+            <div class="type m">DEEP FRIED</div>
+            <div class="type m">REACTION IMAGES</div>
+            <div class="type m">CURSED IMAGES</div>
+            <div class="type m">NONSENSICAL</div>
+          </div>
+
+        </div>
+      </div>
+      <div class="m-comment-wrapper">
+        <div class="m-comments-s">
+
+
+          <div class="m-comment">
+            <div class="m-c-text-box">
+              <div class="c-pp">
+              </div>
+              <div class="c-names">
+                <h1 class="c-OP">Gaetan Almela</h1>
+                <h1 class="c-handle">@Al</h1>
+              </div>
+            </div>
+            <div class="m-c-para">
+              <p class="c-para">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam</p>
+            </div>
+            <div class="comment-image"></div>
+            <div class="m-c-reviews">
+              <div class="m-comment-likes">
+                <i class="material-icons m-comment-icon">keyboard_arrow_up</i>
+                <h1 class="m-header-comment">522</h1>
+              </div>
+              <button class="c-op-1 c-reply" style="top: 5px; margin-left: 7px; color: #62717b;">REPLY</button>
+              <i class="material-icons" style="top: 3px; color: #62717b;">more_horiz</i>
+            </div>
+            <div class="comment-replies">
+              <div class="reply-comment">
+                <h1 class="c-OP">Gaetan Almela</h1>
+                <p class="c-para small">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                <div class="m-c-reviews reply">
+                  <div class="m-comment-likes">
+                    <i class="material-icons m-comment-icon reply">keyboard_arrow_up</i>
+                    <h1 class="m-header-comment reply">522</h1>
+                  </div>
+                  <button class="c-op-1 c-reply reply" style="top: 5px; margin-left: 7px; color: #62717b;">REPLY</button>
+                  <i class="material-icons" style="top: 2px; color: #62717b; font-size: 24px;">more_horiz</i>
+                </div>
+              </div>
+              <div class="reply-comment">
+                <h1 class="c-OP">Gaetan Almela</h1>
+                <p class="c-para small">
+                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p>
+                <div class="comment-image reply"></div>
+                <div class="m-c-reviews reply">
+                  <div class="m-comment-likes">
+                    <i class="material-icons m-comment-icon reply">keyboard_arrow_up</i>
+                    <h1 class="m-header-comment reply">522</h1>
+                  </div>
+                  <button class="c-op-1 c-reply reply" style="top: 5px; margin-left: 7px; color: #62717b;">REPLY</button>
+                  <i class="material-icons" style="top: 2px; color: #62717b; font-size: 24px;">more_horiz</i>
+                </div>
+              </div>
+              <div class="m-c-reviews" style="margin-left: 0px;">
+                <button class="c-op-1 c-reply" style="top: 5px; margin-left: 0px; color: #62717b;">SHOW MORE</button>
+              </div>
+            </div>
+          </div>
+
+
+          <div class="m-comment">
+
+            <div class="m-c-text-box">
+              <div class="c-pp">
+
+              </div>
+              <div class="c-names">
+                <h1 class="c-OP">Gaetan Almela</h1>
+                <h1 class="c-handle">@Al</h1>
+              </div>
+            </div>
+
+            <div class="m-c-para">
+              <p class="c-para">
+                <span style="font-family: Roboto;font-weight: 700;color: #222;">@bobmandude9889
+                </span> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip
+                ex ea commodo consequat. Duis aute irure dolor.</p>
+
+            </div>
+            <div class="m-c-reviews">
+              <div class="m-comment-likes">
+                <i class="material-icons m-comment-icon">keyboard_arrow_up</i>
+                <h1 class="m-header-comment">522</h1>
+              </div>
+              <button class="c-op-1 c-reply" style="top: 5px; margin-left: 7px; color: #62717b;">REPLY</button>
+              <i class="material-icons" style="top: 3px; color: #62717b;">more_horiz</i>
+            </div>
+          </div>
+          <div class="m-comment">
+
+            <div class="m-c-text-box">
+              <div class="c-pp">
+
+              </div>
+              <div class="c-names">
+                <h1 class="c-OP">Gaetan Almela</h1>
+                <h1 class="c-handle">@Al</h1>
+              </div>
+            </div>
+
+            <div class="m-c-para">
+              <p class="c-para">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p>
+
+            </div>
+            <div class="m-c-reviews">
+              <div class="m-comment-likes">
+                <i class="material-icons m-comment-icon">keyboard_arrow_up</i>
+                <h1 class="m-header-comment">522</h1>
+              </div>
+              <button class="c-op-1 c-reply" style="top: 5px; margin-left: 7px; color: #62717b;">REPLY</button>
+              <i class="material-icons" style="top: 3px; color: #62717b;">more_horiz</i>
+            </div>
+          </div>
+          <div class="m-comment">
+
+            <div class="m-c-text-box">
+              <div class="c-pp">
+
+              </div>
+              <div class="c-names">
+                <h1 class="c-OP">Gaetan Almela</h1>
+                <h1 class="c-handle">@Al</h1>
+              </div>
+            </div>
+
+            <div class="m-c-para">
+              <p class="c-para">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p>
+
+            </div>
+            <div class="m-c-reviews">
+              <div class="m-comment-likes">
+                <i class="material-icons m-comment-icon">keyboard_arrow_up</i>
+                <h1 class="m-header-comment">522</h1>
+              </div>
+              <button class="c-op-1 c-reply" style="top: 5px; margin-left: 7px; color: #62717b;">REPLY</button>
+              <i class="material-icons" style="top: 3px; color: #62717b;">more_horiz</i>
+            </div>
+          </div>
+          <div class="m-comment">
+
+            <div class="m-c-text-box">
+              <div class="c-pp">
+
+              </div>
+              <div class="c-names">
+                <h1 class="c-OP">Gaetan Almela</h1>
+                <h1 class="c-handle">@Al</h1>
+              </div>
+            </div>
+
+            <div class="m-c-para">
+              <p class="c-para">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p>
+
+            </div>
+            <div class="m-c-reviews">
+              <div class="m-comment-likes">
+                <i class="material-icons m-comment-icon">keyboard_arrow_up</i>
+                <h1 class="m-header-comment">522</h1>
+              </div>
+              <button class="c-op-1 c-reply" style="top: 5px; margin-left: 7px; color: #62717b;">REPLY</button>
+              <i class="material-icons" style="top: 3px; color: #62717b;">more_horiz</i>
+            </div>
+          </div>
+          <div class="m-comment">
+
+            <div class="m-c-text-box">
+              <div class="c-pp">
+
+              </div>
+              <div class="c-names">
+                <h1 class="c-OP">Gaetan Almela</h1>
+                <h1 class="c-handle">@Al</h1>
+              </div>
+            </div>
+
+            <div class="m-c-para">
+              <p class="c-para">
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor.</p>
+
+            </div>
+            <div class="m-c-reviews">
+              <div class="m-comment-likes">
+                <i class="material-icons m-comment-icon">keyboard_arrow_up</i>
+                <h1 class="m-header-comment">522</h1>
+              </div>
+              <button class="c-op-1 c-reply" style="top: 5px; margin-left: 7px; color: #62717b;">REPLY</button>
+              <i class="material-icons" style="top: 3px; color: #62717b;">more_horiz</i>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="m-post-comment">
+        <div class="comment-box">
+          <i class="material-icons m-meme-icon">add_a_photo</i>
+          <textarea name="name" class="m-textarea" rows="1" cols="10" wrap="hard"></textarea>
+          <button class="c-op-1 post" style="top: 5px; margin-left: 7px; color: #62717b;">POST</button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
 
   </div>
 

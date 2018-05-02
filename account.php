@@ -20,7 +20,7 @@ if (loggedIn() && !$account) {
 }
 
 if ($account == null)
-  header("Location: https://meme-db.com");
+  header("Location: https://meme-db.com/login");
 ?>
 
 <!DOCTYPE html>
@@ -94,7 +94,30 @@ if ($account == null)
       </div>
 
     </div>
-    <div class="sign-in">SIGN IN</div>
+    <div class="sign-in-user openAccount">
+      <img src="<?php echo $account->getImage(); ?>" style="border: inherit; border-radius: inherit;" width="35" height="35">
+    </div>
+  </div>
+  <div class="s-dropdown">
+    <div class="s-d-titlebox">
+      <div class="sd-img">
+        <img src="<?php echo $account->getImage(); ?>" style="border: inherit; border-radius: inherit;" width="40" height="40">
+      </div>
+      <div class="sd-infoholder">
+        <h1 class="n-name sdname"><?php echo $account->name; ?></h1>
+        <div class="username">
+          @<?php echo $account->handle; ?>
+        </div>
+      </div>
+    </div>
+    <div class="sd-content">
+      <div class="sd-option">
+
+      </div>
+      <div class="sd-option">
+
+      </div>
+    </div>
   </div>
 
   <div class="imp-bg-fade" id="imp-bg-fade" style="display: none; opacity 0;"></div>
@@ -230,9 +253,6 @@ if ($account == null)
     <div class="floating-button openAddLib">
       <i class="material-icons floating">add</i>
     </div>
-    <div class="floating-button secondary openSettings">
-      <i class="material-icons floating secondary" >settings</i>
-    </div>
   </div>
 
   <!-- <div class="edit-menu">
@@ -345,15 +365,8 @@ if ($account == null)
             <div class="username">
               @<?php echo $account->handle; ?>
             </div>
-          </div>
-          <div class="u-stat">
-            <!-- CHANGE NAME LATER -->
-            <div class="u-stat karma">
-              Karma: <?php echo $account->karma; ?>
-            </div>
-            <!--  -->
-            <div class="u-stat rank">
-              Elo: <?php echo ($account->rank ? $account->rank : "NaN"); ?>
+            <div class="username">
+              Karma: 0
             </div>
           </div>
         </div>
@@ -398,170 +411,8 @@ if ($account == null)
     <div class="s-results">
       <div class="s-r-scroll">
         <div class="s-margin">
-          <div class="h-post-row">
-            <div class="h-post tiny">
-              <div class="h-post-info tiny">
-                <div class="h-more">
-                  <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
-                </div>
-              </div>
-            </div>
-
-            <div class="h-post tiny">
-              <div class="h-post-info tiny">
-                <div class="h-more">
-                  <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
-                </div>
-              </div>
-            </div>
-
-            <div class="h-post tiny">
-              <div class="h-post-info tiny">
-                <div class="h-more">
-                  <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
-                </div>
-              </div>
-            </div>
-          </div>
 
           <div class="h-post-row">
-            <div class="h-post tiny">
-              <div class="h-post-info tiny">
-                <div class="h-more">
-                  <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
-                </div>
-              </div>
-            </div>
-
-            <div class="h-post tiny">
-              <div class="h-post-info tiny">
-                <div class="h-more">
-                  <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
-                </div>
-              </div>
-            </div>
-
-            <div class="h-post tiny">
-              <div class="h-post-info tiny">
-                <div class="h-more">
-                  <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="h-post-row">
-            <div class="h-post tiny">
-              <div class="h-post-info tiny">
-                <div class="h-more">
-                  <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
-                </div>
-              </div>
-            </div>
-
-            <div class="h-post tiny">
-              <div class="h-post-info tiny">
-                <div class="h-more">
-                  <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
-                </div>
-              </div>
-            </div>
-
-            <div class="h-post tiny">
-              <div class="h-post-info tiny">
-                <div class="h-more">
-                  <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="h-post-row">
-            <div class="h-post tiny">
-              <div class="h-post-info tiny">
-                <div class="h-more">
-                  <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
-                </div>
-              </div>
-            </div>
-
-            <div class="h-post tiny">
-              <div class="h-post-info tiny">
-                <div class="h-more">
-                  <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
-                </div>
-              </div>
-            </div>
-
-            <div class="h-post tiny">
-              <div class="h-post-info tiny">
-                <div class="h-more">
-                  <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="h-post-row">
-            <div class="h-post tiny">
-              <div class="h-post-info tiny">
-                <div class="h-more">
-                  <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
-                </div>
-              </div>
-            </div>
-
-            <div class="h-post tiny">
-              <div class="h-post-info tiny">
-                <div class="h-more">
-                  <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
-                </div>
-              </div>
-            </div>
-
-            <div class="h-post tiny">
-              <div class="h-post-info tiny">
-                <div class="h-more">
-                  <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="h-post-row">
-            <div class="h-post tiny">
-              <div class="h-post-info tiny">
-                <div class="h-more">
-                  <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
-                </div>
-              </div>
-            </div>
-
-            <div class="h-post tiny">
-              <div class="h-post-info tiny">
-                <div class="h-more">
-                  <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
-                </div>
-              </div>
-            </div>
-
-            <div class="h-post tiny">
-              <div class="h-post-info tiny">
-                <div class="h-more">
-                  <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="h-post-row">
-            <div class="h-post tiny">
-              <div class="h-post-info tiny">
-                <div class="h-more">
-                  <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
-                </div>
-              </div>
-            </div>
 
             <div class="h-post tiny">
               <div class="h-post-info tiny">
@@ -582,13 +433,6 @@ if ($account == null)
           </div>
 
           <div class="h-post-row">
-            <div class="h-post tiny">
-              <div class="h-post-info tiny">
-                <div class="h-more">
-                  <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
-                </div>
-              </div>
-            </div>
 
             <div class="h-post tiny">
               <div class="h-post-info tiny">
@@ -605,16 +449,10 @@ if ($account == null)
                 </div>
               </div>
             </div>
+
           </div>
 
           <div class="h-post-row">
-            <div class="h-post tiny">
-              <div class="h-post-info tiny">
-                <div class="h-more">
-                  <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
-                </div>
-              </div>
-            </div>
 
             <div class="h-post tiny">
               <div class="h-post-info tiny">
@@ -631,16 +469,10 @@ if ($account == null)
                 </div>
               </div>
             </div>
+
           </div>
 
           <div class="h-post-row">
-            <div class="h-post tiny">
-              <div class="h-post-info tiny">
-                <div class="h-more">
-                  <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
-                </div>
-              </div>
-            </div>
 
             <div class="h-post tiny">
               <div class="h-post-info tiny">
@@ -657,16 +489,10 @@ if ($account == null)
                 </div>
               </div>
             </div>
+
           </div>
 
           <div class="h-post-row">
-            <div class="h-post tiny">
-              <div class="h-post-info tiny">
-                <div class="h-more">
-                  <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
-                </div>
-              </div>
-            </div>
 
             <div class="h-post tiny">
               <div class="h-post-info tiny">
@@ -683,16 +509,10 @@ if ($account == null)
                 </div>
               </div>
             </div>
+
           </div>
 
           <div class="h-post-row">
-            <div class="h-post tiny">
-              <div class="h-post-info tiny">
-                <div class="h-more">
-                  <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
-                </div>
-              </div>
-            </div>
 
             <div class="h-post tiny">
               <div class="h-post-info tiny">
@@ -709,16 +529,61 @@ if ($account == null)
                 </div>
               </div>
             </div>
+
           </div>
+
+          <div class="h-post-row">
+
+            <div class="h-post tiny">
+              <div class="h-post-info tiny">
+                <div class="h-more">
+                  <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
+                </div>
+              </div>
+            </div>
+
+            <div class="h-post tiny">
+              <div class="h-post-info tiny">
+                <div class="h-more">
+                  <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="h-post-row">
+
+            <div class="h-post tiny">
+              <div class="h-post-info tiny">
+                <div class="h-more">
+                  <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
+                </div>
+              </div>
+            </div>
+
+            <div class="h-post tiny">
+              <div class="h-post-info tiny">
+                <div class="h-more">
+                  <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+
+
+
         </div>
 
+        </div>
       </div>
     </div>
   </div>
 
   <div class="content">
     <div class="c-box">
-      <h1 style="margin-left: 20px; font-weight: 200; font-family: 'Roboto', sans-serif;">Most Popular</h1>
       <div class="c-popular">
         <div class="c-pop-wrapper">
           <div class="h-post small">
