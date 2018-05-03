@@ -83,13 +83,7 @@ Command::register("unfollow", function($user) {
 });
 
 Command::register("delete_favorite", function($user) {
-  $user->removeFavorite($_POST['type']);
-  jsonMessage(array("favorites"=>$user->favorites));
-});
-
-Command::register("add_favorite", function($user) {
-  $user->addFavorite($_POST['type']);
-  jsonMessage(array("favorites"=>$user->favorites));
+  
 });
 
 Command::register("search_tag", function($user) {
@@ -127,13 +121,9 @@ if ($action) {
     }
   }
 
-  if (!$user) {
-    jsonError("Session not found");
-  } else {
-    foreach ($commands as $command) {
-      if ($command->name == $action) {
-        call_user_func($command->action, $user);
-      }
+  foreach ($commands as $command) {
+    if ($command->name == $action) {
+      call_user_func($command->action, $user);
     }
   }
 }
@@ -277,12 +267,8 @@ class user {
   public static function loadFromId($id) {
     $usr = loadDBObject("users", "id=$id", "user");
     if ($usr != null) {
-      if (strlen($usr->favorites) > 0) {
-        $usr->favorites = explode(",",$usr->favorites);
-        $usr->image = "/userimg.php?handle=" + $usr->handle;
-      } else {
-        $usr->favorites = array();
-      }
+      $usr->favorites = explode(",",$usr->favorites);
+      $usr->image = "/userimg.php?handle=" + $usr->handle;
     }
     return $usr;
   }
@@ -290,12 +276,8 @@ class user {
   public static function loadFromEmail($email) {
     $usr = loadDBObject("users", "email='$email'", "user");
     if ($usr != null) {
-      if (strlen($usr->favorites) > 0) {
-        $usr->favorites = explode(",",$usr->favorites);
-        $usr->image = "/userimg.php?handle=" + $usr->handle;
-      } else {
-        $usr->favorites = array();
-      }
+      $usr->favorites = explode(",",$usr->favorites);
+      $usr->image = "/userimg.php?handle=" + $usr->handle;
     }
     return $usr;
   }
@@ -303,12 +285,7 @@ class user {
   public static function loadFromHandle($handle) {
     $usr = loadDBObject("users", "handle='$handle'", "user");
     if ($usr != null) {
-      if (strlen($usr->favorites) > 0) {
-        $usr->favorites = explode(",",$usr->favorites);
-        $usr->image = "/userimg.php?handle=" + $usr->handle;
-      } else {
-        $usr->favorites = array();
-      }
+      $usr->favorites = explode(",",$usr->favorites);
     }
     return $usr;
   }
@@ -366,45 +343,6 @@ class user {
 
     mail($email, $subject, $message, implode("\r\n", $headers));
     return $id;
-  }
-
-  public function updateField($key) {
-    $conn = $GLOBALS['conn'];
-    $stmt = $conn->prepare("UPDATE users SET {$key}=? WHERE id=?");
-    $fieldType = "";
-    $value = get_object_vars($this)[$key];
-    switch (gettype($value)) {
-    case "integer":
-      $fieldType = "i";
-      break;
-    case "string":
-      $fieldType = "s";
-      break;
-    case "array":
-      $fieldType = "s";
-      $value = implode(",", $value);
-      $value = substr($value, 0, strlen($value));
-      break;
-    }
-    $stmt->bind_param("{$fieldType}i", $value, $this->id);
-    $stmt->execute();
-  }
-
-  public function addFavorite($type) {
-    array_push($this->favorites, $type);
-    $this->updateField("favorites");
-  }
-
-  public function removeFavorite($type) {
-    $index = -1;
-    for ($i = 0; $i < count($this->favorites); $i++) {
-      if ($this->favorites[$i] == $type) {
-        $index = $i;
-        break;
-      }
-    }
-    array_splice($this->favorites, $index, 1);
-    $this->updateField("favorites");
   }
 
   public function getFollowerCount() {

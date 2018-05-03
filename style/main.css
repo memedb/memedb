@@ -1,25 +1,13 @@
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, hr, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed,
-figure, figcaption, footer, header, hgroup,
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video, active, hover, selected {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    outline: none;
-    text-decoration: none;
+html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, hr, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video, active, hover, selected {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+  text-decoration: none;
 }
 
-ol,ul {
-    list-style: none;
+ol, ul {
+  list-style: none;
 }
 
 /*Please use one global stylesheet and also get the minify package in atom. Thank you. :D*/
@@ -636,6 +624,10 @@ input:checked+.slider:before {
   color: #444;
 }
 
+.settings-icon {
+  margin-left: 30px;
+}
+
 .s-avatar {
   position: relative;
   float: left;
@@ -1199,11 +1191,9 @@ body {
   top: 65px;
   right: 10px;
   width: 300px;
-  height: 200px;
   background: #fff;
   border-radius: 2px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
 
 .s-d-titlebox {
@@ -1229,13 +1219,11 @@ body {
   width: auto;
   position: relative;
   float: left;
-
 }
 
 .sd-content {
   display: table;
   width: 100%;
-  background: red;
 }
 
 .sd-option {
@@ -1417,7 +1405,7 @@ body {
   cursor: pointer;
 }
 
-.post-btn {
+.post-btn.hover {
   position: relative;
   text-decoration: none;
   font-family: Roboto;
@@ -1432,15 +1420,15 @@ body {
   font-size: 16px;
   cursor: pointer;
   -webkit-transition-duration: .3s;
--o-transition-duration: .3s;
-transition-duration: .3s;
+  -o-transition-duration: .3s;
+  transition-duration: .3s;
 }
 
-.post-btn:hover {
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16),0 3px 6px rgba(0,0,0,0.23);
+.post-btn.hover:hover {
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
-.post-btn.cancel {
+.post-btn.closePost {
   position: relative;
   text-decoration: none;
   font-family: Roboto;
@@ -1607,7 +1595,7 @@ transition-duration: .3s;
   color: #666;
   background: #ccc;
   padding: 2px 8px 2px 8px;
-  margin: 3px 2px 3px 2px;
+  margin: 3px 3px 3px 3px;
   border-radius: 2px;
   border: none;
   text-align: center;
@@ -2225,7 +2213,6 @@ transition-duration: .3s;
   height: auto;
   margin-left: auto;
   margin-right: auto;
-
 }
 
 .m-main-content {
@@ -2245,7 +2232,6 @@ transition-duration: .3s;
   max-height: 300px;
   background: #fafafa;
   overflow-y: auto;
-
 }
 
 .m-new-container {
@@ -2315,8 +2301,8 @@ transition-duration: .3s;
   border-top-left-radius: 2px;
   border-top-right-radius: 2px;
   background: #f5f5f6;
--webkit-box-shadow: 0 3px 6px rgba(0,0,0,0.16),0 3px 6px rgba(0,0,0,0.23);
-box-shadow: 0 3px 6px rgba(0,0,0,0.16),0 3px 6px rgba(0,0,0,0.23);
+  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 .m-text-box.color {
@@ -2376,7 +2362,6 @@ box-shadow: 0 3px 6px rgba(0,0,0,0.16),0 3px 6px rgba(0,0,0,0.23);
   text-align: center;
   font-size: 12px;
   cursor: pointer;
-
 }
 
 .m-post-info {
@@ -2577,19 +2562,66 @@ box-shadow: 0 3px 6px rgba(0,0,0,0.16),0 3px 6px rgba(0,0,0,0.23);
   resize: none;
   height: 21px;
   margin-top: 13px;
-
 }
 
 .post-textarea {
-  width: 90%;
+  width: 100%;
   position: relative;
-  border: none;
-  background: #eee;
+  border: 0;
+  background: #f5f5f5;
   overflow-y: auto;
   resize: none;
-  height: 90%;
-  margin-top: 13px;
+  padding: 0;
+  height: 248px;
+  border-radius: 2px;
+}
 
+.textarea-wrap {
+  position: relative;
+  float: left;
+  width: 595px;
+  height: 300px;
+  display: block;
+}
+
+.other-options-wrap {
+  width: 100%;
+  height: 37px;
+  margin-top: 10px;
+}
+
+.option-btn {
+  position: relative;
+  text-decoration: none;
+  font-family: Roboto;
+  font-weight: 500;
+  color: #222;
+  margin-right: 5px;
+  background: #ddd;
+  padding: 8px 16px 8px 16px;
+  border-radius: 2px;
+  border: none;
+  width: 32%;
+  text-align: center;
+  font-size: 16px;
+  cursor: pointer;
+  -webkit-transition-duration: .3s;
+  -o-transition-duration: .3s;
+  transition-duration: .3s;
+}
+
+.tags-wrap {
+  position: relative;
+  float: left;
+  width: 195px;
+  margin-left: 10px;
+  background: #f5f5f5;
+  height: 300px;
+}
+
+.tags-wrap-inside {
+  width: 100%;
+  height: auto;
 }
 
 .reply-comment {
@@ -2674,7 +2706,7 @@ box-shadow: 0 3px 6px rgba(0,0,0,0.16),0 3px 6px rgba(0,0,0,0.23);
   padding: 8px 8px 8px 8px;
   -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  z-index: 100000;
+  z-index: 10000000;
   cursor: default;
   opacity: 1;
   -webkit-transition-timing-function: linear;
@@ -2688,7 +2720,7 @@ box-shadow: 0 3px 6px rgba(0,0,0,0.16),0 3px 6px rgba(0,0,0,0.23);
 
 .post-blk {
   display: none;
-  position: fixed;
+  position: relative;
   width: 800px;
   background: #fdfdfd;
   border-radius: 2px;
@@ -2705,13 +2737,24 @@ box-shadow: 0 3px 6px rgba(0,0,0,0.16),0 3px 6px rgba(0,0,0,0.23);
   -o-transition: opacity 0.2s;
   transition: opacity 0.2s;
   overflow-y: hidden;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  top: 10px;
 }
 
 .c-title-holder {
   position: relative;
   width: 100%;
   height: 30px;
-  margin-bottom: 10px;
+  background: #eee;
+  z-index: 100000;
+  padding: 8px;
+  left: -8px;
+  top: -8px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 .searchbar.category {
@@ -2787,6 +2830,14 @@ box-shadow: 0 3px 6px rgba(0,0,0,0.16),0 3px 6px rgba(0,0,0,0.23);
   width: 100%;
 }
 
+.c-button-hold.new-post {
+  position: relative;
+  display: inline-block;
+  height: auto;
+  width: 100%;
+  top: 4px;
+}
+
 .c-result {
   width: 100%;
   height: 40px;
@@ -2825,6 +2876,7 @@ box-shadow: 0 3px 6px rgba(0,0,0,0.16),0 3px 6px rgba(0,0,0,0.23);
 .c-content {
   height: 200px;
   width: 100%;
+  margin-bottom: 10px;
 }
 
 /* SHARING */
