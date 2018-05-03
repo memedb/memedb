@@ -27,6 +27,57 @@ if ($account == null)
 
 <body>
 
+  <div class="category-blk tagFinder">
+    <div class="c-title-holder">
+      <div class="searchbar category">
+        <i class="material-icons search-g" style="float: left; padding-right: 25px;position:relative; top: -4px;">search</i><input type="text" placeholder="Search Tags" style="all: unset; width: 330px;position: relative; left: -10px;" />
+      </div>
+    </div>
+
+    <div class="c-b-results">
+      <div class="c-b-wrapper">
+        <div class="c-result">
+          <h1 class="c-r-title">Tag Name</h1>
+          <div class="type c">+</div>
+        </div>
+        <div class="c-result">
+          <h1 class="c-r-title">Tag Name</h1>
+          <div class="type c">+</div>
+        </div>
+        <div class="c-result">
+          <h1 class="c-r-title">Tag Name</h1>
+          <div class="type c">+</div>
+        </div>
+        <div class="c-result">
+          <h1 class="c-r-title">Tag Name</h1>
+          <div class="type c">+</div>
+        </div>
+        <div class="c-result">
+          <h1 class="c-r-title">Tag Name</h1>
+          <div class="type c">+</div>
+        </div>
+        <div class="c-result">
+          <h1 class="c-r-title">Tag Name</h1>
+          <div class="type c">+</div>
+        </div>
+        <div class="c-result">
+          <h1 class="c-r-title">Tag Name</h1>
+          <div class="type c">+</div>
+        </div>
+        <div class="c-result">
+          <h1 class="c-r-title">Tag Name</h1>
+          <div class="type c">+</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="c-button-hold">
+      <button class="c-op-1 closeTagSearch">Cancel</button>
+      <button class="c-op-2" style="color: #4167f4;">Save</button>
+    </div>
+  </div>
+
+
   <div class="top-bar">
     <div class="logo">memedb</div>
     <div class="searchbar">
@@ -104,12 +155,43 @@ if ($account == null)
       </div>
     </div>
     <div class="sd-content">
-      <div class="sd-option">
-
-      </div>
-      <div class="sd-option">
-
-      </div>
+      <div class="section">
+          <i class="material-icons s-icon settings-icon">account_circle</i>
+          <div class="s-txt">
+            My Account
+          </div>
+        </div>
+        <div class="section">
+            <i class="material-icons s-icon settings-icon">group</i>
+            <div class="s-txt">
+              Switch Accounts
+            </div>
+        </div>
+        <div class="section">
+            <i class="material-icons s-icon settings-icon">exit_to_app</i>
+            <div class="s-txt">
+              Sign Out
+            </div>
+        </div>
+        <div class="line"></div>
+        <div class="section">
+            <i class="material-icons s-icon settings-icon">help</i>
+            <div class="s-txt">
+              Help
+            </div>
+        </div>
+        <div class="section">
+            <i class="material-icons s-icon settings-icon">feedback</i>
+            <div class="s-txt">
+              Send Feedback
+            </div>
+        </div>
+        <div class="section">
+            <i class="material-icons s-icon settings-icon">settings</i>
+            <div class="s-txt">
+              Settings
+            </div>
+        </div>
     </div>
   </div>
   <div class="imp-bg-fade" id="imp-bg-fade" style="display: none; opacity 0;"></div>
@@ -490,13 +572,32 @@ if ($account == null)
 
       <div class="c-content">
 
-        <textarea name="name" class="post-textarea" wrap="hard"></textarea>
+        <div class="textarea-wrap">
+          <textarea name="name" class="post-textarea" wrap="hard"></textarea>
+          <div class="other-options-wrap">
+            <button class="option-btn hover">
+              <i class="material-icons search-g" style="float: left;padding-right: 10px; position: relative; font-size: 21px;top: -0.5px;">collections</i>Add Image
+            </button>
+            <button class="option-btn hover">
+              <i class="material-icons search-g" style="float: left;padding-right: 10px; position: relative; font-size: 21px;top: -0.5px;">video_library</i>Add Video
+            </button>
+            <button class="option-btn hover">
+              <i class="material-icons search-g" style="float: left;padding-right: 10px;position: relative;font-size: 35px;height: 10px;top: -6.5px;left: -5px;width: 23px;">gif</i>Add Gif
+            </button>
+          </div>
+        </div>
+        <div class="tags-wrap">
+            <div class="searchbar category" style="background: #ddd">
+              <i class="material-icons search-g" style="float: left; padding-right: 25px;position:relative; top: -4px;">search</i><input type="text" placeholder="Add Tags" style="all: unset; width: 100px;position: relative; left: -10px;" />
+            </div>
+
+        </div>
 
       </div>
 
-      <div class="c-button-hold">
-        <button class="post-btn cancel closePost">Cancel</button>
-        <button class="post-btn">Post</button>
+      <div class="c-button-hold new-post">
+        <button class="post-btn closePost">Cancel</button>
+        <button class="post-btn hover">Post</button>
       </div>
     </div>
 

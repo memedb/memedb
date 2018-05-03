@@ -297,6 +297,7 @@ function closeAccount(){
 }
 
 function openPost(){
+    window.scrollTo(0, 0);
     $(".m-post").css({
       display: "block"
     });
