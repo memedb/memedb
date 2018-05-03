@@ -1,5 +1,7 @@
 toggled = new Array();
 
+searchCode = "";
+
 $(document).ready(function() {
   libs = $(".library");
   for (i = 0; i < libs.length; i++) libs[i].id = i.toString();
@@ -59,6 +61,7 @@ $(document).ready(function() {
 
   $(".openTagSearch").click(function() {
     openTagSearch();
+    tagSearch("");
     $("#imp-bg-fade").css("opacity", "");
   });
 
@@ -111,7 +114,6 @@ $(document).ready(function() {
     if(!(this.classList.contains("s-selected"))){
       $(".s-tab").toggleClass("s-selected");
       $(".s-c-wrapper").toggleClass("s-slide")
-
     }
   });
 
@@ -122,15 +124,37 @@ $(document).ready(function() {
     });
   });
 
-  $(".t-add").click(function() {
-    type = prompt("Enter a meme type");
-    if (type != null) {
-      sendCommand("add_favorite", null, {type: type}, function(response) {
-        console.log(response.favorites);
-      });
-    }
+  $(".c-title-holder .searchbar input").keyup(function() {
+    tagSearch(this.value);
   });
 });
+
+function tagSearch(value) {
+  searchCode = uuid();
+  sendCommand("search_tag", null, {code: searchCode, q: value}, function(response) {
+    console.log(response);
+    if (searchCode == response.code) {
+      $(".c-b-wrapper").text("");
+      for (var i = 0; i < response.results; i++) {
+        var tag = response.tags[i];
+        $(".c-b-wrapper").append("<div class=\"c-result\" onclick=\"addTag('" + tag + "')\"><h1 class=\"c-r-title\">" + tag + "</h1><div class=\"type c\">+</div></div>");
+      }
+    }
+  });
+}
+
+function addTag(tag) {
+  sendCommand("add_favorite", null, {type: tag}, function(response) {
+    console.log(response.favorites);
+  });
+}
+
+function uuid() {
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+    var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+    return v.toString(16);
+  });
+}
 
 function sendCommand(name, session, data, callback) {
   if (session == null) {
@@ -155,6 +179,7 @@ function sendCommand(name, session, data, callback) {
   var xhttp = new XMLHttpRequest();
   xhttp.onreadystatechange = function() {
     if (this.readyState == 4 && this.status ==  200) {
+      //console.log("raw: " + this.responseText);
       response = JSON.parse(this.responseText);
       if (response.status == "success")
         callback(response);

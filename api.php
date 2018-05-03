@@ -1,4 +1,8 @@
 <?php
+ini_set('session.gc_maxlifetime', 3600);
+
+session_set_cookie_params(3600);
+
 session_start();
 
 require('sql.php');
@@ -16,6 +20,8 @@ if ($_SESSION['id']) {
   $ip = get_client_ip();
   $stmt = $conn->prepare("UPDATE users SET ip = '$ip', session='".session_id()."' WHERE id = ".$user->id);
   $stmt->execute();
+} else {
+  $GLOBALS['user'] = null;
 }
 
 if ($GLOBALS['conn']->connect_error) {
@@ -84,6 +90,20 @@ Command::register("delete_favorite", function($user) {
 Command::register("add_favorite", function($user) {
   $user->addFavorite($_POST['type']);
   jsonMessage(array("favorites"=>$user->favorites));
+});
+
+Command::register("search_tag", function($user) {
+  $conn = $GLOBALS['conn'];
+  $stmt = $conn->prepare("SELECT * FROM `tags` WHERE `name` LIKE ?");
+  $search = "%{$_POST['q']}%";
+  $stmt->bind_param("s", $search);
+  $stmt->execute();
+  $result = $stmt->get_result();
+  $tags = [];
+  while ($row = $result->fetch_assoc()) {
+    array_push($tags, $row['name']);
+  }
+  jsonMessage(array("results"=>$result->num_rows,"tags"=>$tags,"q"=>$_POST['q'],"code"=>$_POST['code']));
 });
 
 $action = $_GET['action'];

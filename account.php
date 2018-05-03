@@ -8,7 +8,6 @@ $is_self = false;
 // The user logged in
 $self = getUser();
 
-
 if ($account != null) {
   $account = user::loadFromHandle($account);
   $is_self = (loggedIn() && $self->id == $account->id);
@@ -19,8 +18,10 @@ if (loggedIn() && !$account) {
   exit;
 }
 
-if ($account == null)
+if ($account == null) {
   header("Location: https://meme-db.com/login");
+  exit;
+}
 ?>
 
 <!DOCTYPE html>
@@ -199,38 +200,6 @@ if ($account == null)
 
     <div class="c-b-results">
       <div class="c-b-wrapper">
-        <div class="c-result">
-          <h1 class="c-r-title">Tag Name</h1>
-          <div class="type c">+</div>
-        </div>
-        <div class="c-result">
-          <h1 class="c-r-title">Tag Name</h1>
-          <div class="type c">+</div>
-        </div>
-        <div class="c-result">
-          <h1 class="c-r-title">Tag Name</h1>
-          <div class="type c">+</div>
-        </div>
-        <div class="c-result">
-          <h1 class="c-r-title">Tag Name</h1>
-          <div class="type c">+</div>
-        </div>
-        <div class="c-result">
-          <h1 class="c-r-title">Tag Name</h1>
-          <div class="type c">+</div>
-        </div>
-        <div class="c-result">
-          <h1 class="c-r-title">Tag Name</h1>
-          <div class="type c">+</div>
-        </div>
-        <div class="c-result">
-          <h1 class="c-r-title">Tag Name</h1>
-          <div class="type c">+</div>
-        </div>
-        <div class="c-result">
-          <h1 class="c-r-title">Tag Name</h1>
-          <div class="type c">+</div>
-        </div>
       </div>
     </div>
 
