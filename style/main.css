@@ -31,7 +31,7 @@ h1 {
 
 .top-bar {
   grid-area: top-bar;
-  background-color: #222;
+  background-color: #102027;
   position: fixed;
   z-index: 15;
   width: 100%;
@@ -67,11 +67,15 @@ h1 {
   padding: 8px 8px 8px 25px;
   font-size: 17px;
   width: auto;
-  color: #222;
+  color: #fff;
   border: none;
   border-radius: 2px;
-  background-color: #eee;
+  background-color: #37474f;
   z-index: 100;
+}
+
+::placeholder {
+  color: inherit;
 }
 
 .t-settings {
@@ -738,6 +742,17 @@ input:checked+.slider:before {
   overflow-y: auto;
 }
 
+.sidenav-home {
+  display: block;
+  position: fixed;
+  float: left;
+  height: 100%;
+  width: 300px;
+  background: #eee;
+  border-right: 1px solid #ddd;
+  overflow-y: auto;
+}
+
 .s-scroll {
   position: relative;
   height: auto;
@@ -866,6 +881,17 @@ input:checked+.slider:before {
   margin-bottom: 20px;
 }
 
+.long-line {
+  height: 1px;
+  width: 100%;
+  margin: auto;
+  background: #eee;
+  border-radius: 10px;
+  position: relative;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
 .c-names {
   position: relative;
   float: left;
@@ -944,7 +970,7 @@ input:checked+.slider:before {
 
 .h-content {
   position: relative;
-  margin-left: 350px;
+  margin-left: 300px;
   width: auto;
   height: 1000px;
   margin-top: 55px;
@@ -1142,7 +1168,7 @@ body {
 
 .top-bar {
   grid-area: top-bar;
-  background-color: #222;
+  background-color: #102027;
   position: fixed;
   z-index: 1000;
   width: 100%;
@@ -1282,22 +1308,6 @@ body {
 }
 
 /* END OF SEARCH BAR */
-
-.searchbar {
-  -ms-grid-row: 2;
-  -ms-grid-column: 4;
-  grid-area: s;
-  position: relative;
-  font-family: Roboto;
-  padding: 8px 8px 8px 25px;
-  font-size: 17px;
-  width: auto;
-  color: #222;
-  border: none;
-  border-radius: 2px;
-  background-color: #eee;
-  z-index: 100;
-}
 
 .pepe {
   width: 100%;
@@ -1954,6 +1964,9 @@ body {
 .imp-title {
   position: relative;
   float: left;
+  font-family: 'Roboto';
+  top: 2px;
+  color: #eee;
   font-size: 20px;
   font-weight: 600;
   margin-left: 10px;
@@ -2205,7 +2218,6 @@ body {
   display: inline-block;
   margin-bottom: 50px;
   margin-top: 50px;
-  cursor: pointer;
 }
 
 .post-corridor {
@@ -2257,10 +2269,11 @@ body {
   width: 800px;
   background: #ccc;
   display: block;
+  cursor: pointer;
 }
 
 .m-album {
-  height: 600px;
+  height: 800px;
   position: relative;
   width: 800px;
   display: block;
@@ -2274,13 +2287,30 @@ body {
 }
 
 .m-album-img {
-  width: 380px;
-  height: 140px;
-  margin: 5px;
+  width: 400px;
+  height: 400px;
   position: relative;
   background: #ccc;
   display: block;
   float: left;
+  cursor: pointer;
+}
+
+.m-album-img.light {
+  width: 400px;
+  height: 400px;
+  position: relative;
+  background: #ddd;
+  display: block;
+  float: left;
+}
+
+.album-text {
+  color: #999;
+  font-size: 60px;
+  position: relative;
+  top: 42%;
+  left: 37%;
 }
 
 .m-names {
@@ -2288,12 +2318,25 @@ body {
   float: left;
   margin-top: 16px;
   margin-left: 10px;
+  color: #444;
+}
+
+.reposted {
+  position: absolute;
+  top: -15px;
+  left: 15px;
+  background: #4167f4;
+  border-radius: 2px;
+  -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  padding: 5px;
+  cursor: pointer;
 }
 
 .m-OP {
   font-family: 'Roboto', sans-serif;
   font-size: 15px;
-  color: #444;
+  color: inherit;
 }
 
 .material-icons {
@@ -2305,7 +2348,8 @@ body {
   font-weight: lighter;
   font-style: italic;
   font-size: 12px;
-  color: #666;
+  color: inherit;
+  opacity: .7
 }
 
 .m-pp {
@@ -2470,10 +2514,8 @@ body {
 .m-comment-inside {
   width: 100%;
   position: relative;
-  height: inherit;
-  padding-bottom: 18px;
+  height: 300px;
   margin-top: 10px;
-  padding-right: 17px;
   overflow-y: scroll;
 }
 
@@ -2484,7 +2526,9 @@ body {
   margin-left: 18px;
 }
 
-.follow.mp {
+.followmp {
+  all: unset;
+  border-radius: 2px;
   margin-top: 19px;
   margin-bottom: 5px;
   margin-left: 42px;
@@ -2494,9 +2538,10 @@ body {
   font-size: 12px;
   color: #222;
   background: #ccc;
+  cursor: pointer
 }
 
-.follow.mp.hover {
+.followmp.hover {
   margin-top: 19px;
   margin-bottom: 5px;
   margin-left: 42px;
@@ -2736,7 +2781,7 @@ body {
   top: 40%;
   width: 400px;
   background: #fdfdfd;
-  border-radius: 2px;
+  border-radius: 5px;
   padding: 8px 8px 8px 8px;
   -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
@@ -2781,8 +2826,8 @@ body {
 .c-title-holder {
   position: relative;
   width: 100%;
-  height: 30px;
-  background: #eee;
+  height: 35px;
+  background: #102027;
   z-index: 100000;
   padding: 8px;
   left: -8px;
@@ -2800,6 +2845,9 @@ body {
   overflow-y: auto;
   width: 100%;
   z-index: 100;
+  min-height: 100px;
+  background: #eee;
+  border-radius: 2px;
 }
 
 .c-op-1 {
@@ -2990,4 +3038,107 @@ body {
   left: 19%;
   top: 21%;
   font-weight: 500;
+}
+
+/*Recommended*/
+
+.rec-content {
+  position: relative;
+  width: auto;
+  margin-top: 55px;
+}
+
+.tag-corridor {
+  width: 1130px;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.rt-header {
+  font-family: 'Roboto Mono';
+  font-size: 23px;
+  color: #fff;
+  display: inline-block;
+  margin-top: 10px;
+  margin-left: 20px;
+}
+
+.rec-tag {
+  width: 100%;
+  background: #f5f5f6;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  display: inline-block;
+  border-radius: 2px;
+}
+
+.rt-title {
+  position: relative;
+  width: 100%;
+  height: 50px;
+  background: #102027;
+  border-top-left-radius: 2px;
+  border-top-right-radius: 2px;
+}
+
+.rt-userbox {
+  position: relative;
+  height: auto;
+  width: 100%;
+}
+
+.userbox-title {
+  position: relative;
+  width: 100%;
+  height: 50px;
+}
+
+.rt-postchain {
+  height: 160px;
+  width: 100%;
+  position: relative;
+}
+
+.rt-more {
+  width: 100%;
+  height: 30px;
+  position: relative;
+  display: inline-block;
+}
+
+.rt-fab {
+  cursor: pointer;
+  position: relative;
+  margin-left: 10px;
+  top: 5px;
+  display: inline-block;
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+  background: #37474f;
+  -webkit-box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+  -webkit-transition-duration: 0.3s;
+  -o-transition-duration: 0.3s;
+  transition-duration: 0.3s;
+}
+
+.small-floating {
+  left: 19%;
+  top: 23%;
+  color: #fff;
+}
+
+.rt-post {
+  position: relative;
+  top: 5px;
+  left: 5px;
+  float: left;
+  height: 150px;
+  width: 150px;
+  background: #ddd;
+  margin: 5px;
+  cursor: pointer;
+  border-radius: 3px;
 }
