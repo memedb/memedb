@@ -194,7 +194,7 @@ if ($account == null)
         </div>
     </div>
   </div>
-  <div class="imp-bg-fade" id="imp-bg-fade" style="display: none; opacity 0;"></div>
+  <div class="imp-bg-fade" id="imp-bg-fade" style="display: block; opacity 1;"></div>
 
   <div class="donate-bar" style="display: none;">
     <div class="d-para">Please consider donating to help keep this service shutting down.</div>
