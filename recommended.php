@@ -299,13 +299,6 @@ if ($account == null)
             </div>
           </div>
 
-          <div class="section">
-            <i class="material-icons black s-icon">trending_up</i>
-            <div class="s-txt">
-              Top
-            </div>
-          </div>
-
           <div class="line"></div>
         </div>
 
@@ -436,7 +429,8 @@ if ($account == null)
 
       <div class="rec-tag">
         <div class="rt-title">
-          <h class="rt-header"1>CURSED IMAGES</h1>
+          <h class="rt-header"1>CURSED IMAGES</h>
+          <i class="material-icons rec-icon">bookmark_border</i>
         </div>
         <div class="rt-userbox">
 
@@ -748,7 +742,8 @@ if ($account == null)
 
       <div class="rec-tag">
         <div class="rt-title">
-          <h class="rt-header"1>IRONIC</h1>
+          <h class="rt-header"1>IRONIC</h>
+          <i class="material-icons rec-icon">bookmark_border</i>
         </div>
         <div class="rt-userbox">
 
@@ -1060,7 +1055,8 @@ if ($account == null)
 
       <div class="rec-tag">
         <div class="rt-title">
-          <h class="rt-header"1>SHITPOSTING</h1>
+          <h class="rt-header"1>SHITPOSTING</h>
+          <i class="material-icons rec-icon">bookmark_border</i>
         </div>
         <div class="rt-userbox">
 

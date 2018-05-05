@@ -299,13 +299,6 @@ if ($account == null)
             </div>
           </div>
 
-          <div class="section">
-            <i class="material-icons black s-icon">trending_up</i>
-            <div class="s-txt">
-              Top
-            </div>
-          </div>
-
           <div class="line"></div>
         </div>
 
