@@ -31,6 +31,134 @@ if ($account == null)
     <div class="c-title-holder dark">
       <h1 class="imp-title">Balance</h1>
     </div>
+
+    <div class="bm-lock">
+      <div style="margin-bottom:20px;">
+        <div class="input ec">
+          <input id="pwd" name="password" type="password" placeholder="Password" style="all: unset; width: 100%;position: relative; border-bottom: 2px solid #555; text-align: center;" required/>
+        </div>
+        <p class="login-sub" style="opacity:0;">Potential error message.</p>
+      </div>
+
+      <h1 class="ec-sub-field">No password yet?</h1><span class="ec-sub-field ec-link">Set up</span>
+
+    </div>
+
+    <div class="bm-content">
+      <div class="sidenav-ec small">
+          <div class="scroll-hide">
+
+            <div class="bm-transaction">
+              <h1 class="bm-t-title">Transaction title</h1>
+              <h1 class="bm-t-h">+0.00</h1><span class="bm-db">db</span>
+              <h1 class="bm-t-date">Jan 20 2018</h1>
+            </div>
+
+            <div class="bm-transaction">
+              <h1 class="bm-t-title">Transaction title</h1>
+              <h1 class="bm-t-h">-0.00</h1><span class="bm-db">db</span>
+              <h1 class="bm-t-date">Jan 20 2018</h1>
+            </div>
+
+            <div class="bm-transaction">
+              <h1 class="bm-t-title">Transaction title</h1>
+              <h1 class="bm-t-h">+0.00</h1><span class="bm-db">db</span>
+              <h1 class="bm-t-date">Jan 20 2018</h1>
+            </div>
+
+            <div class="bm-transaction">
+              <h1 class="bm-t-title">Transaction title</h1>
+              <h1 class="bm-t-h">-0.00</h1><span class="bm-db">db</span>
+              <h1 class="bm-t-date">Jan 20 2018</h1>
+            </div>
+
+            <div class="bm-transaction">
+              <h1 class="bm-t-title">Transaction title</h1>
+              <h1 class="bm-t-h">+0.00</h1><span class="bm-db">db</span>
+              <h1 class="bm-t-date">Jan 20 2018</h1>
+            </div>
+
+            <div class="bm-transaction">
+              <h1 class="bm-t-title">Transaction title</h1>
+              <h1 class="bm-t-h">-0.00</h1><span class="bm-db">db</span>
+              <h1 class="bm-t-date">Jan 20 2018</h1>
+            </div>
+
+            <div class="bm-transaction">
+              <h1 class="bm-t-title">Transaction title</h1>
+              <h1 class="bm-t-h">+0.00</h1><span class="bm-db">db</span>
+              <h1 class="bm-t-date">Jan 20 2018</h1>
+            </div>
+
+            <div class="bm-transaction">
+              <h1 class="bm-t-title">Transaction title</h1>
+              <h1 class="bm-t-h">-0.00</h1><span class="bm-db">db</span>
+              <h1 class="bm-t-date">Jan 20 2018</h1>
+            </div>
+
+            <div class="bm-transaction">
+              <h1 class="bm-t-title">Transaction title</h1>
+              <h1 class="bm-t-h">+0.00</h1><span class="bm-db">db</span>
+              <h1 class="bm-t-date">Jan 20 2018</h1>
+            </div>
+
+            <div class="bm-transaction">
+              <h1 class="bm-t-title">Transaction title</h1>
+              <h1 class="bm-t-h">-0.00</h1><span class="bm-db">db</span>
+              <h1 class="bm-t-date">Jan 20 2018</h1>
+            </div>
+
+            <div class="bm-transaction">
+              <h1 class="bm-t-title">Transaction title</h1>
+              <h1 class="bm-t-h">+0.00</h1><span class="bm-db">db</span>
+              <h1 class="bm-t-date">Jan 20 2018</h1>
+            </div>
+
+            <div class="bm-transaction">
+              <h1 class="bm-t-title">Transaction title</h1>
+              <h1 class="bm-t-h">-0.00</h1><span class="bm-db">db</span>
+              <h1 class="bm-t-date">Jan 20 2018</h1>
+            </div>
+
+            <div class="bm-transaction">
+              <h1 class="bm-t-title">Transaction title</h1>
+              <h1 class="bm-t-h">+0.00</h1><span class="bm-db">db</span>
+              <h1 class="bm-t-date">Jan 20 2018</h1>
+            </div>
+
+            <div class="bm-transaction">
+              <h1 class="bm-t-title">Transaction title</h1>
+              <h1 class="bm-t-h">-0.00</h1><span class="bm-db">db</span>
+              <h1 class="bm-t-date">Jan 20 2018</h1>
+            </div>
+
+            <div class="bm-transaction">
+              <h1 class="bm-t-title">Transaction title</h1>
+              <h1 class="bm-t-h">+0.00</h1><span class="bm-db">db</span>
+              <h1 class="bm-t-date">Jan 20 2018</h1>
+            </div>
+
+            <div class="bm-transaction">
+              <h1 class="bm-t-title">Transaction title</h1>
+              <h1 class="bm-t-h">-0.00</h1><span class="bm-db">db</span>
+              <h1 class="bm-t-date">Jan 20 2018</h1>
+            </div>
+
+            <div class="bm-transaction">
+              <h1 class="bm-t-title">Transaction title</h1>
+              <h1 class="bm-t-h">+0.00</h1><span class="bm-db">db</span>
+              <h1 class="bm-t-date">Jan 20 2018</h1>
+            </div>
+
+            <div class="bm-transaction">
+              <h1 class="bm-t-title">Transaction title</h1>
+              <h1 class="bm-t-h">-0.00</h1><span class="bm-db">db</span>
+              <h1 class="bm-t-date">Jan 20 2018</h1>
+            </div>
+
+          </div>
+        </div>
+    </div>
   </div>
 
   <div class="s-dropdown ec">
@@ -164,11 +292,12 @@ if ($account == null)
   <div class="sidenav-ec">
       <div class="scroll-hide">
         <div class="ec-logo-info">
-          <h1 class="ec-logo">memedb</h1>
+          <div class="ec-logo"><a style="all:unset;" href="/">memedb</a></div>
 
           <div class="section-dark imp-info openBalance">
             <div class="s-txt ec">
-              BALANCE <span class="balance-span">24,789db</span>
+              BALANCE
+              <!-- <span class="balance-span">24,789db</span> -->
             </div>
           </div>
 
@@ -177,19 +306,19 @@ if ($account == null)
 
             <div class="section-dark imp-info">
               <div class="s-txt ec">
-                HOME
+                <a style="all:unset;" href="/home.php">HOME</a>
               </div>
             </div>
 
             <div class="section-dark imp-info">
               <div class="s-txt ec">
-                RECOMMENDED
+                <a style="all:unset;" href="/recommended.php">RECOMMENDED</a>
               </div>
             </div>
 
             <div class="section-dark imp-info">
               <div class="s-txt ec highlighted">
-                DB ECONOMY
+                <a style="all:unset;" href="/economy.php">DB ECONOMY</a>
               </div>
             </div>
 
@@ -215,330 +344,6 @@ if ($account == null)
             <div class="s-txt ec">
               MEME 3
             </div><i class="material-icons ec-icons low">trending_down</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
-          </div>
-
-          <div class="section-dark">
-            <div class="s-txt ec">
-              MEME
-            </div><i class="material-icons ec-icons idle">trending_flat</i>
           </div>
 
         </div>
