@@ -121,6 +121,16 @@ $(document).ready(function() {
     $("#imp-message, #imp-bg-fade").css("opacity", "0");
   });
 
+  $(".openEcSearch").click(function() {
+    openBalance();
+    $("#imp-bg-fade").css("opacity", "");
+  });
+
+  $(".closeEcSearch").click(function() {
+    closeBalance();
+    $("#imp-message, #imp-bg-fade").css("opacity", "0");
+  });
+
   $(".s-tab").click(function() {
     if(!(this.classList.contains("s-selected"))){
       $(".s-tab").toggleClass("s-selected");
@@ -168,6 +178,17 @@ function uuid() {
 }
 
 function sendCommand(name, session, data, callback) {
+  if (session == null) {
+    var cookies = document.cookie.split("; ");
+    for (i = 0; i < cookies.length; i++) {
+      var cookie = cookies[i];
+      if (cookie.startsWith("PHPSESSID")) {
+        session = cookie.split("=")[1];
+        break;
+      }
+    }
+  }
+
   var dataString = "";
   for (var key in data) {
     if (data.hasOwnProperty(key)) {
@@ -191,20 +212,10 @@ function sendCommand(name, session, data, callback) {
 }
 
 function followAction() {
-  var cookies = document.cookie.split("; ");
-  var session_id = null;
-  for (i = 0; i < cookies.length; i++) {
-    var cookie = cookies[i];
-    if (cookie.startsWith("PHPSESSID")) {
-      session_id = cookie.split("=")[1];
-      break;
-    }
-  }
-
   var elmt = document.getElementById("follow-btn");
 
   if (elmt.className == "follow" || elmt.className == "unfollow") {
-    sendCommand(elmt.className, session_id, {handle: elmt.dataset.handle}, function(response) {
+    sendCommand(elmt.className, null, {handle: elmt.dataset.handle}, function(response) {
       if (response.following) {
         elmt.className = "unfollow";
       } else {
@@ -382,6 +393,7 @@ function openBalance(){
     }, 10);
     $(".peep").children().css('filter', 'blur(5px)');
     $(".balance-message").css('filter', 'blur(0px)');
+    $(".peep").css('background','#222');
 }
 
 function closeBalance(){
@@ -390,4 +402,9 @@ function closeBalance(){
     });
     $("#imp-bg-fade").css("display", "none");
     $(".peep").children().css('filter', 'blur(0px)');
+    $(".peep").css('background','#fff');
+}
+
+function libDrop(e) {
+  
 }
