@@ -3529,6 +3529,7 @@ body {
 }
 
 .s-dropdown.ec {
+  opacity: 0.8;
   display: none;
   z-index: 1000000;
   position: fixed;
@@ -3719,4 +3720,34 @@ body {
   color: #454e51;
   top: 13.5px;
   text-align: right;
+}
+
+.bm-main-content {
+  position: relative;
+  margin-left: 300px;
+  width: auto;
+  height: auto;
+}
+
+.money-wrapper {
+  padding-top: 10px;
+  padding-left: 30px;
+  height: 130px;
+  background: #3c4347;
+}
+
+.bm-main-moneyyy {
+  float: left;
+  position: relative;
+  margin-left: 10px;
+  font-size: 100px;
+  color: #222629;
+}
+
+.bm-db-moneyyy {
+  position: relative;
+  font-size: 60px;
+  color: #222629;
+  margin-left: 2px;
+  top: 37px;
 }

@@ -348,6 +348,9 @@ function openAccount(){
       });
       $("#imp-bg-fade").css("opacity", "");
     }, 10);
+    $(".peep").children().css('filter', 'blur(5px)');
+    $(".s-dropdown").css('filter', 'blur(0px)');
+    $(".peep").css('background','#222');
 }
 
 function closeAccount(){
@@ -355,6 +358,8 @@ function closeAccount(){
       display: "none"
     });
     $("#imp-bg-fade").css("display", "none");
+    $(".peep").children().css('filter', 'blur(0px)');
+    $(".peep").css('background','#fff');
 }
 
 function openPost(){
@@ -406,5 +411,5 @@ function closeBalance(){
 }
 
 function libDrop(e) {
-  
+
 }

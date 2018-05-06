@@ -158,6 +158,12 @@ if ($account == null)
 
           </div>
         </div>
+      <div class="bm-main-content">
+        <div class="money-wrapper">
+          <h1 class="bm-main-moneyyy">0.00</h1><span class="bm-db-moneyyy">db</span>
+        </div>
+
+      </div>
     </div>
   </div>
 
