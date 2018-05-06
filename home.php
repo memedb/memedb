@@ -21,7 +21,7 @@ if ($account == null)
 
   <?php imports(); ?>
   <link rel="icon" href="https://i.imgur.com/h0t0THj.png" type="image" sizes="16x16">
-  <title>memedb</title>
+  <title>Home</title>
 
 </head>
 
@@ -81,7 +81,7 @@ if ($account == null)
   <div class="top-bar">
     <div class="logo">memedb</div>
     <div class="searchbar">
-      <i class="material-icons search-g" style="float: left; padding-right: 25px;position:relative; top: -4px;">search</i><input type="text" placeholder="Search" style="all: unset; width: 150px;position: relative; left: 11px; color: #fff" />
+      <i class="material-icons search-g" style="float: left; padding-right: 25px;position:relative; top: -4px;color: #ccc;">search</i><input type="text" placeholder="Search" style="all: unset; width: 150px;position: relative; left: 11px; color: #ccc;" />
 
       <div class="search-result-box" style="display:none;">
         <div class="search-op">
@@ -300,7 +300,7 @@ if ($account == null)
           </div>
 
           <div class="section">
-            <i class="material-icons black s-icon">functions</i>
+            <i class="material-icons black s-icon">insert_chart</i>
             <div class="s-txt">
               db Economy
             </div>

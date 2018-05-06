@@ -10,6 +10,10 @@ ol, ul {
   list-style: none;
 }
 
+html {
+  background: #222;
+}
+
 /*Please use one global stylesheet and also get the minify package in atom. Thank you. :D*/
 
 * {
@@ -70,7 +74,7 @@ h1 {
   color: #fff;
   border: none;
   border-radius: 2px;
-  background-color: #37474f;
+  background-color: #2d3235;
   z-index: 100;
 }
 
@@ -1174,7 +1178,7 @@ body {
 
 .top-bar {
   grid-area: top-bar;
-  background-color: #102027;
+  background-color: #222629;
   position: fixed;
   z-index: 1000;
   width: 100%;
@@ -1224,6 +1228,7 @@ body {
   right: 10px;
   width: 300px;
   background: #fff;
+  color: #222;
   border-radius: 2px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
@@ -1972,7 +1977,7 @@ body {
   float: left;
   font-family: 'Roboto';
   top: 2px;
-  color: #eee;
+  color: inherit;
   font-size: 20px;
   font-weight: 600;
   margin-left: 10px;
@@ -2917,14 +2922,20 @@ body {
 .c-title-holder {
   position: relative;
   width: 100%;
-  height: 35px;
+  height: 30px;
   background: #102027;
+  color: #222;
   z-index: 100000;
   padding: 8px;
   left: -8px;
   top: -8px;
   border-top-left-radius: 5px;
   border-top-right-radius: 5px;
+}
+
+.c-title-holder.dark {
+  background: #222629;
+  color: #dbd85e;
 }
 
 .searchbar.category {
@@ -3270,6 +3281,7 @@ body {
 .section-dark {
   height: 40px;
   width: 100%;
+  top: 312px;
   position: relative;
   text-decoration: none;
   font-family: Roboto;
@@ -3282,8 +3294,12 @@ body {
   transition-duration: 0.3s;
 }
 
+.section-dark.imp-info {
+  top: 0px;
+}
+
 .section-dark:hover {
-  margin-left: 10px;
+  margin-left: 5px;
 }
 
 .s-txt.ec {
@@ -3364,6 +3380,20 @@ body {
   z-index: 100;
 }
 
+.ec-search-results {
+  display: block;
+  position: fixed;
+  width: 226px;
+  max-height: 160px;
+  background-color: #2d3235;
+  z-index: 1;
+  top: 75px;
+  left: 330px;
+  border-radius: 2px;
+  opacity: 0.9;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+}
+
 .ec-account-settings {
   height: 100%;
   width: auto;
@@ -3432,7 +3462,7 @@ body {
   height: 700px;
   margin-right: auto;
   margin-left: auto;
-  background: #2d3235;
+  /* background: #2d3235; */
 }
 
 .ec-stats-info {
@@ -3498,4 +3528,106 @@ body {
   height: 100px;
   width: 400px;
   position: relative;
+}
+
+.s-dropdown.ec {
+  display: none;
+  z-index: 1000000;
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  width: 300px;
+  background: #2d3235;
+  color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
+}
+
+.s-d-titlebox.ec {
+  width: auto;
+  height: 40px;
+  color: #dbd85e;
+  background: #222629;
+  padding: 16px;
+}
+
+.section.ec {
+  height: 40px;
+  width: 100%;
+  position: relative;
+  text-decoration: none;
+  font-family: Roboto;
+  font-weight: 600;
+  color: #bdd1d0;
+  border: none;
+  font-size: 18px;
+  display: table;
+  cursor: pointer;
+}
+
+.section.ec:hover {
+  background: #2d3235;
+}
+
+.section.ec:hover .settings-icon.ec {
+  margin-left: 35px;
+}
+
+
+.long-line.ec {
+  background: #222629;
+}
+
+.settings-icon.ec {
+  transition-duration: 0.3s;
+  color: #bdd1d0;
+}
+
+.ec-result-section {
+  height: 40px;
+  width: 100%;
+  position: relative;
+  text-decoration: none;
+  font-family: Roboto;
+  font-weight: 600;
+  color: #bdd1d0;
+  border: none;
+  font-size: 18px;
+  display: table;
+  cursor: pointer;
+  transition-duration: 0.3s;
+}
+
+.s-txt.ec.result {
+  margin-left: 20px;
+  transition-duration: 0.3s;
+}
+
+.ec-result-section:hover .s-txt.ec.result {
+  margin-left: 25px;
+}
+
+.ec-icons.results {
+  margin-right: 10px;
+}
+
+.ec-logo-info {
+  position: absolute;
+  z-index: 10;
+  width: 100%;
+  background: #2d3235;
+}
+
+.balance-message {
+  display: none;
+  width: 800px;
+  height: 600px;
+  background: #2d3235;
+  border-radius: 2px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  z-index: 1000000;
 }

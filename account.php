@@ -30,7 +30,7 @@ if ($account == null) {
 <head>
   <?php imports(); ?>
   <link rel="icon" href="https://i.imgur.com/h0t0THj.png" type="image" sizes="16x16">
-  <title>memedb</title>
+  <title><?php echo $account->name; ?></title>
 </head>
 
 <body>

@@ -11,7 +11,7 @@ if (loggedIn() && !$account) {
 }
 
 if ($account == null)
-  header("Location: https://meme-db.com");
+  header("Location: https://meme-db.com/login.php");
  ?>
 
 <!DOCTYPE html>
@@ -21,64 +21,20 @@ if ($account == null)
 
   <?php imports(); ?>
   <link rel="icon" href="https://i.imgur.com/h0t0THj.png" type="image" sizes="16x16">
-  <title>memedb</title>
+  <title>Economy</title>
 
 </head>
 
-<body>
+<body class="peep">
 
-  <div class="category-blk tagFinder">
-    <div class="c-title-holder">
-      <div class="searchbar category">
-        <i class="material-icons search-g" style="float: left; padding-right: 25px;position:relative; top: -4px;">search</i><input type="text" placeholder="Search Tags" style="all: unset; width: 330px;position: relative; left: -10px;" />
-      </div>
-    </div>
-
-    <div class="c-b-results">
-      <div class="c-b-wrapper">
-        <div class="c-result">
-          <h1 class="c-r-title">Tag Name</h1>
-          <div class="type c">+</div>
-        </div>
-        <div class="c-result">
-          <h1 class="c-r-title">Tag Name</h1>
-          <div class="type c">+</div>
-        </div>
-        <div class="c-result">
-          <h1 class="c-r-title">Tag Name</h1>
-          <div class="type c">+</div>
-        </div>
-        <div class="c-result">
-          <h1 class="c-r-title">Tag Name</h1>
-          <div class="type c">+</div>
-        </div>
-        <div class="c-result">
-          <h1 class="c-r-title">Tag Name</h1>
-          <div class="type c">+</div>
-        </div>
-        <div class="c-result">
-          <h1 class="c-r-title">Tag Name</h1>
-          <div class="type c">+</div>
-        </div>
-        <div class="c-result">
-          <h1 class="c-r-title">Tag Name</h1>
-          <div class="type c">+</div>
-        </div>
-        <div class="c-result">
-          <h1 class="c-r-title">Tag Name</h1>
-          <div class="type c">+</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="c-button-hold">
-      <button class="c-op-1 closeTagSearch">Cancel</button>
-      <button class="c-op-2" style="color: #4167f4;">Save</button>
+  <div class="balance-message">
+    <div class="c-title-holder dark">
+      <h1 class="imp-title">Balance</h1>
     </div>
   </div>
 
-  <div class="s-dropdown">
-    <div class="s-d-titlebox">
+  <div class="s-dropdown ec">
+    <div class="s-d-titlebox ec">
       <div class="sd-img">
         <img src="<?php echo $account->getImage(); ?>" style="border: inherit; border-radius: inherit;" width="40" height="40">
       </div>
@@ -90,55 +46,47 @@ if ($account == null)
       </div>
     </div>
     <div class="sd-content">
-      <div class="section">
-          <i class="material-icons s-icon settings-icon">account_circle</i>
+      <div class="section ec">
+          <i class="material-icons s-icon settings-icon ec">account_circle</i>
           <div class="s-txt">
-            My Account
+            MY ACCOUNT
           </div>
         </div>
-        <div class="section">
-            <i class="material-icons s-icon settings-icon">group</i>
+        <div class="section ec">
+            <i class="material-icons s-icon settings-icon ec">group</i>
             <div class="s-txt">
-              Switch Accounts
+              SWITCH ACCOUNTS
             </div>
         </div>
-        <div class="section">
-            <i class="material-icons s-icon settings-icon">exit_to_app</i>
+        <div class="section ec">
+            <i class="material-icons s-icon settings-icon ec">exit_to_app</i>
             <div class="s-txt">
-              Sign Out
+              SIGN OUT
             </div>
         </div>
-        <div class="long-line"></div>
-        <div class="section">
-            <i class="material-icons s-icon settings-icon">help</i>
+        <div class="long-line ec"></div>
+        <div class="section ec">
+            <i class="material-icons s-icon settings-icon ec">help</i>
             <div class="s-txt">
-              Help
+              HELP
             </div>
         </div>
-        <div class="section">
-            <i class="material-icons s-icon settings-icon">feedback</i>
+        <div class="section ec">
+            <i class="material-icons s-icon settings-icon ec">feedback</i>
             <div class="s-txt">
-              Send Feedback
+              SEND FEEDBACK
             </div>
         </div>
-        <div class="section">
-            <i class="material-icons s-icon settings-icon">settings</i>
+        <div class="section ec">
+            <i class="material-icons s-icon settings-icon ec">settings</i>
             <div class="s-txt">
-              Settings
+              SETTINGS
             </div>
         </div>
     </div>
   </div>
+
   <div class="imp-bg-fade" id="imp-bg-fade" style="display: none; opacity 0;"></div>
-
-  <div class="donate-bar" style="display: none;">
-    <div class="d-para">Please consider donating to help keep this service shutting down.</div>
-
-    <i class="material-icons black d-icon">clear</i>
-
-    <button class="d-button">Donate w/ Paypal</button>
-
-  </div>
 
   <div class="s-settings" style="display: none;">
     <div class="s-title-box">
@@ -215,36 +163,38 @@ if ($account == null)
 
   <div class="sidenav-ec">
       <div class="scroll-hide">
-        <h1 class="ec-logo">memedb</h1>
+        <div class="ec-logo-info">
+          <h1 class="ec-logo">memedb</h1>
 
-        <div class="section-dark">
-          <div class="s-txt ec">
-            BALANCE <span class="balance-span">24,789db</span>
-          </div>
-        </div>
-
-        <div class="sections">
-          <div class="line ec"></div>
-
-          <div class="section-dark">
+          <div class="section-dark imp-info openBalance">
             <div class="s-txt ec">
-              HOME
+              BALANCE <span class="balance-span">24,789db</span>
             </div>
           </div>
 
-          <div class="section-dark">
-            <div class="s-txt ec">
-              RECOMMENDED
-            </div>
-          </div>
+          <div class="sections">
+            <div class="line ec"></div>
 
-          <div class="section-dark">
-            <div class="s-txt ec highlighted">
-              DB ECONOMY
+            <div class="section-dark imp-info">
+              <div class="s-txt ec">
+                HOME
+              </div>
             </div>
-          </div>
 
-          <div class="line ec"></div>
+            <div class="section-dark imp-info">
+              <div class="s-txt ec">
+                RECOMMENDED
+              </div>
+            </div>
+
+            <div class="section-dark imp-info">
+              <div class="s-txt ec highlighted">
+                DB ECONOMY
+              </div>
+            </div>
+
+            <div class="line ec"></div>
+          </div>
         </div>
 
         <div class="subscriptions">
@@ -635,11 +585,31 @@ if ($account == null)
           </div>
         </div>
 
-        <i class="material-icons ec-settings">settings</i>
+        <i class="material-icons ec-settings openAccount">settings</i>
       </div>
 
       <div class="ec-searchbar">
-        <i class="material-icons search-g" style="float: left; position:relative; top: -4px;">search</i><input type="text" placeholder="Search" style="all: unset; width: 150px;position: relative; left: 11px; color: #646d6d; top: -1.5px;" />
+        <i class="material-icons search-g" style="float: left; position:relative; top: -4px;">search</i><input type="text" placeholder="Search Stocks" style="all: unset; width: 150px;position: relative; left: 11px; color: #646d6d; top: -1.5px;" />
+      </div>
+
+      <div class="ec-search-results">
+        <div class="ec-result-section">
+          <div class="s-txt ec result highlighted">
+            MEME 1
+          </div><i class="material-icons ec-icons up results">trending_up</i>
+        </div>
+
+        <div class="ec-result-section">
+          <div class="s-txt ec result">
+            MEME 2
+          </div><i class="material-icons ec-icons idle results">trending_flat</i>
+        </div>
+
+        <div class="ec-result-section">
+          <div class="s-txt ec result">
+            MEME 3
+          </div><i class="material-icons ec-icons low results">trending_down</i>
+        </div>
       </div>
 
     </div>
