@@ -96,7 +96,7 @@ if ($account == null) {
 
     </div>
     <div class="sign-in-user openAccount">
-      <img src="<?php echo $account->getImage(); ?>" style="border: inherit; border-radius: inherit;" width="35" height="35">
+      <img src="<?php echo $self->getImage(); ?>" style="border: inherit; border-radius: inherit;" width="35" height="35">
     </div>
   </div>
   <div class="s-dropdown">
@@ -339,7 +339,7 @@ if ($account == null) {
             </div>
           </div>
         </div>
-        <button id="follow-btn" onclick="followAction()" data-handle="<?= $account->handle?>" class="<?php echo ($is_self ? "follow-self" : ($self->isFollowing($account->id) ? "unfollow" : "follow")) ?>">
+        <button id="follow-btn" onclick="followAction()" data-handle="<?= $account->handle?>" class="<?php echo ($is_self ? "follow-self" : ((loggedIn() && $self->isFollowing($account->id)) ? "unfollow" : "follow")) ?>">
           <span><?php echo ($account->getFollowerCount()); ?></span>
         </button>
       </div>
