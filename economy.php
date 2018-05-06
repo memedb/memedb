@@ -240,7 +240,7 @@ if ($account == null)
 
           <div class="section-dark">
             <div class="s-txt ec highlighted">
-              MEMEDB ECONOMY
+              DB ECONOMY
             </div>
           </div>
 
@@ -335,7 +335,8 @@ if ($account == null)
 
     <div class="ec-stats-info">
       <div class="ec-invest">
-
+        <h1 class="ec-invest">INVEST</h1>
+        <input type="text" placeholder="0.00" class="ec-invest-input" /><span style="font-family: 'Roboto Slab'; font-weight: bold; color: #818c8b; font-size: 25px;    position: relative; top: -6px;">db</span>
       </div>
 
       <div class="ec-lifetime">

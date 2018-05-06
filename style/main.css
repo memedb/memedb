@@ -3253,6 +3253,7 @@ body {
 .ec-content {
   position: relative;
   width: auto;
+  background: #222629;
 }
 
 .sidenav-ec {
@@ -3317,6 +3318,7 @@ body {
   margin-right: 70px;
   margin-top: 6px;
   font-size: 24px;
+  font-weight: 600;
   position: relative;
   float: right;
 }
@@ -3342,14 +3344,14 @@ body {
 .ec-searchbar {
   position: relative;
   font-family: Roboto;
-  padding: 8px 8px 8px 25px;
+  padding: 8px 8px 8px 8px;
   font-size: 17px;
   width: 210px;
   height: 20px;
   color: #646d6d;
   float: left;
   margin-top: 10px;
-  margin-left: 10px;
+  margin-left: 30px;
   border: 0;
   border-radius: 2px;
   background-color: #2d3235;
@@ -3383,10 +3385,10 @@ body {
 
 .ec-meme-title {
   position: relative;
-  margin-left: 10px;
+  margin-left: 30px;
   color: #bdd1d0;
   font-family: 'Roboto';
-  font-weight: 600;
+  font-weight: 500;
   font-size: 45px;
   cursor: default;
   margin-top: 10px;
@@ -3409,8 +3411,50 @@ body {
   font-family: 'Roboto';
   font-weight: 600;
   font-size: 20px;
-  cursor: default;
-  margin-top: 10px;
+  cursor: pointer;
+  margin-top: 25px;
   margin-right: 50px;
   float: right;
+}
+
+.ec-title {
+  height: 80px;
+}
+
+.ec-graph {
+  width: 95%;
+  height: 700px;
+  margin-right: auto;
+  margin-left: auto;
+  background: #2d3235;
+}
+
+.ec-stats-info {
+  width: 95%;
+  height: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+}
+
+.ec-invest {
+  position: relative;
+  margin-left: 10px;
+  color: #bdd1d0;
+  font-family: 'Roboto';
+  font-weight: 500;
+  font-size: 35px;
+  cursor: default;
+  float: left;
+}
+
+.ec-invest-input {
+  all: unset;
+  width: 85px;
+  position: relative;
+  color: #818c8b;
+  margin-left: 10px;
+  font-family: 'Roboto Slab';
+  font-weight: bold;
+  top: -4px;
 }

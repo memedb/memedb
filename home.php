@@ -299,6 +299,13 @@ if ($account == null)
             </div>
           </div>
 
+          <div class="section">
+            <i class="material-icons black s-icon">functions</i>
+            <div class="s-txt">
+              db Economy
+            </div>
+          </div>
+
           <div class="line"></div>
         </div>
 
