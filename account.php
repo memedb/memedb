@@ -34,92 +34,9 @@ if ($account == null) {
 </head>
 
 <body>
-
-  <div class="top-bar">
-    <div class="logo">memedb</div>
-    <div class="searchbar">
-      <i class="material-icons search-g" style="float: left; padding-right: 25px;position:relative; top: -4px;">search</i><input type="text" placeholder="Search" style="all: unset; width: 150px;position: relative; left: 11px;" />
-
-      <div class="search-result-box" style="display:none;">
-        <div class="search-op">
-          <p class="res-p">This is option 1</p>
-        </div>
-        <div class="search-op">
-          <p class="res-p">This is option 2</p>
-        </div>
-        <div class="search-op">
-          <p class="res-p">This is option 3</p>
-        </div>
-        <div class="search-op">
-          <p class="res-p">This is option 1</p>
-        </div>
-        <div class="search-op">
-          <p class="res-p">This is option 2</p>
-        </div>
-        <div class="search-op">
-          <p class="res-p">This is option 3</p>
-        </div>
-      </div>
-
-      <div class="search-featured-box" style="display:none;">
-        <h1>Featured Users</h1>
-        <div class="s-box-holder">
-          <div class="s-box">
-
-          </div>
-          <div class="s-box">
-
-          </div>
-          <div class="s-box">
-
-          </div>
-          <div class="s-box">
-
-          </div>
-          <div class="s-box">
-
-          </div>
-          <div class="s-box">
-
-          </div>
-          <div class="s-box">
-
-          </div>
-          <div class="s-box">
-
-          </div>
-          <div class="s-box">
-
-          </div>
-        </div>
-      </div>
-
-    </div>
-    <div class="sign-in-user openAccount">
-      <img src="<?php echo $self->getImage(); ?>" style="border: inherit; border-radius: inherit;" width="35" height="35">
-    </div>
-  </div>
-  <div class="s-dropdown">
-    <div class="s-d-titlebox">
-      <div class="sd-img">
-        <img src="<?php echo $account->getImage(); ?>" style="border: inherit; border-radius: inherit;" width="40" height="40">
-      </div>
-      <div class="sd-infoholder">
-        <h1 class="n-name sdname"><?php echo $account->name; ?></h1>
-        <div class="username">
-          @<?php echo $account->handle; ?>
-        </div>
-      </div>
-    </div>
-    <div class="sd-content">
-      <div class="sd-option">
-
-      </div>
-      <div class="sd-option">
-
-      </div>
-    </div>
-  </div>
+  <?php
+  topBar($self);
+   ?>
 
   <div class="imp-bg-fade" id="imp-bg-fade" style="display: none; opacity 0;"></div>
 
@@ -654,7 +571,7 @@ if ($account == null) {
       </div>
     </div>
 
-    <div class="library l-l1">
+    <div class="library l-l1" ondragover="libDragOver(event);" ondrop="libDrop(event);">
       <i class="material-icons l-icon">photo_library</i>
       <h1 class="l-title">Posts</h1>
 

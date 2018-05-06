@@ -1,7 +1,7 @@
 <?php
-ini_set('session.gc_maxlifetime', 3600);
+ini_set('session.gc_maxlifetime', 100000);
 
-session_set_cookie_params(3600);
+session_set_cookie_params(100000);
 
 session_start();
 
@@ -83,7 +83,13 @@ Command::register("unfollow", function($user) {
 });
 
 Command::register("delete_favorite", function($user) {
-  
+  $user->removeFavorite($_POST['type']);
+  jsonMessage(array("favorites"=>$user->favorites));
+});
+
+Command::register("add_favorite", function($user) {
+  $user->addFavorite($_POST['type']);
+  jsonMessage(array("favorites"=>$user->favorites));
 });
 
 Command::register("search_tag", function($user) {
@@ -129,6 +135,97 @@ if ($action) {
 }
 
 // Functions:
+
+function topBar($self) {
+  ?>
+    <div class="top-bar">
+      <div class="logo"><a style="all:unset;" href="/">memedb</a></div>
+      <div class="searchbar">
+        <i class="material-icons search-g" style="float: left; padding-right: 25px;position:relative; top: -4px;">search</i><input type="text" placeholder="Search" style="all: unset; width: 150px;position: relative; left: 11px;" />
+
+        <div class="search-result-box" style="display:none;">
+          <div class="search-op">
+            <p class="res-p">This is option 1</p>
+          </div>
+          <div class="search-op">
+            <p class="res-p">This is option 2</p>
+          </div>
+          <div class="search-op">
+            <p class="res-p">This is option 3</p>
+          </div>
+          <div class="search-op">
+            <p class="res-p">This is option 1</p>
+          </div>
+          <div class="search-op">
+            <p class="res-p">This is option 2</p>
+          </div>
+          <div class="search-op">
+            <p class="res-p">This is option 3</p>
+          </div>
+        </div>
+
+        <div class="search-featured-box" style="display:none;">
+          <h1>Featured Users</h1>
+          <div class="s-box-holder">
+            <div class="s-box">
+
+            </div>
+            <div class="s-box">
+
+            </div>
+            <div class="s-box">
+
+            </div>
+            <div class="s-box">
+
+            </div>
+            <div class="s-box">
+
+            </div>
+            <div class="s-box">
+
+            </div>
+            <div class="s-box">
+
+            </div>
+            <div class="s-box">
+
+            </div>
+            <div class="s-box">
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+      <div class="sign-in-user openAccount">
+        <img src="<?php echo $self->getImage(); ?>" style="border: inherit; border-radius: inherit;" width="35" height="35">
+      </div>
+    </div>
+
+    <div class="s-dropdown">
+      <div class="s-d-titlebox">
+        <div class="sd-img">
+          <img src="<?php echo $self->getImage(); ?>" style="border: inherit; border-radius: inherit;" width="40" height="40">
+        </div>
+        <div class="sd-infoholder">
+          <h1 class="n-name sdname"><?php echo $self->name; ?></h1>
+          <div class="username">
+            @<?php echo $self->handle; ?>
+          </div>
+        </div>
+      </div>
+      <div class="sd-content">
+        <div class="sd-option">
+
+        </div>
+        <div class="sd-option">
+
+        </div>
+      </div>
+    </div>
+  <?php
+}
 
 function jsonMessage($data) {
   $data['status'] = 'success';
@@ -343,6 +440,45 @@ class user {
 
     mail($email, $subject, $message, implode("\r\n", $headers));
     return $id;
+  }
+
+  public function updateField($key) {
+    $conn = $GLOBALS['conn'];
+    $stmt = $conn->prepare("UPDATE users SET {$key}=? WHERE id=?");
+    $fieldType = "";
+    $value = get_object_vars($this)[$key];
+    switch (gettype($value)) {
+    case "integer":
+      $fieldType = "i";
+      break;
+    case "string":
+      $fieldType = "s";
+      break;
+    case "array":
+      $fieldType = "s";
+      $value = implode(",", $value);
+      $value = substr($value, 0, strlen($value));
+      break;
+    }
+    $stmt->bind_param("{$fieldType}i", $value, $this->id);
+    $stmt->execute();
+  }
+
+  public function addFavorite($type) {
+    array_push($this->favorites, $type);
+    $this->updateField("favorites");
+  }
+
+  public function removeFavorite($type) {
+    $index = -1;
+    for ($i = 0; $i < count($this->favorites); $i++) {
+      if ($this->favorites[$i] == $type) {
+        $index = $i;
+        break;
+      }
+    }
+    array_splice($this->favorites, $index, 1);
+    $this->updateField("favorites");
   }
 
   public function getFollowerCount() {
