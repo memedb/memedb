@@ -3437,10 +3437,10 @@ body {
 
 .ec-stats-info {
   width: 95%;
-  height: 300px;
+  height: auto;
   margin-left: auto;
   margin-right: auto;
-  margin-top: 20px;
+  margin-top: 50px;
 }
 
 .ec-invest {
@@ -3471,4 +3471,31 @@ body {
   overflow-y: scroll;
   padding-right: 17px; /* Increase/decrease this value for cross-browser compatibility */
     box-sizing: content-box; /* So the width will be 100% + 17px */
+}
+
+.ec-lifetime {
+  position: relative;
+  float: right;
+  margin: 0;
+}
+
+.ec-h-lifetime {
+  width: 130px;
+  height: 18px;
+  position: relative;
+  float: left;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: lighter;
+  text-align: left;
+  font-style: italic;
+  top: -20px;
+  color: #bdd1d0;
+}
+
+.lifetime-box {
+  background: #2d3235;
+  height: 100px;
+  width: 400px;
+  position: relative;
 }

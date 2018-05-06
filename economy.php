@@ -664,7 +664,10 @@ if ($account == null)
       </div>
 
       <div class="ec-lifetime">
+        <h1 class="ec-h-lifetime">Lifetime</h1>
+        <div class="lifetime-box">
 
+        </div>
       </div>
 
     </div>
