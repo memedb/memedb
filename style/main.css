@@ -11,7 +11,7 @@ ol, ul {
 }
 
 html {
-  background: #222;
+  background: #fff;
 }
 
 /*Please use one global stylesheet and also get the minify package in atom. Thank you. :D*/
@@ -978,7 +978,7 @@ input:checked+.slider:before {
   width: auto;
   height: auto;
   margin-top: 55px;
-  top: -19px;
+  top: -20px;
 }
 
 .h-content.ec {
@@ -2295,9 +2295,7 @@ body {
   display: grid;
   grid-template-columns: 800px 400px;
   grid-template-rows: 600px 110px;
-  grid-template-areas:
-    "img comments"
-    "desc reply";
+  grid-template-areas: "img comments" "desc reply";
 }
 
 .m-comment-bar {
@@ -2634,7 +2632,7 @@ body {
 }
 
 .followmp:hover {
-   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 .followmp.hover {
@@ -3172,7 +3170,7 @@ body {
   margin-bottom: 50px;
   display: inline-block;
   border-radius: 2px;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 .rec-icon {
@@ -3237,7 +3235,7 @@ body {
 }
 
 .rt-fab:hover {
-   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
 }
 
 .small-floating {
@@ -3319,7 +3317,7 @@ body {
   position: relative;
   text-align: center;
   color: #dbd85e;
-  font-family: 'Roboto Slab',serif;
+  font-family: 'Roboto Slab', serif;
   font-weight: bold;
   font-size: 45px;
   cursor: pointer;
@@ -3327,7 +3325,7 @@ body {
 }
 
 .balance-span {
-  font-family: 'Roboto',sans-serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: lighter;
   font-style: italic;
   font-size: 16px;
@@ -3377,7 +3375,7 @@ body {
   border: 0;
   border-radius: 2px;
   background-color: #2d3235;
-  z-index: 100;
+  z-index: 1000000;
 }
 
 .ec-search-results {
@@ -3386,12 +3384,12 @@ body {
   width: 226px;
   max-height: 160px;
   background-color: #2d3235;
-  z-index: 1;
+  z-index: 1000000;
   top: 75px;
   left: 330px;
   border-radius: 2px;
   opacity: 0.9;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
 
 .ec-account-settings {
@@ -3499,8 +3497,10 @@ body {
   width: 100%;
   height: 100%;
   overflow-y: scroll;
-  padding-right: 17px; /* Increase/decrease this value for cross-browser compatibility */
-    box-sizing: content-box; /* So the width will be 100% + 17px */
+  padding-right: 17px;
+  /* Increase/decrease this value for cross-browser compatibility */
+  box-sizing: content-box;
+  /* So the width will be 100% + 17px */
 }
 
 .ec-lifetime {
@@ -3573,7 +3573,6 @@ body {
   margin-left: 35px;
 }
 
-
 .long-line.ec {
   background: #222629;
 }
@@ -3628,6 +3627,6 @@ body {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   z-index: 1000000;
 }
