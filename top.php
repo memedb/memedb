@@ -21,7 +21,7 @@ if ($account == null)
 
   <?php imports(); ?>
   <link rel="icon" href="https://i.imgur.com/h0t0THj.png" type="image" sizes="16x16">
-  <title>Home</title>
+  <title>memedb</title>
 
 </head>
 
@@ -81,7 +81,7 @@ if ($account == null)
   <div class="top-bar">
     <div class="logo">memedb</div>
     <div class="searchbar">
-      <i class="material-icons search-g" style="float: left; padding-right: 25px;position:relative; top: -4px;color: #ccc;">search</i><input type="text" placeholder="Search" style="all: unset; width: 150px;position: relative; left: 11px; color: #ccc;" />
+      <i class="material-icons search-g" style="float: left; padding-right: 25px;position:relative; top: -4px;">search</i><input type="text" placeholder="Search" style="all: unset; width: 150px;position: relative; left: 11px; color: #fff" />
 
       <div class="search-result-box" style="display:none;">
         <div class="search-op">
@@ -194,7 +194,7 @@ if ($account == null)
         </div>
     </div>
   </div>
-  <div class="imp-bg-fade" id="imp-bg-fade" style="display: block; opacity 1;"></div>
+  <div class="imp-bg-fade" id="imp-bg-fade" style="display: none; opacity 0;"></div>
 
   <div class="donate-bar" style="display: none;">
     <div class="d-para">Please consider donating to help keep this service shutting down.</div>
@@ -300,9 +300,9 @@ if ($account == null)
           </div>
 
           <div class="section">
-            <i class="material-icons black s-icon">insert_chart</i>
+            <i class="material-icons black s-icon">trending_up</i>
             <div class="s-txt">
-              db Economy
+              Top
             </div>
           </div>
 

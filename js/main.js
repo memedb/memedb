@@ -47,6 +47,7 @@ $(document).ready(function() {
     closeAddLib();
     closeAccount();
     closePost();
+    closeBalance();
   });
 
   $(".openSettings").click(function() {
@@ -107,6 +108,16 @@ $(document).ready(function() {
 
   $(".closePost").click(function() {
     closePost();
+    $("#imp-message, #imp-bg-fade").css("opacity", "0");
+  });
+
+  $(".openBalance").click(function() {
+    openBalance();
+    $("#imp-bg-fade").css("opacity", "");
+  });
+
+  $(".closeBalance").click(function() {
+    closeBalance();
     $("#imp-message, #imp-bg-fade").css("opacity", "0");
   });
 
@@ -355,4 +366,28 @@ function closePost(){
       display: "none"
     });
     $("#imp-bg-fade").css("display", "none");
+}
+
+function openBalance(){
+    $(".balance-message").css({
+      display: "block"
+    });
+    $("#imp-bg-fade").css("display", "");
+    setTimeout(function() {
+      $(".l-sett-opt").css({
+        opacity: "",
+        right: ""
+      });
+      $("#imp-bg-fade").css("opacity", "");
+    }, 10);
+    $(".peep").children().css('filter', 'blur(5px)');
+    $(".balance-message").css('filter', 'blur(0px)');
+}
+
+function closeBalance(){
+    $(".balance-message").css({
+      display: "none"
+    });
+    $("#imp-bg-fade").css("display", "none");
+    $(".peep").children().css('filter', 'blur(0px)');
 }
