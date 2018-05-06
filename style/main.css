@@ -3632,7 +3632,7 @@ body {
 }
 
 .bm-lock {
-  display: none;
+  display: block;
   width: 300px;
   height: 50px;
   position: absolute;
@@ -3640,6 +3640,13 @@ body {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+
+.bm-content {
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: relative;
 }
 
 .input.ec {
@@ -3662,13 +3669,6 @@ body {
   margin-left: 10px;
   font-weight: 500;
   cursor: pointer;
-}
-
-.bm-content {
-  width: 100%;
-  height: 100%;
-  position: relative;
-
 }
 
 .sidenav-ec.small {

@@ -40,7 +40,7 @@ if ($account == null)
         <p class="login-sub" style="opacity:0;">Potential error message.</p>
       </div>
 
-      <h1 class="ec-sub-field">No password yet?</h1><span class="ec-sub-field ec-link">Set up</span>
+      <h1 class="ec-sub-field">No password yet?</h1><span class="ec-sub-field ec-link">Set Up</span>
 
     </div>
 
