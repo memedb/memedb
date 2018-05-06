@@ -972,9 +972,15 @@ input:checked+.slider:before {
   position: relative;
   margin-left: 300px;
   width: auto;
-  height: 1000px;
+  height: auto;
   margin-top: 55px;
   top: -19px;
+}
+
+.h-content.ec {
+  margin-top: 0px;
+  height: 100%;
+  background: #222629;
 }
 
 .h-row {
@@ -3130,7 +3136,6 @@ body {
 .rec-content {
   position: relative;
   width: auto;
-  margin-top: 55px;
 }
 
 .tag-corridor {
@@ -3241,4 +3246,171 @@ body {
   margin: 5px;
   cursor: pointer;
   border-radius: 3px;
+}
+
+/* ECONOMY */
+
+.ec-content {
+  position: relative;
+  width: auto;
+}
+
+.sidenav-ec {
+  display: block;
+  position: fixed;
+  float: left;
+  height: 100%;
+  width: 300px;
+  background: #2d3235;
+  overflow-y: auto;
+}
+
+.section-dark {
+  height: 40px;
+  width: 100%;
+  position: relative;
+  text-decoration: none;
+  font-family: Roboto;
+  font-weight: 600;
+  color: #bdd1d0;
+  border: none;
+  font-size: 18px;
+  display: table;
+  cursor: pointer;
+}
+
+.s-txt.ec {
+  margin-left: 75px;
+}
+
+.s-txt.ec.highlighted {
+  color: #dbd85e;
+}
+
+.line.ec {
+  background: #646d6d;
+  width: 70%;
+}
+
+.ec-logo {
+  position: relative;
+  text-align: center;
+  color: #dbd85e;
+  font-family: 'Roboto Slab',serif;
+  font-weight: bold;
+  font-size: 45px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.balance-span {
+  font-family: 'Roboto',sans-serif;
+  font-weight: lighter;
+  font-style: italic;
+  font-size: 16px;
+  color: inherit;
+  opacity: .7;
+  margin-left: 10px;
+}
+
+.ec-icons {
+  margin-right: 70px;
+  margin-top: 6px;
+  font-size: 24px;
+  position: relative;
+  float: right;
+}
+
+.ec-icons.low {
+  color: #a35555;
+}
+
+.ec-icons.idle {
+  color: inherit
+}
+
+.ec-icons.up {
+  color: #5da555;
+}
+
+.ec-top-bar {
+  width: 100%;
+  height: 60px;
+  padding-top: 15px;
+}
+
+.ec-searchbar {
+  position: relative;
+  font-family: Roboto;
+  padding: 8px 8px 8px 25px;
+  font-size: 17px;
+  width: 210px;
+  height: 20px;
+  color: #646d6d;
+  float: left;
+  margin-top: 10px;
+  margin-left: 10px;
+  border: 0;
+  border-radius: 2px;
+  background-color: #2d3235;
+  z-index: 100;
+}
+
+.ec-account-settings {
+  height: 100%;
+  width: auto;
+  position: relative;
+  float: right;
+}
+
+.ec-account-info {
+  height: 60px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  width: auto;
+  position: relative;
+  float: left;
+  color: #bdd1d0;
+}
+
+.ec-settings {
+  color: #bdd1d0;
+  font-size: 30px;
+  margin-right: 15px;
+  margin-top: 13px;
+  margin-left: 30px;
+}
+
+.ec-meme-title {
+  position: relative;
+  margin-left: 10px;
+  color: #bdd1d0;
+  font-family: 'Roboto';
+  font-weight: 600;
+  font-size: 45px;
+  cursor: default;
+  margin-top: 10px;
+  float: left;
+}
+
+.ec-icons.large {
+  font-size: 55px;
+  float: left;
+  font-weight: 600;
+  margin-left: 10px;
+  float: left;
+}
+
+.ec-meme-save {
+  position: relative;
+  float: right;
+  text-align: center;
+  color: #bdd1d0;
+  font-family: 'Roboto';
+  font-weight: 600;
+  font-size: 20px;
+  cursor: default;
+  margin-top: 10px;
+  margin-right: 50px;
+  float: right;
 }
