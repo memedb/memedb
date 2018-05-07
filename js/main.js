@@ -211,6 +211,39 @@ function sendCommand(name, session, data, callback) {
   xhttp.send(dataString);
 }
 
+function uploadFile(file, session, type, parent, library, callback) {
+  if (session == null) {
+    var cookies = document.cookie.split("; ");
+    for (i = 0; i < cookies.length; i++) {
+      var cookie = cookies[i];
+      if (cookie.startsWith("PHPSESSID")) {
+        session = cookie.split("=")[1];
+        break;
+      }
+    }
+  }
+
+  var formData = new FormData();
+  formData.append('file', file);
+  formData.append('type', type);
+  formData.append('parent', parent);
+  formData.append('library', library);
+  formData.append('session', session);
+
+  $.ajax({
+    type: 'POST',
+    url: '/api/create_post',
+    contentType: false,
+    processData: false,
+    data: formData,
+    success: function(response) {
+      response = JSON.parse(response);
+      if (response.status == "success")
+        callback(response);
+    }
+  });
+}
+
 function followAction() {
   var elmt = document.getElementById("follow-btn");
 
@@ -410,6 +443,29 @@ function closeBalance(){
     $(".peep").css('background','#fff');
 }
 
-function libDrop(e) {
+function removeDragData(ev) {
+  console.log('Removing drag data')
 
+  if (ev.dataTransfer.items) {
+    ev.dataTransfer.items.clear();
+  } else {
+    ev.dataTransfer.clearData();
+  }
+}
+
+function libDrop(ev) {
+  console.log("drop");
+  ev.preventDefault();
+  var file = ev.dataTransfer.items[i].getAsFile();
+  var nameSplit = file.name.split(".");
+  uploadFile(file, null, nameSplit[nameSplit.length - 1], -1, -1, function(data) {
+    console.log(data);
+  });
+
+  removeDragData(ev);
+}
+
+function libDrag(ev) {
+  console.log("drag");
+  ev.preventDefault();
 }
