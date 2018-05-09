@@ -395,7 +395,39 @@ if ($account == null)
       </div>
     </div> -->
 
-  <div class="post-blk m-post">
+  <div class="post m-post openPost">
+    <div class="post-header">
+      <h1 class="post-title">NEW POST</h1>
+    </div>
+    <div class="post-content">
+      <div class="textarea-wrap">
+        <textarea name="name" class="post-textarea" wrap="hard"></textarea>
+        <div class="other-options-wrap">
+          <button class="option-btn hover">
+            <i class="material-icons search-g" style="float: left;padding-right: 10px; position: relative; font-size: 21px;top: -0.5px;">collections</i>Add Image
+          </button>
+          <button class="option-btn hover">
+            <i class="material-icons search-g" style="float: left;padding-right: 10px; position: relative; font-size: 21px;top: -0.5px;">video_library</i>Add Video
+          </button>
+          <button class="option-btn hover">
+            <i class="material-icons search-g" style="float: left;padding-right: 10px;position: relative;font-size: 34px;height: 10px;top: -6.5px;left: -5px;width: 23px;">gif</i>Add Gif
+          </button>
+        </div>
+      </div>
+      <div class="tags-wrap">
+          <div class="searchbar category" style="background: #ddd">
+            <i class="material-icons search-g" style="float: left; padding-right: 25px;position:relative; top: -4px; color: #999;">search</i><input type="text" placeholder="Add Tags" style="all: unset; width: 100px;position: relative; left: -10px; color: #999;" />
+          </div>
+
+      </div>
+      <div class="c-button-hold">
+        <button class="post-btn closePost">Cancel</button>
+        <button class="post-btn closePost" style="float: right">Post</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class="post-blk m-post">
       <div class="c-title-holder">
         <h1 class="imp-title">New Post</h1>
       </div>
@@ -429,7 +461,7 @@ if ($account == null)
         <button class="post-btn closePost">Cancel</button>
         <button class="post-btn hover">Post</button>
       </div>
-    </div>
+    </div> -->
 
   <div class="floating-box">
     <div class="floating-button openPost">
