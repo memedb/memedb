@@ -106,6 +106,19 @@ Command::register("search_tag", function($user) {
   jsonMessage(array("results"=>$result->num_rows,"tags"=>$tags,"q"=>$_POST['q'],"code"=>$_POST['code']));
 });
 
+Command::register("create_post", function($user) {
+  $id = uniqid('', true);
+  $date = gmdate(DATE_ATOM);
+  $conn = $GLOBALS['conn'];
+  $stmt = $conn->prepare("INSERT INTO `posts` (`id`, `tags`, `upvotes`, `downvotes`, `source`, `date`, `type`, `parent`, `library`) VALUES (?, '', 0, 0, ?, ?, ?, ?, ?);");
+  $stmt->bind_param("sissii", $id, $user->id, $date, $_POST['type'], $_POST['parent'], $_POST['library']);
+  $stmt->execute();
+
+  move_uploaded_file($_FILES['file']['tmp_name'], 'images/' . $id . "." . $_POST['type']);
+
+  jsonMessage(array("id"=>$id));
+});
+
 $action = $_GET['action'];
 
 if ($action) {
@@ -339,10 +352,10 @@ function loggedIn() {
 
 // -------------------------------------------------------------------------------------
 
-class image {
+class post {
 
   public static function loadFromId($id) {
-    $img = loadDBObject("images", "id=$id", "image");
+    $img = loadDBObject("posts", "id=$id", "post");
     if ($img != null) {
       $img->tags = explode(",",$img->tags);
     }
@@ -350,7 +363,7 @@ class image {
   }
 
   public function printImage() {
-    echo "<img src=\"/images/id-" . $this->id . "." . $this->type . "\" />";
+    echo "<img src=\"/images/" . $this->id . "." . $this->type . "\" />";
   }
 
 }
