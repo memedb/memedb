@@ -76,71 +76,6 @@ if ($account == null)
     </div>
   </div>
 
-
-  <div class="top-bar">
-    <div class="logo">memedb</div>
-    <div class="searchbar">
-      <i class="material-icons search-g" style="float: left; padding-right: 25px;position:relative; top: -4px;color: #ccc;">search</i><input type="text" placeholder="Search" style="all: unset; width: 150px;position: relative; left: 11px; color: #ccc;" />
-
-      <div class="search-result-box" style="display:none;">
-        <div class="search-op">
-          <p class="res-p">This is option 1</p>
-        </div>
-        <div class="search-op">
-          <p class="res-p">This is option 2</p>
-        </div>
-        <div class="search-op">
-          <p class="res-p">This is option 3</p>
-        </div>
-        <div class="search-op">
-          <p class="res-p">This is option 1</p>
-        </div>
-        <div class="search-op">
-          <p class="res-p">This is option 2</p>
-        </div>
-        <div class="search-op">
-          <p class="res-p">This is option 3</p>
-        </div>
-      </div>
-
-      <div class="search-featured-box" style="display:none;">
-        <h1>Featured Users</h1>
-        <div class="s-box-holder">
-          <div class="s-box">
-
-          </div>
-          <div class="s-box">
-
-          </div>
-          <div class="s-box">
-
-          </div>
-          <div class="s-box">
-
-          </div>
-          <div class="s-box">
-
-          </div>
-          <div class="s-box">
-
-          </div>
-          <div class="s-box">
-
-          </div>
-          <div class="s-box">
-
-          </div>
-          <div class="s-box">
-
-          </div>
-        </div>
-      </div>
-
-    </div>
-    <div class="sign-in-user openAccount">
-      <img src="<?php echo $account->getImage(); ?>" style="border: inherit; border-radius: inherit;" width="35" height="35">
-    </div>
-  </div>
   <div class="s-dropdown">
     <div class="s-d-titlebox">
       <div class="sd-img">
@@ -193,7 +128,62 @@ if ($account == null)
         </div>
     </div>
   </div>
-  <div class="imp-bg-fade" id="imp-bg-fade" style="display: block; opacity 1;"></div>
+
+  <div class="sidenav-home">
+      <div class="scroll-hide">
+        <div class="logo-info">
+          <div class="home-logo"><a style="all:unset;" href="/">memedb</a></div>
+
+          <div class="sections">
+            <div class="line h"></div>
+
+            <div class="section-light imp-info">
+              <div class="s-txt h highlighted">
+                <a style="all:unset;" href="/home.php">HOME</a>
+              </div>
+            </div>
+
+            <div class="section-light imp-info">
+              <div class="s-txt h">
+                <a style="all:unset;" href="/recommended.php">RECOMMENDED</a>
+              </div>
+            </div>
+
+            <div class="section-light imp-info">
+              <div class="s-txt h">
+                <a style="all:unset;" href="/economy.php">DB ECONOMY</a>
+              </div>
+            </div>
+
+            <div class="line h"></div>
+          </div>
+        </div>
+
+        <div class="subscriptions">
+
+          <div class="section-light">
+            <div class="s-txt h">
+              ACCOUNT 1
+            </div>
+          </div>
+
+          <div class="section-light">
+            <div class="s-txt h">
+              ACCOUNT 2
+            </div>
+          </div>
+
+          <div class="section-light">
+            <div class="s-txt h">
+              ACCOUNT 3
+            </div>
+          </div>
+
+        </div>
+      </div>
+  </div>
+
+  <div class="imp-bg-fade" id="imp-bg-fade" style="display: none; opacity 1;"></div>
 
   <div class="donate-bar" style="display: none;">
     <div class="d-para">Please consider donating to help keep this service shutting down.</div>
@@ -277,83 +267,6 @@ if ($account == null)
     </div>
   </div>
 
-  <div class="sidenav-home">
-    <div class="s-scroll">
-      <div class="scroll-hide">
-
-        <div class="sections">
-
-          <div class="section" style="background: #ddd;">
-            <i class="material-icons black s-icon">supervisor_account</i>
-            <div class="s-txt">
-              Following
-            </div>
-            <button class="s-notes">+156</button>
-          </div>
-
-          <div class="section">
-            <i class="material-icons black s-icon">functions</i>
-            <div class="s-txt">
-              Recommended
-            </div>
-          </div>
-
-          <div class="section">
-            <i class="material-icons black s-icon">insert_chart</i>
-            <div class="s-txt">
-              db Economy
-            </div>
-          </div>
-
-          <div class="line"></div>
-        </div>
-
-        <div class="subscriptions">
-
-          <div class="section">
-            <div class="s-avatar"></div>
-            <div class="s-txt">
-              Will Garrett
-            </div>
-            <button class="s-notes">4</button>
-          </div>
-
-          <div class="section">
-            <div class="s-avatar"></div>
-            <div class="s-txt">
-              Asher Bearce
-            </div>
-            <button class="s-notes">6</button>
-          </div>
-
-          <div class="section">
-            <div class="s-avatar"></div>
-            <div class="s-txt">
-              Bryan Scott
-            </div>
-          </div>
-
-          <div class="section">
-            <div class="s-avatar"></div>
-            <div class="s-txt">
-              Justin Fernald
-            </div>
-            <button class="s-notes">99+</button>
-          </div>
-
-          <div class="section">
-            <div class="s-avatar"></div>
-            <div class="s-txt">
-              Last one
-            </div>
-            <button class="s-notes">99+</button>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
-
   <div class="context" style="display: none;">
     <div class="support">
 
@@ -379,22 +292,81 @@ if ($account == null)
   </div> -->
 
   <div class="h-content">
-    <!-- <div class="h-search-tools">
-      <div class="e-sort" title="Sort by" style="float: left;">
-        <i class="material-icons black edit-icons">sort</i>
-      </div>
-      <div class="h-s-txt">
-        Oldest
-      </div>
-      <div class="h-s-txt">
-        Newest
-      </div>
-      <div class="h-s-txt">
-        Most Popular
-      </div>
-    </div> -->
+    <div class="top-bar">
+      <div class="ec-account-settings">
+        <div class="account-info">
+          <div class="sd-img">
+            <img src="<?php echo $account->getImage(); ?>" style="border: inherit; border-radius: inherit;" width="40" height="40">
+          </div>
+          <div class="sd-infoholder">
+            <h1 class="n-name sdname"><?php echo $account->name; ?></h1>
+            <div class="username">
+              @<?php echo $account->handle; ?>
+            </div>
+          </div>
+        </div>
 
-  <div class="post-blk m-post">
+        <i class="material-icons settings openAccount">settings</i>
+      </div>
+
+      <div class="searchbar">
+        <i class="material-icons search-g" style="float: left; position:relative; top: -4px;">search</i><input type="text" placeholder="Search Site" style="all: unset; width: 150px;position: relative; left: 11px; color: #646d6d; top: -1.5px;" />
+      </div>
+
+      <div class="ec-search-results">
+        <div class="ec-result-section">
+          <div class="s-txt ec result highlighted">
+            MEME 1
+          </div><i class="material-icons ec-icons up results">trending_up</i>
+        </div>
+
+        <div class="ec-result-section">
+          <div class="s-txt ec result">
+            MEME 2
+          </div><i class="material-icons ec-icons idle results">trending_flat</i>
+        </div>
+
+        <div class="ec-result-section">
+          <div class="s-txt ec result">
+            MEME 3
+          </div><i class="material-icons ec-icons low results">trending_down</i>
+        </div>
+      </div>
+
+    </div>
+
+  <div class="post m-post">
+    <div class="post-header">
+      <h1 class="post-title">NEW POST</h1>
+    </div>
+    <div class="post-content">
+      <div class="textarea-wrap">
+        <textarea name="name" class="post-textarea" wrap="hard"></textarea>
+        <div class="other-options-wrap">
+          <button class="option-btn hover">
+            <i class="material-icons search-g" style="float: left;padding-right: 10px; position: relative; font-size: 21px;top: -0.5px;">collections</i>Add Image
+          </button>
+          <button class="option-btn hover">
+            <i class="material-icons search-g" style="float: left;padding-right: 10px; position: relative; font-size: 21px;top: -0.5px;">video_library</i>Add Video
+          </button>
+          <button class="option-btn hover">
+            <i class="material-icons search-g" style="float: left;padding-right: 10px;position: relative;font-size: 34px;height: 10px;top: -6.5px;left: -5px;width: 23px;">gif</i>Add Gif
+          </button>
+        </div>
+      </div>
+      <div class="tags-wrap">
+          <div class="searchbar category" style="background: #ddd">
+            <i class="material-icons search-g" style="float: left; padding-right: 25px;position:relative; top: -4px; color: #999;">search</i><input type="text" placeholder="Add Tags" style="all: unset; width: 100px;position: relative; left: -10px; color: #999;" />
+          </div>
+      </div>
+    </div>
+    <div class="c-button-hold">
+      <button class="post-btn closePost">Cancel</button>
+      <button class="post-btn closePost" style="float: right">Post</button>
+    </div>
+  </div>
+
+  <!-- <div class="post-blk m-post">
       <div class="c-title-holder">
         <h1 class="imp-title">New Post</h1>
       </div>
@@ -419,7 +391,6 @@ if ($account == null)
             <div class="searchbar category" style="background: #ddd">
               <i class="material-icons search-g" style="float: left; padding-right: 25px;position:relative; top: -4px; color: #999;">search</i><input type="text" placeholder="Add Tags" style="all: unset; width: 100px;position: relative; left: -10px; color: #999;" />
             </div>
-
         </div>
 
       </div>
@@ -428,7 +399,7 @@ if ($account == null)
         <button class="post-btn closePost">Cancel</button>
         <button class="post-btn hover">Post</button>
       </div>
-    </div>
+    </div> -->
 
   <div class="floating-box">
     <div class="floating-button openPost">
@@ -705,7 +676,7 @@ if ($account == null)
         <div class="comment-box">
           <i class="material-icons m-meme-icon">add_a_photo</i>
           <textarea name="name" class="m-textarea" rows="1" cols="10" wrap="hard"></textarea>
-          <button class="c-op-1 post" style="top: 5px; margin-left: 7px; color: #62717b;">POST</button>
+          <button class="c-op-1 postit" style="top: 5px; margin-left: 7px; color: #62717b;">POST</button>
         </div>
       </div>
     </div>
@@ -967,7 +938,7 @@ if ($account == null)
         <div class="comment-box">
           <i class="material-icons m-meme-icon">add_a_photo</i>
           <textarea name="name" class="m-textarea" rows="1" cols="10" wrap="hard"></textarea>
-          <button class="c-op-1 post" style="top: 5px; margin-left: 7px; color: #62717b;">POST</button>
+          <button class="c-op-1 postit" style="top: 5px; margin-left: 7px; color: #62717b;">POST</button>
         </div>
       </div>
     </div>
