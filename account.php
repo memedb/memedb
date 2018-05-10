@@ -244,7 +244,7 @@ details
                 </div>
               </div>
               <div class="account-para">
-                Founder of memedb
+                <?=$account->description;?>
               </div>
               <button class="follow">
                 <span><?= $account->getFormattedFollowerCount(); ?></span>
@@ -368,6 +368,53 @@ details
       </div>
     </div>
 
+    <div class="library" ondragenter="libDrag(event);" ondragleave="libDragLeave(event);" ondragover="libDrag(event);" ondrop="libDrop(event);">
+      <i class="material-icons l-icon">photo_library</i>
+      <h1 class="l-title">POSTS</h1>
+
+      <div class="l-settings">
+        <i class="material-icons">keyboard_arrow_down</i>
+      </div>
+      <div class="l-drop">
+        <i class="material-icons">more_horiz</i>
+      </div>
+    </div>
+
+    <div class="l-content" style="height: 0px;">
+      <div class="l-img"></div>
+    </div>
+
+    <div class="library light">
+      <i class="material-icons l-icon">repeat</i>
+      <h1 class="l-title">REPOSTS</h1>
+      <div class="l-settings">
+        <i class="material-icons">keyboard_arrow_down</i>
+      </div>
+      <div class="l-drop">
+        <i class="material-icons">more_horiz</i>
+      </div>
+    </div>
+
+    <div class="l-content" style="height: 0px;">
+      <div class="l-img"></div>
+    </div>
+
+    <div class="library">
+      <i class="material-icons l-icon">star</i>
+      <h1 class="l-title">FAVORITES</h1>
+
+      <div class="l-settings">
+        <i class="material-icons">keyboard_arrow_down</i>
+      </div>
+      <div class="l-drop">
+        <i class="material-icons">more_horiz</i>
+      </div>
+    </div>
+
+    <div class="l-content" style="height: 0px;">
+      <div class="l-img"></div>
+    </div>
+
     <?php
     $libs = library::loadFromUser($self);
     foreach ($libs as $lib) {
@@ -396,22 +443,6 @@ details
         <?php
     }
     ?>
-
-    <div class="library" ondragenter="libDrag(event);" ondragleave="libDragLeave(event);" ondragover="libDrag(event);" ondrop="libDrop(event);">
-      <i class="material-icons l-icon">photo_library</i>
-      <h1 class="l-title">POSTS</h1>
-
-      <div class="l-settings">
-        <i class="material-icons">keyboard_arrow_down</i>
-      </div>
-      <div class="l-drop">
-        <i class="material-icons">more_horiz</i>
-      </div>
-    </div>
-
-    <div class="l-content" style="height: 0px;">
-      <div class="l-img"></div>
-    </div>
 
   </div>
 
