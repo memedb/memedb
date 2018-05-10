@@ -111,7 +111,7 @@ Command::register("create_post", function($user) {
   $date = gmdate(DATE_ATOM);
   $conn = $GLOBALS['conn'];
   $stmt = $conn->prepare("INSERT INTO `posts` (`id`, `tags`, `upvotes`, `downvotes`, `source`, `date`, `type`, `parent`, `library`) VALUES (?, '', 0, 0, ?, ?, ?, ?, ?);");
-  $stmt->bind_param("sissii", $id, $user->id, $date, $_POST['type'], $_POST['parent'], $_POST['library']);
+  $stmt->bind_param("sissis", $id, $user->id, $date, $_POST['type'], $_POST['parent'], $_POST['library']);
   $stmt->execute();
 
   move_uploaded_file($_FILES['file']['tmp_name'], 'images/' . $id . "." . $_POST['type']);
@@ -169,7 +169,7 @@ function topBar($self) {
     </div>
 
     <div class="searchbar">
-      <i class="material-icons search-g" style="float: left; position:relative; top: -4px;">search</i><input type="text" placeholder="Search Site" style="all: unset; width: 150px;position: relative; left: 11px; color: #646d6d; top: -1.5px;" />
+      <i class="material-icons search-g" style="float: left; position:relative; top: -4px;">search</i><input type="text" placeholder="Search Site" style="all: unset; width: 150px;position: relative; left: 11px; color: #646d6d; top: 1px;" />
     </div>
 
     <div class="ec-search-results">
@@ -207,12 +207,43 @@ function topBar($self) {
         </div>
       </div>
       <div class="sd-content">
-        <div class="sd-option">
-
-        </div>
-        <div class="sd-option">
-
-        </div>
+        <div class="section">
+            <i class="material-icons s-icon settings-icon">account_circle</i>
+            <div class="s-txt">
+              My Account
+            </div>
+          </div>
+          <div class="section">
+              <i class="material-icons s-icon settings-icon">group</i>
+              <div class="s-txt">
+                Switch Accounts
+              </div>
+          </div>
+          <div class="section">
+              <i class="material-icons s-icon settings-icon">exit_to_app</i>
+              <div class="s-txt">
+                Sign Out
+              </div>
+          </div>
+          <div class="long-line"></div>
+          <div class="section">
+              <i class="material-icons s-icon settings-icon">help</i>
+              <div class="s-txt">
+                Help
+              </div>
+          </div>
+          <div class="section">
+              <i class="material-icons s-icon settings-icon">feedback</i>
+              <div class="s-txt">
+                Send Feedback
+              </div>
+          </div>
+          <div class="section">
+              <i class="material-icons s-icon settings-icon">settings</i>
+              <div class="s-txt">
+                Settings
+              </div>
+          </div>
       </div>
     </div>
   <?php
@@ -302,6 +333,21 @@ function loadDBObject($table, $selector, $classname) {
   return null;
 }
 
+function loadDBObjects($table, $selector, $classname) {
+  $conn = $GLOBALS['conn'];
+  $stmt = $conn->prepare("SELECT * FROM $table WHERE $selector");
+  $stmt->execute();
+  $result = $stmt->get_result();
+  $objects = array();
+  if ($result->num_rows > 0) {
+    while ($obj = $result->fetch_object($classname)) {
+      $obj->fixVars();
+      array_push($objects, $obj);
+    }
+  }
+  return $objects;
+}
+
 function getUser() {
   return $GLOBALS['user'];
 }
@@ -336,10 +382,14 @@ class post {
 
   public static function loadFromId($id) {
     $img = loadDBObject("posts", "id=$id", "post");
+    $img->fixVars();
+    return $img;
+  }
+
+  public function fixVars() {
     if ($img != null) {
       $img->tags = explode(",",$img->tags);
     }
-    return $img;
   }
 
   public function printImage() {
@@ -356,36 +406,33 @@ class user {
 
   public static function loadFromId($id) {
     $usr = loadDBObject("users", "id=$id", "user");
-    if ($usr != null) {
-      $usr->favorites = explode(",",$usr->favorites);
-      $usr->image = "/userimg.php?handle=" + $usr->handle;
-    }
+    $usr->fixVars();
     return $usr;
   }
 
   public static function loadFromEmail($email) {
     $usr = loadDBObject("users", "email='$email'", "user");
-    if ($usr != null) {
-      $usr->favorites = explode(",",$usr->favorites);
-      $usr->image = "/userimg.php?handle=" + $usr->handle;
-    }
+    $usr->fixVars();
     return $usr;
   }
 
   public static function loadFromHandle($handle) {
     $usr = loadDBObject("users", "handle='$handle'", "user");
-    if ($usr != null) {
-      $usr->favorites = explode(",",$usr->favorites);
-    }
+    $usr->fixVars();
     return $usr;
   }
 
   public static function loadFromSession($session) {
     $usr = loadDBObject("users", "session='$session'", "user");
+    $usr->fixVars();
+    return $usr;
+  }
+
+  public function fixVars() {
     if ($usr != null) {
       $usr->favorites = explode(",",$usr->favorites);
+      $usr->image = "/userimg.php?handle=" + $usr->handle;
     }
-    return $usr;
   }
 
   public static function create($name, $email, $password, $google) {
@@ -483,6 +530,13 @@ class user {
     return $result->fetch_assoc()['followers'];
   }
 
+  public function getFormattedFollowerCount() {
+    $count = $this->getFollowerCount();
+    if ($count >= 1000000) return round(($count/1000000),1)."M";
+    if ($count >= 1000) return round(($count/1000),1).'K';
+    return $count;
+  }
+
   public function getFollowers() {
     $conn = $GLOBALS['conn'];
     $stmt = $conn->prepare("SELECT user FROM `following` WHERE `following`=?");
@@ -518,6 +572,20 @@ class user {
     $result = $stmt->get_result();
     return $result->num_rows > 0;
   }
+
+}
+
+class library {
+
+  public static function loadFromUser($user) {
+    return loadDBObjects("libraries", "user={$user->id}", "library");
+  }
+
+  public function getPosts() {
+    return loadDBObjects("posts", "library='{$this->id}'", "post");
+  }
+
+  public function fixVars() {}
 
 }
  ?>

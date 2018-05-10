@@ -223,26 +223,12 @@ if ($account == null) {
   <div class="sidenav-home">
       <div class="scroll-hide">
         <div class="logo-info">
-          <div class="home-logo"><a style="all:unset;" href="/">memedb</a></div>
 
           <div class="sections">
+
             <div class="line h"></div>
 
-            <div class="section-light imp-info">
-              <div class="s-txt h highlighted">
-                <a style="all:unset;" href="/home.php">HOME</a>
               </div>
-            </div>
-
-            <div class="section-light imp-info">
-              <div class="s-txt h">
-                <a style="all:unset;" href="/recommended.php">RECOMMENDED</a>
-              </div>
-            </div>
-
-            <div class="section-light imp-info">
-              <div class="s-txt h">
-                <a style="all:unset;" href="/economy.php">DB ECONOMY</a>
               </div>
             </div>
 
@@ -251,24 +237,6 @@ if ($account == null) {
         </div>
 
         <div class="subscriptions">
-
-          <div class="section-light">
-            <div class="s-txt h">
-              ACCOUNT 1
-            </div>
-          </div>
-
-          <div class="section-light">
-            <div class="s-txt h">
-              ACCOUNT 2
-            </div>
-          </div>
-
-          <div class="section-light">
-            <div class="s-txt h">
-              ACCOUNT 3
-            </div>
-          </div>
 
         </div>
       </div>
@@ -380,9 +348,32 @@ if ($account == null) {
       </div>
     </div>
 
-    <div class="library l-l1" ondragover="libDragOver(event);" ondrop="libDrop(event);">
+    <?php
+    $libs = library::loadFromUser($self);
+    foreach ($libs as $lib) {
+        ?>
+        <div class="library" data-id="<?=$lib->id?>" ondragenter="libDrag(event);" ondragleave="libDragLeave(event);" ondragover="libDrag(event);" ondrop="libDrop(event);">
+          <h1 class="l-title"><?=$lib->name?></h1>
+
+          <div class="l-settings">
+            <i class="material-icons">keyboard_arrow_down</i>
+          </div>
+          <div class="l-drop">
+            <i class="material-icons">more_horiz</i>
+          </div>
+        </div>
+
+      <div class="l-settings">
+        <i class="material-icons">keyboard_arrow_down</i>
+      </div>
+      <div class="l-drop">
+        <i class="material-icons">more_horiz</i>
+      </div>
+    </div>
+
+    <div class="library" ondragenter="libDrag(event);" ondragleave="libDragLeave(event);" ondragover="libDrag(event);" ondrop="libDrop(event);">
       <i class="material-icons l-icon">photo_library</i>
-      <h1 class="l-title">Posts</h1>
+      <h1 class="l-title">POSTS</h1>
 
       <div class="l-settings">
         <i class="material-icons">keyboard_arrow_down</i>
@@ -394,191 +385,9 @@ if ($account == null) {
 
     <div class="l-content" style="height: 0px;">
       <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
     </div>
 
-    <div class="library l-l1">
-      <i class="material-icons l-icon">repeat</i>
-      <h1 class="l-title">Reposts</h1>
-      <div class="l-settings">
-        <i class="material-icons">keyboard_arrow_down</i>
-      </div>
-      <div class="l-drop">
-        <i class="material-icons">more_horiz</i>
-      </div>
-    </div>
-
-    <div class="l-content" style="height: 0px;">
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-      <div class="l-img"></div>
-    </div>
-
-    <div class="library l-l1">
-      <i class="material-icons l-icon">star</i>
-      <h1 class="l-title">Favorites</h1>
-
-      <div class="l-settings">
-        <i class="material-icons">keyboard_arrow_down</i>
-      </div>
-      <div class="l-drop">
-        <i class="material-icons">more_horiz</i>
-      </div>
-    </div>
-
+<<<<<<< HEAD
     <div class="l-content" style="height: 0px;">
       <div class="l-img"></div>
       <div class="l-img"></div>
@@ -1091,6 +900,8 @@ if ($account == null) {
       <div class="l-img"></div>
       <div class="l-img"></div>
     </div>
+=======
+>>>>>>> 79bb6c83aac3810676334564449ace1efc6dac99
   </div>
 
 
