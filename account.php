@@ -223,13 +223,16 @@ if ($account == null) {
   <div class="sidenav-home">
       <div class="scroll-hide">
         <div class="logo-info">
-          <div class="home-logo"><a style="all:unset;" href="/">memedb</a></div>
+          <div class="home-logo"><a style="all:unset;" href="/">memedb</a><i class="material-icons expand-sidenav">
+details
+</i></div>
 
           <div class="sections">
+
             <div class="line h"></div>
 
             <div class="account-wrapper">
-              <div class="account-info" style="float: none;">
+              <div class="account-info" style="float: none; margin-top: 0px;">
                 <div class="sd-img">
                   <img src="<?= $account->getImage(); ?>" style="border: inherit; border-radius: inherit;" width="40" height="40">
                 </div>
@@ -240,6 +243,9 @@ if ($account == null) {
                   </div>
                 </div>
               </div>
+              <div class="account-para">
+                Founder of memedb
+              </div>
               <button class="follow">
                 <span><?= $account->getFormattedFollowerCount(); ?></span>
               </button>
@@ -247,47 +253,10 @@ if ($account == null) {
 
             <div class="line h"></div>
 
-            <div class="section-light imp-info">
-              <div class="s-txt h highlighted">
-                <a style="all:unset;" href="/home.php">HOME</a>
-              </div>
-            </div>
-
-            <div class="section-light imp-info">
-              <div class="s-txt h">
-                <a style="all:unset;" href="/recommended.php">RECOMMENDED</a>
-              </div>
-            </div>
-
-            <div class="section-light imp-info">
-              <div class="s-txt h">
-                <a style="all:unset;" href="/economy.php">DB ECONOMY</a>
-              </div>
-            </div>
-
-            <div class="line h"></div>
           </div>
         </div>
 
         <div class="subscriptions">
-
-          <div class="section-light">
-            <div class="s-txt h">
-              ACCOUNT 1
-            </div>
-          </div>
-
-          <div class="section-light">
-            <div class="s-txt h">
-              ACCOUNT 2
-            </div>
-          </div>
-
-          <div class="section-light">
-            <div class="s-txt h">
-              ACCOUNT 3
-            </div>
-          </div>
 
         </div>
       </div>
@@ -428,9 +397,9 @@ if ($account == null) {
     }
     ?>
 
-    <div class="library l-l1" ondragenter="libDrag(event);" ondragleave="libDragLeave(event);" ondragover="libDrag(event);" ondrop="libDrop(event);">
+    <div class="library" ondragenter="libDrag(event);" ondragleave="libDragLeave(event);" ondragover="libDrag(event);" ondrop="libDrop(event);">
       <i class="material-icons l-icon">photo_library</i>
-      <h1 class="l-title">Posts</h1>
+      <h1 class="l-title">POSTS</h1>
 
       <div class="l-settings">
         <i class="material-icons">keyboard_arrow_down</i>

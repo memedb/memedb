@@ -3,7 +3,6 @@ toggled = new Array();
 searchCode = "";
 
 $(document).ready(function() {
-  console.log('this?');
   libs = $(".library");
   for (i = 0; i < libs.length; i++) libs[i].id = i.toString();
   libs.click(function(event) {
@@ -53,6 +52,10 @@ $(document).ready(function() {
     closeAccount();
     closePost();
     closeBalance();
+  });
+
+  $(".expand-sidenav").click(function() {
+    expandSidenav();
   });
 
   $(".openSettings").click(function() {
@@ -446,6 +449,21 @@ function closeBalance(){
     $("#imp-bg-fade").css("display", "none");
     $(".peep").children().css('filter', 'blur(0px)');
     $(".peep").css('background','#fff');
+}
+
+function expandSidenav(){
+  $(".sidenav-home").css({
+    width: "66%"
+  });
+  $(".home-content").css({
+    'width' : '34%'
+  });
+}
+
+function compactSidenav(){
+  $(".sidenav-home").css({
+    width: "300px"
+  });
 }
 
 function removeDragData(ev) {
