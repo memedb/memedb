@@ -449,8 +449,6 @@ function closeBalance(){
 }
 
 function removeDragData(ev) {
-  console.log('Removing drag data')
-
   if (ev.dataTransfer.items) {
     ev.dataTransfer.items.clear();
   } else {
@@ -459,18 +457,23 @@ function removeDragData(ev) {
 }
 
 function libDrop(ev) {
-  console.log("drop");
   ev.preventDefault();
-  var file = ev.dataTransfer.items[i].getAsFile();
+  var file = ev.dataTransfer.files[0];
   var nameSplit = file.name.split(".");
-  uploadFile(file, null, nameSplit[nameSplit.length - 1], -1, -1, function(data) {
+  uploadFile(file, null, nameSplit[nameSplit.length - 1], -1, ev.srcElement.dataset.id, function(data) {
     console.log(data);
   });
 
   removeDragData(ev);
+  $(ev.srcElement).removeClass("is-dragover");
 }
 
 function libDrag(ev) {
-  console.log("drag");
   ev.preventDefault();
+  $(ev.srcElement).addClass("is-dragover");
+}
+
+function libDragLeave(ev) {
+  ev.preventDefault();
+  $(ev.srcElement).removeClass("is-dragover");
 }
