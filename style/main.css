@@ -37,6 +37,7 @@ h1 {
   width: 100%;
   height: 60px;
   padding-top: 15px;
+  padding-bottom: 15px;
 }
 
 .logo {
@@ -1721,6 +1722,7 @@ body {
   width: auto;
   height: auto;
   margin-left: 300px;
+  transition-duration: 0.3s;
 }
 
 .c-box {

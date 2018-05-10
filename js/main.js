@@ -3,6 +3,7 @@ toggled = new Array();
 searchCode = "";
 
 $(document).ready(function() {
+  var isSidenavOpen = false;
   libs = $(".library");
   for (i = 0; i < libs.length; i++) libs[i].id = i.toString();
   libs.click(function(event) {
@@ -55,7 +56,14 @@ $(document).ready(function() {
   });
 
   $(".expand-sidenav").click(function() {
-    expandSidenav();
+
+    if(!isSidenavOpen){
+      expandSidenav();
+    } else {
+      compactSidenav();
+    }
+
+    isSidenavOpen = !isSidenavOpen;
   });
 
   $(".openSettings").click(function() {
@@ -453,16 +461,27 @@ function closeBalance(){
 
 function expandSidenav(){
   $(".sidenav-home").css({
-    width: "66%"
+    'width' : "66%"
   });
   $(".home-content").css({
-    'width' : '34%'
+    'width' : '34%',
+    'margin-left' : '66%'
+  });
+  $(".searchbar").css({
+    'display' : 'none'
   });
 }
 
 function compactSidenav(){
   $(".sidenav-home").css({
     width: "300px"
+  });
+  $(".home-content").css({
+    'width' : 'auto',
+    'margin-left' : '300px'
+  });
+  $(".searchbar").css({
+    'display' : 'block'
   });
 }
 
