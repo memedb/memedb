@@ -577,18 +577,23 @@ class user {
 
 class library {
 
-  public function __construct($name, $posts, $icon) {
-    $this->name = $name;
-    $this->posts = $posts;
-    $this->icon = $icon;
+  public static function create($name, $posts, $icon) {
+    $lib = new library();
+    $lib->name = $name;
+    $lib->posts = $posts;
+    $lib->icon = $icon;
+    return $lib;
   }
 
   public static function loadFromUser($user) {
     $libs = loadDBObjects("libraries", "user={$user->id}", "library");
-    array_unshift($libs, new library("POSTS", ));
+    array_unshift($libs, library::create("POSTS", loadDBObjects("posts", "source={$user->id}", "post"), "photo_library"));
+    return $libs;
   }
 
   public function getPosts() {
+    if ($this->posts)
+      return $this->posts;
     return loadDBObjects("posts", "library='{$this->id}'", "post");
   }
 

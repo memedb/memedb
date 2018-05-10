@@ -266,107 +266,6 @@ details
     <?php
     topBar($self);
      ?>
-    <div class="c-box">
-      <div class="c-popular">
-        <div class="c-pop-wrapper">
-          <div class="h-post small">
-            <div class="h-post-info">
-              <div class="h-icon">
-                <i class="material-icons" style="font-size: 18px; top: 5px;">keyboard_arrow_up</i>
-              </div>
-              <div class="h-p-stat" title="16472">
-                16K
-              </div>
-              <div class="h-icon">
-                <i class="material-icons black" style="font-size: 18px; top: 5px;font-weight: 600;">repeat</i>
-              </div>
-              <div class="h-p-stat">
-                4K
-              </div>
-              <div class="h-more">
-                <i class="material-icons" style="font-size: 18px; top: -3px;">more_horiz</i>
-              </div>
-            </div>
-          </div>
-          <div class="h-post small">
-            <div class="h-post-info">
-              <div class="h-icon">
-                <i class="material-icons" style="font-size: 18px; top: 5px;">keyboard_arrow_up</i>
-              </div>
-              <div class="h-p-stat">
-                16K
-              </div>
-              <div class="h-icon">
-                <i class="material-icons black" style="font-size: 18px; top: 5px;font-weight: 600;">repeat</i>
-              </div>
-              <div class="h-p-stat">
-                4K
-              </div>
-              <div class="h-more">
-                <i class="material-icons" style="font-size: 18px; top: -3px;">more_horiz</i>
-              </div>
-            </div>
-          </div>
-          <div class="h-post small">
-            <div class="h-post-info">
-              <div class="h-icon">
-                <i class="material-icons" style="font-size: 18px; top: 5px;">keyboard_arrow_up</i>
-              </div>
-              <div class="h-p-stat">
-                16K
-              </div>
-              <div class="h-icon">
-                <i class="material-icons black" style="font-size: 18px; top: 5px;font-weight: 600;">repeat</i>
-              </div>
-              <div class="h-p-stat">
-                4K
-              </div>
-              <div class="h-more">
-                <i class="material-icons" style="font-size: 18px; top: -3px;">more_horiz</i>
-              </div>
-            </div>
-          </div>
-          <div class="h-post small">
-            <div class="h-post-info">
-              <div class="h-icon">
-                <i class="material-icons" style="font-size: 18px; top: 5px;">keyboard_arrow_up</i>
-              </div>
-              <div class="h-p-stat">
-                16K
-              </div>
-              <div class="h-icon">
-                <i class="material-icons black" style="font-size: 18px; top: 5px;font-weight: 600;">repeat</i>
-              </div>
-              <div class="h-p-stat">
-                4K
-              </div>
-              <div class="h-more">
-                <i class="material-icons" style="font-size: 18px; top: -3px;">more_horiz</i>
-              </div>
-            </div>
-          </div>
-          <div class="h-post small">
-            <div class="h-post-info">
-              <div class="h-icon">
-                <i class="material-icons" style="font-size: 18px; top: 5px;">keyboard_arrow_up</i>
-              </div>
-              <div class="h-p-stat">
-                16K
-              </div>
-              <div class="h-icon">
-                <i class="material-icons black" style="font-size: 18px; top: 5px;font-weight: 600;">repeat</i>
-              </div>
-              <div class="h-p-stat">
-                4K
-              </div>
-              <div class="h-more">
-                <i class="material-icons" style="font-size: 18px; top: -3px;">more_horiz</i>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <div class="library" ondragenter="libDrag(event);" ondragleave="libDragLeave(event);" ondragover="libDrag(event);" ondrop="libDrop(event);">
       <i class="material-icons l-icon">photo_library</i>
@@ -417,9 +316,17 @@ details
 
     <?php
     $libs = library::loadFromUser($self);
+    $libCount = 0;
     foreach ($libs as $lib) {
         ?>
-        <div class="library" data-id="<?=$lib->id?>" ondragenter="libDrag(event);" ondragleave="libDragLeave(event);" ondragover="libDrag(event);" ondrop="libDrop(event);">
+        <div class="library <?=$libCount%2==0?" light":""?>" data-id="<?=$lib->id?>" ondragenter="libDrag(event);" ondragleave="libDragLeave(event);" ondragover="libDrag(event);" ondrop="libDrop(event);">
+          <?php
+          if ($lib->icon) {
+            ?>
+            <i class="material-icons l-icon"><?=$lib->icon;?></i>
+            <?php
+          }
+          ?>
           <h1 class="l-title"><?=$lib->name?></h1>
 
           <div class="l-settings">
@@ -441,6 +348,7 @@ details
           ?>
         </div>
         <?php
+        $libCount++;
     }
     ?>
 
