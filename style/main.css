@@ -1711,12 +1711,11 @@ body {
 
 /* CONTENT */
 
-.content {
+.home-content {
   position: relative;
   width: auto;
   height: auto;
-  margin-left: 350px;
-  top: 55px;
+  margin-left: 300px;
 }
 
 .c-box {
@@ -1742,13 +1741,12 @@ body {
   width: auto;
   height: 45px;
   background: #f5f5f5;
-  border-bottom: 2px #ddd solid;
+  border-bottom: 3px #ddd solid;
   cursor: pointer;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  margin-left: 1px;
 }
 
 .library.is-dragover {
@@ -1869,8 +1867,6 @@ body {
 }
 
 .l-content {
-  margin-left: 5px;
-  margin-top: 4px;
   width: auto;
   height: auto;
   position: relative;
@@ -2371,8 +2367,7 @@ body {
 
 .reposted:hover {
   transform: scale3d(1.05, 1.05, 1.05);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
-
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
 }
 
 .m-OP {
@@ -3735,7 +3730,6 @@ body {
   position: relative;
   top: 30px;
   margin-left: 17px;
-
 }
 
 .bm-t-title {
@@ -3807,7 +3801,7 @@ body {
 .post {
   width: 400px;
   height: auto;
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 
 .post-header {

@@ -33,9 +33,6 @@ if ($account == null) {
 </head>
 
 <body>
-  <?php
-  topBar($self);
-   ?>
 
   <div class="imp-bg-fade" id="imp-bg-fade" style="display: none; opacity 0;"></div>
 
@@ -140,21 +137,6 @@ if ($account == null) {
     </div>
   </div>
 
-  <!-- <div class="edit-menu">
-    <div class="e-add" title="Add Library">
-      <i class="material-icons edit-icons openAddLib">add</i>
-    </div>
-    <div class="e-edit" title="Edit Library">
-      <i class="material-icons edit-icons">edit</i>
-    </div>
-    <div class="l-line"></div>
-    <div class="e-sort" title="Sort by">
-      <i class="material-icons edit-icons l-drop">sort</i>
-    </div>
-    <div class="e-timeln" title="Statistics">
-      <i class="material-icons edit-icons openStats">timeline</i>
-  </div> -->
-
   <div class="s-settings">
     <div class="s-title-box">
       <h1 class="s-title">Settings</h1>
@@ -238,236 +220,64 @@ if ($account == null) {
     </div>
   </div>
 
-  <div class="sidenav">
-    <div class="s-user">
-      <div class="user-wrapper">
-        <div class="a-user-info">
-          <div class="image">
-            <img src="<?php echo $account->getImage(); ?>" style="border: inherit; border-radius: inherit;" width="60" height="60">
-          </div>
-          <div class="name">
-            <h1 class="n-name"><?php echo $account->name; ?></h1>
-            <div class="username">
-              @<?php echo $account->handle; ?>
+  <div class="sidenav-home">
+      <div class="scroll-hide">
+        <div class="logo-info">
+          <div class="home-logo"><a style="all:unset;" href="/">memedb</a></div>
+
+          <div class="sections">
+            <div class="line h"></div>
+
+            <div class="section-light imp-info">
+              <div class="s-txt h highlighted">
+                <a style="all:unset;" href="/home.php">HOME</a>
+              </div>
             </div>
-            <div class="username">
-              Karma: 0
+
+            <div class="section-light imp-info">
+              <div class="s-txt h">
+                <a style="all:unset;" href="/recommended.php">RECOMMENDED</a>
+              </div>
             </div>
+
+            <div class="section-light imp-info">
+              <div class="s-txt h">
+                <a style="all:unset;" href="/economy.php">DB ECONOMY</a>
+              </div>
+            </div>
+
+            <div class="line h"></div>
           </div>
         </div>
-        <button id="follow-btn" onclick="followAction()" data-handle="<?= $account->handle?>" class="<?php echo ($is_self ? "follow-self" : ((loggedIn() && $self->isFollowing($account->id)) ? "unfollow" : "follow")) ?>">
-          <span><?php echo ($account->getFollowerCount()); ?></span>
-        </button>
-      </div>
-    </div>
 
-    <div class="s-favorites">
-      <div class="fav-holder">
-        <div class="div-line"></div>
-        <h1 class="div-text">Favorites</h1>
-        <div class="div-line"></div>
-      </div>
+        <div class="subscriptions">
 
-      <div class="meme-type">
-        <?php
-          for ($i = 0; $i < count($account->favorites); $i++) {
-            $type = $account->favorites[$i];
-            ?>
-            <div class="type"><?=$type?><?php if ($is_self) {?><button class="t-cross" data-type="<?=$type?>">X</button><?php } ?></div>
-            <?php
-          }
-          if ($is_self) { ?>
-            <button class="t-add openTagSearch">+</button>
-          <?php }
-        ?>
-      </div>
-
-      <div class="line" style="margin-top: 0;"></div>
-    </div>
-
-    <div class="s-searchbox">
-      <div class="s-searchbar">
-        <i class="material-icons seach-g" style="float: left;position:relative; top: -1px; color: #666;">search</i><input type="text" placeholder="Search User" style="all: unset; width: 88.5%;position: relative; left: 11px; border-bottom: 2px solid #ddd;"
-        />
-      </div>
-    </div>
-
-
-    <div class="s-results">
-      <div class="s-r-scroll">
-        <div class="s-margin">
-
-          <div class="h-post-row">
-
-            <div class="h-post tiny">
-              <div class="h-post-info tiny">
-                <div class="h-more">
-                  <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
-                </div>
-              </div>
+          <div class="section-light">
+            <div class="s-txt h">
+              ACCOUNT 1
             </div>
-
-            <div class="h-post tiny">
-              <div class="h-post-info tiny">
-                <div class="h-more">
-                  <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
-                </div>
-              </div>
-            </div>
-
           </div>
 
-          <div class="h-post-row">
-
-            <div class="h-post tiny">
-              <div class="h-post-info tiny">
-                <div class="h-more">
-                  <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
-                </div>
-              </div>
+          <div class="section-light">
+            <div class="s-txt h">
+              ACCOUNT 2
             </div>
-
-            <div class="h-post tiny">
-              <div class="h-post-info tiny">
-                <div class="h-more">
-                  <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
-                </div>
-              </div>
-            </div>
-
           </div>
 
-          <div class="h-post-row">
-
-            <div class="h-post tiny">
-              <div class="h-post-info tiny">
-                <div class="h-more">
-                  <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
-                </div>
-              </div>
+          <div class="section-light">
+            <div class="s-txt h">
+              ACCOUNT 3
             </div>
-
-            <div class="h-post tiny">
-              <div class="h-post-info tiny">
-                <div class="h-more">
-                  <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
-                </div>
-              </div>
-            </div>
-
           </div>
-
-          <div class="h-post-row">
-
-            <div class="h-post tiny">
-              <div class="h-post-info tiny">
-                <div class="h-more">
-                  <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
-                </div>
-              </div>
-            </div>
-
-            <div class="h-post tiny">
-              <div class="h-post-info tiny">
-                <div class="h-more">
-                  <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="h-post-row">
-
-            <div class="h-post tiny">
-              <div class="h-post-info tiny">
-                <div class="h-more">
-                  <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
-                </div>
-              </div>
-            </div>
-
-            <div class="h-post tiny">
-              <div class="h-post-info tiny">
-                <div class="h-more">
-                  <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="h-post-row">
-
-            <div class="h-post tiny">
-              <div class="h-post-info tiny">
-                <div class="h-more">
-                  <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
-                </div>
-              </div>
-            </div>
-
-            <div class="h-post tiny">
-              <div class="h-post-info tiny">
-                <div class="h-more">
-                  <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="h-post-row">
-
-            <div class="h-post tiny">
-              <div class="h-post-info tiny">
-                <div class="h-more">
-                  <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
-                </div>
-              </div>
-            </div>
-
-            <div class="h-post tiny">
-              <div class="h-post-info tiny">
-                <div class="h-more">
-                  <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          <div class="h-post-row">
-
-            <div class="h-post tiny">
-              <div class="h-post-info tiny">
-                <div class="h-more">
-                  <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
-                </div>
-              </div>
-            </div>
-
-            <div class="h-post tiny">
-              <div class="h-post-info tiny">
-                <div class="h-more">
-                  <i class="material-icons" style="font-size: 18px; top: -7.5px;">more_horiz</i>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-
-
-
-        </div>
 
         </div>
       </div>
-    </div>
   </div>
 
-  <div class="content">
+  <div class="home-content">
+    <?php
+    topBar($self);
+     ?>
     <div class="c-box">
       <div class="c-popular">
         <div class="c-pop-wrapper">
@@ -581,6 +391,7 @@ if ($account == null) {
         <i class="material-icons">more_horiz</i>
       </div>
     </div>
+
     <div class="l-content" style="height: 0px;">
       <div class="l-img"></div>
       <div class="l-img"></div>
@@ -668,6 +479,7 @@ if ($account == null) {
         <i class="material-icons">more_horiz</i>
       </div>
     </div>
+
     <div class="l-content" style="height: 0px;">
       <div class="l-img"></div>
       <div class="l-img"></div>
@@ -766,6 +578,7 @@ if ($account == null) {
         <i class="material-icons">more_horiz</i>
       </div>
     </div>
+
     <div class="l-content" style="height: 0px;">
       <div class="l-img"></div>
       <div class="l-img"></div>

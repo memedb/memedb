@@ -151,70 +151,48 @@ if ($action) {
 
 function topBar($self) {
   ?>
-    <div class="top-bar">
-      <div class="logo"><a style="all:unset;" href="/">memedb</a></div>
-      <div class="searchbar">
-        <i class="material-icons search-g" style="float: left; padding-right: 25px;position:relative; top: -4px;">search</i><input type="text" placeholder="Search" style="all: unset; width: 150px;position: relative; left: 11px;" />
-
-        <div class="search-result-box" style="display:none;">
-          <div class="search-op">
-            <p class="res-p">This is option 1</p>
-          </div>
-          <div class="search-op">
-            <p class="res-p">This is option 2</p>
-          </div>
-          <div class="search-op">
-            <p class="res-p">This is option 3</p>
-          </div>
-          <div class="search-op">
-            <p class="res-p">This is option 1</p>
-          </div>
-          <div class="search-op">
-            <p class="res-p">This is option 2</p>
-          </div>
-          <div class="search-op">
-            <p class="res-p">This is option 3</p>
+  <div class="top-bar">
+    <div class="ec-account-settings">
+      <div class="account-info">
+        <div class="sd-img">
+          <img src="<?php echo $self->getImage(); ?>" style="border: inherit; border-radius: inherit;" width="40" height="40">
+        </div>
+        <div class="sd-infoholder">
+          <h1 class="n-name sdname"><?php echo $self->name; ?></h1>
+          <div class="username">
+            @<?php echo $self->handle; ?>
           </div>
         </div>
-
-        <div class="search-featured-box" style="display:none;">
-          <h1>Featured Users</h1>
-          <div class="s-box-holder">
-            <div class="s-box">
-
-            </div>
-            <div class="s-box">
-
-            </div>
-            <div class="s-box">
-
-            </div>
-            <div class="s-box">
-
-            </div>
-            <div class="s-box">
-
-            </div>
-            <div class="s-box">
-
-            </div>
-            <div class="s-box">
-
-            </div>
-            <div class="s-box">
-
-            </div>
-            <div class="s-box">
-
-            </div>
-          </div>
-        </div>
-
       </div>
-      <div class="sign-in-user openAccount">
-        <img src="<?php echo $self->getImage(); ?>" style="border: inherit; border-radius: inherit;" width="35" height="35">
+
+      <i class="material-icons settings openAccount">settings</i>
+    </div>
+
+    <div class="searchbar">
+      <i class="material-icons search-g" style="float: left; position:relative; top: -4px;">search</i><input type="text" placeholder="Search Site" style="all: unset; width: 150px;position: relative; left: 11px; color: #646d6d; top: -1.5px;" />
+    </div>
+
+    <div class="ec-search-results">
+      <div class="ec-result-section">
+        <div class="s-txt ec result highlighted">
+          MEME 1
+        </div><i class="material-icons ec-icons up results">trending_up</i>
+      </div>
+
+      <div class="ec-result-section">
+        <div class="s-txt ec result">
+          MEME 2
+        </div><i class="material-icons ec-icons idle results">trending_flat</i>
+      </div>
+
+      <div class="ec-result-section">
+        <div class="s-txt ec result">
+          MEME 3
+        </div><i class="material-icons ec-icons low results">trending_down</i>
       </div>
     </div>
+
+  </div>
 
     <div class="s-dropdown">
       <div class="s-d-titlebox">

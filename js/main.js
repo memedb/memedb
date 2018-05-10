@@ -3,20 +3,25 @@ toggled = new Array();
 searchCode = "";
 
 $(document).ready(function() {
+  console.log('this?');
   libs = $(".library");
   for (i = 0; i < libs.length; i++) libs[i].id = i.toString();
   libs.click(function(event) {
     if(toggled[this.id]) {
 			this.querySelector(".l-settings").style.transform = "";
 			this.nextElementSibling.style.height = "0px";
+      content.style.margin = "0px";
+      console.log("---1");
 		} else {
 			this.querySelector(".l-settings").style.transform = "rotate(180deg)";
 			content = this.nextElementSibling;
 			content.style.height = "";
 			height = content.clientHeight;
 			content.style.height = "0px";
+      console.log("---2");
 			setTimeout(function() {
-				content.style.height = height.toString() + "px";
+			content.style.height = height.toString() + "px";
+      content.style.margin = "0px";
 			}, 10);
 		}
 		toggled[this.id] = !toggled[this.id];

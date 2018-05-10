@@ -334,7 +334,7 @@ if ($account == null)
       </div>
 
     </div>
-
+    
   <div class="post m-post">
     <div class="post-header">
       <h1 class="post-title">NEW POST</h1>
