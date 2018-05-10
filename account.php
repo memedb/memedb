@@ -228,6 +228,25 @@ if ($account == null) {
           <div class="sections">
             <div class="line h"></div>
 
+            <div class="account-wrapper">
+              <div class="account-info" style="float: none;">
+                <div class="sd-img">
+                  <img src="<?php echo $self->getImage(); ?>" style="border: inherit; border-radius: inherit;" width="40" height="40">
+                </div>
+                <div class="sd-infoholder">
+                  <h1 class="n-name sdname"><?php echo $self->name; ?></h1>
+                  <div class="username">
+                    @<?php echo $self->handle; ?>
+                  </div>
+                </div>
+              </div>
+              <button class="follow">
+                <span>100k</span>
+              </button>
+            </div>
+
+            <div class="line h"></div>
+
             <div class="section-light imp-info">
               <div class="s-txt h highlighted">
                 <a style="all:unset;" href="/home.php">HOME</a>
