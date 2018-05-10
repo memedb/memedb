@@ -499,6 +499,13 @@ class user {
     return $result->fetch_assoc()['followers'];
   }
 
+  public function getFormattedFollowerCount() {
+    $count = $this->getFollowerCount();
+    if ($count >= 1000000) return round(($count/1000000),1)."M";
+    if ($count >= 1000) return round(($count/1000),1).'K';
+    return $count;
+  }
+
   public function getFollowers() {
     $conn = $GLOBALS['conn'];
     $stmt = $conn->prepare("SELECT user FROM `following` WHERE `following`=?");
