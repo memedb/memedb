@@ -577,8 +577,15 @@ class user {
 
 class library {
 
+  public function __construct($name, $posts, $icon) {
+    $this->name = $name;
+    $this->posts = $posts;
+    $this->icon = $icon;
+  }
+
   public static function loadFromUser($user) {
-    return loadDBObjects("libraries", "user={$user->id}", "library");
+    $libs = loadDBObjects("libraries", "user={$user->id}", "library");
+    array_unshift($libs, new library("POSTS", ));
   }
 
   public function getPosts() {

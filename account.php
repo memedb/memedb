@@ -446,8 +446,6 @@ details
 
   </div>
 
-
-
 </body>
 
 </html>
