@@ -1747,6 +1747,14 @@ body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+  z-index: 10;
+}
+
+.library.onDrop {
+  z-index: 100;
+  border-bottom: 3px #777 solid;
+  background: #999;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
 }
 
 .library.is-dragover {

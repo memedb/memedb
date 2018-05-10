@@ -831,7 +831,7 @@ if ($account == null) {
       <div class="l-img"></div>
     </div>
 
-    <div class="library">
+    <div class="library onDrop">
       <h1 class="l-title">Selected Library</h1>
 
       <div class="l-settings">
