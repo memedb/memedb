@@ -207,12 +207,43 @@ function topBar($self) {
         </div>
       </div>
       <div class="sd-content">
-        <div class="sd-option">
-
-        </div>
-        <div class="sd-option">
-
-        </div>
+        <div class="section">
+            <i class="material-icons s-icon settings-icon">account_circle</i>
+            <div class="s-txt">
+              My Account
+            </div>
+          </div>
+          <div class="section">
+              <i class="material-icons s-icon settings-icon">group</i>
+              <div class="s-txt">
+                Switch Accounts
+              </div>
+          </div>
+          <div class="section">
+              <i class="material-icons s-icon settings-icon">exit_to_app</i>
+              <div class="s-txt">
+                Sign Out
+              </div>
+          </div>
+          <div class="long-line"></div>
+          <div class="section">
+              <i class="material-icons s-icon settings-icon">help</i>
+              <div class="s-txt">
+                Help
+              </div>
+          </div>
+          <div class="section">
+              <i class="material-icons s-icon settings-icon">feedback</i>
+              <div class="s-txt">
+                Send Feedback
+              </div>
+          </div>
+          <div class="section">
+              <i class="material-icons s-icon settings-icon">settings</i>
+              <div class="s-txt">
+                Settings
+              </div>
+          </div>
       </div>
     </div>
   <?php
