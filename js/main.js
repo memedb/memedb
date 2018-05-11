@@ -459,11 +459,11 @@ function closeBalance(){
 
 function expandSidenav(){
   $(".sidenav-home").css({
-    'width' : "66%"
+    'width' : "950px"
   });
   $(".home-content").css({
-    'width' : '34%',
-    'margin-left' : '66%'
+    'width' : 'auto',
+    'margin-left' : '950px'
   });
   $(".home-logo").css({
     'margin-bottom' : '0px'
@@ -480,6 +480,26 @@ function expandSidenav(){
   $(".tl-post-title").css({
     'display' : 'inline-block'
   });
+  setTimeout(function() {
+    $(".exp-post-corridor").css({
+      'display' : 'inline-block'
+    });
+    setTimeout(function() {
+      $(".exp-post-corridor").css({
+        'opacity' : '1'
+      });
+    }, 10);
+  }, 100);
+  setTimeout(function() {
+    $(".tl-post-title").css({
+      'display' : 'inline-block'
+    });
+    setTimeout(function() {
+      $(".tl-post-title").css({
+        'opacity' : '1'
+      });
+    }, 10);
+  }, 100);
 
 }
 
@@ -503,9 +523,20 @@ function compactSidenav(){
   $(".exp-post-corridor").css({
     'display' : 'none'
   });
+  setTimeout(function() {
+    $(".exp-post-corridor").css({
+      'display' : 'none',
+      'opacity' : '0'
+    });
+  }, 10);
   $(".tl-post-title").css({
-    'display' : 'none'
+    'opacity' : '0'
   });
+  setTimeout(function() {
+    $(".tl-post-title").css({
+      'display' : 'none'
+    });
+  }, 10);
 }
 
 function removeDragData(ev) {

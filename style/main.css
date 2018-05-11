@@ -760,6 +760,7 @@ input:checked+.slider:before {
   overflow-y: auto;
   overflow-x: hidden;
   transition-duration: 0.3s;
+  transition-timing-function: cubic-bezier(0, 1, 1, 1);
 }
 
 .logo-info {
@@ -1730,6 +1731,7 @@ body {
   height: auto;
   margin-left: 300px;
   transition-duration: 0.3s;
+  transition-timing-function: cubic-bezier(0, 1, 1, 1);
 }
 
 .c-box {
@@ -3950,6 +3952,8 @@ h6 {
   z-index: 100;
   float: right;
   margin-right: 55px;
+  transition-duration: 0.3s;
+  opacity: 0;
 }
 
 .exp-post {
@@ -3982,6 +3986,7 @@ h6 {
   left: -140px;
   font-size: 23px;
   font-weight: 600;
+  transition-duration: 0.3s;
 }
 
 .exp-card {
