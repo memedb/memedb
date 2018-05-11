@@ -47,15 +47,15 @@ if ($account == null) {
 
   </div>
 
-  <div class="category-blk addLib">
-    <div class="c-title-holder">
-      <h1 class="imp-title">Add Library</h1>
+  <div class="post category-blk addLib">
+    <div class="post-header">
+      <h1 class="post-title">ADD LIBRARY</h1>
     </div>
 
     <div class="c-content">
       <div>
         <div class="input">
-          <input id="name" name="name" type="text" placeholder="Name" style="all: unset; width: 100%;position: relative; border-bottom: 2px solid #ddd;" required/>
+          <input id="name" name="name" type="text" placeholder="Name" style="all: unset; width: 100%;position: relative; border-bottom: 2px solid #ddd; margin-top: 10px; cursor: auto;" required/>
         </div>
       </div>
 
@@ -223,11 +223,13 @@ if ($account == null) {
   <div class="sidenav-home">
       <div class="scroll-hide">
         <div class="logo-info">
-          <div class="home-logo"><a style="all:unset;" href="/">memedb</a><i class="material-icons expand-sidenav">
-details
-</i></div>
+          <div class="home-logo">
+            <a style="all:unset;position: fixed;left: 60px;" href="/">memedb</a>
+            <h1 class="l-title tl-post-title">TIMELINE</h1>
+            <i class="material-icons expand-sidenav">details</i>
+          </div>
 
-          <div class="sections">
+          <div class="sections account">
 
             <div class="line h"></div>
 
@@ -256,9 +258,73 @@ details
           </div>
         </div>
 
-        <div class="subscriptions">
+        <div class="exp-post-corridor">
+
+          <div class="exp-post">
+            <div class="exp-post-image">
+
+            </div>
+            <div class="exp-post-info">
+
+            </div>
+          </div>
+
+          <div class="exp-card">
+            <div class="exp-card-title">
+              <h1 class="card-title">+ New Library</h1>
+              <h2 class="card-date">dd/mm/yyyy</h2>
+            </div>
+            <div class="exp-card-content">
+              <div class="exp-card-block">
+                <div class="exp-card-square">
+                  <i class="material-icons card-icon">
+                  library_books
+                  </i>
+                </div>
+                <h1 class="card-library-title">Library Name</h1>
+              </div>
+              <div class="exp-card-block">
+                <div class="exp-card-square">
+                  <i class="material-icons card-icon">
+                  library_books
+                  </i>
+                </div>
+                <h1 class="card-library-title">Library Name</h1>
+              </div>
+            </div>
+          </div>
+
+          <div class="exp-post">
+            <div class="exp-post-image">
+
+            </div>
+            <div class="exp-post-info">
+
+            </div>
+          </div>
+
+          <div class="exp-card">
+            <div class="exp-card-title">
+              <h1 class="card-title">+ New Library</h1>
+              <h2 class="card-date">dd/mm/yyyy</h2>
+            </div>
+            <div class="exp-card-content">
+              <div class="exp-card-block">
+                <div class="exp-card-square">
+                  <i class="material-icons card-icon">
+                  library_books
+                  </i>
+                </div>
+                <h1 class="card-library-title">Library Name</h1>
+              </div>
+              <div class="c-button-hold">
+                <button class="post-btn closePost" style="float: right">VIEW</button>
+              </div>
+            </div>
+          </div>
 
         </div>
+
       </div>
   </div>
 

@@ -169,7 +169,7 @@ function topBar($self) {
     </div>
 
     <div class="searchbar">
-      <i class="material-icons search-g" style="float: left; position:relative; top: -4px;">search</i><input type="text" placeholder="Search Site" style="all: unset; width: 150px;position: relative; left: 11px; color: #646d6d; top: 1px;" />
+      <i class="material-icons search-g" style="float: left; position:relative; top: -4px;">search</i><input type="text" placeholder="Search" style="all: unset; width: 150px;position: relative; left: 11px; color: #646d6d; top: 1px;" />
     </div>
 
     <div class="ec-search-results">
