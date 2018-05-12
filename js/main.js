@@ -162,6 +162,25 @@ $(document).ready(function() {
   $(".c-title-holder .searchbar input").keyup(function() {
     tagSearch(this.value);
   });
+
+  $(".sendAddLib").click(function() {
+    var data = $("#libForm").serializeArray();
+    console.log(data);
+    var temp = new Array();
+    for (var i = 0; i < data.length; i++) {
+      dataP = data[i];
+      temp[dataP['name']] = dataP['value'];
+    }
+    data = temp;
+    if (!('private' in data)) {
+      data['private'] = 0;
+    } else {
+      data['private'] = 1;
+    }
+    sendCommand("create_library", null, data, function(response) {
+      console.log(response);
+    })
+  });
 });
 
 function tagSearch(value) {

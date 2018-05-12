@@ -53,39 +53,40 @@ if ($account == null) {
     </div>
 
     <div class="c-content">
-      <div>
-        <div class="input">
-          <input id="name" name="name" type="text" placeholder="Name" style="all: unset; width: 100%;position: relative; border-bottom: 2px solid #ddd; margin-top: 10px; cursor: auto;" required/>
+      <form id="libForm">
+        <div>
+          <div class="input">
+            <input id="name" name="name" type="text" placeholder="Name" style="all: unset; width: 100%;position: relative; border-bottom: 2px solid #ddd; margin-top: 10px; cursor: auto;" required/>
+          </div>
         </div>
-      </div>
 
-      <label class="container">Lock Library
-        <label class="switch">
-          <input type="checkbox">
-          <span class="slider round"></span>
+        <label class="container">Private
+          <label class="switch">
+            <input type="checkbox" name="private">
+            <span class="slider round"></span>
+          </label>
         </label>
-      </label>
 
-      <h1 class="s-section-title">Visibility</h1>
+        <h1 class="s-section-title">Visibility</h1>
 
-      <label class="container">Everyone
-        <input type="radio" name="radio">
-        <span class="radio"></span>
-      </label>
-      <label class="container">Followers Only
-        <input type="radio" name="radio" checked="checked">
-        <span class="radio"></span>
-      </label>
-      <label class="container">Only Me
-        <input type="radio" name="radio">
-        <span class="radio"></span>
-      </label>
-
+        <label class="container">Everyone
+          <input type="radio" name="visibility" value="2">
+          <span class="radio"></span>
+        </label>
+        <label class="container">Followers Only
+          <input type="radio" name="visibility" checked="checked" value="1">
+          <span class="radio"></span>
+        </label>
+        <label class="container">Only Me
+          <input type="radio" name="visibility" value="0">
+          <span class="radio"></span>
+        </label>
+      </form>
     </div>
 
     <div class="c-button-hold">
       <button class="c-op-1 closeAddLib">Cancel</button>
-      <button class="c-op-2" style="color: #4167f4;">Add</button>
+      <button class="c-op-2 sendAddLib" style="color: #4167f4;">Add</button>
     </div>
   </div>
 
@@ -248,7 +249,7 @@ if ($account == null) {
               <div class="account-para">
                 <?=$account->description;?>
               </div>
-              <button class="follow">
+              <button id="follow-btn" onclick="followAction()" data-handle="<?= $account->handle?>" class="<?php echo ($is_self ? "follow-self" : ($self->isFollowing($account->id) ? "unfollow" : "follow")) ?>">
                 <span><?= $account->getFormattedFollowerCount(); ?></span>
               </button>
             </div>
@@ -355,56 +356,7 @@ if ($account == null) {
   <div class="home-content">
     <?php
     topBar($self);
-     ?>
 
-    <div class="library" ondragenter="libDrag(event);" ondragleave="libDragLeave(event);" ondragover="libDrag(event);" ondrop="libDrop(event);">
-      <i class="material-icons l-icon">photo_library</i>
-      <h1 class="l-title">POSTS</h1>
-
-      <div class="l-settings">
-        <i class="material-icons">keyboard_arrow_down</i>
-      </div>
-      <div class="l-drop">
-        <i class="material-icons">more_horiz</i>
-      </div>
-    </div>
-
-    <div class="l-content" style="height: 0px;">
-      <div class="l-img"></div>
-    </div>
-
-    <div class="library light">
-      <i class="material-icons l-icon">repeat</i>
-      <h1 class="l-title">REPOSTS</h1>
-      <div class="l-settings">
-        <i class="material-icons">keyboard_arrow_down</i>
-      </div>
-      <div class="l-drop">
-        <i class="material-icons">more_horiz</i>
-      </div>
-    </div>
-
-    <div class="l-content" style="height: 0px;">
-      <div class="l-img"></div>
-    </div>
-
-    <div class="library">
-      <i class="material-icons l-icon">star</i>
-      <h1 class="l-title">FAVORITES</h1>
-
-      <div class="l-settings">
-        <i class="material-icons">keyboard_arrow_down</i>
-      </div>
-      <div class="l-drop">
-        <i class="material-icons">more_horiz</i>
-      </div>
-    </div>
-
-    <div class="l-content" style="height: 0px;">
-      <div class="l-img"></div>
-    </div>
-
-    <?php
     $libs = library::loadFromUser($self);
     $libCount = 0;
     $dragAttr = "ondragenter='libDrag(event);' ondragleave='libDragLeave(event);' ondragover='libDrag(event);' ondrop='libDrop(event);'";

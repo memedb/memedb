@@ -14,6 +14,16 @@ $db = "zerentha_meme";
 
 $GLOBALS['conn'] = new mysqli($server, $user, $pass, $db);
 
+if (!isset($_SESSION['id']) && isset($_COOKIE['PHPSESSID'])) {
+  $conn = $GLOBALS['conn'];
+  $stmt = $conn->prepare("SELECT id FROM users WHERE session='{$_COOKIE['PHPSESSID']}'");
+  $stmt->execute();
+  $result = $stmt->get_result();
+  if ($result->num_rows > 0) {
+    $_SESSION['id'] = $result->fetch_assoc()['id'];
+  }
+}
+
 if ($_SESSION['id']) {
   $GLOBALS['user'] = user::loadFromId($_SESSION['id']);
   $conn = $GLOBALS['conn'];
@@ -116,6 +126,17 @@ Command::register("create_post", function($user) {
 
   move_uploaded_file($_FILES['file']['tmp_name'], 'images/' . $id . "." . $_POST['type']);
 
+  jsonMessage(array("id"=>$id));
+});
+
+Command::register("create_library", function($user){
+  logger($_POST);
+  $id = uniqid('', true);
+  $date = gmdate(DATE_ATOM);
+  $conn = $GLOBALS['conn'];
+  $stmt = $conn->prepare("INSERT INTO `libraries` (`id`, `user`, `name`, `visibility`, `private`, `date`) VALUES (?, ?, ?, ?, ?, ?);");
+  $stmt->bind_param("sisiis", $id,  $user->id, $_POST['name'], $_POST['visibility'], $_POST['private'], $date);
+  $stmt->execute();
   jsonMessage(array("id"=>$id));
 });
 
@@ -603,8 +624,9 @@ class library {
   public static function loadFromUser($user) {
     $libs = loadDBObjects("libraries", "user={$user->id}", "library");
     array_unshift($libs,
-      library::create("POSTS", loadDBObjects("posts", "source={$user->id} AND original=NULL", "post"), "photo_library", true),
-      library::create("REPOSTS", loadDBObjects("posts", "source={$user->id} AND original!=NULL", "post"), "repeat", false)
+      library::create("POSTS", loadDBObjects("posts", "source={$user->id} AND original IS NULL", "post"), "photo_library", true),
+      library::create("REPOSTS", loadDBObjects("posts", "source={$user->id} AND original IS NOT NULL", "post"), "repeat", false),
+      library::create("FAVORITES", loadDBObjects("posts", "id IN (SELECT post FROM favorites)", "post"), "start", false)
     );
     return $libs;
   }
