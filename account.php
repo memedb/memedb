@@ -383,9 +383,10 @@ if ($account == null) {
     <?php
     $libs = library::loadFromUser($self);
     $libCount = 0;
+    $dragAttr = "ondragenter='libDrag(event);' ondragleave='libDragLeave(event);' ondragover='libDrag(event);' ondrop='libDrop(event);'";
     foreach ($libs as $lib) {
         ?>
-        <div class="library <?=$libCount%2==0?" light":""?>" data-id="<?=$lib->id?>" ondragenter="libDrag(event);" ondragleave="libDragLeave(event);" ondragover="libDrag(event);" ondrop="libDrop(event);">
+        <div class="library <?=$libCount%2==0?" light":""?>" data-id="<?=$lib->id?>" <?php echo $lib->icon ? $lib->canUpload ? $dragAttr : "" : $dragAttr; ?>>
           <?php
           if ($lib->icon) {
             ?>

@@ -110,7 +110,7 @@ Command::register("create_post", function($user) {
   $id = uniqid('', true);
   $date = gmdate(DATE_ATOM);
   $conn = $GLOBALS['conn'];
-  $stmt = $conn->prepare("INSERT INTO `posts` (`id`, `tags`, `upvotes`, `downvotes`, `source`, `date`, `type`, `parent`, `library`) VALUES (?, '', 0, 0, ?, ?, ?, ?, ?);");
+  $stmt = $conn->prepare("INSERT INTO `posts` (`id`, `tags`, `upvotes`, `downvotes`, `source`, `account`, `date`, `type`, `parent`, `library`) VALUES (?, '', 0, 0, ?, NULL, ?, ?, ?, ?);");
   $stmt->bind_param("sissis", $id, $user->id, $date, $_POST['type'], $_POST['parent'], $_POST['library']);
   $stmt->execute();
 
@@ -393,7 +393,7 @@ class post {
   }
 
   public function printImage() {
-    echo "<img src=\"/images/" . $this->id . "." . $this->type . "\" />";
+    echo "<img src=\"/images/" . ($this->original ? $this->original : $this->id) . "." . $this->type . "\" />";
   }
 
 }
@@ -577,17 +577,22 @@ class user {
 
 class library {
 
-  public static function create($name, $posts, $icon) {
+  public static function create($name, $posts, $icon, $canUpload) {
     $lib = new library();
     $lib->name = $name;
+    $lib->id = $name;
     $lib->posts = $posts;
     $lib->icon = $icon;
+    $lib->canUpload = $canUpload;
     return $lib;
   }
 
   public static function loadFromUser($user) {
     $libs = loadDBObjects("libraries", "user={$user->id}", "library");
-    array_unshift($libs, library::create("POSTS", loadDBObjects("posts", "source={$user->id}", "post"), "photo_library"));
+    array_unshift($libs,
+      library::create("POSTS", loadDBObjects("posts", "source={$user->id} AND original=NULL", "post"), "photo_library", true),
+      library::create("REPOSTS", loadDBObjects("posts", "source={$user->id} AND original!=NULL", "post"), "repeat", false)
+    );
     return $libs;
   }
 
