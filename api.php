@@ -207,43 +207,56 @@ function topBar($self) {
         </div>
       </div>
       <div class="sd-content">
-        <div class="section">
-            <i class="material-icons s-icon settings-icon">account_circle</i>
-            <div class="s-txt">
-              My Account
+
+            <div class="section">
+              <a style="all:unset;" href="/account.php">
+                <i class="material-icons s-icon settings-icon">account_circle</i>
+                <div class="s-txt">
+                  My Account
+                </div>
+              </a>
             </div>
-          </div>
-          <div class="section">
-              <i class="material-icons s-icon settings-icon">group</i>
-              <div class="s-txt">
-                Switch Accounts
-              </div>
-          </div>
-          <div class="section">
-              <i class="material-icons s-icon settings-icon">exit_to_app</i>
-              <div class="s-txt">
-                Sign Out
-              </div>
-          </div>
+            <div class="section">
+              <a style="all:unset;" href="/">
+                <i class="material-icons s-icon settings-icon">group</i>
+                <div class="s-txt">
+                  Switch Accounts
+                </div>
+              </a>
+            </div>
+            <div class="section">
+              <a style="all:unset;" href="/logout.php">
+                <i class="material-icons s-icon settings-icon">exit_to_app</i>
+                <div class="s-txt">
+                  Sign Out
+                </div>
+              </a>
+            </div>
           <div class="long-line"></div>
-          <div class="section">
-              <i class="material-icons s-icon settings-icon">help</i>
-              <div class="s-txt">
-                Help
-              </div>
-          </div>
-          <div class="section">
-              <i class="material-icons s-icon settings-icon">feedback</i>
-              <div class="s-txt">
-                Send Feedback
-              </div>
-          </div>
-          <div class="section">
-              <i class="material-icons s-icon settings-icon">settings</i>
-              <div class="s-txt">
-                Settings
-              </div>
-          </div>
+            <div class="section">
+              <a style="all:unset;" href="/">
+                <i class="material-icons s-icon settings-icon">help</i>
+                <div class="s-txt">
+                  Help
+                </div>
+              </a>
+            </div>
+            <div class="section">
+              <a style="all:unset;" href="/">
+                <i class="material-icons s-icon settings-icon">feedback</i>
+                <div class="s-txt">
+                  Send Feedback
+                </div>
+              </a>
+            </div>
+            <div class="section">
+              <a style="all:unset;" href="/">
+                <i class="material-icons s-icon settings-icon">settings</i>
+                <div class="s-txt">
+                  Settings
+                </div>
+              </a>
+            </div>
       </div>
     </div>
   <?php

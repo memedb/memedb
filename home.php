@@ -132,7 +132,7 @@ if ($account == null)
   <div class="sidenav-home">
       <div class="scroll-hide">
         <div class="logo-info">
-          <div class="home-logo"><a style="all:unset;" href="/">memedb</a></div>
+          <div class="home-logo" style="margin-bottom:0px;"><a style="all:unset;" href="/">memedb</a></div>
 
           <div class="sections">
             <div class="line h"></div>
@@ -334,7 +334,7 @@ if ($account == null)
       </div>
 
     </div>
-    
+
   <div class="post m-post">
     <div class="post-header">
       <h1 class="post-title">NEW POST</h1>
