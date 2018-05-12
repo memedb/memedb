@@ -274,7 +274,6 @@ function followAction() {
 }
 
 function openOptions(id) {
-  console.log(id);
   var offset = $("#" + id).offset();
   $(".l-sett-opt").css({
     top: (offset.top + 15) + "px",
@@ -311,6 +310,28 @@ function openSettings(){
       });
       $("#imp-bg-fade").css("opacity", "");
     }, 10);
+}
+
+function fadeToDark(){
+  $("#imp-bg-fade").css("display", "");
+  setTimeout(function() {
+    $(".l-sett-opt").css({
+      opacity: "",
+      right: ""
+    });
+    $("#imp-bg-fade").css("opacity", "");
+  }, 10);
+}
+
+function unfade(){
+  $("#imp-bg-fade").css({
+    'opacity' : '0'
+  });
+  setTimeout(function() {
+    $(".l-sett-opt").css({
+      'display' : 'none'
+    });
+  }, 10);
 }
 
 function closeSettings(){
