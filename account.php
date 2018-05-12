@@ -229,7 +229,7 @@ if ($account == null) {
             <i class="material-icons expand-sidenav">details</i>
           </div>
 
-          <div class="sections account">
+          <div class="sections slim">
 
             <div class="line h"></div>
 
@@ -256,6 +256,30 @@ if ($account == null) {
             <div class="line h"></div>
 
           </div>
+
+          <div class="sections slim">
+
+            <div class="section-light imp-info">
+              <div class="s-txt h highlighted">
+                <a style="all:unset;" href="/home.php">HOME</a>
+              </div>
+            </div>
+
+            <div class="section-light imp-info">
+              <div class="s-txt h">
+                <a style="all:unset;" href="/recommended.php">RECOMMENDED</a>
+              </div>
+            </div>
+
+            <div class="section-light imp-info">
+              <div class="s-txt h">
+                <a style="all:unset;" href="/economy.php">DB ECONOMY</a>
+              </div>
+            </div>
+
+            <div class="line h"></div>
+          </div>
+
         </div>
 
         <div class="exp-post-corridor">

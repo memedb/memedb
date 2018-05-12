@@ -662,7 +662,7 @@ input:checked+.slider:before {
   display: block;
 }
 
-.sections.account {
+.sections.slim {
   height: auto;
   display: block;
   width: 250px;
@@ -3389,7 +3389,7 @@ body {
   cursor: pointer;
   transition-duration: 0.3s;
   position: relative;
-  top: 22px;
+  top: 24px;
   right: 22px;
   float: right;
 }
