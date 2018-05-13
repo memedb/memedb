@@ -261,19 +261,19 @@ if ($account == null) {
           <div class="sections slim">
 
             <div class="section-light imp-info">
-              <div class="s-txt h highlighted">
+              <div class="s-txt a highlighted">
                 <a style="all:unset;" href="/home.php">HOME</a>
               </div>
             </div>
 
             <div class="section-light imp-info">
-              <div class="s-txt h">
+              <div class="s-txt a">
                 <a style="all:unset;" href="/recommended.php">RECOMMENDED</a>
               </div>
             </div>
 
             <div class="section-light imp-info">
-              <div class="s-txt h">
+              <div class="s-txt a">
                 <a style="all:unset;" href="/economy.php">DB ECONOMY</a>
               </div>
             </div>

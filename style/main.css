@@ -1414,7 +1414,6 @@ body {
   padding: 8px 16px 8px 16px;
   margin-top: 5px;
   margin-bottom: 5px;
-  margin-left: 42px;
   border-radius: 2px;
   border: none;
   text-align: center;
@@ -2373,10 +2372,11 @@ body {
 .album-text {
   color: #999;
   font-size: 60px;
-  position: relative;
+  position: absolute;
+  display: inline-block;
   left: 50%;
   top: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%,-50%);
 }
 
 .m-names {
@@ -3340,7 +3340,11 @@ body {
 }
 
 .s-txt.h {
-  margin-left: 75px;
+  margin-left: 85px;
+}
+
+.s-txt.a {
+  margin-left: 35px;
 }
 
 .s-txt.ec.highlighted {
