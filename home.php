@@ -2,6 +2,7 @@
 require('api.php');
 
 $account = $_GET['id'];
+$self = getUser();
 
 if ($account != null)
   $account = user::loadFromId($account);
@@ -132,7 +133,7 @@ if ($account == null)
   <div class="sidenav-home">
       <div class="scroll-hide">
         <div class="logo-info">
-          <div class="home-logo"><a style="all:unset;" href="/">memedb</a></div>
+          <div class="home-logo" style="margin-bottom:0px;"><a style="all:unset;" href="/">memedb</a></div>
 
           <div class="sections">
             <div class="line h"></div>
@@ -292,49 +293,8 @@ if ($account == null)
   </div> -->
 
   <div class="h-content">
-    <div class="top-bar">
-      <div class="ec-account-settings">
-        <div class="account-info">
-          <div class="sd-img">
-            <img src="<?php echo $account->getImage(); ?>" style="border: inherit; border-radius: inherit;" width="40" height="40">
-          </div>
-          <div class="sd-infoholder">
-            <h1 class="n-name sdname"><?php echo $account->name; ?></h1>
-            <div class="username">
-              @<?php echo $account->handle; ?>
-            </div>
-          </div>
-        </div>
+    <?php topBar($self) ?>
 
-        <i class="material-icons settings openAccount">settings</i>
-      </div>
-
-      <div class="searchbar">
-        <i class="material-icons search-g" style="float: left; position:relative; top: -4px;">search</i><input type="text" placeholder="Search Site" style="all: unset; width: 150px;position: relative; left: 11px; color: #646d6d; top: -1.5px;" />
-      </div>
-
-      <div class="ec-search-results">
-        <div class="ec-result-section">
-          <div class="s-txt ec result highlighted">
-            MEME 1
-          </div><i class="material-icons ec-icons up results">trending_up</i>
-        </div>
-
-        <div class="ec-result-section">
-          <div class="s-txt ec result">
-            MEME 2
-          </div><i class="material-icons ec-icons idle results">trending_flat</i>
-        </div>
-
-        <div class="ec-result-section">
-          <div class="s-txt ec result">
-            MEME 3
-          </div><i class="material-icons ec-icons low results">trending_down</i>
-        </div>
-      </div>
-
-    </div>
-    
   <div class="post m-post">
     <div class="post-header">
       <h1 class="post-title">NEW POST</h1>
@@ -436,48 +396,40 @@ if ($account == null)
           <div class="m-album-row">
             <div class="m-album-img"></div>
             <div class="m-album-img light">
-              <h1 class="album-text">+51</h1>
+              <h1 class="album-text">+1</h1>
             </div>
           </div>
         </div>
-        <div class="m-desc">
-          <div class="m-post-info">
-            <div class="m-likes">
-              <i class="material-icons m-icon">keyboard_arrow_up</i>
-              <h1 class="m-header">16K</h1>
-            </div>
-            <div class="m-reposts">
-              <i class="material-icons m-icon" style="font-size: 23px; margin-top: 1px;">repeat</i>
-              <h1 class="m-header">69</h1>
-            </div>
-            <div class="m-comments">
-              <i class="material-icons m-icon" style="font-size: 22px; position: relative; top: 4px;">chat_bubble_outline</i>
-              <h1 class="m-header">572</h1>
-            </div>
-            <div class="m-save">
-              <i class="material-icons m-icon" style="float: left;">save</i>
-            </div>
-            <h1 class="m-date">dd/mm/yyyy</h1>
+        <div class="post-content">
+          <h6>Title of Post</h6>
+          <div class="post-para">
+            This is the content of the card. I have to write shit in here huh?
+             I don't really know what to write so I'm just gonna say that Will sucks.
           </div>
-
-          <p class="m-para">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-          <div class="m-tags">
-            <div class="type m">META IRONIC</div>
-            <div class="type m">IRONIC</div>
-            <div class="type m">SHITPOSTING</div>
-            <div class="type m">PHILOSOPHY</div>
-            <div class="type m">DEEP FRIED</div>
-            <div class="type m">REACTION IMAGES</div>
-            <div class="type m">CURSED IMAGES</div>
-            <div class="type m">NONSENSICAL</div>
+          <div class="c-button-hold">
+            <div class="m-post-info">
+              <div class="m-likes">
+                <i class="material-icons m-icon">keyboard_arrow_up</i>
+                <h1 class="m-header">16K</h1>
+              </div>
+              <div class="m-reposts">
+                <i class="material-icons m-icon" style="font-size: 23px; margin-top: 1px;">repeat</i>
+                <h1 class="m-header">69</h1>
+              </div>
+              <div class="m-comments">
+                <i class="material-icons m-icon" style="font-size: 22px; position: relative; top: 4px;">chat_bubble_outline</i>
+                <h1 class="m-header">572</h1>
+              </div>
+              <div class="m-save">
+                <i class="material-icons m-icon" style="float: left;">save</i>
+              </div>
+              <h1 class="m-date">dd/mm/yyyy</h1>
+            </div>
           </div>
-
         </div>
       </div>
       <div class="m-comment-wrapper">
         <div class="m-comment-inside">
-          <div class="m-comments-s">
 
 
             <div class="m-comment">
@@ -499,8 +451,8 @@ if ($account == null)
                   <i class="material-icons m-comment-icon">keyboard_arrow_up</i>
                   <h1 class="m-header-comment">522</h1>
                 </div>
-                <button class="c-op-1 c-reply" style="top: 5px; margin-left: 7px; color: #62717b;">REPLY</button>
-                <i class="material-icons" style="top: 3px; color: #62717b;">more_horiz</i>
+                <button class="c-op-1 c-reply" style="top: 5px; margin-left: 7px; color: #333;">REPLY</button>
+                <i class="material-icons" style="top: 3px; color: #333;">more_horiz</i>
               </div>
               <div class="comment-replies">
                 <div class="reply-comment">
@@ -512,8 +464,8 @@ if ($account == null)
                       <i class="material-icons m-comment-icon reply">keyboard_arrow_up</i>
                       <h1 class="m-header-comment reply">522</h1>
                     </div>
-                    <button class="c-op-1 c-reply reply" style="top: 5px; margin-left: 7px; color: #62717b;">REPLY</button>
-                    <i class="material-icons" style="top: 2px; color: #62717b; font-size: 24px;">more_horiz</i>
+                    <button class="c-op-1 c-reply reply" style="top: 5px; margin-left: 7px; color: #333;">REPLY</button>
+                    <i class="material-icons" style="top: 2px; color: #333; font-size: 24px;">more_horiz</i>
                   </div>
                 </div>
                 <div class="reply-comment">
@@ -526,12 +478,12 @@ if ($account == null)
                       <i class="material-icons m-comment-icon reply">keyboard_arrow_up</i>
                       <h1 class="m-header-comment reply">522</h1>
                     </div>
-                    <button class="c-op-1 c-reply reply" style="top: 5px; margin-left: 7px; color: #62717b;">REPLY</button>
-                    <i class="material-icons" style="top: 2px; color: #62717b; font-size: 24px;">more_horiz</i>
+                    <button class="c-op-1 c-reply reply" style="top: 5px; margin-left: 7px; color: #333;">REPLY</button>
+                    <i class="material-icons" style="top: 2px; color: #333; font-size: 24px;">more_horiz</i>
                   </div>
                 </div>
                 <div class="m-c-reviews" style="margin-left: 0px;">
-                  <button class="c-op-1 c-reply" style="top: 5px; margin-left: 0px; color: #62717b;">SHOW MORE</button>
+                  <button class="c-op-1 c-reply" style="top: 5px; margin-left: 0px; color: #333;">SHOW MORE</button>
                 </div>
               </div>
             </div>
@@ -561,8 +513,8 @@ if ($account == null)
                   <i class="material-icons m-comment-icon">keyboard_arrow_up</i>
                   <h1 class="m-header-comment">522</h1>
                 </div>
-                <button class="c-op-1 c-reply" style="top: 5px; margin-left: 7px; color: #62717b;">REPLY</button>
-                <i class="material-icons" style="top: 3px; color: #62717b;">more_horiz</i>
+                <button class="c-op-1 c-reply" style="top: 5px; margin-left: 7px; color: #333;">REPLY</button>
+                <i class="material-icons" style="top: 3px; color: #333;">more_horiz</i>
               </div>
             </div>
             <div class="m-comment">
@@ -587,8 +539,8 @@ if ($account == null)
                   <i class="material-icons m-comment-icon">keyboard_arrow_up</i>
                   <h1 class="m-header-comment">522</h1>
                 </div>
-                <button class="c-op-1 c-reply" style="top: 5px; margin-left: 7px; color: #62717b;">REPLY</button>
-                <i class="material-icons" style="top: 3px; color: #62717b;">more_horiz</i>
+                <button class="c-op-1 c-reply" style="top: 5px; margin-left: 7px; color: #333;">REPLY</button>
+                <i class="material-icons" style="top: 3px; color: #333;">more_horiz</i>
               </div>
             </div>
             <div class="m-comment">
@@ -613,8 +565,8 @@ if ($account == null)
                   <i class="material-icons m-comment-icon">keyboard_arrow_up</i>
                   <h1 class="m-header-comment">522</h1>
                 </div>
-                <button class="c-op-1 c-reply" style="top: 5px; margin-left: 7px; color: #62717b;">REPLY</button>
-                <i class="material-icons" style="top: 3px; color: #62717b;">more_horiz</i>
+                <button class="c-op-1 c-reply" style="top: 5px; margin-left: 7px; color: #333;">REPLY</button>
+                <i class="material-icons" style="top: 3px; color: #333;">more_horiz</i>
               </div>
             </div>
             <div class="m-comment">
@@ -639,8 +591,8 @@ if ($account == null)
                   <i class="material-icons m-comment-icon">keyboard_arrow_up</i>
                   <h1 class="m-header-comment">522</h1>
                 </div>
-                <button class="c-op-1 c-reply" style="top: 5px; margin-left: 7px; color: #62717b;">REPLY</button>
-                <i class="material-icons" style="top: 3px; color: #62717b;">more_horiz</i>
+                <button class="c-op-1 c-reply" style="top: 5px; margin-left: 7px; color: #333;">REPLY</button>
+                <i class="material-icons" style="top: 3px; color: #333;">more_horiz</i>
               </div>
             </div>
             <div class="m-comment">
@@ -665,18 +617,17 @@ if ($account == null)
                   <i class="material-icons m-comment-icon">keyboard_arrow_up</i>
                   <h1 class="m-header-comment">522</h1>
                 </div>
-                <button class="c-op-1 c-reply" style="top: 5px; margin-left: 7px; color: #62717b;">REPLY</button>
-                <i class="material-icons" style="top: 3px; color: #62717b;">more_horiz</i>
+                <button class="c-op-1 c-reply" style="top: 5px; margin-left: 7px; color: #333;">REPLY</button>
+                <i class="material-icons" style="top: 3px; color: #333;">more_horiz</i>
               </div>
             </div>
-          </div>
         </div>
       </div>
       <div class="m-post-comment">
         <div class="comment-box">
           <i class="material-icons m-meme-icon">add_a_photo</i>
           <textarea name="name" class="m-textarea" rows="1" cols="10" wrap="hard"></textarea>
-          <button class="c-op-1 postit" style="top: 5px; margin-left: 7px; color: #62717b;">POST</button>
+          <button class="c-op-1 postit" style="top: 5px; margin-left: 7px; color: #333;">POST</button>
         </div>
       </div>
     </div>
@@ -761,8 +712,8 @@ if ($account == null)
                   <i class="material-icons m-comment-icon">keyboard_arrow_up</i>
                   <h1 class="m-header-comment">522</h1>
                 </div>
-                <button class="c-op-1 c-reply" style="top: 5px; margin-left: 7px; color: #62717b;">REPLY</button>
-                <i class="material-icons" style="top: 3px; color: #62717b;">more_horiz</i>
+                <button class="c-op-1 c-reply" style="top: 5px; margin-left: 7px; color: #333;">REPLY</button>
+                <i class="material-icons" style="top: 3px; color: #333;">more_horiz</i>
               </div>
               <div class="comment-replies">
                 <div class="reply-comment">
@@ -774,8 +725,8 @@ if ($account == null)
                       <i class="material-icons m-comment-icon reply">keyboard_arrow_up</i>
                       <h1 class="m-header-comment reply">522</h1>
                     </div>
-                    <button class="c-op-1 c-reply reply" style="top: 5px; margin-left: 7px; color: #62717b;">REPLY</button>
-                    <i class="material-icons" style="top: 2px; color: #62717b; font-size: 24px;">more_horiz</i>
+                    <button class="c-op-1 c-reply reply" style="top: 5px; margin-left: 7px; color: #333;">REPLY</button>
+                    <i class="material-icons" style="top: 2px; color: #333; font-size: 24px;">more_horiz</i>
                   </div>
                 </div>
                 <div class="reply-comment">
@@ -788,12 +739,12 @@ if ($account == null)
                       <i class="material-icons m-comment-icon reply">keyboard_arrow_up</i>
                       <h1 class="m-header-comment reply">522</h1>
                     </div>
-                    <button class="c-op-1 c-reply reply" style="top: 5px; margin-left: 7px; color: #62717b;">REPLY</button>
-                    <i class="material-icons" style="top: 2px; color: #62717b; font-size: 24px;">more_horiz</i>
+                    <button class="c-op-1 c-reply reply" style="top: 5px; margin-left: 7px; color: #333;">REPLY</button>
+                    <i class="material-icons" style="top: 2px; color: #333; font-size: 24px;">more_horiz</i>
                   </div>
                 </div>
                 <div class="m-c-reviews" style="margin-left: 0px;">
-                  <button class="c-op-1 c-reply" style="top: 5px; margin-left: 0px; color: #62717b;">SHOW MORE</button>
+                  <button class="c-op-1 c-reply" style="top: 5px; margin-left: 0px; color: #333;">SHOW MORE</button>
                 </div>
               </div>
             </div>
@@ -823,8 +774,8 @@ if ($account == null)
                   <i class="material-icons m-comment-icon">keyboard_arrow_up</i>
                   <h1 class="m-header-comment">522</h1>
                 </div>
-                <button class="c-op-1 c-reply" style="top: 5px; margin-left: 7px; color: #62717b;">REPLY</button>
-                <i class="material-icons" style="top: 3px; color: #62717b;">more_horiz</i>
+                <button class="c-op-1 c-reply" style="top: 5px; margin-left: 7px; color: #333;">REPLY</button>
+                <i class="material-icons" style="top: 3px; color: #333;">more_horiz</i>
               </div>
             </div>
             <div class="m-comment">
@@ -849,8 +800,8 @@ if ($account == null)
                   <i class="material-icons m-comment-icon">keyboard_arrow_up</i>
                   <h1 class="m-header-comment">522</h1>
                 </div>
-                <button class="c-op-1 c-reply" style="top: 5px; margin-left: 7px; color: #62717b;">REPLY</button>
-                <i class="material-icons" style="top: 3px; color: #62717b;">more_horiz</i>
+                <button class="c-op-1 c-reply" style="top: 5px; margin-left: 7px; color: #333;">REPLY</button>
+                <i class="material-icons" style="top: 3px; color: #333;">more_horiz</i>
               </div>
             </div>
             <div class="m-comment">
@@ -875,8 +826,8 @@ if ($account == null)
                   <i class="material-icons m-comment-icon">keyboard_arrow_up</i>
                   <h1 class="m-header-comment">522</h1>
                 </div>
-                <button class="c-op-1 c-reply" style="top: 5px; margin-left: 7px; color: #62717b;">REPLY</button>
-                <i class="material-icons" style="top: 3px; color: #62717b;">more_horiz</i>
+                <button class="c-op-1 c-reply" style="top: 5px; margin-left: 7px; color: #333;">REPLY</button>
+                <i class="material-icons" style="top: 3px; color: #333;">more_horiz</i>
               </div>
             </div>
             <div class="m-comment">
@@ -901,8 +852,8 @@ if ($account == null)
                   <i class="material-icons m-comment-icon">keyboard_arrow_up</i>
                   <h1 class="m-header-comment">522</h1>
                 </div>
-                <button class="c-op-1 c-reply" style="top: 5px; margin-left: 7px; color: #62717b;">REPLY</button>
-                <i class="material-icons" style="top: 3px; color: #62717b;">more_horiz</i>
+                <button class="c-op-1 c-reply" style="top: 5px; margin-left: 7px; color: #333;">REPLY</button>
+                <i class="material-icons" style="top: 3px; color: #333;">more_horiz</i>
               </div>
             </div>
             <div class="m-comment">
@@ -927,8 +878,8 @@ if ($account == null)
                   <i class="material-icons m-comment-icon">keyboard_arrow_up</i>
                   <h1 class="m-header-comment">522</h1>
                 </div>
-                <button class="c-op-1 c-reply" style="top: 5px; margin-left: 7px; color: #62717b;">REPLY</button>
-                <i class="material-icons" style="top: 3px; color: #62717b;">more_horiz</i>
+                <button class="c-op-1 c-reply" style="top: 5px; margin-left: 7px; color: #333;">REPLY</button>
+                <i class="material-icons" style="top: 3px; color: #333;">more_horiz</i>
               </div>
             </div>
           </div>
@@ -938,7 +889,7 @@ if ($account == null)
         <div class="comment-box">
           <i class="material-icons m-meme-icon">add_a_photo</i>
           <textarea name="name" class="m-textarea" rows="1" cols="10" wrap="hard"></textarea>
-          <button class="c-op-1 postit" style="top: 5px; margin-left: 7px; color: #62717b;">POST</button>
+          <button class="c-op-1 postit" style="top: 5px; margin-left: 7px; color: #333;">POST</button>
         </div>
       </div>
     </div>

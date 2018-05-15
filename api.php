@@ -14,6 +14,16 @@ $db = "zerentha_meme";
 
 $GLOBALS['conn'] = new mysqli($server, $user, $pass, $db);
 
+if (!isset($_SESSION['id']) && isset($_COOKIE['PHPSESSID'])) {
+  $conn = $GLOBALS['conn'];
+  $stmt = $conn->prepare("SELECT id FROM users WHERE session='{$_COOKIE['PHPSESSID']}'");
+  $stmt->execute();
+  $result = $stmt->get_result();
+  if ($result->num_rows > 0) {
+    $_SESSION['id'] = $result->fetch_assoc()['id'];
+  }
+}
+
 if ($_SESSION['id']) {
   $GLOBALS['user'] = user::loadFromId($_SESSION['id']);
   $conn = $GLOBALS['conn'];
@@ -110,12 +120,23 @@ Command::register("create_post", function($user) {
   $id = uniqid('', true);
   $date = gmdate(DATE_ATOM);
   $conn = $GLOBALS['conn'];
-  $stmt = $conn->prepare("INSERT INTO `posts` (`id`, `tags`, `upvotes`, `downvotes`, `source`, `date`, `type`, `parent`, `library`) VALUES (?, '', 0, 0, ?, ?, ?, ?, ?);");
+  $stmt = $conn->prepare("INSERT INTO `posts` (`id`, `tags`, `upvotes`, `downvotes`, `source`, `account`, `date`, `type`, `parent`, `library`) VALUES (?, '', 0, 0, ?, NULL, ?, ?, ?, ?);");
   $stmt->bind_param("sissis", $id, $user->id, $date, $_POST['type'], $_POST['parent'], $_POST['library']);
   $stmt->execute();
 
   move_uploaded_file($_FILES['file']['tmp_name'], 'images/' . $id . "." . $_POST['type']);
 
+  jsonMessage(array("id"=>$id));
+});
+
+Command::register("create_library", function($user){
+  logger($_POST);
+  $id = uniqid('', true);
+  $date = gmdate(DATE_ATOM);
+  $conn = $GLOBALS['conn'];
+  $stmt = $conn->prepare("INSERT INTO `libraries` (`id`, `user`, `name`, `visibility`, `private`, `date`) VALUES (?, ?, ?, ?, ?, ?);");
+  $stmt->bind_param("sisiis", $id,  $user->id, $_POST['name'], $_POST['visibility'], $_POST['private'], $date);
+  $stmt->execute();
   jsonMessage(array("id"=>$id));
 });
 
@@ -169,7 +190,7 @@ function topBar($self) {
     </div>
 
     <div class="searchbar">
-      <i class="material-icons search-g" style="float: left; position:relative; top: -4px;">search</i><input type="text" placeholder="Search Site" style="all: unset; width: 150px;position: relative; left: 11px; color: #646d6d; top: 1px;" />
+      <i class="material-icons search-g" style="float: left; position:relative; top: -4px;">search</i><input type="text" placeholder="Search" style="all: unset; width: 150px;position: relative; left: 11px; color: #646d6d; top: 1px;" />
     </div>
 
     <div class="ec-search-results">
@@ -207,43 +228,56 @@ function topBar($self) {
         </div>
       </div>
       <div class="sd-content">
-        <div class="section">
-            <i class="material-icons s-icon settings-icon">account_circle</i>
-            <div class="s-txt">
-              My Account
+
+            <div class="section">
+              <a style="all:unset;" href="/account.php">
+                <i class="material-icons s-icon settings-icon">account_circle</i>
+                <div class="s-txt">
+                  My Account
+                </div>
+              </a>
             </div>
-          </div>
-          <div class="section">
-              <i class="material-icons s-icon settings-icon">group</i>
-              <div class="s-txt">
-                Switch Accounts
-              </div>
-          </div>
-          <div class="section">
-              <i class="material-icons s-icon settings-icon">exit_to_app</i>
-              <div class="s-txt">
-                Sign Out
-              </div>
-          </div>
+            <div class="section">
+              <a style="all:unset;" href="/">
+                <i class="material-icons s-icon settings-icon">group</i>
+                <div class="s-txt">
+                  Switch Accounts
+                </div>
+              </a>
+            </div>
+            <div class="section">
+              <a style="all:unset;" href="/logout.php">
+                <i class="material-icons s-icon settings-icon">exit_to_app</i>
+                <div class="s-txt">
+                  Sign Out
+                </div>
+              </a>
+            </div>
           <div class="long-line"></div>
-          <div class="section">
-              <i class="material-icons s-icon settings-icon">help</i>
-              <div class="s-txt">
-                Help
-              </div>
-          </div>
-          <div class="section">
-              <i class="material-icons s-icon settings-icon">feedback</i>
-              <div class="s-txt">
-                Send Feedback
-              </div>
-          </div>
-          <div class="section">
-              <i class="material-icons s-icon settings-icon">settings</i>
-              <div class="s-txt">
-                Settings
-              </div>
-          </div>
+            <div class="section">
+              <a style="all:unset;" href="/">
+                <i class="material-icons s-icon settings-icon">help</i>
+                <div class="s-txt">
+                  Help
+                </div>
+              </a>
+            </div>
+            <div class="section">
+              <a style="all:unset;" href="/">
+                <i class="material-icons s-icon settings-icon">feedback</i>
+                <div class="s-txt">
+                  Send Feedback
+                </div>
+              </a>
+            </div>
+            <div class="section">
+              <a style="all:unset;" href="/">
+                <i class="material-icons s-icon settings-icon">settings</i>
+                <div class="s-txt">
+                  Settings
+                </div>
+              </a>
+            </div>
       </div>
     </div>
   <?php
@@ -393,7 +427,7 @@ class post {
   }
 
   public function printImage() {
-    echo "<img src=\"/images/" . $this->id . "." . $this->type . "\" />";
+    echo "<img src=\"/images/" . ($this->original ? $this->original : $this->id) . "." . $this->type . "\" />";
   }
 
 }
@@ -530,6 +564,13 @@ class user {
     return $result->fetch_assoc()['followers'];
   }
 
+  public function getFormattedFollowerCount() {
+    $count = $this->getFollowerCount();
+    if ($count >= 1000000) return round(($count/1000000),1)."M";
+    if ($count >= 1000) return round(($count/1000),1).'K';
+    return $count;
+  }
+
   public function getFollowers() {
     $conn = $GLOBALS['conn'];
     $stmt = $conn->prepare("SELECT user FROM `following` WHERE `following`=?");
@@ -570,11 +611,30 @@ class user {
 
 class library {
 
+  public static function create($name, $posts, $icon, $canUpload) {
+    $lib = new library();
+    $lib->name = $name;
+    $lib->id = $name;
+    $lib->posts = $posts;
+    $lib->icon = $icon;
+    $lib->canUpload = $canUpload;
+    return $lib;
+  }
+
   public static function loadFromUser($user) {
-    return loadDBObjects("libraries", "user={$user->id}", "library");
+    $libs = loadDBObjects("libraries", "user={$user->id}", "library");
+    array_unshift($libs,
+      library::create("POSTS", loadDBObjects("posts", "source={$user->id} AND original IS NULL", "post"), "photo_library", true),
+      library::create("REPOSTS", loadDBObjects("posts", "source={$user->id} AND original IS NOT NULL", "post"), "repeat", false),
+      library::create("FAVORITES", loadDBObjects("posts", "id IN (SELECT post FROM favorites)", "post"), "start", false)
+
+    );
+    return $libs;
   }
 
   public function getPosts() {
+    if ($this->posts)
+      return $this->posts;
     return loadDBObjects("posts", "library='{$this->id}'", "post");
   }
 
