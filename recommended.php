@@ -3,15 +3,6 @@ require('api.php');
 
 $account = $_GET['id'];
 
-$is_self = false;
-// The user logged in
-$self = getUser();
-
-if ($account != null) {
-  $account = user::loadFromHandle($account);
-  $is_self = (loggedIn() && $self->id == $account->id);
-}
-
 if ($account != null)
   $account = user::loadFromId($account);
 
@@ -85,6 +76,71 @@ if ($account == null)
     </div>
   </div>
 
+
+  <div class="top-bar">
+    <div class="logo">memedb</div>
+    <div class="searchbar">
+      <i class="material-icons search-g" style="float: left; padding-right: 25px;position:relative; top: -4px;">search</i><input type="text" placeholder="Search" style="all: unset; width: 150px;position: relative; left: 11px; color: #fff" />
+
+      <div class="search-result-box" style="display:none;">
+        <div class="search-op">
+          <p class="res-p">This is option 1</p>
+        </div>
+        <div class="search-op">
+          <p class="res-p">This is option 2</p>
+        </div>
+        <div class="search-op">
+          <p class="res-p">This is option 3</p>
+        </div>
+        <div class="search-op">
+          <p class="res-p">This is option 1</p>
+        </div>
+        <div class="search-op">
+          <p class="res-p">This is option 2</p>
+        </div>
+        <div class="search-op">
+          <p class="res-p">This is option 3</p>
+        </div>
+      </div>
+
+      <div class="search-featured-box" style="display:none;">
+        <h1>Featured Users</h1>
+        <div class="s-box-holder">
+          <div class="s-box">
+
+          </div>
+          <div class="s-box">
+
+          </div>
+          <div class="s-box">
+
+          </div>
+          <div class="s-box">
+
+          </div>
+          <div class="s-box">
+
+          </div>
+          <div class="s-box">
+
+          </div>
+          <div class="s-box">
+
+          </div>
+          <div class="s-box">
+
+          </div>
+          <div class="s-box">
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <div class="sign-in-user openAccount">
+      <img src="<?php echo $account->getImage(); ?>" style="border: inherit; border-radius: inherit;" width="35" height="35">
+    </div>
+  </div>
   <div class="s-dropdown">
     <div class="s-d-titlebox">
       <div class="sd-img">
@@ -313,53 +369,61 @@ if ($account == null)
 
 
     <h1 class="title">Latest</h1>
-  </div>
+  </div> -->
 
-  <div class="sidenav-home">
-      <div class="scroll-hide">
-        <div class="logo-info">
-          <div class="home-logo"><a style="all:unset;" href="/">memedb</a><i class="material-icons expand-sidenav">details</i></div>
+  <div class="h-content">
+    <!-- <div class="h-search-tools">
+      <div class="e-sort" title="Sort by" style="float: left;">
+        <i class="material-icons black edit-icons">sort</i>
+      </div>
+      <div class="h-s-txt">
+        Oldest
+      </div>
+      <div class="h-s-txt">
+        Newest
+      </div>
+      <div class="h-s-txt">
+        Most Popular
+      </div>
+    </div> -->
 
-          <div class="sections">
+  <div class="post-blk m-post">
+      <div class="c-title-holder">
+        <h1 class="imp-title">New Post</h1>
+      </div>
 
-            <div class="line h"></div>
+      <div class="c-content">
 
-            <div class="account-wrapper">
-              <div class="account-info" style="float: none; margin-top: 0px;">
-                <div class="sd-img">
-                  <img src="<?php echo $self->getImage(); ?>" style="border: inherit; border-radius: inherit;" width="40" height="40">
-                </div>
-                <div class="sd-infoholder">
-                  <h1 class="n-name sdname"><?php echo $self->name; ?></h1>
-                  <div class="username">
-                    @<?php echo $self->handle; ?>
-                  </div>
-                </div>
-              </div>
-              <div class="account-para">
-                Founder of memedb
-              </div>
-              <button class="follow">
-                <span>100k</span>
-              </button>
-            </div>
-
-            <div class="line h"></div>
-
+        <div class="textarea-wrap">
+          <textarea name="name" class="post-textarea" wrap="hard"></textarea>
+          <div class="other-options-wrap">
+            <button class="option-btn hover">
+              <i class="material-icons search-g" style="float: left;padding-right: 10px; position: relative; font-size: 21px;top: -0.5px;">collections</i>Add Image
+            </button>
+            <button class="option-btn hover">
+              <i class="material-icons search-g" style="float: left;padding-right: 10px; position: relative; font-size: 21px;top: -0.5px;">video_library</i>Add Video
+            </button>
+            <button class="option-btn hover">
+              <i class="material-icons search-g" style="float: left;padding-right: 10px;position: relative;font-size: 34px;height: 10px;top: -6.5px;left: -5px;width: 23px;">gif</i>Add Gif
+            </button>
           </div>
         </div>
-
-        <div class="subscriptions">
+        <div class="tags-wrap">
+            <div class="searchbar category" style="background: #ddd">
+              <i class="material-icons search-g" style="float: left; padding-right: 25px;position:relative; top: -4px; color: #999;">search</i><input type="text" placeholder="Add Tags" style="all: unset; width: 100px;position: relative; left: -10px; color: #999;" />
+            </div>
 
         </div>
-      </div>
-  </div>
 
+      </div>
+
+      <div class="c-button-hold new-post">
+        <button class="post-btn closePost">Cancel</button>
+        <button class="post-btn hover">Post</button>
+      </div>
+    </div>
 
   <div class="rec-content">
-    <?php
-    topBar($self);
-     ?>
     <div class="tag-corridor">
 
       <div class="rec-tag">
@@ -1302,6 +1366,8 @@ if ($account == null)
       </div>
 
     </div>
+  </div>
+
   </div>
 
 </body>
