@@ -290,7 +290,47 @@ if ($account == null) {
 
             </div>
             <div class="exp-post-info">
+              <h6>Title of Post</h6>
+              <h2 class="card-date">dd/mm/yyyy</h2>
+            </div>
+          </div>
 
+          <div class="exp-card long">
+            <div class="exp-card-title">
+              <h1 class="card-title">+ Cool Pics</h1>
+              <h2 class="card-date">dd/mm/yyyy</h2>
+            </div>
+            <div class="exp-card-content">
+              <div class="small-post"></div>
+              <div class="small-post"></div>
+              <div class="small-post"></div>
+              <div class="small-post"></div>
+              <div class="small-post"></div>
+              <div class="small-post"></div>
+              <div class="small-post"></div>
+              <div class="small-post"></div>
+              <div class="small-post"></div>
+              <div class="small-post"></div>
+              <div class="small-post"></div>
+              <div class="small-post"></div>
+              <div class="small-post"></div>
+              <div class="small-post"><h1 class="album-text small">+267</h1></div>
+            </div>
+          </div>
+
+          <!-- ONLY MAKE AN EVENT IS >=5 photos -->
+
+          <div class="exp-card long">
+            <div class="exp-card-title">
+              <h1 class="card-title">+ Cool Pics</h1>
+              <h2 class="card-date">dd/mm/yyyy</h2>
+            </div>
+            <div class="exp-card-content">
+              <div class="small-post"></div>
+              <div class="small-post"></div>
+              <div class="small-post"></div>
+              <div class="small-post"></div>
+              <div class="small-post"></div>
             </div>
           </div>
 
@@ -324,7 +364,8 @@ if ($account == null) {
 
             </div>
             <div class="exp-post-info">
-
+              <h6>Title of Post</h6>
+              <h2 class="card-date">dd/mm/yyyy</h2>
             </div>
           </div>
 
