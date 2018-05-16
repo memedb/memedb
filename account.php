@@ -225,7 +225,7 @@ if ($account == null) {
       <div class="scroll-hide">
         <div class="logo-info">
           <div class="home-logo">
-            <a style="all:unset;position: fixed;left: 60px;" href="/">memedb</a>
+            <a style="all:unset;position: fixed;left: 58px;" href="/">memedb</a>
             <h1 class="l-title tl-post-title">TIMELINE</h1>
             <i class="material-icons expand-sidenav">details</i>
           </div>
