@@ -509,7 +509,8 @@ function expandSidenav(){
     'margin-bottom' : '0px'
   });
   $(".searchbar").css({
-    'display' : 'none'
+    'display' : 'none',
+    'opacity' : '0'
   });
   $(".expand-sidenav").css({
     'transform' : 'rotate(-30deg)'
@@ -568,15 +569,19 @@ function compactSidenav(){
       'display' : 'none',
       'opacity' : '0'
     });
+    $(".tl-post-title").css({
+      'display' : 'none'
+    });
   }, 10);
   $(".tl-post-title").css({
     'opacity' : '0'
   });
   setTimeout(function() {
-    $(".tl-post-title").css({
-      'display' : 'none'
+    $(".searchbar").css({
+      'display' : 'block',
+      'opacity' : '1'
     });
-  }, 10);
+  }, 100);
 }
 
 function removeDragData(ev) {

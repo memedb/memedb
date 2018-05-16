@@ -253,7 +253,7 @@ function topBar($self) {
                 </div>
               </a>
             </div>
-          <div class="long-line"></div>
+          <!-- <div class="long-line"></div>
             <div class="section">
               <a style="all:unset;" href="/">
                 <i class="material-icons s-icon settings-icon">help</i>
@@ -269,7 +269,7 @@ function topBar($self) {
                   Send Feedback
                 </div>
               </a>
-            </div>
+            </div> -->
             <div class="section">
               <a style="all:unset;" href="/">
                 <i class="material-icons s-icon settings-icon">settings</i>

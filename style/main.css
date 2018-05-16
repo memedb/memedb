@@ -1792,6 +1792,7 @@ body {
 
 .l-icon {
   float: left;
+  width: 30px;
   font-size: 23px !important;
 }
 
@@ -3323,7 +3324,7 @@ body {
   margin-left: 5px;
 }
 
-.s-txt.h.highlighted {
+.s-txt.highlighted {
   color: #4167f4;
 }
 
@@ -3981,6 +3982,7 @@ h6 {
 }
 
 .tl-post-title {
+  opacity: 0;
   display: none;
   position: relative;
   left: -140px;
