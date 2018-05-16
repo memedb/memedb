@@ -10,14 +10,12 @@ $(document).ready(function() {
 			this.querySelector(".l-settings").style.transform = "";
 			this.nextElementSibling.style.height = "0px";
       content.style.margin = "0px";
-      console.log("---1");
 		} else {
 			this.querySelector(".l-settings").style.transform = "rotate(180deg)";
 			content = this.nextElementSibling;
 			content.style.height = "";
 			height = content.clientHeight;
 			content.style.height = "0px";
-      console.log("---2");
 			setTimeout(function() {
 			content.style.height = height.toString() + "px";
       content.style.margin = "0px";
