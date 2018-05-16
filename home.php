@@ -99,7 +99,7 @@ if ($account == null)
 
             <div class="section-light imp-info">
               <div class="s-txt h">
-                <a style="all:unset;" href="/economy.php">DB ECONOMY</a>
+                <a style="all:unset;" href="/account.php">MY ACCOUNT</a>
               </div>
             </div>
 

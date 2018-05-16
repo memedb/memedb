@@ -223,7 +223,7 @@ if ($account == null) {
 
   <div class="sidenav-home">
       <div class="scroll-hide">
-        <div class="logo-info">
+        <div class="logo-info account">
           <div class="home-logo">
             <a style="all:unset;position: fixed;left: 58px;" href="/">memedb</a>
             <h1 class="l-title tl-post-title">TIMELINE</h1>
@@ -261,7 +261,7 @@ if ($account == null) {
           <div class="sections slim">
 
             <div class="section-light imp-info">
-              <div class="s-txt a highlighted">
+              <div class="s-txt a">
                 <a style="all:unset;" href="/home.php">HOME</a>
               </div>
             </div>
@@ -273,8 +273,8 @@ if ($account == null) {
             </div>
 
             <div class="section-light imp-info">
-              <div class="s-txt a">
-                <a style="all:unset;" href="/economy.php">DB ECONOMY</a>
+              <div class="s-txt highlighted a">
+                <a style="all:unset;" href="/account.php">MY ACCOUNT</a>
               </div>
             </div>
 

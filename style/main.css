@@ -771,6 +771,10 @@ input:checked+.slider:before {
   background: #e1e2e1;
 }
 
+.logo-info.account {
+  background: transparent;
+}
+
 .s-scroll {
   position: relative;
   height: auto;
@@ -3352,6 +3356,8 @@ body {
 .s-txt.foll {
   margin-left: 16px;
   color: #666;
+  font-family: 'Rubik';
+  font-weight: 400;
 }
 
 .section-avi {
