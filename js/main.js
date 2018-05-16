@@ -3,7 +3,6 @@ toggled = new Array();
 searchCode = "";
 
 $(document).ready(function() {
-  var isSidenavOpen = false;
   libs = $(".library");
   for (i = 0; i < libs.length; i++) libs[i].id = i.toString();
   libs.click(function(event) {
@@ -54,14 +53,7 @@ $(document).ready(function() {
   });
 
   $(".expand-sidenav").click(function() {
-
-    if(!isSidenavOpen){
-      expandSidenav();
-    } else {
-      compactSidenav();
-    }
-
-    isSidenavOpen = !isSidenavOpen;
+    expandSidenav();
   });
 
   $(".openSettings").click(function() {
@@ -161,25 +153,6 @@ $(document).ready(function() {
 
   $(".c-title-holder .searchbar input").keyup(function() {
     tagSearch(this.value);
-  });
-
-  $(".sendAddLib").click(function() {
-    var data = $("#libForm").serializeArray();
-    console.log(data);
-    var temp = new Array();
-    for (var i = 0; i < data.length; i++) {
-      dataP = data[i];
-      temp[dataP['name']] = dataP['value'];
-    }
-    data = temp;
-    if (!('private' in data)) {
-      data['private'] = 0;
-    } else {
-      data['private'] = 1;
-    }
-    sendCommand("create_library", null, data, function(response) {
-      console.log(response);
-    })
   });
 });
 
@@ -293,6 +266,7 @@ function followAction() {
 }
 
 function openOptions(id) {
+  console.log(id);
   var offset = $("#" + id).offset();
   $(".l-sett-opt").css({
     top: (offset.top + 15) + "px",
@@ -329,28 +303,6 @@ function openSettings(){
       });
       $("#imp-bg-fade").css("opacity", "");
     }, 10);
-}
-
-function fadeToDark(){
-  $("#imp-bg-fade").css("display", "");
-  setTimeout(function() {
-    $(".l-sett-opt").css({
-      opacity: "",
-      right: ""
-    });
-    $("#imp-bg-fade").css("opacity", "");
-  }, 10);
-}
-
-function unfade(){
-  $("#imp-bg-fade").css({
-    'opacity' : '0'
-  });
-  setTimeout(function() {
-    $(".l-sett-opt").css({
-      'display' : 'none'
-    });
-  }, 10);
 }
 
 function closeSettings(){
@@ -499,7 +451,7 @@ function closeBalance(){
 
 function expandSidenav(){
   $(".sidenav-home").css({
-    'width' : "950px"
+    width: "66%"
   });
   $(".home-content").css({
     'width' : 'auto',
@@ -512,36 +464,6 @@ function expandSidenav(){
     'display' : 'none',
     'opacity' : '0'
   });
-  $(".expand-sidenav").css({
-    'transform' : 'rotate(-30deg)'
-  });
-  $(".exp-post-corridor").css({
-    'display' : 'inline-block'
-  });
-  $(".tl-post-title").css({
-    'display' : 'inline-block'
-  });
-  setTimeout(function() {
-    $(".exp-post-corridor").css({
-      'display' : 'inline-block'
-    });
-    setTimeout(function() {
-      $(".exp-post-corridor").css({
-        'opacity' : '1'
-      });
-    }, 10);
-  }, 100);
-  setTimeout(function() {
-    $(".tl-post-title").css({
-      'display' : 'inline-block'
-    });
-    setTimeout(function() {
-      $(".tl-post-title").css({
-        'opacity' : '1'
-      });
-    }, 10);
-  }, 100);
-
 }
 
 function compactSidenav(){
