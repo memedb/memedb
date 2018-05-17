@@ -270,13 +270,11 @@ function topBar($self) {
                 </div>
               </a>
             </div> -->
-            <div class="section">
-              <a style="all:unset;" href="/">
+            <div class="section openSettings">
                 <i class="material-icons s-icon settings-icon">settings</i>
                 <div class="s-txt">
                   Settings
                 </div>
-              </a>
             </div>
       </div>
     </div>
