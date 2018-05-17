@@ -616,6 +616,7 @@ class library {
     $lib->posts = $posts;
     $lib->icon = $icon;
     $lib->canUpload = $canUpload;
+    $lib->visibility = 2;
     return $lib;
   }
 
@@ -625,7 +626,6 @@ class library {
       library::create("POSTS", loadDBObjects("posts", "source={$user->id} AND original IS NULL", "post"), "photo_library", true),
       library::create("REPOSTS", loadDBObjects("posts", "source={$user->id} AND original IS NOT NULL", "post"), "repeat", false),
       library::create("FAVORITES", loadDBObjects("posts", "id IN (SELECT post FROM favorites)", "post"), "start", false)
-
     );
     return $libs;
   }
