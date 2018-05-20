@@ -120,8 +120,12 @@ Command::register("create_post", function($user) {
   $id = uniqid('', true);
   $date = gmdate(DATE_ATOM);
   $conn = $GLOBALS['conn'];
-  $stmt = $conn->prepare("INSERT INTO `posts` (`id`, `tags`, `upvotes`, `downvotes`, `source`, `account`, `date`, `type`, `parent`, `library`) VALUES (?, '', 0, 0, ?, NULL, ?, ?, ?, ?);");
-  $stmt->bind_param("sissis", $id, $user->id, $date, $_POST['type'], $_POST['parent'], $_POST['library']);
+  $title = '';
+  if (isset($_POST['title'])) {
+    $title = $_POST['title'];
+  }
+  $stmt = $conn->prepare("INSERT INTO `posts` (`id`, `title`, `tags`, `upvotes`, `downvotes`, `source`, `original`, `date`, `type`, `parent`, `library`) VALUES (?, ?, '', 0, 0, ?, NULL, ?, ?, ?, ?);");
+  $stmt->bind_param("ssissis", $id, $title, $user->id, $date, $_POST['type'], $_POST['parent'], $_POST['library']);
   $stmt->execute();
 
   move_uploaded_file($_FILES['file']['tmp_name'], 'images/' . $id . "." . $_POST['type']);
@@ -637,6 +641,45 @@ class library {
   }
 
   public function fixVars() {}
+
+  public static function printActivityContainerHtml($timestamp, ...$libs) {
+    $dateStr = date("d/m/Y");
+    ?> 
+      <div class="exp-card">
+        <div class="exp-card-title">
+          <h1 class="card-title">+ New Library</h1>
+          <h2 class="card-date"><?=$dateStr?></h2>
+        </div>
+        <div class="exp-card-content">
+          <?php
+            foreach ($libs as $lib)
+              $lib->printActivityHtml();
+              
+            if ($libs->length == 1) {
+              ?>
+                <div class="c-button-hold">
+                  <button class="post-btn closePost" style="float: right">VIEW</button>
+                </div>
+              <?php
+            }
+          ?>
+        </div>
+      </div>
+    <?php
+  }
+
+  public function printActivityHtml() {
+    ?>
+    <div class="exp-card-block">
+      <div class="exp-card-square">
+        <i class="material-icons card-icon">
+        library_books
+        </i>
+      </div>
+      <h1 class="card-library-title"><?=$this->name?></h1>
+    </div>
+    <?php
+  }
 
 }
  ?>
