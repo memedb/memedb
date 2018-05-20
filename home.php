@@ -758,15 +758,14 @@ if ($account == null)
 
     <div class="m-new-container">
       <div class="m-main-content">
+        <div class="post-para">
+          This is the content of the card. I have to write stuff in here huh?
+           I don't really know what to write so I'm just gonna say that Will sucks.
+        </div>
         <div class="meme-img">
 
         </div>
         <div class="post-content">
-          <h6>Title of Post</h6>
-          <div class="post-para">
-            This is the content of the card. I have to write shit in here huh?
-             I don't really know what to write so I'm just gonna say that Will sucks.
-          </div>
           <div class="c-button-hold">
             <div class="m-post-info">
               <div class="m-likes">
@@ -784,7 +783,7 @@ if ($account == null)
               <div class="m-save">
                 <i class="material-icons m-icon" style="float: left;">save</i>
               </div>
-              <h1 class="m-date">dd/mm/yyyy</h1>
+              <h1 class="m-date">12 Mar 2017 - 1h Ago</h1>
             </div>
           </div>
         </div>
@@ -1015,6 +1014,10 @@ if ($account == null)
 
     <div class="m-new-container">
       <div class="m-main-content">
+        <div class="post-para">
+          This is the content of the card. I have to write stuff in here huh?
+           I don't really know what to write so I'm just gonna say that Will sucks.
+        </div>
         <div class="m-album">
           <div class="m-album-row">
             <div class="m-album-img light"></div>
@@ -1022,17 +1025,10 @@ if ($account == null)
           </div>
           <div class="m-album-row">
             <div class="m-album-img"></div>
-            <div class="m-album-img light">
-              <h1 class="album-text">+1</h1>
-            </div>
+            <div class="m-album-img light"></div>
           </div>
         </div>
         <div class="post-content">
-          <h6>Title of Post</h6>
-          <div class="post-para">
-            This is the content of the card. I have to write shit in here huh?
-             I don't really know what to write so I'm just gonna say that Will sucks.
-          </div>
           <div class="c-button-hold">
             <div class="m-post-info">
               <div class="m-likes">
@@ -1050,7 +1046,7 @@ if ($account == null)
               <div class="m-save">
                 <i class="material-icons m-icon" style="float: left;">save</i>
               </div>
-              <h1 class="m-date">dd/mm/yyyy</h1>
+              <h1 class="m-date">12 Mar 2017 - 1h Ago</h1>
             </div>
           </div>
         </div>
@@ -1281,6 +1277,10 @@ if ($account == null)
 
     <div class="m-new-container">
       <div class="m-main-content">
+        <div class="post-para">
+          This is the content of the card. I have to write stuff in here huh?
+           I don't really know what to write so I'm just gonna say that Will sucks.
+        </div>
         <div class="m-album">
           <div class="m-album-row">
             <div class="m-album-img light"></div>
@@ -1289,11 +1289,6 @@ if ($account == null)
           </div>
         </div>
         <div class="post-content">
-          <h6>Title of Post</h6>
-          <div class="post-para">
-            This is the content of the card. I have to write shit in here huh?
-             I don't really know what to write so I'm just gonna say that Will sucks.
-          </div>
           <div class="c-button-hold">
             <div class="m-post-info">
               <div class="m-likes">
@@ -1311,7 +1306,7 @@ if ($account == null)
               <div class="m-save">
                 <i class="material-icons m-icon" style="float: left;">save</i>
               </div>
-              <h1 class="m-date">dd/mm/yyyy</h1>
+              <h1 class="m-date">12 Mar 2017 - 1h Ago</h1>
             </div>
           </div>
         </div>
