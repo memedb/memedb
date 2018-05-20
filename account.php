@@ -426,9 +426,7 @@ if ($account == null) {
             <?php
               $posts = $lib->getPosts();
               foreach ($posts as $post) {
-                ?>
-                  <div class="l-img"><?=$post->printImage();?></div>
-                <?php
+                $post->printImage("l-img");
               }
             ?>
           </div>

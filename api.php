@@ -121,10 +121,10 @@ Command::register("create_post", function($user) {
   $date = gmdate(DATE_ATOM);
   $conn = $GLOBALS['conn'];
   $title = '';
-  if (isset($_POST['title'])) {
-    $title = $_POST['title'];
+  if (isset($_POST['caption'])) {
+    $title = $_POST['caption'];
   }
-  $stmt = $conn->prepare("INSERT INTO `posts` (`id`, `title`, `tags`, `upvotes`, `downvotes`, `source`, `original`, `date`, `type`, `parent`, `library`) VALUES (?, ?, '', 0, 0, ?, NULL, ?, ?, ?, ?);");
+  $stmt = $conn->prepare("INSERT INTO `posts` (`id`, `caption`, `tags`, `upvotes`, `downvotes`, `source`, `original`, `date`, `type`, `parent`, `library`) VALUES (?, ?, '', 0, 0, ?, NULL, ?, ?, ?, ?);");
   $stmt->bind_param("ssissis", $id, $title, $user->id, $date, $_POST['type'], $_POST['parent'], $_POST['library']);
   $stmt->execute();
 
@@ -428,8 +428,56 @@ class post {
     }
   }
 
-  public function printImage() {
-    echo "<img src=\"/images/" . ($this->original ? $this->original : $this->id) . "." . $this->type . "\" />";
+  public function printImage($class) {
+    ?>
+    <div class="<?=$class?>" style="background: url(/images/<?=($this->original ? $this->original : $this->id) . "." . $this->type?>) center center no-repeat; background-size: contain;"></div>
+    <?php
+  }
+
+  public static function printActivityContainerHtml($timestamp, ...$posts) {
+    $dateStr = date("d/m/Y");
+    if ($posts->length == 1) {
+    ?>
+    <div class="exp-post">
+      <?php
+      $posts[0]->printImage("exp-post-image");
+      ?>
+      <div class="exp-post-info">
+        <h6></h6>
+        <h2 class="card-date"><?=$dateStr?></h2>
+      </div>
+    </div>
+    <?php
+    } else {
+    ?>
+    <div class="exp-card long">
+      <div class="exp-card-title">
+        <h1 class="card-title">+ <?=$posts[0]->getLibrary()->name?></h1>
+        <h2 class="card-date"><?=$dateStr?></h2>
+      </div>
+      <div class="exp-card-content">
+        <?php
+        $count = 0;
+        foreach ($posts as $post) {
+          $post->printImage("small-post");
+          $count++;
+          if ($count >= 14)
+            break;
+        }
+        if ($posts->length > 14) {
+          ?>
+          <div class="small-post"><h1 class="album-text small"><?=$post->length - 14?></h1></div>
+          <?php
+        }
+        ?>
+      </div>
+    </div>
+    <?php
+    }
+  }
+
+  public function getLibrary() {
+    return loadDBObject("libraries", "id=" . $this->library, "library");
   }
 
 }
