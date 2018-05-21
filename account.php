@@ -38,17 +38,23 @@ if ($account == null) {
 
   <div class="upload-popup-hover">
     <div class="upload-popup-bar">
-
+      <h1 class="upload-popup-title">Uploads</h1>
     </div>
     <div class="upload-popup-content">
       <div class="upload-popup-item">
-
+        <i class="material-icons l-icon upload">image</i>
+        <h1 class="upload-title">Title of Upload</h1>
+        <div class="upload-circle"></div>
       </div>
       <div class="upload-popup-item">
-
+        <i class="material-icons l-icon upload">image</i>
+        <h1 class="upload-title">Title of Upload</h1>
+        <div class="upload-circle"></div>
       </div>
       <div class="upload-popup-item">
-
+        <i class="material-icons l-icon upload">image</i>
+        <h1 class="upload-title">Title of Upload</h1>
+        <div class="upload-circle"></div>
       </div>
 
     </div>
