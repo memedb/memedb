@@ -36,6 +36,24 @@ if ($account == null) {
 
   <div class="imp-bg-fade" id="imp-bg-fade" style="display: none; opacity 0;"></div>
 
+  <div class="upload-popup-hover">
+    <div class="upload-popup-bar">
+
+    </div>
+    <div class="upload-popup-content">
+      <div class="upload-popup-item">
+
+      </div>
+      <div class="upload-popup-item">
+
+      </div>
+      <div class="upload-popup-item">
+
+      </div>
+
+    </div>
+  </div>
+
   <div class="l-sett-opt" style="display: none;">
     <button class="l-sett-button">Rename</button>
     <button class="l-sett-button">Info</button>
