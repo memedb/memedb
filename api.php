@@ -120,8 +120,12 @@ Command::register("create_post", function($user) {
   $id = uniqid('', true);
   $date = gmdate(DATE_ATOM);
   $conn = $GLOBALS['conn'];
-  $stmt = $conn->prepare("INSERT INTO `posts` (`id`, `tags`, `upvotes`, `downvotes`, `source`, `account`, `date`, `type`, `parent`, `library`) VALUES (?, '', 0, 0, ?, NULL, ?, ?, ?, ?);");
-  $stmt->bind_param("sissis", $id, $user->id, $date, $_POST['type'], $_POST['parent'], $_POST['library']);
+  $title = '';
+  if (isset($_POST['caption'])) {
+    $title = $_POST['caption'];
+  }
+  $stmt = $conn->prepare("INSERT INTO `posts` (`id`, `caption`, `tags`, `upvotes`, `downvotes`, `source`, `original`, `date`, `type`, `parent`, `library`) VALUES (?, ?, '', 0, 0, ?, NULL, ?, ?, ?, ?);");
+  $stmt->bind_param("ssissis", $id, $title, $user->id, $date, $_POST['type'], $_POST['parent'], $_POST['library']);
   $stmt->execute();
 
   move_uploaded_file($_FILES['file']['tmp_name'], 'images/' . $id . "." . $_POST['type']);
@@ -424,8 +428,56 @@ class post {
     }
   }
 
-  public function printImage() {
-    echo "<img src=\"/images/" . ($this->original ? $this->original : $this->id) . "." . $this->type . "\" />";
+  public function printImage($class) {
+    ?>
+    <div class="<?=$class?>" style="background: url(/images/<?=($this->original ? $this->original : $this->id) . "." . $this->type?>) center center no-repeat; background-size: contain;"></div>
+    <?php
+  }
+
+  public static function printActivityContainerHtml($timestamp, ...$posts) {
+    $dateStr = date("d/m/Y");
+    if ($posts->length == 1) {
+    ?>
+    <div class="exp-post">
+      <?php
+      $posts[0]->printImage("exp-post-image");
+      ?>
+      <div class="exp-post-info">
+        <h6></h6>
+        <h2 class="card-date"><?=$dateStr?></h2>
+      </div>
+    </div>
+    <?php
+    } else {
+    ?>
+    <div class="exp-card long">
+      <div class="exp-card-title">
+        <h1 class="card-title">+ <?=$posts[0]->getLibrary()->name?></h1>
+        <h2 class="card-date"><?=$dateStr?></h2>
+      </div>
+      <div class="exp-card-content">
+        <?php
+        $count = 0;
+        foreach ($posts as $post) {
+          $post->printImage("small-post");
+          $count++;
+          if ($count >= 14)
+            break;
+        }
+        if ($posts->length > 14) {
+          ?>
+          <div class="small-post"><h1 class="album-text small"><?=$post->length - 14?></h1></div>
+          <?php
+        }
+        ?>
+      </div>
+    </div>
+    <?php
+    }
+  }
+
+  public function getLibrary() {
+    return loadDBObject("libraries", "id=" . $this->library, "library");
   }
 
 }
@@ -616,6 +668,7 @@ class library {
     $lib->posts = $posts;
     $lib->icon = $icon;
     $lib->canUpload = $canUpload;
+    $lib->visibility = 2;
     return $lib;
   }
 
@@ -625,7 +678,6 @@ class library {
       library::create("POSTS", loadDBObjects("posts", "source={$user->id} AND original IS NULL", "post"), "photo_library", true),
       library::create("REPOSTS", loadDBObjects("posts", "source={$user->id} AND original IS NOT NULL", "post"), "repeat", false),
       library::create("FAVORITES", loadDBObjects("posts", "id IN (SELECT post FROM favorites)", "post"), "start", false)
-
     );
     return $libs;
   }
@@ -637,6 +689,45 @@ class library {
   }
 
   public function fixVars() {}
+
+  public static function printActivityContainerHtml($timestamp, ...$libs) {
+    $dateStr = date("d/m/Y");
+    ?> 
+      <div class="exp-card">
+        <div class="exp-card-title">
+          <h1 class="card-title">+ New Library</h1>
+          <h2 class="card-date"><?=$dateStr?></h2>
+        </div>
+        <div class="exp-card-content">
+          <?php
+            foreach ($libs as $lib)
+              $lib->printActivityHtml();
+              
+            if ($libs->length == 1) {
+              ?>
+                <div class="c-button-hold">
+                  <button class="post-btn closePost" style="float: right">VIEW</button>
+                </div>
+              <?php
+            }
+          ?>
+        </div>
+      </div>
+    <?php
+  }
+
+  public function printActivityHtml() {
+    ?>
+    <div class="exp-card-block">
+      <div class="exp-card-square">
+        <i class="material-icons card-icon">
+        library_books
+        </i>
+      </div>
+      <h1 class="card-library-title"><?=$this->name?></h1>
+    </div>
+    <?php
+  }
 
 }
  ?>

@@ -102,6 +102,7 @@ $(document).ready(function() {
 
   $(".closeAddLib").click(function() {
     closeAddLib();
+    document.getElementById("libForm").reset();
     $("#imp-message, #imp-bg-fade").css("opacity", "0");
   });
 
@@ -178,7 +179,7 @@ $(document).ready(function() {
       data['private'] = 1;
     }
     sendCommand("create_library", null, data, function(response) {
-      console.log(response);
+      location.reload();
     })
   });
 });
@@ -506,9 +507,6 @@ function expandSidenav(){
     'width' : 'auto',
     'margin-left' : '950px'
   });
-  $(".home-logo").css({
-    'margin-bottom' : '0px'
-  });
   $(".searchbar").css({
     'display' : 'none',
     'opacity' : '0'
@@ -552,9 +550,6 @@ function compactSidenav(){
   $(".home-content").css({
     'width' : 'auto',
     'margin-left' : '300px'
-  });
-  $(".home-logo").css({
-    'margin-bottom' : '80px'
   });
   $(".searchbar").css({
     'display' : 'block'
