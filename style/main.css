@@ -1911,7 +1911,6 @@ body {
   -o-transition: height 0.3s;
   transition: height 0.3s;
   overflow: hidden;
-  border: 2px solid transparent;
 }
 
 .l-content.is-dragover {
