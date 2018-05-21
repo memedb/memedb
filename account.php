@@ -418,45 +418,45 @@ if ($account == null) {
       </div>
   </div>
 
-  <div class="home-content">
+  <div id="home-content" class="home-content">
     <?php
     topBar($self);
 
-    $libs = library::loadFromUser($self);
+    $libs = library::loadFromUser($account);
     $libCount = 0;
     $dragAttr = "ondragenter='libDrag(event);' ondragleave='libDragLeave(event);' ondragover='libDrag(event);' ondrop='libDrop(event);'";
     foreach ($libs as $lib) {
-        ?>
-        <div class="library <?=$libCount%2==0?" light":""?>" data-id="<?=$lib->id?>" <?php echo $lib->icon ? $lib->canUpload ? $dragAttr : "" : $dragAttr; ?>>
-          <?php
-          if ($lib->icon) {
-            ?>
-            <i class="material-icons l-icon"><?=$lib->icon;?></i>
-            <?php
-          }
+        if ($lib->visibility == 2 || ($lib->visibility == 1 && ($self->id == $account->id || $self->isFollowing($account->id))) || ($lib->visibility == 0 && $self->id == $account->id)) {
           ?>
-          <h1 class="l-title"><?=$lib->name?></h1>
-
-          <div class="l-settings">
-            <i class="material-icons">keyboard_arrow_down</i>
-          </div>
-          <div class="l-drop">
-            <i class="material-icons">more_horiz</i>
-          </div>
-        </div>
-
-        <div class="l-content" style="height: 0px;" data-id="<?=$lib->id?>" ondragenter="libDrag(event);" ondragleave="libDragLeave(event);" ondragover="libDrag(event);" ondrop="libDrop(event);">
-          <?php
-            $posts = $lib->getPosts();
-            foreach ($posts as $post) {
+          <div class="library <?=$libCount%2==0?" light":""?>" data-id="<?=$lib->id?>" <?php echo $lib->icon ? $lib->canUpload ? $dragAttr : "" : $dragAttr; ?>>
+            <?php
+            if ($lib->icon) {
               ?>
-                <div class="l-img"><?=$post->printImage();?></div>
+              <i class="material-icons l-icon"><?=$lib->icon;?></i>
               <?php
             }
-          ?>
-        </div>
-        <?php
-        $libCount++;
+            ?>
+            <h1 class="l-title"><?=$lib->name?></h1>
+
+            <div class="l-settings">
+              <i class="material-icons">keyboard_arrow_down</i>
+            </div>
+            <div class="l-drop">
+              <i class="material-icons">more_horiz</i>
+            </div>
+          </div>
+
+          <div class="l-content" style="height: 0px;" data-id="<?=$lib->id?>" ondragenter="libDrag(event);" ondragleave="libDragLeave(event);" ondragover="libDrag(event);" ondrop="libDrop(event);">
+            <?php
+              $posts = $lib->getPosts();
+              foreach ($posts as $post) {
+                $post->printImage("l-img");
+              }
+            ?>
+          </div>
+          <?php
+          $libCount++;
+        }
     }
     ?>
 
