@@ -133,8 +133,7 @@ Command::register("create_post", function($user) {
   jsonMessage(array("id"=>$id));
 });
 
-Command::register("create_library", function($user){
-  logger($_POST);
+Command::register("create_library", function($user) {
   $id = uniqid('', true);
   $date = gmdate(DATE_ATOM);
   $conn = $GLOBALS['conn'];
@@ -142,6 +141,10 @@ Command::register("create_library", function($user){
   $stmt->bind_param("sisiis", $id,  $user->id, $_POST['name'], $_POST['visibility'], $_POST['private'], $date);
   $stmt->execute();
   jsonMessage(array("id"=>$id));
+});
+
+Command::register("get_timeline", function($user) {
+  
 });
 
 $action = $_GET['action'];
@@ -173,6 +176,10 @@ if ($action) {
 }
 
 // Functions:
+
+function isLibrary($id) {
+  $conn = $GLOBALS['conn'];
+}
 
 function topBar($self) {
   ?>
@@ -417,7 +424,7 @@ function loggedIn() {
 class post {
 
   public static function loadFromId($id) {
-    $img = loadDBObject("posts", "id=$id", "post");
+    $img = loadDBObject("posts", "id='$id'", "post");
     $img->fixVars();
     return $img;
   }
@@ -434,9 +441,9 @@ class post {
     <?php
   }
 
-  public static function printActivityContainerHtml($timestamp, ...$posts) {
-    $dateStr = date("d/m/Y");
-    if ($posts->length == 1) {
+  public static function printActivityContainerHtml($timestamp, $posts) {
+    $dateStr = date("d/m/Y", $timestamp);
+    if (sizeof($posts) == 1) {
     ?>
     <div class="exp-post">
       <?php
@@ -449,30 +456,32 @@ class post {
     </div>
     <?php
     } else {
-    ?>
-    <div class="exp-card long">
-      <div class="exp-card-title">
-        <h1 class="card-title">+ <?=$posts[0]->getLibrary()->name?></h1>
-        <h2 class="card-date"><?=$dateStr?></h2>
-      </div>
-      <div class="exp-card-content">
-        <?php
-        $count = 0;
-        foreach ($posts as $post) {
-          $post->printImage("small-post");
-          $count++;
-          if ($count >= 14)
-            break;
-        }
-        if ($posts->length > 14) {
-          ?>
-          <div class="small-post"><h1 class="album-text small"><?=$post->length - 14?></h1></div>
+      if (sizeof($posts) >= 5) {
+      ?>
+      <div class="exp-card long">
+        <div class="exp-card-title">
+          <h1 class="card-title">+ <?=$posts[0]->getLibrary()->name?></h1>
+          <h2 class="card-date"><?=$dateStr?></h2>
+        </div>
+        <div class="exp-card-content">
           <?php
-        }
-        ?>
+            $count = 0;
+            foreach ($posts as $post) {
+              $post->printImage("small-post");
+              $count++;
+              if ($count >= 13)
+                break;
+            }
+          if (sizeof($posts) > 13) {
+            ?>
+            <div class="small-post"><h1 class="album-text small"><?=sizeof($posts) - 13?></h1></div>
+            <?php
+          }
+          ?>
+        </div>
       </div>
-    </div>
-    <?php
+      <?php
+      }
     }
   }
 
@@ -489,7 +498,7 @@ class user {
   }
 
   public static function loadFromId($id) {
-    $usr = loadDBObject("users", "id=$id", "user");
+    $usr = loadDBObject("users", "id={$id}", "user");
     $usr->fixVars();
     return $usr;
   }
@@ -690,8 +699,8 @@ class library {
 
   public function fixVars() {}
 
-  public static function printActivityContainerHtml($timestamp, ...$libs) {
-    $dateStr = date("d/m/Y");
+  public static function printActivityContainerHtml($timestamp, $libs) {
+    $dateStr = date("d M Y", $timestamp);
     ?> 
       <div class="exp-card">
         <div class="exp-card-title">
@@ -700,10 +709,11 @@ class library {
         </div>
         <div class="exp-card-content">
           <?php
-            foreach ($libs as $lib)
+            foreach ($libs as $lib) {
               $lib->printActivityHtml();
+            }
               
-            if ($libs->length == 1) {
+            if (sizeof($libs) == 1) {
               ?>
                 <div class="c-button-hold">
                   <button class="post-btn closePost" style="float: right">VIEW</button>
