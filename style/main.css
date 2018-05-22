@@ -4145,6 +4145,7 @@ h6 {
 }
 
 .upload-popup-hover {
+  display: none;
   position: absolute;
   z-index: 1000000;
   right: 10px;
