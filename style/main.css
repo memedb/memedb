@@ -1790,6 +1790,53 @@ body {
   box-sizing: border-box;
 }
 
+.empty-library {
+  width: auto;
+  height: auto;
+  display: flex;
+  color: #999;
+
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
+
+.empty-library.is-dragover {
+  width: auto;
+  height: auto;
+  background: #7ba4e5;
+  border: 2px solid #4167f4;
+  color: #fff;
+}
+
+.empty-library-content {
+  width: 500px;
+  height: auto;
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 20px;
+}
+
+.material-icons.empty-library-icon {
+  font-size: 100px;
+  color: inherit;
+  position: relative;
+  right: -50%;
+  transform: translateX(-50%);
+  cursor: default;
+}
+
+.empty-library-title {
+  font-size: 16px;
+  color: inherit;
+  text-align: center;
+}
+
 .l-l1 {
   background: #cfcfcf;
   box-sizing: border-box;
@@ -2045,6 +2092,19 @@ body {
   font-size: 27px;
   position: relative;
   top: 2px;
+}
+
+.material-icons.hoverable:hover:after {
+  width: 100%;
+  height: 100%;
+  background: #999;
+  opacity: .4;
+  border-radius: 50%;
+  z-index: 10000;
+  content: "";
+  position: absolute;
+  left: -50%;
+  transform: translateX(50%);
 }
 
 .black {

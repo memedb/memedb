@@ -10,7 +10,7 @@ $(document).ready(function() {
     if(toggled[this.id]) {
 			this.querySelector(".l-settings").style.transform = "";
 			this.nextElementSibling.style.height = "0px";
-      content.style.margin = "0px";
+      this.nextElementSibling.style.border = "0px";
 		} else {
 			this.querySelector(".l-settings").style.transform = "rotate(180deg)";
 			content = this.nextElementSibling;
@@ -20,6 +20,7 @@ $(document).ready(function() {
 			setTimeout(function() {
 			content.style.height = height.toString() + "px";
       content.style.margin = "0px";
+      content.style.border = "2px solid transparent";
 			}, 10);
 		}
 		toggled[this.id] = !toggled[this.id];

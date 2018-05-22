@@ -310,7 +310,7 @@ if ($account == null) {
         <div class="exp-post-corridor">
 
           <?php
-          
+
           ?>
 
         </div>
@@ -335,27 +335,39 @@ if ($account == null) {
               <i class="material-icons l-icon"><?=$lib->icon;?></i>
               <?php
             }
+            $posts = $lib->getPosts(); // Array of post in that library
             ?>
             <h1 class="l-title"><?=$lib->name?></h1>
 
             <div class="l-settings">
-              <i class="material-icons">keyboard_arrow_down</i>
+              <i class="material-icons hoverable">keyboard_arrow_down</i>
             </div>
             <div class="l-drop">
-              <i class="material-icons">more_horiz</i>
+              <i class="material-icons hoverable">more_horiz</i>
             </div>
           </div>
 
-          <div class="l-content" style="height: 0px;" data-id="<?=$lib->id?>" ondragenter="libDrag(event);" ondragleave="libDragLeave(event);" ondragover="libDrag(event);" ondrop="libDrop(event);">
+          <div class=" l-content <?=sizeof($posts) == 0?"empty-library":""?>" style="height: 0px;" data-id="<?=$lib->id?>" ondragenter="libDrag(event);" ondragleave="libDragLeave(event);" ondragover="libDrag(event);" ondrop="libDrop(event);">
             <?php
-              $posts = $lib->getPosts();
               foreach ($posts as $post) {
                 $post->printImage("l-img");
+              }
+
+              if(sizeof($posts) == 0) {
+                ?>
+                  <div class="empty-library-content">
+                    <i class="material-icons empty-library-icon">add_photo_alternate</i>
+                    <h1 class="empty-library-title">Start adding Images, Videos, Gifs - Just Drag & Drop</h1>
+                  </div>
+                <?php
               }
             ?>
           </div>
           <?php
           $libCount++;
+
+
+
         }
     }
     ?>
