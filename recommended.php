@@ -3,6 +3,8 @@ require('api.php');
 
 $account = $_GET['id'];
 
+$self = getUser();
+
 if ($account != null)
   $account = user::loadFromId($account);
 
@@ -76,123 +78,6 @@ if ($account == null)
     </div>
   </div>
 
-
-  <div class="top-bar">
-    <div class="logo">memedb</div>
-    <div class="searchbar">
-      <i class="material-icons search-g" style="float: left; padding-right: 25px;position:relative; top: -4px;">search</i><input type="text" placeholder="Search" style="all: unset; width: 150px;position: relative; left: 11px; color: #fff" />
-
-      <div class="search-result-box" style="display:none;">
-        <div class="search-op">
-          <p class="res-p">This is option 1</p>
-        </div>
-        <div class="search-op">
-          <p class="res-p">This is option 2</p>
-        </div>
-        <div class="search-op">
-          <p class="res-p">This is option 3</p>
-        </div>
-        <div class="search-op">
-          <p class="res-p">This is option 1</p>
-        </div>
-        <div class="search-op">
-          <p class="res-p">This is option 2</p>
-        </div>
-        <div class="search-op">
-          <p class="res-p">This is option 3</p>
-        </div>
-      </div>
-
-      <div class="search-featured-box" style="display:none;">
-        <h1>Featured Users</h1>
-        <div class="s-box-holder">
-          <div class="s-box">
-
-          </div>
-          <div class="s-box">
-
-          </div>
-          <div class="s-box">
-
-          </div>
-          <div class="s-box">
-
-          </div>
-          <div class="s-box">
-
-          </div>
-          <div class="s-box">
-
-          </div>
-          <div class="s-box">
-
-          </div>
-          <div class="s-box">
-
-          </div>
-          <div class="s-box">
-
-          </div>
-        </div>
-      </div>
-
-    </div>
-    <div class="sign-in-user openAccount">
-      <img src="<?php echo $account->getImage(); ?>" style="border: inherit; border-radius: inherit;" width="35" height="35">
-    </div>
-  </div>
-  <div class="s-dropdown">
-    <div class="s-d-titlebox">
-      <div class="sd-img">
-        <img src="<?php echo $account->getImage(); ?>" style="border: inherit; border-radius: inherit;" width="40" height="40">
-      </div>
-      <div class="sd-infoholder">
-        <h1 class="n-name sdname"><?php echo $account->name; ?></h1>
-        <div class="username">
-          @<?php echo $account->handle; ?>
-        </div>
-      </div>
-    </div>
-    <div class="sd-content">
-      <div class="section">
-          <i class="material-icons s-icon settings-icon">account_circle</i>
-          <div class="s-txt">
-            My Account
-          </div>
-        </div>
-        <div class="section">
-            <i class="material-icons s-icon settings-icon">group</i>
-            <div class="s-txt">
-              Switch Accounts
-            </div>
-        </div>
-        <div class="section">
-            <i class="material-icons s-icon settings-icon">exit_to_app</i>
-            <div class="s-txt">
-              Sign Out
-            </div>
-        </div>
-        <div class="long-line"></div>
-        <div class="section">
-            <i class="material-icons s-icon settings-icon">help</i>
-            <div class="s-txt">
-              Help
-            </div>
-        </div>
-        <div class="section">
-            <i class="material-icons s-icon settings-icon">feedback</i>
-            <div class="s-txt">
-              Send Feedback
-            </div>
-        </div>
-        <div class="section">
-            <i class="material-icons s-icon settings-icon">settings</i>
-            <div class="s-txt">
-              Settings
-            </div>
-        </div>
-    </div>
-  </div>
   <div class="imp-bg-fade" id="imp-bg-fade" style="display: none; opacity 0;"></div>
 
   <div class="donate-bar" style="display: none;">
@@ -278,73 +163,60 @@ if ($account == null)
   </div>
 
   <div class="sidenav-home">
-    <div class="s-scroll">
       <div class="scroll-hide">
+        <div class="logo-info">
+          <div class="home-logo" style="margin-bottom:0px;"><a style="all:unset;" href="/">memedb</a></div>
 
-        <div class="sections">
+          <div class="sections">
+            <div class="line h"></div>
 
-          <div class="section">
-            <i class="material-icons black s-icon">supervisor_account</i>
-            <div class="s-txt">
-              Following
+            <div class="section-light imp-info">
+              <div class="s-txt h">
+                <a style="all:unset;" href="/home.php">HOME</a>
+              </div>
             </div>
-            <button class="s-notes">+156</button>
-          </div>
 
-          <div class="section" style="background: #ddd;">
-            <i class="material-icons black s-icon">functions</i>
-            <div class="s-txt">
-              Recommended
+            <div class="section-light imp-info">
+              <div class="s-txt h highlighted">
+                <a style="all:unset;" href="/recommended.php">RECOMMENDED</a>
+              </div>
             </div>
-          </div>
 
-          <div class="line"></div>
+            <div class="section-light imp-info">
+              <div class="s-txt h">
+                <a style="all:unset;" href="/account.php">MY ACCOUNT</a>
+              </div>
+            </div>
+
+            <div class="line h"></div>
+          </div>
         </div>
 
         <div class="subscriptions">
 
-          <div class="section">
-            <div class="s-avatar"></div>
-            <div class="s-txt">
-              Will Garrett
-            </div>
-            <button class="s-notes">4</button>
-          </div>
-
-          <div class="section">
-            <div class="s-avatar"></div>
-            <div class="s-txt">
-              Asher Bearce
-            </div>
-            <button class="s-notes">6</button>
-          </div>
-
-          <div class="section">
-            <div class="s-avatar"></div>
-            <div class="s-txt">
-              Bryan Scott
+          <div class="section-light subs">
+            <div class="section-avi"></div>
+            <div class="s-txt foll">
+              Gaetan A.
             </div>
           </div>
 
-          <div class="section">
-            <div class="s-avatar"></div>
-            <div class="s-txt">
-              Justin Fernald
+          <div class="section-light subs">
+            <div class="section-avi"></div>
+            <div class="s-txt foll">
+              bobmandude9889
             </div>
-            <button class="s-notes">99+</button>
           </div>
 
-          <div class="section">
-            <div class="s-avatar"></div>
-            <div class="s-txt">
-              Last one
+          <div class="section-light subs">
+            <div class="section-avi"></div>
+            <div class="s-txt foll">
+              Ryan Scott
             </div>
-            <button class="s-notes">99+</button>
           </div>
 
         </div>
       </div>
-    </div>
   </div>
 
   <div class="context" style="display: none;">
@@ -372,20 +244,9 @@ if ($account == null)
   </div> -->
 
   <div class="h-content">
-    <!-- <div class="h-search-tools">
-      <div class="e-sort" title="Sort by" style="float: left;">
-        <i class="material-icons black edit-icons">sort</i>
-      </div>
-      <div class="h-s-txt">
-        Oldest
-      </div>
-      <div class="h-s-txt">
-        Newest
-      </div>
-      <div class="h-s-txt">
-        Most Popular
-      </div>
-    </div> -->
+    <?php
+      topbar($self);
+    ?>
 
   <div class="post-blk m-post">
       <div class="c-title-holder">

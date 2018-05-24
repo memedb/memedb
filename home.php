@@ -567,7 +567,7 @@ if ($account == null)
         <div class="comment-box">
           <i class="material-icons m-meme-icon hoverable">add_a_photo</i>
           <textarea name="name" class="m-textarea" rows="1" cols="10" wrap="hard"></textarea>
-          <button class="c-op-1 postit" style="top: 5px; margin-left: 7px; color: #333;">POST</button>
+          <button class="c-op-1 postit">POST</button>
         </div>
       </div>
     </div>
@@ -825,7 +825,7 @@ if ($account == null)
         <div class="comment-box">
           <i class="material-icons m-meme-icon hoverable">add_a_photo</i>
           <textarea name="name" class="m-textarea" rows="1" cols="10" wrap="hard"></textarea>
-          <button class="c-op-1 postit" style="top: 5px; margin-left: 7px; color: #333;">POST</button>
+          <button class="c-op-1 postit">POST</button>
         </div>
       </div>
     </div>
@@ -1083,7 +1083,7 @@ if ($account == null)
           <div class="comment-box">
             <i class="material-icons m-meme-icon hoverable">add_a_photo</i>
             <textarea name="name" class="m-textarea" rows="1" cols="10" wrap="hard"></textarea>
-            <button class="c-op-1 postit" style="top: 5px; margin-left: 7px; color: #333;">POST</button>
+            <button class="c-op-1 postit">POST</button>
           </div>
         </div>
       </div>
