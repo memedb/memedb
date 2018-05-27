@@ -80,7 +80,7 @@ if ($account == null)
   <div class="sidenav-home">
       <div class="scroll-hide">
         <div class="logo-info">
-          <div class="home-logo" style="margin-bottom:0px;"><a style="all:unset;" href="/">memedb</a></div>
+          <div class="home-logo" style="margin-bottom:0px;"><a style="all:unset;" href="/home.php">memedb</a></div>
 
           <div class="sections">
             <div class="line h"></div>
