@@ -183,6 +183,10 @@ $(document).ready(function() {
       location.reload();
     })
   });
+
+  sendCommand("get_timeline", null, {page: 1, handle: "bobmandude9889"}, function(response) {
+    console.log(response);
+  })
 });
 
 function tagSearch(value) {

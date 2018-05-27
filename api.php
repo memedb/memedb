@@ -144,8 +144,49 @@ Command::register("create_library", function($user) {
 });
 
 Command::register("get_timeline", function($user) {
-  
+  $page = $_POST['page'];
+  $account = user::loadFromHandle($_POST['handle']);
+  $libs = loadDBObjects("libraries", "user={$account->id} ORDER BY date DESC", "library");
+  $i = 0;
+  $count = 0;
+  $ymd = substr($libs[0]->date, 0, 10);
+  while ($count < $page) {
+    if (sizeof($libs) == 0)
+      break;
+    $ymd = substr($libs[0]->date, 0, 10);
+    while ($i < sizeof($libs)) {
+      if (substr($libs[$i]->date, 0, 10) !== $ymd)
+        break;
+      $i++;
+    }
+    $count++;
+    if ($count == $page)
+      $libs = array_splice($libs, $i);
+    else
+      $libs = array_splice($libs, 0, $i);
+    $i = 0;
+  }
+
+  $posts = loadDBObjects("posts", "`source`={$account->id} AND `original` IS NULL AND `date` LIKE '{$ymd}%'", "post");
+  $userLibs = loadDBObjects("libraries", "user={$account->id}", "library");
+  $postGroups = array();
+
+  foreach ($posts as $post) {
+    if (!isset($postGroups[$post->library]))
+      $postGroups[$post->library] = array();
+    array_push($postGroups[$post->library], $post->id);
+  }
+
+  $libIds = array();
+
+  foreach ($libs as $lib) {
+    array_push($libIds, $lib->id);
+  }
+
+  jsonMessage(array($libIds, $postGroups));
 });
+
+
 
 $action = $_GET['action'];
 
