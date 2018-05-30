@@ -29,10 +29,39 @@ if ($account == null) {
 
 <head>
   <?php imports(); ?>
+  <script>
+    var timelinePage = 0;
+    var handle = "";
+    $(document).ready(function() {
+      handle = document.getElementById("data-account").dataset.account;
+      loadTimeline();
+      $(".scroll-hide").scroll(function(event) {
+        if(this.scrollTop === (this.scrollHeight - this.offsetHeight)) {
+          loadTimeline();
+        }
+      });
+    });
+
+    function loadTimeline() {
+      console.log(timelinePage);
+      if (timelinePage >= 0) {
+        loadPage("/timeline.php?handle=" + handle + "&page=" + timelinePage, function(content) {
+          if (content == "null")
+            timelinePage = -1;
+          else {
+            $("#timeline-content").append(content);
+            timelinePage++;
+          }
+        });
+      }
+    }
+  </script>
   <title><?php echo $account->name; ?></title>
 </head>
 
 <body>
+
+  <div style="display:none;" id="data-account" data-account=<?=$account->handle;?>></div>
 
   <div class="imp-bg-fade" id="imp-bg-fade" style="display: none; opacity 0;"></div>
 
@@ -307,11 +336,7 @@ if ($account == null) {
 
         </div>
 
-        <div class="exp-post-corridor">
-
-          <?php
-            
-          ?>
+        <div id="timeline-content" class="exp-post-corridor">
 
         </div>
 

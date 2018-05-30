@@ -184,9 +184,9 @@ $(document).ready(function() {
     })
   });
 
-  sendCommand("get_timeline", null, {page: 1, handle: "bobmandude9889"}, function(response) {
+  sendCommand("get_timeline", null, {page: 0, handle: "bobmandude9889"}, function(response) {
     console.log(response);
-  })
+  });
 });
 
 function tagSearch(value) {
@@ -281,6 +281,18 @@ function uploadFile(file, session, type, parent, library, callback) {
         callback(response);
     }
   });
+}
+
+function loadPage(url, callback) {
+  var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status ==  200) {
+      callback(this.responseText);
+    }
+  }
+  xhttp.open("GET", url, true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  xhttp.send();
 }
 
 function followAction() {
