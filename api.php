@@ -195,11 +195,26 @@ function getTimeline($handle, $page) {
     array_push($dates, $row['date']);
   }
 
+  sort($dates);
+
+  $last = "";
+  for ($i = 0; $i < sizeof($dates); $i++) {
+    $dates[$i] = substr($dates[$i], 0, 10);
+    if ($dates[$i] == $last) {
+      array_splice($dates, $i, 1);
+      $i--;
+    } else {
+      $last = $dates[$i];
+    }
+  }
+
   if ($page >= sizeof($dates)) {
     return NULL;
   }
 
-  $ymd = substr($dates[$page], 0, 10);
+  logger(varToString($dates));
+
+  $ymd = $dates[$page];
 
   $libs = loadDBObjects("libraries", "`user`={$account->id} AND `date` LIKE '{$ymd}%' ORDER BY `date` DESC", "library");
   $posts = loadDBObjects("posts", "`source`={$account->id} AND `original` IS NULL AND `date` LIKE '{$ymd}%' ORDER BY `date` DESC", "post");
@@ -422,6 +437,8 @@ function loadDBObject($table, $selector, $classname) {
 function loadDBObjects($table, $selector, $classname) {
   $conn = $GLOBALS['conn'];
   $stmt = $conn->prepare("SELECT * FROM $table WHERE $selector");
+  logger($table . " : " . $selector);
+  logger(varToString(debug_backtrace()));
   $stmt->execute();
   $result = $stmt->get_result();
   $objects = array();
@@ -493,7 +510,7 @@ class post {
       $posts[0]->printImage("exp-post-image");
       ?>
       <div class="exp-post-info">
-        <h6></h6>
+        <h6><?=$posts[0]->caption;?></h6>
         <h2 class="card-date"><?=$dateStr?></h2>
       </div>
     </div>

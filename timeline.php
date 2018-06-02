@@ -21,6 +21,8 @@ foreach ($postGroups as $postIds) {
 }
 
 function idsToObjects($ids, $table, $class) {
+    if (sizeof($ids) == 0)
+        return $ids;
     $idsOr = array();
     for ($i = 0; $i < sizeof($ids); $i++) {
         $idsOr[$i] = "id='". $ids[$i] ."' ";
