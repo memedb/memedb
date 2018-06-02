@@ -1250,7 +1250,7 @@ body {
 
 .sd-img {
   border-radius: 50%;
-  margin-right: 10px;
+  margin-right: 7px;
   position: relative;
   float: left;
 }
@@ -2431,6 +2431,11 @@ body {
   background: #ddd;
   display: block;
   float: left;
+}
+
+.m-album-img.wide {
+  width: 800px;
+  height: 800px;
 }
 
 .album-text {
