@@ -860,6 +860,9 @@ if ($account == null)
             <div class="m-album-img light"></div>
             <div class="m-album-img "></div>
           </div>
+          <div class="m-album-row">
+            <div class="m-album-img light wide"></div>
+          </div>
           </div>
         </div>
         <div class="post-content">
