@@ -2435,7 +2435,8 @@ body {
 
 .m-album-img.wide {
   width: 800px;
-  height: 800px;
+  height: 400px;
+  background: #d5d5d5;
 }
 
 .album-text {
@@ -2544,7 +2545,7 @@ body {
   color: #222;
   position: relative;
   float: right;
-  margin-top: 11.5px;
+  margin-top: 10.5px;
 }
 
 .m-desc {
@@ -2602,7 +2603,7 @@ body {
   display: block;
   margin-left: 18px;
   margin-right: 10px;
-  margin-top: 15px;
+  margin-top: 9px;
 }
 
 .m-likes {
@@ -3086,6 +3087,7 @@ body {
   display: inline-block;
   height: auto;
   width: 100%;
+  margin-bottom: 8px;
 }
 
 .c-button-hold.new-post {
