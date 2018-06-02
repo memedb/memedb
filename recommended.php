@@ -594,7 +594,7 @@ if ($account == null)
 
         </div>
         <div class="rt-more">
-          <div class="rt-fab">
+          <div class="rt-fab expand-rec-section">
             <i class="material-icons small-floating">keyboard_arrow_down</i>
           </div>
         </div>
@@ -907,7 +907,7 @@ if ($account == null)
 
         </div>
         <div class="rt-more">
-          <div class="rt-fab">
+          <div class="rt-fab expand-rec-section">
             <i class="material-icons small-floating">keyboard_arrow_down</i>
           </div>
         </div>
@@ -1220,7 +1220,7 @@ if ($account == null)
 
         </div>
         <div class="rt-more">
-          <div class="rt-fab">
+          <div class="rt-fab expand-rec-section">
             <i class="material-icons small-floating">keyboard_arrow_down</i>
           </div>
         </div>

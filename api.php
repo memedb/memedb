@@ -227,12 +227,15 @@ function isLibrary($id) {
 function topBar($self) {
   ?>
   <div class="top-bar">
+
+    <i class="material-icons openSidenav" style="display: none;">menu</i>
+
     <div class="ec-account-settings">
       <div class="account-info">
         <div class="sd-img">
-          <img src="<?php echo $self->getImage(); ?>" style="border: inherit; border-radius: inherit;" width="40" height="40">
+          <img src="<?php echo $self->getImage(); ?>" class="home-topbar-image" style="border: inherit; border-radius: inherit;" width="width" height="40">
         </div>
-        <div class="sd-infoholder">
+        <div class="sd-infoholder disapear">
           <h1 class="n-name sdname"><?php echo $self->name; ?></h1>
           <div class="username">
             @<?php echo $self->handle; ?>
@@ -244,7 +247,7 @@ function topBar($self) {
     </div>
 
     <div class="searchbar">
-      <i class="material-icons search-g" style="float: left; position:relative; top: -4px;">search</i><input type="text" placeholder="Search" style="all: unset; width: 150px;position: relative; left: 11px; color: #646d6d; top: 1px;" />
+      <i class="material-icons search-g" style="float: left; position:relative; top: -4px;">search</i><input type="text" class="input-searchbar" placeholder="Search" style="all: unset; width: 150px;position: relative; left: 11px; color: #646d6d; top: 1px;" />
     </div>
 
     <div class="ec-search-results">
@@ -272,7 +275,7 @@ function topBar($self) {
     <div class="s-dropdown">
       <div class="s-d-titlebox">
         <div class="sd-img">
-          <img src="<?php echo $self->getImage(); ?>" style="border: inherit; border-radius: inherit;" width="40" height="40">
+          <img src="<?php echo $self->getImage(); ?>" class="home-topbar-image" style="border: inherit; border-radius: inherit;" width="auto" height="40">
         </div>
         <div class="sd-infoholder">
           <h1 class="n-name sdname"><?php echo $self->name; ?></h1>
@@ -744,7 +747,7 @@ class library {
 
   public static function printActivityContainerHtml($timestamp, $libs) {
     $dateStr = date("d M Y", $timestamp);
-    ?> 
+    ?>
       <div class="exp-card">
         <div class="exp-card-title">
           <h1 class="card-title">+ New Library</h1>
@@ -755,7 +758,7 @@ class library {
             foreach ($libs as $lib) {
               $lib->printActivityHtml();
             }
-              
+
             if (sizeof($libs) == 1) {
               ?>
                 <div class="c-button-hold">
