@@ -27,6 +27,12 @@ if ($account == null)
 
 <body>
 
+  <div class="newpost-mobile">
+    <div class="npm-">
+
+    </div>
+  </div>
+
   <div class="category-blk tagFinder">
     <div class="c-title-holder">
       <div class="searchbar category">

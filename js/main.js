@@ -624,19 +624,30 @@ function showSidenav(){
     $(".sidenav-home").css({
       'left' : '0px'
     });
-  }, 10);
+    $("#imp-bg-fade").css("opacity", "");
+  }, 400);
 }
 
+
+
 function hideSidenav(){
+
+  var windowWidth = $(window).width();
+
+  if(windowWidth >= 1200) {
+    showSidenav();
+    return;
+  }
   $(".sidenav-home").css({
-    'left' : '-300px'
+    'left' : '-500px'
   });
   $("#imp-bg-fade").css("display", "none");
   setTimeout(function() {
     $(".sidenav-home").css({
       'display' : 'none'
     });
-  }, 10);
+    $("#imp-bg-fade").css("opacity", "0");
+  }, 400);
 }
 
 // function expandRec(){
