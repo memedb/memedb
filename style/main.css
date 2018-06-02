@@ -14,6 +14,8 @@ html {
   background: #f5f5f6;
 }
 
+*:focus {outline:0;}
+
 /*Please use one global stylesheet and also get the minify package in atom. Thank you. :D*/
 
 * {
@@ -751,6 +753,7 @@ input:checked+.slider:before {
 }
 
 .sidenav-home {
+  z-index: 1000000;
   display: block;
   position: fixed;
   float: left;
@@ -996,7 +999,6 @@ input:checked+.slider:before {
   margin-left: 300px;
   width: auto;
   height: auto;
-  top: -19px;
   background: #F5F5F6;
 }
 
@@ -1250,7 +1252,7 @@ body {
 
 .sd-img {
   border-radius: 50%;
-  margin-right: 10px;
+  margin-right: 7px;
   position: relative;
   float: left;
 }
@@ -2108,6 +2110,20 @@ body {
   transform: translateX(50%);
 }
 
+.material-icons.hoverable-sidenav:hover:after {
+  width: 170%;
+  height: 170%;
+  left: -118%;
+  top: -45%;
+  background: #999;
+  opacity: .2;
+  border-radius: 50%;
+  z-index: 10000;
+  content: "";
+  position: absolute;
+  transform: translateX(50%);
+}
+
 .black {
   color: #222;
 }
@@ -2386,7 +2402,7 @@ body {
 .meme-img {
   height: 600px;
   position: relative;
-  width: 800px;
+  width: 100%;
   background: #ccc;
   display: block;
   cursor: pointer;
@@ -2431,6 +2447,12 @@ body {
   background: #ddd;
   display: block;
   float: left;
+}
+
+.m-album-img.wide {
+  width: 800px;
+  height: 400px;
+  background: #d5d5d5;
 }
 
 .album-text {
@@ -2539,7 +2561,7 @@ body {
   color: #222;
   position: relative;
   float: right;
-  margin-top: 11.5px;
+  margin-top: 10.5px;
 }
 
 .m-desc {
@@ -2597,7 +2619,7 @@ body {
   display: block;
   margin-left: 18px;
   margin-right: 10px;
-  margin-top: 15px;
+  margin-top: 9px;
 }
 
 .m-likes {
@@ -2708,7 +2730,7 @@ body {
   padding: 6px 10px 6px 10px;
   font-size: 12px;
   color: #222;
-  background: #ccc;
+  background: #ddd;
   cursor: pointer;
   transition-duration: 0.3s;
 }
@@ -3081,6 +3103,7 @@ body {
   display: inline-block;
   height: auto;
   width: 100%;
+  margin-bottom: 8px;
 }
 
 .c-button-hold.new-post {
@@ -3981,7 +4004,7 @@ body {
 
 .post-content {
   width: auto;
-  background: #fff;
+  background: #f5f5f5;
   border-bottom-left-radius: 2px;
   border-bottom-right-radius: 2px;
   padding: 8px;
@@ -4143,7 +4166,7 @@ h6 {
   font-size: 14px;
   font-weight: lighter;
   text-align: left;
-  margin-top: 8px;
+  margin-top: 11px;
   margin-right: 8px;
 }
 
@@ -4269,4 +4292,177 @@ h6 {
   margin-right: 25px;
   position: relative;
   float: right;
+}
+
+/* MEDIA TAGS */
+
+/* MOBILE */
+@media screen and (max-width: 1200px) {
+
+  .sidenav-home {
+    display: none;
+    width: 500px;
+    left: -500px;
+  }
+
+  .section-light {
+    height: 70px;
+    top: 382px;
+  }
+
+  .section-light.subs {
+    height: 85px;
+  }
+
+  .section-avi {
+    height: 50px;
+    width: 50px;
+  }
+
+  .h-content {
+    margin-left: 0px;
+  }
+
+  .reposted {
+    height: 29px;
+    width: auto;
+    top: -31px;
+  }
+
+  .m-handle {
+    font-size: 23px;
+  }
+
+  .m-icon {
+    font-size: 29px !important;
+  }
+
+  .m-text-box {
+    height: 95px;
+    background: #efefef;
+  }
+
+  .m-pp {
+    height: 60px;
+    width: 60px;
+  }
+
+  .m-OP {
+    font-size: 30px;
+
+  }
+
+  .followmp {
+    font-size: 22px;
+    padding: 10px 18px;
+    margin-top: 24px;
+  }
+
+  .m-header {
+    font-size: 25px;
+    margin-left: 30px;
+  }
+
+  .m-likes, .m-reposts, .m-comments {
+    width: 100px;
+  }
+
+  .m-date {
+    font-size: 22px;
+  }
+
+  .m-comment-wrapper {
+    display: none;
+  }
+
+  .m-post-comment {
+    display: none;
+  }
+
+  .post-corridor {
+    top: 130px;
+    position: relative;
+  }
+
+  .top-bar {
+    top: -1px;
+    position: fixed;
+    background: #222;
+    height: 90px;
+    z-index: 1;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  }
+
+  .settings {
+    font-size: 60px;
+    margin-right: 35px;
+    margin-top: 15px;
+    margin-left: 30px;
+    color: #eee;
+  }
+
+  .openSidenav {
+    float: left;
+    font-size: 60px;
+    margin-right: 35px;
+    margin-top: 15px;
+    margin-left: 30px;
+    color: #eee;
+  }
+
+  .sd-infoholder.disapear {
+    display: none;
+  }
+
+  .home-topbar-image {
+    height: 50px !important;
+  }
+
+  .searchbar {
+    font-size: 34px;
+    width: 330px;
+    height: 40px;
+    margin-top: 18px;
+    background: #333;
+    color: #eee;
+  }
+
+  .search-g {
+    font-size: 50px;
+  }
+
+  .account-info {
+    margin-top: 20px;
+  }
+
+  .input-searchbar {
+    color: #eee !important;
+    width: 270px !important;
+  }
+
+  .s-dropdown {
+    width: 450px;
+  }
+
+  .section {
+    height: 70px;
+  }
+
+  .settings-icon {
+    font-size: 50px;
+  }
+
+  .s-txt {
+    font-size: 30px;
+    top: 13.5px;
+  }
+
+  .openSidenav {
+    display: block !important;
+  }
+
+  .post.m-post {
+    top: 130px;
+  }
+
 }

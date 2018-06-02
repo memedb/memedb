@@ -280,7 +280,7 @@ if ($account == null) {
           <div class="home-logo">
             <a style="all:unset;position: fixed;left: 58px;" href="/home.php">memedb</a>
             <h1 class="l-title tl-post-title">TIMELINE</h1>
-            <i class="material-icons expand-sidenav">details</i>
+            <i class="material-icons expand-sidenav hoverable-sidenav">details</i>
           </div>
 
           <div class="sections slim">

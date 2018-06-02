@@ -4,6 +4,8 @@ searchCode = "";
 
 $(document).ready(function() {
   var isSidenavOpen = false;
+  var recHeight = 420;
+  var isSidenavShown = false;
   libs = $(".library");
   for (i = 0; i < libs.length; i++) libs[i].id = i.toString();
   libs.click(function(event) {
@@ -52,6 +54,18 @@ $(document).ready(function() {
     closeAccount();
     closePost();
     closeBalance();
+    hideSidenav();
+  });
+
+  $(".openSidenav").click(function() {
+
+    if(!isSidenavOpen){
+      showSidenav();
+    } else {
+      hideSidenav();
+    }
+
+    isSidenavShown = !isSidenavShown;
   });
 
   $(".expand-sidenav").click(function() {
@@ -145,6 +159,10 @@ $(document).ready(function() {
   $(".closeEcSearch").click(function() {
     closeBalance();
     $("#imp-message, #imp-bg-fade").css("opacity", "0");
+  });
+
+  $(".expand-rec-section").click(function() {
+    expandRec();
   });
 
   $(".s-tab").click(function() {
@@ -596,6 +614,38 @@ function compactSidenav(){
     });
   }, 100);
 }
+
+function showSidenav(){
+  $(".sidenav-home").css({
+    'display' : 'block'
+  });
+  $("#imp-bg-fade").css("display", "");
+  setTimeout(function() {
+    $(".sidenav-home").css({
+      'left' : '0px'
+    });
+  }, 10);
+}
+
+function hideSidenav(){
+  $(".sidenav-home").css({
+    'left' : '-300px'
+  });
+  $("#imp-bg-fade").css("display", "none");
+  setTimeout(function() {
+    $(".sidenav-home").css({
+      'display' : 'none'
+    });
+  }, 10);
+}
+
+// function expandRec(){
+//   // make sure all of this applies to only the element expanded
+//   $(".expand-rec-section").css({
+//     'height' : recHeight + 420 + 'px';
+//   });
+//   recHeight += 420;
+// }
 
 function removeDragData(ev) {
   if (ev.dataTransfer.items) {
