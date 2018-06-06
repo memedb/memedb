@@ -34,7 +34,7 @@ if ($account == null) {
     var handle = "";
     $(document).ready(function() {
       handle = document.getElementById("data-account").dataset.account;
-      loadTimeline();
+      loadTimeline(3);
       $(".scroll-hide").scroll(function(event) {
         if(this.scrollTop === (this.scrollHeight - this.offsetHeight)) {
           loadTimeline();
@@ -42,7 +42,7 @@ if ($account == null) {
       });
     });
 
-    function loadTimeline() {
+    function loadTimeline(amount) {
       console.log(timelinePage);
       if (timelinePage >= 0) {
         loadPage("/timeline.php?handle=" + handle + "&page=" + timelinePage, function(content) {
@@ -51,6 +51,9 @@ if ($account == null) {
           else {
             $("#timeline-content").append(content);
             timelinePage++;
+            if (amount > 1) {
+              loadTimeline(amount - 1);
+            }
           }
         });
       }
@@ -61,11 +64,11 @@ if ($account == null) {
 
 <body>
 
-  <div style="display:none;" id="data-account" data-account=<?=$account->handle;?>></div>
+  <div style="display:none;" id="data-account" data-account=<?=$_GET['handle'];?>></div>
 
   <div class="imp-bg-fade" id="imp-bg-fade" style="display: none; opacity 0;"></div>
 
-  <div class="upload-popup-hover">
+  <div class="upload-popup-hover" style="display:none;">
     <div class="upload-popup-bar">
       <h1 class="upload-popup-title">Uploads</h1>
     </div>
@@ -352,7 +355,6 @@ if ($account == null) {
         </div>
 
         <div id="timeline-content" class="exp-post-corridor">
-
         </div>
 
       </div>

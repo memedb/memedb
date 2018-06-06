@@ -128,6 +128,7 @@ Command::register("create_post", function($user) {
   $stmt->bind_param("ssissis", $id, $title, $user->id, $date, $_POST['type'], $_POST['parent'], $_POST['library']);
   $stmt->execute();
 
+  logger($_FILES['file']['tmp_name']);
   move_uploaded_file($_FILES['file']['tmp_name'], 'images/' . $id . "." . $_POST['type']);
 
   jsonMessage(array("id"=>$id));
@@ -196,6 +197,13 @@ function getTimeline($handle, $page) {
   }
 
   sort($dates);
+
+  $datesFlip = array();
+
+  for ($i = sizeof($dates) - 1; $i >= 0; $i--) {
+    array_push($datesFlip, $dates[$i]);
+  }
+  $dates = $datesFlip;
 
   $last = "";
   for ($i = 0; $i < sizeof($dates); $i++) {
@@ -505,7 +513,7 @@ class post {
   }
 
   public static function printActivityContainerHtml($timestamp, $posts) {
-    $dateStr = date("d/m/Y", $timestamp);
+    $dateStr = date("d M Y", $timestamp);
     if (sizeof($posts) == 1) {
     ?>
     <div class="exp-post">
@@ -779,7 +787,9 @@ class library {
             if (sizeof($libs) == 1) {
               ?>
                 <div class="c-button-hold">
-                  <button class="post-btn closePost" style="float: right">VIEW</button>
+                  <a href="">
+                    <button class="post-btn closePost" style="float: right">VIEW</button>
+                  </a>
                 </div>
               <?php
             }

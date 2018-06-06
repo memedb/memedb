@@ -201,10 +201,6 @@ $(document).ready(function() {
       location.reload();
     })
   });
-
-  sendCommand("get_timeline", null, {page: 0, handle: "bobmandude9889"}, function(response) {
-    console.log(response);
-  });
 });
 
 function tagSearch(value) {
