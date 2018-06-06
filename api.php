@@ -144,6 +144,15 @@ Command::register("create_library", function($user) {
   jsonMessage(array("id"=>$id));
 });
 
+Command::register("delete_library", function($user) {
+  $id = $_POST['id'];
+  $conn = $GLOBALS['conn'];
+  $stmt = $conn->prepare("DELETE FROM `libraries` WHERE `id`=?");
+  $stmt->bind_param("s", $id);
+  $stmt->execute();
+  jsonMessage(array());
+});
+
 Command::register("get_timeline", function($user) {
   $message = getTimeline($_POST['handle'], $_POST['page']);
   if ($message == NULL)

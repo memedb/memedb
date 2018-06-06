@@ -334,6 +334,17 @@ function openOptions(id) {
   });
   $("#imp-bg-fade").css("display", "");
   setTimeout(function() {
+    var dataId = document.getElementById(id).dataset.id;
+    var ids = ["POSTS", "REPOSTS", "FAVORITES"];
+    if (ids.includes(dataId)) {
+      $(".l-sett-opt #delete, .l-sett-opt .l-line").css({
+        display: "none"
+      });
+    } else {
+      $(".l-sett-opt #delete, .l-sett-opt .l-line").css({
+        display: ""
+      });
+    }
     $(".l-sett-opt").css({
       opacity: "",
       right: ""

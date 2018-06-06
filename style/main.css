@@ -1392,6 +1392,8 @@ body {
   font-size: 16px;
   cursor: pointer;
   height: 35px;
+  width: 115px;
+  transition: background 0.5s;
 }
 
 .unfollow {
@@ -1403,12 +1405,13 @@ body {
   background: #ccc;
   padding: 8px 16px 8px 16px;
   margin-top: 5px;
-  margin-bottom: 5px;
   border-radius: 2px;
   border: none;
   text-align: center;
   font-size: 16px;
   cursor: pointer;
+  width: 115px;
+  transition: background 0.5s;
 }
 
 .follow-self {
@@ -1420,7 +1423,6 @@ body {
   background: #ccc;
   padding: 8px 16px 8px 16px;
   margin-top: 5px;
-  margin-bottom: 5px;
   border-radius: 2px;
   border: none;
   text-align: center;
@@ -2111,6 +2113,22 @@ body {
   transform: translateX(50%);
 }
 
+.material-icons.hoverable:after {
+  width: 0%;
+  height: 0%;
+  left: 50%;
+  top: 50%;
+  background: #999;
+  opacity: .2;
+  border-radius: 50%;
+  z-index: 10000;
+  content: "";
+  position: absolute;
+  transform: translateX(50%);
+  /* You can mess with the animations on these. Probably want to keep them all the same though. */
+  transition: width 0.2s, height 0.2s, left 0.2s, top 0.2s, transform 0.2s;
+}
+
 .material-icons.hoverable-sidenav:hover:after {
   width: 170%;
   height: 170%;
@@ -2123,6 +2141,22 @@ body {
   content: "";
   position: absolute;
   transform: translateX(50%);
+}
+
+.material-icons.hoverable-sidenav:after {
+  width: 0%;
+  height: 0%;
+  left: 50%;
+  top: 50%;
+  background: #999;
+  opacity: .2;
+  border-radius: 50%;
+  z-index: 10000;
+  content: "";
+  position: absolute;
+  transform: translateX(50%);
+  /* Also here. */
+  transition: width 0.2s, height 0.2s, left 0.2s, top 0.2s, transform 0.2s;
 }
 
 .black {

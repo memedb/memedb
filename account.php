@@ -114,7 +114,7 @@ if ($account == null) {
 
     <div class="l-line"></div>
 
-    <button class="l-sett-button" style="color: #f44242;">Delete</button>
+    <button id="delete" class="l-sett-button" style="color: #f44242;">Delete</button>
 
   </div>
 
@@ -203,11 +203,17 @@ if ($account == null) {
     <button class="imp-op-1">Cancel</button>
   </div>
 
+  <?php
+  if ($is_self) {
+  ?>  
   <div class="floating-box">
     <div class="floating-button openAddLib">
       <i class="material-icons floating">add</i>
     </div>
   </div>
+  <?php
+  }
+  ?>
 
   <div class="s-settings">
     <div class="s-title-box">
