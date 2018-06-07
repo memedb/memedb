@@ -91,23 +91,27 @@ if ($account == null)
           <div class="sections">
             <div class="line h"></div>
 
-            <div class="section-light imp-info">
-              <div class="s-txt h highlighted">
-                <a style="all:unset;" href="/home.php">HOME</a>
+            <a style="all:unset;" href="/home.php">
+              <div class="section-light imp-info">
+                <div class="s-txt h highlighted">
+                  HOME
+                </div>
               </div>
-            </div>
-
-            <div class="section-light imp-info">
-              <div class="s-txt h">
-                <a style="all:unset;" href="/recommended.php">RECOMMENDED</a>
+            </a>
+            <a style="all:unset;" href="/recommended.php">
+              <div class="section-light imp-info">
+                <div class="s-txt h">
+                  RECOMMENDED
+                </div>
               </div>
-            </div>
-
-            <div class="section-light imp-info">
-              <div class="s-txt h">
-                <a style="all:unset;" href="/account.php">MY ACCOUNT</a>
+            </a>
+            <a style="all:unset;" href="/account.php">
+              <div class="section-light imp-info">
+                <div class="s-txt h">
+                  MY ACCOUNT
+                </div>
               </div>
-            </div>
+            </a>
 
             <div class="line h"></div>
           </div>
@@ -115,194 +119,32 @@ if ($account == null)
 
         <div class="subscriptions">
 
-          <div class="section-light subs">
-            <div class="section-avi"></div>
-            <div class="s-txt foll">
-              Gaetan A.
+          <a style="all:unset;" href="/<?php ?>">
+            <div class="section-light subs">
+              <div class="section-avi"></div>
+              <div class="s-txt foll">
+                Gaetan A.
+              </div>
             </div>
-          </div>
+          </a>
 
-          <div class="section-light subs">
-            <div class="section-avi"></div>
-            <div class="s-txt foll">
-              bobmandude9889
+          <a style="all:unset;" href="/<?php ?>">
+            <div class="section-light subs">
+              <div class="section-avi"></div>
+              <div class="s-txt foll">
+                bobmandude9889
+              </div>
             </div>
-          </div>
+          </a>
 
-          <div class="section-light subs">
-            <div class="section-avi"></div>
-            <div class="s-txt foll">
-              Ryan Scott
+          <a style="all:unset;" href="/<?php ?>">
+            <div class="section-light subs">
+              <div class="section-avi"></div>
+              <div class="s-txt foll">
+                Ryan Scott
+              </div>
             </div>
-          </div>
-
-          <div class="section-light subs">
-            <div class="section-avi"></div>
-            <div class="s-txt foll">
-              Gaetan A.
-            </div>
-          </div>
-
-          <div class="section-light subs">
-            <div class="section-avi"></div>
-            <div class="s-txt foll">
-              bobmandude9889
-            </div>
-          </div>
-
-          <div class="section-light subs">
-            <div class="section-avi"></div>
-            <div class="s-txt foll">
-              Ryan Scott
-            </div>
-          </div>
-
-          <div class="section-light subs">
-            <div class="section-avi"></div>
-            <div class="s-txt foll">
-              Gaetan A.
-            </div>
-          </div>
-
-          <div class="section-light subs">
-            <div class="section-avi"></div>
-            <div class="s-txt foll">
-              bobmandude9889
-            </div>
-          </div>
-
-          <div class="section-light subs">
-            <div class="section-avi"></div>
-            <div class="s-txt foll">
-              Ryan Scott
-            </div>
-          </div>
-
-          <div class="section-light subs">
-            <div class="section-avi"></div>
-            <div class="s-txt foll">
-              Gaetan A.
-            </div>
-          </div>
-
-          <div class="section-light subs">
-            <div class="section-avi"></div>
-            <div class="s-txt foll">
-              bobmandude9889
-            </div>
-          </div>
-
-          <div class="section-light subs">
-            <div class="section-avi"></div>
-            <div class="s-txt foll">
-              Ryan Scott
-            </div>
-          </div>
-
-          <div class="section-light subs">
-            <div class="section-avi"></div>
-            <div class="s-txt foll">
-              Gaetan A.
-            </div>
-          </div>
-
-          <div class="section-light subs">
-            <div class="section-avi"></div>
-            <div class="s-txt foll">
-              bobmandude9889
-            </div>
-          </div>
-
-          <div class="section-light subs">
-            <div class="section-avi"></div>
-            <div class="s-txt foll">
-              Ryan Scott
-            </div>
-          </div>
-
-          <div class="section-light subs">
-            <div class="section-avi"></div>
-            <div class="s-txt foll">
-              Gaetan A.
-            </div>
-          </div>
-
-          <div class="section-light subs">
-            <div class="section-avi"></div>
-            <div class="s-txt foll">
-              bobmandude9889
-            </div>
-          </div>
-
-          <div class="section-light subs">
-            <div class="section-avi"></div>
-            <div class="s-txt foll">
-              Ryan Scott
-            </div>
-          </div>
-
-          <div class="section-light subs">
-            <div class="section-avi"></div>
-            <div class="s-txt foll">
-              Gaetan A.
-            </div>
-          </div>
-
-          <div class="section-light subs">
-            <div class="section-avi"></div>
-            <div class="s-txt foll">
-              bobmandude9889
-            </div>
-          </div>
-
-          <div class="section-light subs">
-            <div class="section-avi"></div>
-            <div class="s-txt foll">
-              Ryan Scott
-            </div>
-          </div>
-
-          <div class="section-light subs">
-            <div class="section-avi"></div>
-            <div class="s-txt foll">
-              Gaetan A.
-            </div>
-          </div>
-
-          <div class="section-light subs">
-            <div class="section-avi"></div>
-            <div class="s-txt foll">
-              bobmandude9889
-            </div>
-          </div>
-
-          <div class="section-light subs">
-            <div class="section-avi"></div>
-            <div class="s-txt foll">
-              Ryan Scott
-            </div>
-          </div>
-
-          <div class="section-light subs">
-            <div class="section-avi"></div>
-            <div class="s-txt foll">
-              Gaetan A.
-            </div>
-          </div>
-
-          <div class="section-light subs">
-            <div class="section-avi"></div>
-            <div class="s-txt foll">
-              bobmandude9889
-            </div>
-          </div>
-
-          <div class="section-light subs">
-            <div class="section-avi"></div>
-            <div class="s-txt foll">
-              Ryan Scott
-            </div>
-          </div>
+          </a>
 
         </div>
       </div>
@@ -319,78 +161,7 @@ if ($account == null)
 
   </div>
 
-  <div class="s-settings" style="display: none;">
-    <div class="s-title-box">
-      <h1 class="s-title">Settings</h1>
-      <i class="material-icons black s-delete">clear</i>
-    </div>
-    <div class="s-tab-box">
-      <div class="s-tab-holder">
-        <div class="s-tab s-selected">
-          GENERAL
-        </div>
-        <div class="s-tab">
-          ACCOUNT
-        </div>
-      </div>
-    </div>
-    <div class="s-content">
-      <div class="s-c-wrapper">
-        <div class="s-c-tab">
-          <h1 class="s-section-title">Notifications</h1>
-          <label class="container">Enable Notifications
-            <label class="switch">
-              <input type="checkbox">
-              <span class="slider round"></span>
-            </label>
-          </label>
-          <div class="line"></div>
-          <label class="container">Checkmark
-            <input type="checkbox">
-            <span class="checkmark"></span>
-          </label>
-          <label class="container">Radio
-            <input type="radio" name="radio" checked="checked">
-            <span class="radio"></span>
-          </label>
-          <label class="container">Buttons
-            <input type="radio" name="radio">
-            <span class="radio"></span>
-          </label>
-
-        </div>
-        <div class="s-c-tab account">
-          <h1 class="s-section-title">Personalisation</h1>
-          <div class="p-holder">
-            <div class="image edit">
-              <p class="i-edit">Edit</p>
-            </div>
-            <div style="margin-bottom:20px;">
-              <div class="input s">
-                <input type="text" placeholder="Change name" value="Gaetan A." class="input-bar" />
-              </div>
-              <p class="input-sub">Name may only contain </p>
-              <div class="input s">
-                <input type="text" placeholder="Change handle" value="@Al" class="input-bar i-handle" />
-              </div>
-              <p class="input-sub">_______ is already taken</p>
-            </div>
-          </div>
-          <h1 class="s-section-title">Other</h1>
-          <label class="container">Lock Account
-            <label class="switch">
-              <input type="checkbox">
-              <span class="slider round"></span>
-            </label>
-          </label>
-        </div>
-      </div>
-    </div>
-    <div class="s-bottom-buttons">
-      <button class="s-op-1">Cancel</button>
-      <button class="s-op-2" style="color: #4167f4;">Save</button>
-    </div>
-  </div>
+  <?php settingsMenu(); ?>
 
   <div class="context" style="display: none;">
     <div class="support">
