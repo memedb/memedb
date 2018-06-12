@@ -108,13 +108,12 @@ if ($account == null) {
   </div>
 
   <div class="l-sett-opt" style="display: none;">
-    <button class="l-sett-button">Rename</button>
     <button class="l-sett-button">Info</button>
     <button class="l-sett-button">Settings</button>
 
     <div class="l-line"></div>
 
-    <button id="delete" class="l-sett-button" style="color: #f44242;">Delete</button>
+    <button onclick="confirmDeleteLib();" id="delete" class="l-sett-button" style="color: #f44242;">Delete</button>
 
   </div>
 
@@ -199,7 +198,7 @@ if ($account == null) {
       <h1 class="imp-title">Warning!</h1>
     </div>
     <p class="imp-p">Are you sure you want to permanently delete this library and all of its content?</p>
-    <button class="imp-op-2" style="color: #f44242;">Delete</button>
+    <button class="imp-op-2" style="color: #f44242;" onclick="deleteLib();">Delete</button>
     <button class="imp-op-1">Cancel</button>
   </div>
 
@@ -293,7 +292,7 @@ if ($account == null) {
     $libCount = 0;
     $dragAttr = "ondragenter='libDrag(event);' ondragleave='libDragLeave(event);' ondragover='libDrag(event);' ondrop='libDrop(event);'";
     foreach ($libs as $lib) {
-        if ($lib->visibility == 2 || ($lib->visibility == 1 && ($self->id == $account->id || $self->isFollowing($account->id))) || ($lib->visibility == 0 && $self->id == $account->id)) {
+        if (!$lib->private && ($lib->visibility == 2 || ($lib->visibility == 1 && ($self->id == $account->id || $self->isFollowing($account->id))) || ($lib->visibility == 0 && $self->id == $account->id))) {
           ?>
           <div class="library <?=$libCount%2==0?" light":""?>" data-id="<?=$lib->id?>" <?php echo $lib->icon ? $lib->canUpload ? $dragAttr : "" : $dragAttr; ?>>
             <?php

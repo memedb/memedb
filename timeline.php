@@ -1,6 +1,6 @@
 <?php
 require_once('api.php');
-$result = getTimeline($_GET['handle'], (int) $_GET['page']);
+$result = getTimeline($_GET['handle'], (int) $_GET['page'], getUser());
 
 if ($result == NULL) {
     echo "null";

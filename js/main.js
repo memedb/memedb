@@ -335,6 +335,7 @@ function openOptions(id) {
   $("#imp-bg-fade").css("display", "");
   setTimeout(function() {
     var dataId = document.getElementById(id).dataset.id;
+    document.getElementsByClassName("l-sett-opt")[0].dataset.id = dataId;
     var ids = ["POSTS", "REPOSTS", "FAVORITES"];
     if (ids.includes(dataId)) {
       $(".l-sett-opt #delete, .l-sett-opt .l-line").css({
@@ -353,11 +354,23 @@ function openOptions(id) {
   }, 10);
 }
 
-function showError(message) {
+function deleteLib() {
+  var id = document.getElementsByClassName("l-sett-opt")[0].dataset.id;
+  sendCommand("delete_library", null, {"id": id}, function(response){
+    if (response.status == "success") {
+      location.reload();
+    }
+  });
+}
+
+function confirmDeleteLib() {
   elmt = $("#imp-bg-fade, #imp-message");
   elmt.css("display","");
+  $(".l-sett-opt").css({
+    opacity: "0",
+    right: "50px"
+  });
   setTimeout(function() {elmt.css("opacity", "")}, 10);
-  $("#imp-message .imp-p").text(message);
 }
 
 function openSettings(){
@@ -447,17 +460,31 @@ function closeStats(){
 }
 
 function openAddLib(){
-    $(".addLib").css({
-      display: "block"
+  $(".addLib").css({
+    display: "block"
+  });
+  $("#imp-bg-fade").css("display", "");
+  setTimeout(function() {
+    $(".l-sett-opt").css({
+      opacity: "",
+      right: ""
     });
-    $("#imp-bg-fade").css("display", "");
-    setTimeout(function() {
-      $(".l-sett-opt").css({
-        opacity: "",
-        right: ""
-      });
-      $("#imp-bg-fade").css("opacity", "");
-    }, 10);
+    $("#imp-bg-fade").css("opacity", "");
+  }, 10);
+}
+
+function openEditLib() {
+  $(".addLib").css({
+    display: "block"
+  });
+  $("#imp-bg-fade").css("display", "");
+  setTimeout(function() {
+    $(".l-sett-opt").css({
+      opacity: "",
+      right: ""
+    });
+    $("#imp-bg-fade").css("opacity", "");
+  }, 10);
 }
 
 function closeAddLib(){

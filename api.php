@@ -144,6 +144,15 @@ Command::register("create_library", function($user) {
   jsonMessage(array("id"=>$id));
 });
 
+Command::register("edit_library", function($user) {
+  $id = $_POST['id'];
+  $conn = $GLOBALS['conn'];
+  $stmt = $conn->prepare("UPDATE `libraries` SET `name`=?, `visibility`=?, `private`=? WHERE `id`=?");
+  $stmt->bind_param("siis", $_POST['name'], $_POST['visibility'], $_POST['private'], $id);
+  $stmt->execute();
+  jsonMessage(array("id"=>$id));
+});
+
 Command::register("delete_library", function($user) {
   $id = $_POST['id'];
   $conn = $GLOBALS['conn'];
@@ -191,7 +200,7 @@ if ($action) {
 
 // Functions:
 
-function getTimeline($handle, $page) {
+function getTimeline($handle, $page, $self) {
   $account = user::loadFromHandle($handle);
 
   $conn = $GLOBALS['conn'];
@@ -246,7 +255,8 @@ function getTimeline($handle, $page) {
   $libIds = array();
 
   foreach ($libs as $lib) {
-    array_push($libIds, $lib->id);
+    if (!$lib->private && ($lib->visibility == 2 || ($lib->visibility == 1 && ($self->id == $account->id || $self->isFollowing($account->id))) || ($lib->visibility == 0 && $self->id == $account->id)))
+      array_push($libIds, $lib->id);
   }
 
   return array($libIds, $postGroups);
