@@ -316,7 +316,7 @@ input:checked+.slider:before {
   position: absolute;
   z-index: 100000;
   width: 500px;
-  height: 80%;
+  height: 320px;
   background: #fff;
   top: 50%;
   left: 50%;
@@ -326,7 +326,7 @@ input:checked+.slider:before {
   border-radius: 2px;
   -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
-  padding: 16px 16px 24px 16px;
+  padding: 8px;
 }
 
 .s-tab-box {
@@ -382,7 +382,6 @@ input:checked+.slider:before {
   position: relative;
   float: left;
   top: 12.5px;
-  margin-right: 12.5px;
   cursor: pointer;
   float: right;
 }
@@ -449,7 +448,13 @@ input:checked+.slider:before {
   width: 80px;
   height: 80px;
   margin-top: 5px;
-  background: #000;
+  /* background: #000; */
+  display: inline-block;
+}
+
+.setting-img {
+  width: auto;
+  height: 100%;
 }
 
 .input.s {
@@ -1474,6 +1479,11 @@ body {
 .follow span::before {
   content: "Follow ";
   color: #efefef;
+}
+
+.follow-white::before {
+  content: "Follow ";
+  color: #555 !important;
 }
 
 .unfollow span::before {
@@ -2680,6 +2690,8 @@ body {
 
 .comment-box {
   position: relative;
+  display: inline-flex;
+  margin: 10px 0px;
   grid-area: reply;
 }
 
@@ -2825,12 +2837,16 @@ body {
 }
 
 .m-meme-icon {
+  background: none;
+  border: none;
   position: relative;
   float: left;
   color: #333;
   font-size: 25px;
   margin: 0px 13px 0px 13px;
-  top: 10px;
+  top: 0px;
+  display: table-column;
+  text-align: center;
 }
 
 .m-c-reviews {
@@ -3198,7 +3214,7 @@ body {
 }
 
 .c-content {
-  height: 200px;
+  height: auto;
   width: 100%;
   margin-bottom: 10px;
 }

@@ -241,7 +241,7 @@ if ($account == null)
 
 
     <h1 class="title">Latest</h1>
-  </div> -->
+  </div>
 
   <div class="h-content">
     <?php

@@ -327,6 +327,7 @@ function settingsMenu() {
           <h1 class="s-section-title">Personalisation</h1>
           <div class="p-holder">
           <div class="image edit">
+              <img class="setting-img">
               <input type="file" id="acctImg" multiple="" accept="image/*" style="display:none;">
               <label for="acctImg">
                 <p class="i-edit" style="/* display:  none; */">Edit</p>
