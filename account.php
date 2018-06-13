@@ -109,46 +109,39 @@ if ($account == null) {
 
   <div class="l-sett-opt" style="display: none;">
     <button class="l-sett-button">Info</button>
-    <button class="l-sett-button">Settings</button>
+    <button onclick="openLibSettings();" class="l-sett-button editable_lib">Settings</button>
 
-    <div class="l-line"></div>
+    <div class="l-line editable_lib"></div>
 
-    <button onclick="confirmDeleteLib();" id="delete" class="l-sett-button" style="color: #f44242;">Delete</button>
+    <button onclick="confirmDeleteLib();" class="l-sett-button editable_lib" style="color: #f44242;">Delete</button>
 
   </div>
 
   <div class="post category-blk addLib">
     <div class="post-header">
-      <h1 class="post-title">ADD LIBRARY</h1>
+      <h1 class="post-title" id="lib_edit_title">ADD LIBRARY</h1>
     </div>
 
     <div class="c-content">
       <form id="libForm">
         <div>
           <div class="input">
-            <input id="name" name="name" type="text" placeholder="Name" style="all: unset; width: 100%;position: relative; border-bottom: 2px solid #ddd; margin-top: 10px; cursor: auto;" required/>
+            <input id="lib_name" name="name" type="text" placeholder="Name" style="all: unset; width: 100%;position: relative; border-bottom: 2px solid #ddd; margin-top: 10px; cursor: auto;" required/>
           </div>
         </div>
-
-        <label class="container">Private
-          <label class="switch">
-            <input type="checkbox" name="private">
-            <span class="slider round"></span>
-          </label>
-        </label>
 
         <h1 class="s-section-title">Visibility</h1>
 
         <label class="container">Everyone
-          <input type="radio" name="visibility" value="2">
+          <input id="lib_visibility_2" type="radio" name="visibility" value="2">
           <span class="radio"></span>
         </label>
         <label class="container">Followers Only
-          <input type="radio" name="visibility" checked="checked" value="1">
+          <input id="lib_visibility_1" type="radio" name="visibility" checked="checked" value="1">
           <span class="radio"></span>
         </label>
         <label class="container">Only Me
-          <input type="radio" name="visibility" value="0">
+          <input id="lib_visibility_0" type="radio" name="visibility" value="0">
           <span class="radio"></span>
         </label>
       </form>
@@ -292,7 +285,7 @@ if ($account == null) {
     $libCount = 0;
     $dragAttr = "ondragenter='libDrag(event);' ondragleave='libDragLeave(event);' ondragover='libDrag(event);' ondrop='libDrop(event);'";
     foreach ($libs as $lib) {
-        if (!$lib->private && ($lib->visibility == 2 || ($lib->visibility == 1 && ($self->id == $account->id || $self->isFollowing($account->id))) || ($lib->visibility == 0 && $self->id == $account->id))) {
+        if ((!$lib->private || $is_self) || $lib->visibility == 2 || ($lib->visibility == 1 && ($self->id == $account->id || $self->isFollowing($account->id))) || ($lib->visibility == 0 && $self->id == $account->id)) {
           ?>
           <div class="library <?=$libCount%2==0?" light":""?>" data-id="<?=$lib->id?>" <?php echo $lib->icon ? $lib->canUpload ? $dragAttr : "" : $dragAttr; ?>>
             <?php

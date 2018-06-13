@@ -2,6 +2,8 @@ toggled = new Array();
 
 searchCode = "";
 
+var editLib = false;
+
 $(document).ready(function() {
   var isSidenavOpen = false;
   var recHeight = 420;
@@ -39,13 +41,9 @@ $(document).ready(function() {
   });
 
   $("#imp-bg-fade").click(function() {
-    $(".l-sett-opt").css({
-      opacity: "0",
-      right: "50px"
-    });
     $("#imp-message, #imp-bg-fade").css("opacity", "0");
     setTimeout(function() {
-      $("#imp-message, #imp-bg-fade, .l-sett-opt").css("display", "none");
+      $("#imp-message, #imp-bg-fade").css("display", "none");
     }, 100);
     closeSettings();
     closeTagSearch();
@@ -54,6 +52,7 @@ $(document).ready(function() {
     closeAccount();
     closePost();
     closeBalance();
+    closeOptions();
     hideSidenav();
   });
 
@@ -117,7 +116,6 @@ $(document).ready(function() {
 
   $(".closeAddLib").click(function() {
     closeAddLib();
-    document.getElementById("libForm").reset();
     $("#imp-message, #imp-bg-fade").css("opacity", "0");
   });
 
@@ -192,14 +190,14 @@ $(document).ready(function() {
       temp[dataP['name']] = dataP['value'];
     }
     data = temp;
-    if (!('private' in data)) {
-      data['private'] = 0;
-    } else {
-      data['private'] = 1;
+    if (editLib) {
+      var id = document.getElementsByClassName("l-sett-opt")[0].dataset.id;
+      data['id'] = id;
     }
-    sendCommand("create_library", null, data, function(response) {
+    sendCommand(editLib ? "edit_library" : "create_library", null, data, function(response) {
+      console.log(response);
       location.reload();
-    })
+    });
   });
 });
 
@@ -338,11 +336,11 @@ function openOptions(id) {
     document.getElementsByClassName("l-sett-opt")[0].dataset.id = dataId;
     var ids = ["POSTS", "REPOSTS", "FAVORITES"];
     if (ids.includes(dataId)) {
-      $(".l-sett-opt #delete, .l-sett-opt .l-line").css({
+      $(".editable_lib").css({
         display: "none"
       });
     } else {
-      $(".l-sett-opt #delete, .l-sett-opt .l-line").css({
+      $(".editable_lib").css({
         display: ""
       });
     }
@@ -352,6 +350,17 @@ function openOptions(id) {
     });
     $("#imp-bg-fade").css("opacity", "");
   }, 10);
+}
+
+function closeOptions() {
+  $(".l-sett-opt").css({
+    opacity: "0",
+    right: "50px"
+  });
+  $("#imp-bg-fade").css("display", "");
+  setTimeout(function() {
+    $(".l-sett-opt").css("display", "none");
+  }, 100);
 }
 
 function deleteLib() {
@@ -371,6 +380,25 @@ function confirmDeleteLib() {
     right: "50px"
   });
   setTimeout(function() {elmt.css("opacity", "")}, 10);
+}
+
+function openLibSettings() {
+  document.getElementById("libForm").reset();
+  var id = document.getElementsByClassName("l-sett-opt")[0].dataset.id;
+  sendCommand("get_library", null, {"id": id}, function(response) {
+    var lib = response;
+    var vis = lib.visibility;
+    var name = lib.name;
+    var priv = lib.private;
+    closeOptions();
+    openAddLib();
+    $("#lib_visibility_" + vis).prop("checked", true);
+    $("#lib_name").val(name);
+    $("#lib_private").prop("checked", priv == 1);
+    $("#lib_edit_title").html("EDIT LIBRARY");
+    $(".sendAddLib").html("Save");
+    editLib = true;
+  });
 }
 
 function openSettings(){
@@ -460,6 +488,8 @@ function closeStats(){
 }
 
 function openAddLib(){
+  editLib = false;
+  document.getElementById("libForm").reset();
   $(".addLib").css({
     display: "block"
   });
@@ -471,6 +501,8 @@ function openAddLib(){
     });
     $("#imp-bg-fade").css("opacity", "");
   }, 10);
+  $("#lib_edit_title").html("ADD LIBRARY");
+  $(".sendAddLib").html("Add");
 }
 
 function openEditLib() {

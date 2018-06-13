@@ -138,8 +138,8 @@ Command::register("create_library", function($user) {
   $id = uniqid('', true);
   $date = gmdate(DATE_ATOM);
   $conn = $GLOBALS['conn'];
-  $stmt = $conn->prepare("INSERT INTO `libraries` (`id`, `user`, `name`, `visibility`, `private`, `date`) VALUES (?, ?, ?, ?, ?, ?);");
-  $stmt->bind_param("sisiis", $id,  $user->id, $_POST['name'], $_POST['visibility'], $_POST['private'], $date);
+  $stmt = $conn->prepare("INSERT INTO `libraries` (`id`, `user`, `name`, `visibility`, `date`) VALUES (?, ?, ?, ?, ?);");
+  $stmt->bind_param("sisis", $id,  $user->id, $_POST['name'], $_POST['visibility'], $_POST['private'], $date);
   $stmt->execute();
   jsonMessage(array("id"=>$id));
 });
@@ -147,8 +147,8 @@ Command::register("create_library", function($user) {
 Command::register("edit_library", function($user) {
   $id = $_POST['id'];
   $conn = $GLOBALS['conn'];
-  $stmt = $conn->prepare("UPDATE `libraries` SET `name`=?, `visibility`=?, `private`=? WHERE `id`=?");
-  $stmt->bind_param("siis", $_POST['name'], $_POST['visibility'], $_POST['private'], $id);
+  $stmt = $conn->prepare("UPDATE `libraries` SET `name`=?, `visibility`=? WHERE `id`=?");
+  $stmt->bind_param("sis", $_POST['name'], $_POST['visibility'], $id);
   $stmt->execute();
   jsonMessage(array("id"=>$id));
 });
@@ -160,6 +160,15 @@ Command::register("delete_library", function($user) {
   $stmt->bind_param("s", $id);
   $stmt->execute();
   jsonMessage(array());
+});
+
+Command::register("get_library", function($user) {
+  $id = $_POST['id'];
+  $lib = loadDBObject("libraries", "`id`='$id'", "library");
+  if ($lib === null)
+    jsonMessage(array("id"=>"null"));
+  else
+    jsonMessage((array) $lib);
 });
 
 Command::register("get_timeline", function($user) {
@@ -255,7 +264,7 @@ function getTimeline($handle, $page, $self) {
   $libIds = array();
 
   foreach ($libs as $lib) {
-    if (!$lib->private && ($lib->visibility == 2 || ($lib->visibility == 1 && ($self->id == $account->id || $self->isFollowing($account->id))) || ($lib->visibility == 0 && $self->id == $account->id)))
+    if ((!$lib->private || $is_self) || $lib->visibility == 2 || ($lib->visibility == 1 && ($self->id == $account->id || $self->isFollowing($account->id))) || ($lib->visibility == 0 && $self->id == $account->id))
       array_push($libIds, $lib->id);
   }
 
@@ -317,8 +326,11 @@ function settingsMenu() {
         <div class="s-c-tab account">
           <h1 class="s-section-title">Personalisation</h1>
           <div class="p-holder">
-            <div class="image edit">
-              <p class="i-edit">Edit</p>
+          <div class="image edit">
+              <input type="file" id="acctImg" multiple="" accept="image/*" style="display:none;">
+              <label for="acctImg">
+                <p class="i-edit" style="/* display:  none; */">Edit</p>
+              </label>
             </div>
             <div style="margin-bottom:20px;">
               <div class="input s">
