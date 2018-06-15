@@ -2376,6 +2376,7 @@ body {
   left: 50%;
   transform: translate(-50%, -50%);
   box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+  border-radius: 5px;
 }
 
 .post-corridor {
@@ -2433,7 +2434,7 @@ body {
   width: auto;
   display: inline-grid;
   grid-template-columns: 800px 400px;
-  grid-template-rows: 600px 110px;
+  grid-template-rows: 600px auto;
   grid-template-areas: "img comments" "desc reply";
 }
 
@@ -2447,12 +2448,7 @@ body {
 }
 
 .m-comment-bar {
-  position: relative;
-  float: left;
-  height: 568px;
-  width: 400px;
-  border-bottom-right-radius: 2px;
-  border-top-right-radius: 2px;
+  grid-area: comments;
 }
 
 .meme-img {
@@ -2609,6 +2605,8 @@ body {
   border-top-left-radius: 2px;
   border-top-right-radius: 2px;
   background: #222;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 .m-date {
@@ -2640,7 +2638,7 @@ body {
 .m-para {
   font-family: 'Roboto', sans-serif;
   font-weight: lighter;
-  font-size: 13px;
+  font-size: 16px;
   display: block;
   width: auto;
   margin-left: 18px;
@@ -2666,8 +2664,19 @@ body {
   border-radius: 2px;
   border: none;
   text-align: center;
-  font-size: 12px;
+  font-size: 14px;
   cursor: pointer;
+}
+
+.comment-options {
+  position: absolute;
+  bottom: -40px;
+  right: -20px;
+  background: #ddd;
+  padding: 10px;
+  border-radius: 35px;
+  z-index: 10;
+  box-shadow: 0 0 10px 0px #777;
 }
 
 .m-post-info {
@@ -2691,7 +2700,7 @@ body {
 .comment-box {
   position: relative;
   display: inline-flex;
-  margin: 10px 0px;
+  margin: 10px;
   grid-area: reply;
 }
 
@@ -2836,17 +2845,51 @@ body {
   cursor: pointer;
 }
 
+.hover-post-textarea {
+  width: 100%;
+  position: relative;
+  background: #ddd;
+  border: none;
+  border-radius: 5px;
+  padding: 5px;
+  float: left;
+  overflow-y: hidden;
+  resize: none;
+  font-size: 18px;
+  font-style: 'Rubik', sans-serif;
+}
+
+.reply-header {
+  font-size: 12px;
+  font-style: 'Rubik', sans-serif;
+  position: absolute;
+}
+
 .m-meme-icon {
-  background: none;
+  background: #eee;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
   border: none;
   position: relative;
   float: left;
-  color: #333;
-  font-size: 25px;
-  margin: 0px 13px 0px 13px;
+  color: #222;
+  font-size: 20px;
   top: 0px;
   display: table-column;
   text-align: center;
+  transition: 0.2s;
+}
+
+.m-meme-icon:hover {
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+}
+
+.m-meme-icon.main {
+  float: right;
+  margin-left: 10px;
+  background: #222;
+  color: #eee;
 }
 
 .m-c-reviews {
