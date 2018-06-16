@@ -4376,6 +4376,11 @@ h6 {
   color: #eee;
 }
 
+.upload-popup-content {
+  overflow-y: scroll;
+  max-height: 300px;
+}
+
 .material-icons.upload {
   color: #999;
   padding-right: 10px;

@@ -72,38 +72,7 @@ if ($account == null) {
     <div class="upload-popup-bar">
       <h1 class="upload-popup-title">Uploads</h1>
     </div>
-    <div class="upload-popup-content">
-      <div class="upload-popup-item">
-        <i class="material-icons l-icon upload">image</i>
-        <h1 class="upload-title">Title of Upload</h1>
-        <div class="progress-circle over50 p83">
-          <div class="left-half-clipper">
-              <div class="first50-bar"></div>
-              <div class="value-bar"></div>
-          </div>
-        </div>
-      </div>
-      <div class="upload-popup-item">
-        <i class="material-icons l-icon upload">image</i>
-        <h1 class="upload-title">Title of Upload</h1>
-        <div class="progress-circle p22">
-          <div class="left-half-clipper">
-              <div class="first50-bar"></div>
-              <div class="value-bar"></div>
-          </div>
-        </div>
-      </div>
-      <div class="upload-popup-item">
-        <i class="material-icons l-icon upload">image</i>
-        <h1 class="upload-title">Title of Upload</h1>
-        <div class="progress-circle over50 p69 nice">
-          <div class="left-half-clipper">
-              <div class="first50-bar"></div>
-              <div class="value-bar"></div>
-          </div>
-        </div>
-      </div>
-
+    <div class="upload-popup-content" id="uploads">
     </div>
   </div>
 

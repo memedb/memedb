@@ -3,6 +3,9 @@ toggled = new Array();
 searchCode = "";
 
 var editLib = false;
+var uploadKeys = [];
+
+var SID = null;
 
 $(document).ready(function() {
   var isSidenavOpen = false;
@@ -235,6 +238,7 @@ function sendCommand(name, session, data, callback) {
       var cookie = cookies[i];
       if (cookie.startsWith("PHPSESSID")) {
         session = cookie.split("=")[1];
+        SID = session;
         break;
       }
     }
@@ -262,13 +266,18 @@ function sendCommand(name, session, data, callback) {
   xhttp.send(dataString);
 }
 
-function uploadFile(file, session, type, parent, library, callback) {
+function getImageHtml(id, className, type) {
+  return "<div class=\"" + className + "\" style=\"background-color: black;\"><div class=\"" + className + "\" style=\"background: url(/images/" + id + "." + type + ") center center no-repeat; background-size: contain;\"></div>"
+}
+
+function uploadFile(file, session, type, parent, library) {
   if (session == null) {
     var cookies = document.cookie.split("; ");
     for (i = 0; i < cookies.length; i++) {
       var cookie = cookies[i];
       if (cookie.startsWith("PHPSESSID")) {
         session = cookie.split("=")[1];
+        SID = session;
         break;
       }
     }
@@ -281,18 +290,66 @@ function uploadFile(file, session, type, parent, library, callback) {
   formData.append('library', library);
   formData.append('session', session);
 
+  var libCont = null;
+
+  var elmts = document.getElementsByClassName("l-content");
+  for (var i = 0; i < elmts.length; i++) {
+    if (elmts[i].dataset.id == library) {
+      libCont = elmts[i];
+      break;
+    }
+  }
+
+  var id = (Math.random() + 1).toString(36).substring(7);
+
+  $(".upload-popup-hover").css("display", "");
+  $("#uploads").append(""
+  + "<div class=\"upload-popup-item\">"
+  + "<i class=\"material-icons l-icon upload\">image</i>"
+  + "<h1 class=\"upload-title\">" + (file.name.length > 15 ? file.name.substring(0, 15) + "..." : file.name) + "</h1>"
+  + "<div id=\"progress-" + id + "\" class=\"progress-circle p0\">"
+  + "<div class=\"left-half-clipper\">"
+  + "<div class=\"first50-bar\"></div>"
+  + "<div class=\"value-bar\"></div>"
+  + "</div>"
+  + "</div>"
+  + "</div>");
+
   $.ajax({
     type: 'POST',
     url: '/api/create_post',
     contentType: false,
+    cache: false,
     processData: false,
     data: formData,
+    xhr: function() {
+      var XHR = null;
+      if ( window.ActiveXObject ) {
+        XHR = new window.ActiveXObject( "Microsoft.XMLHTTP" );
+      } else {
+        XHR = new window.XMLHttpRequest();
+      }
+      
+      XHR.upload.addEventListener("progress", function (event) {
+        if(event.lengthComputable) {
+          var percentage = Math.round((event.loaded / event.total) * 100);
+          console.log(percentage);
+          document.getElementById("progress-" + id).className = "progress-circle p" + percentage + (percentage > 50 ? " over50" : "");
+        }
+      });
+
+      return XHR;
+    },
     success: function(response) {
+      document.cookie = "PHPSESSID="+SID+"; path=/";
       response = JSON.parse(response);
-      if (response.status == "success")
-        callback(response);
+      console.log(response);
+      libCont.innerHTML += getImageHtml(response.id, "l-img", type)
     }
   });
+  // setInterval(function() {
+  //   getFileProgress(key);
+  // }, 1000);
 }
 
 function loadPage(url, callback) {
@@ -734,11 +791,12 @@ function removeDragData(ev) {
 
 function libDrop(ev) {
   ev.preventDefault();
-  var file = ev.dataTransfer.files[0];
-  var nameSplit = file.name.split(".");
-  uploadFile(file, null, nameSplit[nameSplit.length - 1], -1, ev.srcElement.dataset.id, function(data) {
-    console.log(data);
-  });
+  var files = ev.dataTransfer.files;
+  for (var i = 0; i < files.length; i++) {
+    var file = files[i];
+    var nameSplit = file.name.split(".");
+    uploadFile(file, null, nameSplit[nameSplit.length - 1], -1, ev.srcElement.dataset.id);
+  }
 
   removeDragData(ev);
   $(ev.srcElement).removeClass("is-dragover");

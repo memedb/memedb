@@ -1,11 +1,10 @@
 <?php
-ini_set('session.gc_maxlifetime', 100000);
-
-session_set_cookie_params(100000);
-
 session_start();
 
 require('sql.php');
+
+header("Access-Control-Allow-Credentials: true");
+header("X-Frame-Options: DENY");
 
 $server = "localhost";
 $user = $GLOBALS['sql_user'];
@@ -118,20 +117,22 @@ Command::register("search_tag", function($user) {
 
 Command::register("create_post", function($user) {
   $id = uniqid('', true);
-  $date = gmdate(DATE_ATOM);
-  $conn = $GLOBALS['conn'];
-  $title = '';
-  if (isset($_POST['caption'])) {
-    $title = $_POST['caption'];
+
+  if (move_uploaded_file($_FILES['file']['tmp_name'], 'images/' . $id . "." . $_POST['type'])) {
+    $date = gmdate(DATE_ATOM);
+    $conn = $GLOBALS['conn'];
+    $title = '';
+    if (isset($_POST['caption'])) {
+      $title = $_POST['caption'];
+    }
+    $stmt = $conn->prepare("INSERT INTO `posts` (`id`, `caption`, `tags`, `upvotes`, `downvotes`, `source`, `original`, `date`, `type`, `parent`, `library`) VALUES (?, ?, '', 0, 0, ?, NULL, ?, ?, ?, ?);");
+    $stmt->bind_param("ssissis", $id, $title, $user->id, $date, $_POST['type'], $_POST['parent'], $_POST['library']);
+    $stmt->execute();
+
+    jsonMessage(array("id"=>$id));
+  } else {
+    jsonError("Something went wrong while uploading your file. Please try again later.");
   }
-  $stmt = $conn->prepare("INSERT INTO `posts` (`id`, `caption`, `tags`, `upvotes`, `downvotes`, `source`, `original`, `date`, `type`, `parent`, `library`) VALUES (?, ?, '', 0, 0, ?, NULL, ?, ?, ?, ?);");
-  $stmt->bind_param("ssissis", $id, $title, $user->id, $date, $_POST['type'], $_POST['parent'], $_POST['library']);
-  $stmt->execute();
-
-  logger($_FILES['file']['tmp_name']);
-  move_uploaded_file($_FILES['file']['tmp_name'], 'images/' . $id . "." . $_POST['type']);
-
-  jsonMessage(array("id"=>$id));
 });
 
 Command::register("create_library", function($user) {
@@ -186,10 +187,8 @@ if ($action) {
   $session = $_POST['session'];
 
   if ($session == session_id()) {
-    $user = user::loadFromSession($session);
-  }
-
-  if ($session) {
+    $user  = user::loadFromSession($session);
+  } else if ($session) {
     $stmt = $conn->prepare("SELECT user FROM `sessions` WHERE id=?");
     $stmt->bind_param("s", $session);
     $stmt->execute();
@@ -623,7 +622,7 @@ class post {
 
   public function printImage($class) {
     ?>
-    <div class="<?=$class?>" style="background: url(/images/<?=($this->original ? $this->original : $this->id) . "." . $this->type?>) center center no-repeat; background-size: contain;"></div>
+    <div class="<?=$class?>" style="background-color: black;"><div class="<?=$class?>" style="background: url(/images/<?=($this->original ? $this->original : $this->id) . "." . $this->type?>) center center no-repeat; background-size: contain;"></div></div>
     <?php
   }
 
