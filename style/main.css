@@ -2715,6 +2715,18 @@ body {
   padding-bottom: 20px;
 }
 
+.h-post-comment {
+  width: auto;
+  height: 75px;
+  display: grid;
+  grid-template-columns: 55px 1fr 55px;
+  grid-template-rows: 10px 55px 10px;
+  grid-template-areas:
+  ". . ."
+  "addimg commentbox postbtn"
+  ". . .";
+}
+
 .m-post-comment-hover {
   width: 100%;
   position: relative;
@@ -2881,6 +2893,23 @@ body {
   transition: 0.2s;
 }
 
+.h-meme-icon {
+  background: #eee;
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  border: none;
+  position: relative;
+  float: left;
+  color: #222;
+  font-size: 20px;
+  top: 0px;
+  grid-area: addimg;
+  text-align: center;
+  transition: 0.2s;
+  margin: auto;
+}
+
 .m-meme-icon:hover {
   box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
@@ -2942,6 +2971,16 @@ body {
   resize: none;
   height: 21px;
   margin-top: 7px;
+}
+
+.m-textarea.home {
+  grid-area: commentbox;
+  width: 99%;
+  margin: auto auto auto auto;
+  height: 35px;
+  background: #eee;
+  border: none;
+  border-radius: 5px;
 }
 
 .post-textarea {
@@ -3165,7 +3204,6 @@ body {
   margin-right: 10px;
   margin-bottom: 5px;
   z-index: 100;
-  top: 6px !important;
 }
 
 .c-op-1.postit {
@@ -3183,7 +3221,14 @@ body {
   margin-right: 10px;
   margin-bottom: 5px;
   z-index: 100;
-  top: 12px !important;
+}
+
+.postit.home {
+  grid-area: postbtn;
+  margin: 0px;
+  padding: 0px;
+  position: relative;
+  top: 0px;
 }
 
 .c-op-2 {
@@ -4735,6 +4780,73 @@ h6 {
 
   .post.m-post {
     top: 130px;
+  }
+
+}
+
+/* ANIMATIONS */
+
+.animation-box {
+  height: 200px;
+  width: 200px;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  box-shadow: 0px 40px 60px -20px rgba(0,0,0,0.2)
+}
+
+.tickmark {
+  width: 10px;
+  height: 10px;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.tickmark > span{
+  display: block;
+  width: 10px;
+  height: 10px;
+  background: #ddd;
+  position: absolute;
+}
+
+.tickmark > span:nth-child(1) {
+  background: red;
+  width: 40px;
+  animation: span1 1s linear infinite;
+}
+
+.tickmark > span:nth-child(2) {
+  background: green;
+  width: 40px;
+  transform: rotate(-45deg);
+  animation: span2 1s linear infinite;
+}
+
+@keyframes span1 {
+  0%, 70% {
+    transform: rotate(45deg);
+    transform: translate(0px, 0px);
+  }
+  100% {
+    transform: rotate(90deg);
+    transform: translate(-10px, -10px);
+  }
+
+}
+
+@keyframes span2 {
+  0%, 70% {
+    width: 40px;
+    transform: rotate(-45deg);
+  }
+  100% {
+    transform: rotate(45deg);
+    transform: translate(-10px, -10px);
   }
 
 }

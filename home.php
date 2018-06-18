@@ -505,12 +505,10 @@ if ($account == null)
             </div>
         </div>
       </div>
-      <div class="m-post-comment">
-        <div class="comment-box">
-          <i class="material-icons m-meme-icon hoverable">add_a_photo</i>
-          <textarea name="name" class="m-textarea" rows="1" cols="10" wrap="hard"></textarea>
-          <button class="c-op-1 postit">POST</button>
-        </div>
+      <div class="h-post-comment">
+          <button class="material-icons h-meme-icon hoverable">add_a_photo</button>
+          <textarea name="name" class="m-textarea home" rows="1" cols="10" wrap="hard"></textarea>
+          <button class="c-op-1 postit home">POST</button>
       </div>
     </div>
 
@@ -761,12 +759,10 @@ if ($account == null)
             </div>
         </div>
       </div>
-      <div class="m-post-comment">
-        <div class="comment-box">
-          <i class="material-icons m-meme-icon hoverable">add_a_photo</i>
-          <textarea name="name" class="m-textarea" rows="1" cols="10" wrap="hard"></textarea>
-          <button class="c-op-1 postit">POST</button>
-        </div>
+      <div class="h-post-comment">
+          <button class="material-icons h-meme-icon hoverable">add_a_photo</button>
+          <textarea name="name" class="m-textarea home" rows="1" cols="10" wrap="hard"></textarea>
+          <button class="c-op-1 postit home">POST</button>
       </div>
     </div>
 
@@ -1019,12 +1015,10 @@ if ($account == null)
             </div>
         </div>
       </div>
-      <div class="m-post-comment">
-        <div class="comment-box">
-          <i class="material-icons m-meme-icon hoverable">add_a_photo</i>
-          <textarea name="name" class="m-textarea" rows="1" cols="10" wrap="hard"></textarea>
-          <button class="c-op-1 postit">POST</button>
-        </div>
+      <div class="h-post-comment">
+          <button class="material-icons h-meme-icon hoverable">add_a_photo</button>
+          <textarea name="name" class="m-textarea home" rows="1" cols="10" wrap="hard"></textarea>
+          <button class="c-op-1 postit home">POST</button>
       </div>
     </div>
 
@@ -1280,12 +1274,10 @@ if ($account == null)
               </div>
           </div>
         </div>
-        <div class="m-post-comment">
-          <div class="comment-box">
-            <i class="material-icons m-meme-icon hoverable">add_a_photo</i>
-            <textarea name="name" class="m-textarea" rows="1" cols="10" wrap="hard"></textarea>
-            <button class="c-op-1 postit">POST</button>
-          </div>
+        <div class="h-post-comment">
+            <button class="material-icons h-meme-icon hoverable">add_a_photo</button>
+            <textarea name="name" class="m-textarea home" rows="1" cols="10" wrap="hard"></textarea>
+            <button class="c-op-1 postit home">POST</button>
         </div>
       </div>
     </div>
