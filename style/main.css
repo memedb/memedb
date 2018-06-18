@@ -4698,6 +4698,10 @@ h6 {
     display: none;
   }
 
+  .h-post-comment {
+    display: none;
+  }
+
   .post-corridor {
     top: 130px;
     position: relative;
@@ -4819,7 +4823,7 @@ h6 {
 .tickmark > span:nth-child(1) {
   background: red;
   width: 40px;
-  animation: span1 1s linear infinite;
+  animation: span1 10s linear infinite;
 }
 
 .tickmark > span:nth-child(2) {
@@ -4829,6 +4833,7 @@ h6 {
   animation: span2 1s linear infinite;
 }
 
+/* RED ELEMENT */
 @keyframes span1 {
   0%, 70% {
     transform: rotate(45deg);
@@ -4841,13 +4846,15 @@ h6 {
 
 }
 
+/* GREEN ELEMENT */
+
 @keyframes span2 {
   0%, 70% {
     width: 40px;
     transform: rotate(-45deg);
   }
   100% {
-    transform: rotate(45deg);
+    transform: rotate(0deg);
     transform: translate(-10px, -10px);
   }
 
