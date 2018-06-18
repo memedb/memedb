@@ -2975,12 +2975,14 @@ body {
 
 .m-textarea.home {
   grid-area: commentbox;
-  width: 99%;
+  width: 96%;
   margin: auto auto auto auto;
-  height: 35px;
+  height: 26px;
   background: #eee;
-  border: none;
+  border: 0;
   border-radius: 5px;
+  font-size: 20px;
+  padding: 10px;
 }
 
 .post-textarea {
