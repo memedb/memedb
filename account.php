@@ -76,10 +76,6 @@ if ($account == null) {
     </div>
   </div>
 
-  <?php
-    memePreview();
-  ?>
-
   <div class="l-sett-opt" style="display: none;">
     <button class="l-sett-button">Info</button>
     <button onclick="openLibSettings();" class="l-sett-button editable_lib">Settings</button>

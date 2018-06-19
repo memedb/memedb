@@ -2370,11 +2370,11 @@ body {
 
 .meme-preview-box-hover {
   position: absolute;
-  z-index: 1000;
+  z-index: 100000;
   display: inline-block;
-  top: 50%;
+  top: 50px;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, 0);
   box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
   border-radius: 5px;
 }
@@ -2633,6 +2633,7 @@ body {
   position: relative;
   display: block;
   grid-area: desc;
+  background: #f5f5f5;
 }
 
 .m-para {
@@ -2670,8 +2671,8 @@ body {
 
 .comment-options {
   position: absolute;
-  bottom: -40px;
-  right: -20px;
+  bottom: -29px;
+  right: -10px;
   background: #ddd;
   padding: 10px;
   border-radius: 35px;
@@ -2700,8 +2701,9 @@ body {
 .comment-box {
   position: relative;
   display: inline-flex;
-  margin: 10px;
+  padding: 10px;
   grid-area: reply;
+  background: #f5f5f5;
 }
 
 .comment-box-hover {
