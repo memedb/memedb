@@ -265,6 +265,9 @@ if ($account == null) {
             }
             $posts = $lib->getPosts(); // Array of post in that library
             ?>
+            <i class="material-icons l-icon" title="Only You can see this">lock</i>
+            <i class="material-icons l-icon" title="Only Followers can see this">lock_open</i>
+            <i class="material-icons l-icon" title="Everyone can see this">visibility</i>
             <h1 class="l-title"><?=$lib->name?></h1>
 
             <div class="l-settings">
