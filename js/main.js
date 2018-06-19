@@ -202,6 +202,11 @@ $(document).ready(function() {
       location.reload();
     });
   });
+
+  $("#libForm").submit(function(event) {
+    event.preventDefault();
+    $(".sendAddLib").click();
+  });
 });
 
 function tagSearch(value) {
@@ -290,13 +295,16 @@ function uploadFile(file, session, type, parent, library) {
   formData.append('library', library);
   formData.append('session', session);
 
+  var postsCont = null;
   var libCont = null;
 
   var elmts = document.getElementsByClassName("l-content");
   for (var i = 0; i < elmts.length; i++) {
     if (elmts[i].dataset.id == library) {
       libCont = elmts[i];
-      break;
+    }
+    if (elmts[i].dataset.id == "POSTS" && library != "POSTS") {
+      postsCont = elmts[i];
     }
   }
 
@@ -344,7 +352,12 @@ function uploadFile(file, session, type, parent, library) {
       document.cookie = "PHPSESSID="+SID+"; path=/";
       response = JSON.parse(response);
       console.log(response);
-      libCont.innerHTML += getImageHtml(response.id, "l-img", type)
+      $(libCont).find(".empty-library-content").remove();
+      libCont.innerHTML += getImageHtml(response.id, "l-img", type);
+      if (postsCont != null) {
+        $(postsCont).find(".empty-library-content").remove();
+        postsCont.innerHTML += getImageHtml(response.id, "l-img", type);
+      }
     }
   });
   // setInterval(function() {

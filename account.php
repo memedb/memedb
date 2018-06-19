@@ -76,6 +76,10 @@ if ($account == null) {
     </div>
   </div>
 
+  <?php
+    memePreview();
+  ?>
+
   <div class="l-sett-opt" style="display: none;">
     <button class="l-sett-button">Info</button>
     <button onclick="openLibSettings();" class="l-sett-button editable_lib">Settings</button>
@@ -278,7 +282,7 @@ if ($account == null) {
           <div class=" l-content <?=sizeof($posts) == 0?"empty-library":""?>" style="height: 0px;" data-id="<?=$lib->id?>" ondragenter="libDrag(event);" ondragleave="libDragLeave(event);" ondragover="libDrag(event);" ondrop="libDrop(event);">
             <?php
               foreach ($posts as $post) {
-                $post->printImage("l-img");
+                $post->printImage("l-img", true, 100);
               }
 
               if(sizeof($posts) == 0) {
