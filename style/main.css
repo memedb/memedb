@@ -2414,7 +2414,7 @@ body {
 
 .m-comment-wrapper-hover {
   display: inline-block;
-  height: 600px;
+  height: 100%;
   background: #fafafa;
   overflow-y: auto;
   grid-area: comments;
@@ -2461,9 +2461,9 @@ body {
 }
 
 .meme-img-hover {
-  height: 600px;
+  height: 100%;
   position: relative;
-  width: 800px;
+  width: 100%;
   background: #ccc;
   grid-area: img;
   cursor: pointer;
@@ -2628,7 +2628,7 @@ body {
 }
 
 .m-desc-hover {
-  width: 800px;
+  width: 100%;
   height: auto;
   position: relative;
   display: block;
