@@ -57,6 +57,7 @@ $(document).ready(function() {
     closeBalance();
     closeOptions();
     hideSidenav();
+    hideImagePreview();
   });
 
   $(".openSidenav").click(function() {
@@ -202,6 +203,11 @@ $(document).ready(function() {
       location.reload();
     });
   });
+
+  $("#libForm").submit(function(event) {
+    event.preventDefault();
+    $(".sendAddLib").click();
+  });
 });
 
 function tagSearch(value) {
@@ -266,8 +272,28 @@ function sendCommand(name, session, data, callback) {
   xhttp.send(dataString);
 }
 
-function getImageHtml(id, className, type) {
-  return "<div class=\"" + className + "\" style=\"background-color: black;\"><div class=\"" + className + "\" style=\"background: url(/images/" + id + "." + type + ") center center no-repeat; background-size: contain;\"></div>"
+function getImageHtml(id, className, type, width, height, elmtWidth) {
+  height = (height/width) * elmtWidth;
+  return "<img class=" + className + " src=\"/images/" + id + "." + type + " style=\"height:" + height + "px;\">"
+}
+
+function showImagePreview(event) {
+  var id = event.target.dataset.id;
+  sendCommand("get_post", null, {id: id}, function(response) {
+    console.log(response);
+    $.ajax({
+      type: 'GET',
+      url: '/meme_preview.php?id=' + id,
+      success: function(response) {
+        $("body").append(response);
+        $("#imp-bg-fade").css("display", "");
+      }
+    });
+  });
+}
+
+function hideImagePreview() {
+  $(".meme-preview-box-hover").remove();
 }
 
 function uploadFile(file, session, type, parent, library) {
@@ -290,13 +316,16 @@ function uploadFile(file, session, type, parent, library) {
   formData.append('library', library);
   formData.append('session', session);
 
+  var postsCont = null;
   var libCont = null;
 
   var elmts = document.getElementsByClassName("l-content");
   for (var i = 0; i < elmts.length; i++) {
     if (elmts[i].dataset.id == library) {
       libCont = elmts[i];
-      break;
+    }
+    if (elmts[i].dataset.id == "POSTS" && library != "POSTS") {
+      postsCont = elmts[i];
     }
   }
 
@@ -344,7 +373,12 @@ function uploadFile(file, session, type, parent, library) {
       document.cookie = "PHPSESSID="+SID+"; path=/";
       response = JSON.parse(response);
       console.log(response);
-      libCont.innerHTML += getImageHtml(response.id, "l-img", type)
+      $(libCont).find(".empty-library-content").remove();
+      libCont.innerHTML += getImageHtml(response.id, "l-img", type);
+      if (postsCont != null) {
+        $(postsCont).find(".empty-library-content").remove();
+        postsCont.innerHTML += getImageHtml(response.id, "l-img", type);
+      }
     }
   });
   // setInterval(function() {

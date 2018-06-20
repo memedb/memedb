@@ -135,14 +135,25 @@ Command::register("create_post", function($user) {
   }
 });
 
+Command::register("get_post", function($user) {
+  $id = $_POST['id'];
+  $post = post::loadFromId($id);
+  if ($post === null)
+    jsonMessage(array("id"=>"null"));
+  else {
+    $post->source = user::loadFromId($post->source)->handle;
+    jsonMessage((array) $post);
+  }
+});
+
 Command::register("create_library", function($user) {
   $id = uniqid('', true);
   $date = gmdate(DATE_ATOM);
   $conn = $GLOBALS['conn'];
   $stmt = $conn->prepare("INSERT INTO `libraries` (`id`, `user`, `name`, `visibility`, `date`) VALUES (?, ?, ?, ?, ?);");
-  $stmt->bind_param("sisis", $id,  $user->id, $_POST['name'], $_POST['visibility'], $_POST['private'], $date);
+  $stmt->bind_param("sisis", $id,  $user->id, $_POST['name'], $_POST['visibility'], $date);
   $stmt->execute();
-  jsonMessage(array("id"=>$id));
+  jsonMessage(array("type"=>"create","id"=>$id));
 });
 
 Command::register("edit_library", function($user) {
@@ -151,7 +162,7 @@ Command::register("edit_library", function($user) {
   $stmt = $conn->prepare("UPDATE `libraries` SET `name`=?, `visibility`=? WHERE `id`=?");
   $stmt->bind_param("sis", $_POST['name'], $_POST['visibility'], $id);
   $stmt->execute();
-  jsonMessage(array("id"=>$id));
+  jsonMessage(array("type"=>"edit","id"=>$id));
 });
 
 Command::register("delete_library", function($user) {
@@ -272,12 +283,6 @@ function getTimeline($handle, $page, $self) {
 
 function isLibrary($id) {
   $conn = $GLOBALS['conn'];
-}
-
-function hoverPost() {
-  ?>
-
-  <?php
 }
 
 function settingsMenu() {
@@ -604,6 +609,13 @@ function loggedIn() {
   return $_SESSION['id'] !== null;
 }
 
+function shortNum($num) {
+  if ($num >= 1000000000) return round(($num/1000000000),1)."B";
+  if ($num >= 1000000) return round(($num/1000000),1)."M";
+  if ($num >= 1000) return round(($num/1000),1).'K';
+  return $num;
+}
+
 // -------------------------------------------------------------------------------------
 
 class post {
@@ -615,14 +627,18 @@ class post {
   }
 
   public function fixVars() {
-    if ($img != null) {
-      $img->tags = explode(",",$img->tags);
-    }
+    $arr = explode(',',$this->tags);
+    if ($arr[0] === "")
+      $this->tags = array();
+    else
+      $this->tags = $arr;
   }
 
-  public function printImage($class) {
+  public function printImage($class, $resizeHolder, $width) {
+    $size = getimagesize("./images/" . ($this->original ? $this->original : $this->id) . "." . $this->type);
+    $height = ($size[1]/$size[0]) * $width;
     ?>
-    <div class="<?=$class?>" style="background-color: black;"><div class="<?=$class?>" style="background: url(/images/<?=($this->original ? $this->original : $this->id) . "." . $this->type?>) center center no-repeat; background-size: contain;"></div></div>
+    <img onclick="showImagePreview(event);" data-id="<?=$this->id;?>" class="<?=$class?>" src="/images/<?=($this->original ? $this->original : $this->id) . "." . $this->type?>" style="<?=$resizeHolder ? "height: ".$height."px;" : ""?>">
     <?php
   }
 
@@ -632,7 +648,7 @@ class post {
     ?>
     <div class="exp-post">
       <?php
-      $posts[0]->printImage("exp-post-image");
+      $posts[0]->printImage("exp-post-image", true, 600);
       ?>
       <div class="exp-post-info">
         <h6><?=$posts[0]->caption;?></h6>
@@ -652,7 +668,10 @@ class post {
           <?php
             $count = 0;
             foreach ($posts as $post) {
-              $post->printImage("small-post");
+              ?>
+              <div class="small-post" style="background-image: url(/images/<?=($post->original ? $post->original : $post->id) . "." . $post->type?>);">
+              </div>
+              <?php
               $count++;
               if ($count >= 13)
                 break;
@@ -672,6 +691,14 @@ class post {
 
   public function getLibrary() {
     return loadDBObject("libraries", "`id`='{$this->library}'", "library");
+  }
+
+  public function getRepostCount() {
+    $conn = $GLOBALS['conn'];
+    $stmt = $conn->prepare("SELECT COUNT(id) AS reposts FROM `posts` WHERE `original`='{$post->id}'");
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_assoc()['reposts'];
   }
 
 }
@@ -810,9 +837,7 @@ class user {
 
   public function getFormattedFollowerCount() {
     $count = $this->getFollowerCount();
-    if ($count >= 1000000) return round(($count/1000000),1)."M";
-    if ($count >= 1000) return round(($count/1000),1).'K';
-    return $count;
+    return shortNum($count);
   }
 
   public function getFollowers() {
