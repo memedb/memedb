@@ -258,16 +258,23 @@ if ($account == null) {
           ?>
           <div class="library <?=$libCount%2==0?" light":""?>" data-id="<?=$lib->id?>" <?php echo $lib->icon ? $lib->canUpload ? $dragAttr : "" : $dragAttr; ?>>
             <?php
-            if ($lib->icon) {
+            if ($lib->icon) { // icon is a boolean - should icons be loaded
               ?>
               <i class="material-icons l-icon"><?=$lib->icon;?></i>
               <?php
             }
             $posts = $lib->getPosts(); // Array of post in that library
-            ?>
-            <i class="material-icons l-icon" title="Only You can see this">lock</i>
-            <i class="material-icons l-icon" title="Only Followers can see this">lock_open</i>
-            <i class="material-icons l-icon" title="Everyone can see this">visibility</i>
+
+            if(!$lib->icon){
+              if($lib->visibility == 0){
+                ?><i class="material-icons l-icon" title="Only You can see this">lock</i><?php
+              } elseif ($lib->visibility == 1) {
+                ?><i class="material-icons l-icon" title="Only Followers can see this">lock_open</i><?php
+              } elseif ($lib->visibility == 2) {
+                ?><i class="material-icons l-icon" title="Everyone can see this">visibility</i><?php
+              }
+            }
+             ?>
             <h1 class="l-title"><?=$lib->name?></h1>
 
             <div class="l-settings">
@@ -284,11 +291,11 @@ if ($account == null) {
                 $post->printImage("l-img", true, 100);
               }
 
-              if(sizeof($posts) == 0) {
+              if(sizeof($posts) == 0 && !$lib->icon) {
                 ?>
                   <div class="empty-library-content">
                     <i class="material-icons empty-library-icon">add_photo_alternate</i>
-                    <h1 class="empty-library-title">Start adding Images, Videos, Gifs - Just Drag & Drop</h1>
+                    <h1 class="empty-library-title">Start adding Images, Gifs - Just Drag & Drop</h1>
                   </div>
                 <?php
               }
