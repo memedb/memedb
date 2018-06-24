@@ -16,6 +16,19 @@ html {
 
 *:focus {outline:0;}
 
+:root {
+  --white: #fff;
+  --gray1: #eee;
+  --gray2: #E1E2E1;
+  --gray3: #ccc;
+
+  --icon-color: #000;
+  --title-color: #444;
+  --highlight: #4167f4;
+  --post-content: #f5f5f5;
+
+}
+
 /*Please use one global stylesheet and also get the minify package in atom. Thank you. :D*/
 
 * {
@@ -3259,7 +3272,7 @@ body {
   display: inline-block;
   height: auto;
   width: 100%;
-  margin-bottom: 8px;
+  /* margin-bottom: 8px; */
 }
 
 .c-button-hold.new-post {
