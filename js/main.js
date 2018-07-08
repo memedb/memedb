@@ -283,7 +283,7 @@ function showImagePreview(event) {
     console.log(response);
     $.ajax({
       type: 'GET',
-      url: '/meme_preview.php?id=' + id,
+      url: '/meme_preview.php?id=' + id + '&SID=' + SID,
       success: function(response) {
         $("body").append(response);
         $("#imp-bg-fade").css("display", "");
@@ -398,15 +398,15 @@ function loadPage(url, callback) {
   xhttp.send();
 }
 
-function followAction() {
-  var elmt = document.getElementById("follow-btn");
-
-  if (elmt.className == "follow" || elmt.className == "unfollow") {
-    sendCommand(elmt.className, null, {handle: elmt.dataset.handle}, function(response) {
+function followAction(elmt) {
+  if (elmt.classList.contains("follow") || elmt.classList.contains("unfollow")) {
+    sendCommand((elmt.classList.contains("follow") ? "follow" : "unfollow"), null, {handle: elmt.dataset.handle}, function(response) {
       if (response.following) {
-        elmt.className = "unfollow";
+        elmt.classList.remove("follow");
+        elmt.classList.add("unfollow");
       } else {
-        elmt.className = "follow";
+        elmt.classList.remove("unfollow");
+        elmt.classList.add("follow");
       }
       elmt.innerHTML = "<span>" + response.followers + "</span>";
     });

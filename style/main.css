@@ -2434,17 +2434,13 @@ body {
   width: auto;
   display: inline-grid;
   grid-template-columns: 600px 300px;
-  grid-template-rows: 400px auto;
+  grid-template-rows: 400px minmax(150px, auto);
   grid-template-areas: "img comments" "desc reply";
 }
 
-.follow.mp {
+.follow.mp, .unfollow.mp, .follow-self.mp {
   float: right;
   margin: 16px 20px;
-  height: min-content;
-  width: auto;
-  background: #eee;
-  color: #222;
 }
 
 .m-comment-bar {
@@ -2800,34 +2796,6 @@ body {
   height: 20px;
   margin-top: 10px;
   margin-left: 18px;
-}
-
-.followmp {
-  border: none;
-  border-radius: 2px;
-  margin-top: 19px;
-  margin-bottom: 5px;
-  margin-left: 42px;
-  margin-right: 16px;
-  float: right;
-  padding: 6px 10px 6px 10px;
-  font-size: 12px;
-  color: #222;
-  background: #ddd;
-  cursor: pointer;
-  transition-duration: 0.3s;
-}
-
-.followmp.hover {
-  margin-top: 19px;
-  margin-bottom: 5px;
-  margin-left: 42px;
-  margin-right: 16px;
-  float: right;
-  padding: 6px 10px 6px 10px;
-  font-size: 12px;
-  color: #22 !important;
-  background: #fff;
 }
 
 /* D O N A T E */
