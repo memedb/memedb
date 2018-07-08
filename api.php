@@ -191,6 +191,16 @@ Command::register("get_timeline", function($user) {
     jsonMessage($message);
 });
 
+Command::register("upvote_post", function($user) {
+  $id = $_POST['id'];
+  $conn = $GLOBALS['conn'];
+  $stmt = $conn->prepare("UPDATE posts SET upvotes=upvotes+1 WHERE id=?");
+  $stmt->bind_param("s", $id);
+  $stmt->execute();
+  $post = post::loadFromId($id);
+  jsonMessage(array("upvotes"=>$post->upvotes));
+});
+
 $action = $_GET['action'];
 
 if ($action) {

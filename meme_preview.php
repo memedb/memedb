@@ -2,6 +2,10 @@
 require_once('api.php');
 $post = post::loadFromId($_GET['id']);
 $user = user::loadFromId($post->source);
+$is_self = false;
+if (isset($_GET['SID']))
+    $self = user::loadFromSession($_GET['SID']);
+$is_self = (isset($self) && $self->id == $user->id);
 ?>
 
 <div class="meme-preview-box-hover">
@@ -13,16 +17,16 @@ $user = user::loadFromId($post->source);
         <h1 class="m-OP light"><?= $user->name; ?></h1>
         <h1 class="m-handle light">@<?= $user->handle; ?></h1>
         </div>
-        <button class="follow mp hover">
-            <span class="follow-white" style="font-family: Roboto;font-weight: 500;">0
-        </span></button>
+        <button id="follow-btn" onclick="followAction(this);" data-handle="<?= $user->handle?>" class="<?php echo ($is_self ? "follow-self" : ($self->isFollowing($user->id) ? "unfollow" : "follow")) ?> mp">
+            <span><?= $user->getFormattedFollowerCount(); ?></span>
+        </button>
     </div>
     <?php 
         $size = getimagesize("./images/" . ($post->original ? $post->original : $post->id) . "." . $post->type);
         $height = ($size[1]/$size[0]) * 600;
     ?>
 
-    <div class="m-new-container-hover" style="grid-template-rows: <?=$height;?>px auto;">
+    <div class="m-new-container-hover" style="grid-template-rows: <?=$height;?>px minmax(150px, auto);">
         <div class="meme-img-hover">
             <img src="<?="/images/" . ($post->original ? $post->original : $post->id) . "." . $post->type;?>" style="width: 100%; height: 100%;">
         </div>
