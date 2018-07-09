@@ -14,12 +14,12 @@ if ($account != null) {
 }
 
 if (loggedIn() && !$account) {
-  header("Location: https://meme-db.com/account/" . getUser()->handle);
+  header("Location: https://memedb.io/account/" . getUser()->handle);
   exit;
 }
 
 if ($account == null) {
-  header("Location: https://meme-db.com/login");
+  header("Location: https://memedb.io/login");
   exit;
 }
 ?>

@@ -18,5 +18,5 @@ if (isset($_COOKIE['Session'])) {
 
 session_destroy();
 
-header("Location: https://meme-db.com");
+header("Location: https://memedb.io");
  ?>

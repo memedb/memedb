@@ -2,7 +2,7 @@
 require('api.php');
 
 if ($_SESSION['id'] !== null) {
-  header("Location: https://meme-db.com");
+  header("Location: https://memedb.io");
 }
 
 function location($url) {
@@ -24,7 +24,7 @@ if ($name !== null && $pass !== null) {
     $GLOBALS['valid'] = true;
     ?>
     <script>
-      window.location.href = "https://meme-db.com/" + "<?php echo ($redirect ? $redirect : ""); ?>";
+      window.location.href = "https://memedb.io/" + "<?php echo ($redirect ? $redirect : ""); ?>";
     </script>
     <?php
   } else {
@@ -47,7 +47,7 @@ if ($name !== null && $pass !== null) {
     function onSignIn(googleUser) {
       var id_token = googleUser.getAuthResponse().id_token;
 
-      $('#inset_form').html('<form action="https://meme-db.com/tokenlogin.php" name="google_login" method="post"><input type="text" name="idtoken" value="' + id_token + '" /></form>');
+      $('#inset_form').html('<form action="https://memedb.io/tokenlogin.php" name="google_login" method="post"><input type="text" name="idtoken" value="' + id_token + '" /></form>');
 
       document.forms['google_login'].submit();
       gapi.auth2.getAuthInstance().signOut();

@@ -13,7 +13,7 @@ if (loggedIn() && !$account) {
 }
 
 if ($account == null)
-  header("Location: https://meme-db.com");
+  header("Location: https://memedb.io");
  ?>
 
 <!DOCTYPE html>

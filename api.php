@@ -791,7 +791,7 @@ class user {
     $headers[] = 'Content-type: text/html; charset=iso-8859-1';
 
     $headers[] = 'To: '.$name.' <'.$email.'>';
-    $headers[] = 'From: MemeDB Confirmation <support@meme-db.com>';
+    $headers[] = 'From: MemeDB Confirmation <support@memedb.io>';
 
     mail($email, $subject, $message, implode("\r\n", $headers));
     return $id;
