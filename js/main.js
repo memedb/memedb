@@ -311,6 +311,12 @@ function downvotePost(id, elmt) {
   });
 }
 
+function repost(id, elmt) {
+  sendCommand("repost", null, {id: id}, function(response) {
+    elmt.children[elmt.childElementCount-1].innerHTML = response.reposts;
+  });
+}
+
 function uploadFile(file, session, type, parent, library) {
   if (session == null) {
     var cookies = document.cookie.split("; ");

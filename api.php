@@ -205,6 +205,13 @@ Command::register("downvote_post", function($user) {
   jsonMessage(array("upvotes"=>$post->getDownvotes()));
 });
 
+Command::register("repost", function($user) {
+  $id = $_POST['id'];
+  $post = post::loadFromId($id);
+  $post->repost($user);
+  jsonMessage(array("reposts"=>$post->getRepostCount()));
+});
+
 $action = $_GET['action'];
 
 if ($action) {
@@ -709,7 +716,8 @@ class post {
 
   public function getRepostCount() {
     $conn = $GLOBALS['conn'];
-    $stmt = $conn->prepare("SELECT COUNT(id) AS reposts FROM `posts` WHERE `original`='{$post->id}'");
+    $stmt = $conn->prepare("SELECT COUNT(id) AS reposts FROM `posts` WHERE `original`=?");
+    $stmt->bind_param("s", $this->id);
     $stmt->execute();
     $result = $stmt->get_result();
     return $result->fetch_assoc()['reposts'];
@@ -740,7 +748,7 @@ class post {
     $this->vote(-1, $user);
   }
 
-  private function vote($vote, $user) {  
+  private function vote($vote, $user) {
     $conn = $GLOBALS['conn'];
     $stmt = $conn->prepare("SELECT post FROM votes WHERE post=? AND vote=?");
     $stmt->bind_param("si", $this->id, $vote);
@@ -756,6 +764,26 @@ class post {
       $stmt->execute();
     }
     $post = post::loadFromId($this->id);
+  }
+
+  public function repost($user) {
+    $conn = $GLOBALS['conn'];
+    $stmt = $conn->prepare("SELECT `id` FROM `posts` WHERE `original`=? AND `source`=?");
+    $stmt->bind_param("si", $this->id, $user->id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($result->num_rows == 0) {
+      $id = uniqid('', true);
+      $date = gmdate(DATE_ATOM);
+      $lib = "POSTS";
+      $stmt = $conn->prepare("INSERT INTO `posts` (`id`, `caption`, `tags`, `source`, `original`, `date`, `type`, `parent`, `library`) VALUES (?, '', '', ?, ?, ?, ?, ?, ?);");
+      $stmt->bind_param("sisssis", $id, $user->id, $this->id, $date, $this->type, $this->parent, $lib);
+      $stmt->execute();
+    } else {
+      $stmt = $conn->prepare("DELETE FROM `posts` WHERE `original`=? AND `source`=?");
+      $stmt->bind_param("si", $this->id, $user->id);
+      $stmt->execute();
+    }
   }
 
 }
