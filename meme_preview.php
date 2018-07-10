@@ -32,9 +32,9 @@ $is_self = (isset($self) && $self->id == $user->id);
         </div>
         <div class="m-desc-hover">
         <div class="m-post-info">
-            <div class="m-likes">
+            <div class="m-likes" onclick="upvotePost('<?=$post->id?>', this);">
             <i class="material-icons m-icon hoverable">keyboard_arrow_up</i>
-            <h1 class="m-header"><?=shortNum($post->upvotes);?></h1>
+            <h1 class="m-header"><?=shortNum($post->getUpvotes());?></h1>
             </div>
             <div class="m-reposts">
             <i class="material-icons m-icon hoverable" style="font-size: 23px; margin-top: 1px;">repeat</i>
