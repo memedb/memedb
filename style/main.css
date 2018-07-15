@@ -1448,6 +1448,12 @@ body {
   cursor: pointer;
 }
 
+.follow-self.home {
+  float: right;
+  margin: 15px;
+  background: #eee;
+}
+
 .post-btn.hover {
   position: relative;
   text-decoration: none;

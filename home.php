@@ -276,7 +276,7 @@ if ($account == null)
         <h1 class="m-OP">Gaetan Almela</h1>
         <h1 class="m-handle">@Al</h1>
       </div>
-      <button class="followmp">Follow
+      <button class="follow-self home">
         <span style="font-family: Roboto;font-weight: 500;color: #444;">0
         </span></button>
     </div>
@@ -527,7 +527,7 @@ if ($account == null)
         <h1 class="m-OP">Gaetan Almela</h1>
         <h1 class="m-handle">@Al</h1>
       </div>
-      <button class="followmp">Follow
+      <button class="follow-self home">
         <span style="font-family: Roboto;font-weight: 500;color: #444;">0
         </span></button>
     </div>
@@ -781,7 +781,7 @@ if ($account == null)
         <h1 class="m-OP">Gaetan Almela</h1>
         <h1 class="m-handle">@Al</h1>
       </div>
-      <button class="followmp">Follow
+      <button class="follow-self home">
         <span style="font-family: Roboto;font-weight: 500;color: #444;">0
         </span></button>
     </div>
@@ -1037,7 +1037,7 @@ if ($account == null)
         <h1 class="m-OP">Gaetan Almela</h1>
         <h1 class="m-handle">@Al</h1>
       </div>
-      <button class="followmp">Follow
+      <button class="follow-self home">Follow
         <span style="font-family: Roboto;font-weight: 500;color: #444;">0
         </span></button>
     </div>
