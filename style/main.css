@@ -1454,6 +1454,12 @@ body {
   background: #eee;
 }
 
+.follow-self.rec {
+  float: right;
+  margin: 14px 10px 0px 0px;
+  background: #ddd;
+}
+
 .post-btn.hover {
   position: relative;
   text-decoration: none;
@@ -2686,13 +2692,13 @@ body {
 
 .comment-options {
   position: absolute;
-  bottom: -29px;
-  right: -10px;
+  bottom: -24px;
+  right: -17px;
   background: #ddd;
-  padding: 10px;
+  padding: 6px;
   border-radius: 35px;
   z-index: 10;
-  box-shadow: 0 0 10px 0px #777;
+  box-shadow: 0 0 10px 0 #777;
 }
 
 .m-post-info {
@@ -2868,14 +2874,14 @@ body {
 
 .m-meme-icon {
   background: #eee;
-  width: 35px;
-  height: 35px;
+  width: 25px;
+  height: 25px;
   border-radius: 50%;
   border: none;
   position: relative;
   float: left;
   color: #222;
-  font-size: 20px;
+  font-size: 14px;
   top: 0px;
   display: table-column;
   text-align: center;
@@ -3317,6 +3323,7 @@ body {
   height: 55px;
   width: auto;
   z-index: 10000;
+  user-select: none;
 }
 
 .floating-button {

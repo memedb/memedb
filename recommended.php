@@ -303,7 +303,7 @@ if ($account == null)
               <h1 class="m-handle">@Al</h1>
             </div>
 
-            <button class="followmp">Follow
+            <button class="follow-self rec">
               <span style="font-family: Roboto;font-weight: 500;color: #444;">0
               </span></button>
           </div>
@@ -452,7 +452,7 @@ if ($account == null)
               <h1 class="m-handle">@Al</h1>
             </div>
 
-            <button class="followmp">Follow
+            <button class="follow-self rec">
               <span style="font-family: Roboto;font-weight: 500;color: #444;">0
               </span></button>
           </div>
@@ -616,7 +616,7 @@ if ($account == null)
               <h1 class="m-handle">@Al</h1>
             </div>
 
-            <button class="followmp">Follow
+            <button class="follow-self rec">
               <span style="font-family: Roboto;font-weight: 500;color: #444;">0
               </span></button>
           </div>
@@ -765,7 +765,7 @@ if ($account == null)
               <h1 class="m-handle">@Al</h1>
             </div>
 
-            <button class="followmp">Follow
+            <button class="follow-self rec">
               <span style="font-family: Roboto;font-weight: 500;color: #444;">0
               </span></button>
           </div>
@@ -929,7 +929,7 @@ if ($account == null)
               <h1 class="m-handle">@Al</h1>
             </div>
 
-            <button class="followmp">Follow
+            <button class="follow-self rec">
               <span style="font-family: Roboto;font-weight: 500;color: #444;">0
               </span></button>
           </div>
@@ -1078,7 +1078,7 @@ if ($account == null)
               <h1 class="m-handle">@Al</h1>
             </div>
 
-            <button class="followmp">Follow
+            <button class="follow-self rec">
               <span style="font-family: Roboto;font-weight: 500;color: #444;">0
               </span></button>
           </div>
