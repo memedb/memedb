@@ -11,7 +11,7 @@ $is_self = (isset($self) && $self->id == $user->id);
 <div class="meme-preview-box-hover">
     <div class="m-text-box color">
         <div class="m-pp">
-
+            <img src="<?= $user->getImage(); ?>" style="border: inherit; border-radius: inherit;" width="30" height="30">
         </div>
         <div class="m-names">
         <h1 class="m-OP light"><?= $user->name; ?></h1>
@@ -32,11 +32,11 @@ $is_self = (isset($self) && $self->id == $user->id);
         </div>
         <div class="m-desc-hover">
         <div class="m-post-info">
-            <div class="m-likes">
+            <div class="m-likes" onclick="upvotePost('<?=$post->id?>', this);">
             <i class="material-icons m-icon hoverable">keyboard_arrow_up</i>
-            <h1 class="m-header"><?=shortNum($post->upvotes);?></h1>
+            <h1 class="m-header"><?=shortNum($post->getUpvotes());?></h1>
             </div>
-            <div class="m-reposts">
+            <div class="m-reposts" onclick="repost('<?=$post->id?>', this);">
             <i class="material-icons m-icon hoverable" style="font-size: 23px; margin-top: 1px;">repeat</i>
             <h1 class="m-header"><?=$post->getRepostCount();?></h1>
             </div>

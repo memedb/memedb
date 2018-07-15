@@ -3,9 +3,10 @@ toggled = new Array();
 searchCode = "";
 
 var editLib = false;
-var uploadKeys = [];
 
 var SID = null;
+
+var openPost = "";
 
 $(document).ready(function() {
   var isSidenavOpen = false;
@@ -285,6 +286,7 @@ function showImagePreview(event) {
       type: 'GET',
       url: '/meme_preview.php?id=' + id + '&SID=' + SID,
       success: function(response) {
+        openPost = id;
         $("body").append(response);
         $("#imp-bg-fade").css("display", "");
       }
@@ -294,6 +296,25 @@ function showImagePreview(event) {
 
 function hideImagePreview() {
   $(".meme-preview-box-hover").remove();
+}
+
+function upvotePost(id, elmt) {
+  sendCommand("upvote_post", null, {id: id}, function(response) {
+    console.log(response);
+    elmt.children[elmt.children.length-1].innerHTML = response.upvotes;
+  });
+}
+
+function downvotePost(id, elmt) {
+  sendCommand("downvote_post", null, {id: id}, function(response) {
+    elmt.children[elmt.childElementCount-1].innerHTML = response.downvotes;
+  });
+}
+
+function repost(id, elmt) {
+  sendCommand("repost", null, {id: id}, function(response) {
+    elmt.children[elmt.childElementCount-1].innerHTML = response.reposts;
+  });
 }
 
 function uploadFile(file, session, type, parent, library) {

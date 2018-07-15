@@ -125,7 +125,7 @@ Command::register("create_post", function($user) {
     if (isset($_POST['caption'])) {
       $title = $_POST['caption'];
     }
-    $stmt = $conn->prepare("INSERT INTO `posts` (`id`, `caption`, `tags`, `upvotes`, `downvotes`, `source`, `original`, `date`, `type`, `parent`, `library`) VALUES (?, ?, '', 0, 0, ?, NULL, ?, ?, ?, ?);");
+    $stmt = $conn->prepare("INSERT INTO `posts` (`id`, `caption`, `tags`, `source`, `original`, `date`, `type`, `parent`, `library`) VALUES (?, ?, '', ?, NULL, ?, ?, ?, ?);");
     $stmt->bind_param("ssissis", $id, $title, $user->id, $date, $_POST['type'], $_POST['parent'], $_POST['library']);
     $stmt->execute();
 
@@ -193,12 +193,23 @@ Command::register("get_timeline", function($user) {
 
 Command::register("upvote_post", function($user) {
   $id = $_POST['id'];
-  $conn = $GLOBALS['conn'];
-  $stmt = $conn->prepare("UPDATE posts SET upvotes=upvotes+1 WHERE id=?");
-  $stmt->bind_param("s", $id);
-  $stmt->execute();
   $post = post::loadFromId($id);
-  jsonMessage(array("upvotes"=>$post->upvotes));
+  $post->upvote($user);
+  jsonMessage(array("upvotes"=>$post->getUpvotes()));
+});
+
+Command::register("downvote_post", function($user) {
+  $id = $_POST['id'];
+  $post = post::loadFromId($id);
+  $post->downvote($user);
+  jsonMessage(array("upvotes"=>$post->getDownvotes()));
+});
+
+Command::register("repost", function($user) {
+  $id = $_POST['id'];
+  $post = post::loadFromId($id);
+  $post->repost($user);
+  jsonMessage(array("reposts"=>$post->getRepostCount()));
 });
 
 $action = $_GET['action'];
@@ -705,10 +716,74 @@ class post {
 
   public function getRepostCount() {
     $conn = $GLOBALS['conn'];
-    $stmt = $conn->prepare("SELECT COUNT(id) AS reposts FROM `posts` WHERE `original`='{$post->id}'");
+    $stmt = $conn->prepare("SELECT COUNT(id) AS reposts FROM `posts` WHERE `original`=?");
+    $stmt->bind_param("s", $this->id);
     $stmt->execute();
     $result = $stmt->get_result();
     return $result->fetch_assoc()['reposts'];
+  }
+
+  public function getUpvotes() {
+    $conn = $GLOBALS['conn'];
+    $stmt = $conn->prepare("SELECT COUNT(vote) AS upvotes FROM `votes` WHERE `vote`=1 AND `post`=?");
+    $stmt->bind_param("s", $this->id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_assoc()['upvotes'];
+  }
+
+  public function getDownvotes() {
+    $conn = $GLOBALS['conn'];
+    $stmt = $conn->prepare("SELECT COUNT(id) AS downvotes FROM `votes` WHERE `vote`=-1");
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_assoc()['downvotes'];
+  }
+
+  public function upvote($user) {
+    $this->vote(1, $user);
+  }
+
+  public function downvote($user) {
+    $this->vote(-1, $user);
+  }
+
+  private function vote($vote, $user) {
+    $conn = $GLOBALS['conn'];
+    $stmt = $conn->prepare("SELECT post FROM votes WHERE post=? AND vote=?");
+    $stmt->bind_param("si", $this->id, $vote);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($result->num_rows == 0) {
+      $stmt = $conn->prepare("INSERT INTO `votes` (`user`, `post`, `vote`) VALUES (?, ?, ?)");
+      $stmt->bind_param("isi", $user->id, $this->id, $vote);
+      $stmt->execute();
+    } else {
+      $stmt = $conn->prepare("DELETE FROM `votes` WHERE `post`=? AND `user`=?");
+      $stmt->bind_param("si", $this->id, $user->id);
+      $stmt->execute();
+    }
+    $post = post::loadFromId($this->id);
+  }
+
+  public function repost($user) {
+    $conn = $GLOBALS['conn'];
+    $stmt = $conn->prepare("SELECT `id` FROM `posts` WHERE `original`=? AND `source`=?");
+    $stmt->bind_param("si", $this->id, $user->id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($result->num_rows == 0) {
+      $id = uniqid('', true);
+      $date = gmdate(DATE_ATOM);
+      $lib = "POSTS";
+      $stmt = $conn->prepare("INSERT INTO `posts` (`id`, `caption`, `tags`, `source`, `original`, `date`, `type`, `parent`, `library`) VALUES (?, '', '', ?, ?, ?, ?, ?, ?);");
+      $stmt->bind_param("sisssis", $id, $user->id, $this->id, $date, $this->type, $this->parent, $lib);
+      $stmt->execute();
+    } else {
+      $stmt = $conn->prepare("DELETE FROM `posts` WHERE `original`=? AND `source`=?");
+      $stmt->bind_param("si", $this->id, $user->id);
+      $stmt->execute();
+    }
   }
 
 }
@@ -791,7 +866,7 @@ class user {
     $headers[] = 'Content-type: text/html; charset=iso-8859-1';
 
     $headers[] = 'To: '.$name.' <'.$email.'>';
-    $headers[] = 'From: MemeDB Confirmation <support@meme-db.com>';
+    $headers[] = 'From: MemeDB Confirmation <support@memedb.io>';
 
     mail($email, $subject, $message, implode("\r\n", $headers));
     return $id;

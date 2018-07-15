@@ -11,7 +11,7 @@ if (loggedIn() && !$account) {
 }
 
 if ($account == null)
-  header("Location: https://meme-db.com/login.php");
+  header("Location: https://memedb.io/login.php");
  ?>
 
 <!DOCTYPE html>
