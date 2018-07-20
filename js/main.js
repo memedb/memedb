@@ -8,6 +8,8 @@ var SID = null;
 
 var openPost = "";
 
+var parent = null;
+
 $(document).ready(function() {
   var isSidenavOpen = false;
   var recHeight = 420;
@@ -278,6 +280,21 @@ function getImageHtml(id, className, type, width, height, elmtWidth) {
   return "<img class=" + className + " src=\"/images/" + id + "." + type + " style=\"height:" + height + "px;\">"
 }
 
+function updateImagePreview() {
+  sendCommand("get_post", null, {id: openPost}, function(response) {
+    console.log(response);
+    $.ajax({
+      type: 'GET',
+      url: '/meme_preview.php?id=' + openPost + '&SID=' + SID,
+      success: function(response) {
+        $(".meme-preview-box-hover").remove();
+        $("body").append(response);
+        $("#imp-bg-fade").css("display", "");
+      }
+    });
+  });
+}
+
 function showImagePreview(event) {
   var id = event.target.dataset.id;
   sendCommand("get_post", null, {id: id}, function(response) {
@@ -300,7 +317,6 @@ function hideImagePreview() {
 
 function upvotePost(id, elmt) {
   sendCommand("upvote_post", null, {id: id}, function(response) {
-    console.log(response);
     elmt.children[elmt.children.length-1].innerHTML = response.upvotes;
   });
 }
@@ -311,10 +327,38 @@ function downvotePost(id, elmt) {
   });
 }
 
+function upvoteComment(id, elmt) {
+  sendCommand("upvote_comment", null, {id: id}, function(response) {
+    console.log(response);
+    elmt.children[elmt.children.length-1].innerHTML = response.upvotes;
+  });
+}
+
+function downvoteComment(id, elmt) {
+  sendCommand("downvote_comment", null, {id: id}, function(response) {
+    elmt.children[elmt.childElementCount-1].innerHTML = response.downvotes;
+  });
+}
+
 function repost(id, elmt) {
   sendCommand("repost", null, {id: id}, function(response) {
     elmt.children[elmt.childElementCount-1].innerHTML = response.reposts;
   });
+}
+
+function postComment() {
+  sendCommand("post_comment", null, {text: document.getElementById("comment_text").value, post: openPost, parent: parent}, function(response) {
+    updateImagePreview();
+  });
+}
+
+function setParent(id) {
+  parent = id;
+}
+
+function showMore(id) {
+  console.log(id);
+  document.getElementById("hidden_" + id).style.display = null;
 }
 
 function uploadFile(file, session, type, parent, library) {

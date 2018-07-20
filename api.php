@@ -212,6 +212,35 @@ Command::register("repost", function($user) {
   jsonMessage(array("reposts"=>$post->getRepostCount()));
 });
 
+Command::register("upvote_comment", function($user) {
+  $id = $_POST['id'];
+  $cmt = comment::loadFromId($id);
+  $cmt->upvote($user);
+  jsonMessage(array("upvotes"=>$cmt->getUpvotes()));
+});
+
+Command::register("downvote_comment", function($user) {
+  $id = $_POST['id'];
+  $cmt = comment::loadFromId($id);
+  $cmt->downvote($user);
+  jsonMessage(array("upvotes"=>$cmt->getDownvotes()));
+});
+
+Command::register("post_comment", function($user) {
+  $id = uniqid('', true);
+  $date = gmdate(DATE_ATOM);
+  $conn = $GLOBALS['conn'];
+  if ($_POST['parent'] == "null") {
+    $stmt = $conn->prepare("INSERT INTO `comments` (`user`, `text`, `post`, `id`, `parent`, `date`) VALUES (?, ?, ?, ?, NULL, ?);");
+    $stmt->bind_param("issss", $user->id, $_POST['text'], $_POST['post'], $id, $date);
+  } else {
+    $stmt = $conn->prepare("INSERT INTO `comments` (`user`, `text`, `post`, `id`, `parent`, `date`) VALUES (?, ?, ?, ?, ?, ?);");
+    $stmt->bind_param("isssss", $user->id, $_POST['text'], $_POST['post'], $id, $_POST['parent'], $date);
+  }
+  $stmt->execute();
+  jsonMessage(array("id"=>$id));
+});
+
 $action = $_GET['action'];
 
 if ($action) {
@@ -734,7 +763,8 @@ class post {
 
   public function getDownvotes() {
     $conn = $GLOBALS['conn'];
-    $stmt = $conn->prepare("SELECT COUNT(id) AS downvotes FROM `votes` WHERE `vote`=-1");
+    $stmt = $conn->prepare("SELECT COUNT(id) AS downvotes FROM `votes` WHERE `vote`=-1 AND `post`=?");
+    $stmt->bind_param("s", $this->id);
     $stmt->execute();
     $result = $stmt->get_result();
     return $result->fetch_assoc()['downvotes'];
@@ -784,6 +814,80 @@ class post {
       $stmt->bind_param("si", $this->id, $user->id);
       $stmt->execute();
     }
+  }
+
+  public function getComments() {
+    return loadDBObjects("comments", "`post`='{$this->id}' AND `parent` IS NULL ORDER BY date DESC", "comment");
+  }
+
+  public function getCommentCount() {
+    $conn = $GLOBALS['conn'];
+    $stmt = $conn->prepare("SELECT COUNT(id) AS comments FROM `comments` WHERE `post`=?");
+    $stmt->bind_param("s", $this->id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_assoc()['comments'];
+  }
+
+}
+
+class comment {
+
+  public static function loadFromId($id) {
+    $cmt = loadDBObject("comments", "id='$id'", "comment");
+    $cmt->fixVars();
+    return $cmt;
+  }
+ 
+  public function fixVars() {
+  }
+
+  public function getUpvotes() {
+    $conn = $GLOBALS['conn'];
+    $stmt = $conn->prepare("SELECT COUNT(vote) AS upvotes FROM `comment_votes` WHERE `vote`=1 AND `id`=?");
+    $stmt->bind_param("s", $this->id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_assoc()['upvotes'];
+  }
+
+  public function getDownvotes() {
+    $conn = $GLOBALS['conn'];
+    $stmt = $conn->prepare("SELECT COUNT(id) AS downvotes FROM `comment_votes` WHERE `vote`=-1 AND `id`=?");
+    $stmt->bind_param("s", $this->id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return $result->fetch_assoc()['downvotes'];
+  }
+
+  public function upvote($user) {
+    $this->vote(1, $user);
+  }
+
+  public function downvote($user) {
+    $this->vote(-1, $user);
+  }
+
+  private function vote($vote, $user) {
+    $conn = $GLOBALS['conn'];
+    $stmt = $conn->prepare("SELECT id FROM comment_votes WHERE id=? AND vote=?");
+    $stmt->bind_param("si", $this->id, $vote);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    if ($result->num_rows == 0) {
+      $stmt = $conn->prepare("INSERT INTO `comment_votes` (`id`, `user`, `vote`) VALUES (?, ?, ?)");
+      $stmt->bind_param("ssi", $this->id, $user->id, $vote);
+      $stmt->execute();
+    } else {
+      $stmt = $conn->prepare("DELETE FROM `comment_votes` WHERE `id`=? AND `user`=?");
+      $stmt->bind_param("si", $this->id, $user->id);
+      $stmt->execute();
+    }
+    //$post = post::loadFromId($this->id);
+  }
+
+  public function getReplies() {
+    return loadDBObjects("comments", "`post`='{$this->post}' AND `parent`='{$this->id}' ORDER BY date DESC", "comment");
   }
 
 }
@@ -961,11 +1065,15 @@ class user {
     return $result->num_rows > 0;
   }
 
+  public function getAccountLink() {
+    
+  }
+
 }
 
 class library {
 
-  public static function create($name, $posts, $icon, $canUpload) {
+  public static function create($name, $posts, $icon, $canUpload, $user) {
     $lib = new library();
     $lib->name = $name;
     $lib->id = $name;
@@ -973,15 +1081,16 @@ class library {
     $lib->icon = $icon;
     $lib->canUpload = $canUpload;
     $lib->visibility = 2;
+    $lib->user = $user->id;
     return $lib;
   }
 
   public static function loadFromUser($user) {
     $libs = loadDBObjects("libraries", "user={$user->id}", "library");
     array_unshift($libs,
-      library::create("POSTS", loadDBObjects("posts", "source={$user->id} AND original IS NULL", "post"), "photo_library", true),
-      library::create("REPOSTS", loadDBObjects("posts", "source={$user->id} AND original IS NOT NULL", "post"), "repeat", false),
-      library::create("FAVORITES", loadDBObjects("posts", "id IN (SELECT post FROM favorites)", "post"), "start", false)
+      library::create("POSTS", loadDBObjects("posts", "source={$user->id} AND original IS NULL", "post"), "photo_library", true, $user),
+      library::create("REPOSTS", loadDBObjects("posts", "source={$user->id} AND original IS NOT NULL", "post"), "repeat", false, $user),
+      library::create("FAVORITES", loadDBObjects("posts", "id IN (SELECT post FROM favorites WHERE user={$user->id})", "post"), "start", false, $user)
     );
     return $libs;
   }
@@ -989,7 +1098,8 @@ class library {
   public function getPosts() {
     if ($this->posts)
       return $this->posts;
-    return loadDBObjects("posts", "library='{$this->id}'", "post");
+    logger("library='{$this->id}' AND source={$this->user}");
+    return loadDBObjects("posts", "library='{$this->id}' AND source={$this->user}", "post");
   }
 
   public function fixVars() {}

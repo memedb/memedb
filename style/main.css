@@ -2440,6 +2440,7 @@ body {
 .m-comment-wrapper-hover {
   display: inline-block;
   height: 100%;
+  width: 100%;
   background: #fafafa;
   overflow-y: auto;
   grid-area: comments;
