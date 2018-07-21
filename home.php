@@ -293,6 +293,7 @@ if ($account == null)
               <div class="m-likes">
                 <i class="material-icons m-icon hoverable">keyboard_arrow_up</i>
                 <h1 class="m-header">16K</h1>
+                <i class="material-icons m-icon hoverable">keyboard_arrow_down</i>
               </div>
               <div class="m-reposts">
                 <i class="material-icons m-icon hoverable" style="font-size: 23px; margin-top: 1px;">repeat</i>
@@ -547,6 +548,7 @@ if ($account == null)
               <div class="m-likes">
                 <i class="material-icons m-icon hoverable">keyboard_arrow_up</i>
                 <h1 class="m-header">16K</h1>
+                <i class="material-icons m-icon hoverable">keyboard_arrow_down</i>
               </div>
               <div class="m-reposts">
                 <i class="material-icons m-icon hoverable" style="font-size: 23px; margin-top: 1px;">repeat</i>
@@ -807,6 +809,7 @@ if ($account == null)
               <div class="m-likes">
                 <i class="material-icons m-icon hoverable">keyboard_arrow_up</i>
                 <h1 class="m-header">16K</h1>
+                <i class="material-icons m-icon hoverable">keyboard_arrow_down</i>
               </div>
               <div class="m-reposts">
                 <i class="material-icons m-icon hoverable" style="font-size: 23px; margin-top: 1px;">repeat</i>
@@ -1037,7 +1040,7 @@ if ($account == null)
         <h1 class="m-OP">Gaetan Almela</h1>
         <h1 class="m-handle">@Al</h1>
       </div>
-      <button class="follow-self home">Follow
+      <button class="follow-self home">
         <span style="font-family: Roboto;font-weight: 500;color: #444;">0
         </span></button>
     </div>
@@ -1063,6 +1066,7 @@ if ($account == null)
               <div class="m-likes">
                 <i class="material-icons m-icon hoverable">keyboard_arrow_up</i>
                 <h1 class="m-header">16K</h1>
+                <i class="material-icons m-icon hoverable">keyboard_arrow_down</i>
               </div>
               <div class="m-reposts">
                 <i class="material-icons m-icon hoverable" style="font-size: 23px; margin-top: 1px;">repeat</i>

@@ -34,7 +34,7 @@ $is_self = (isset($self) && $self->id == $user->id);
             <span><?= $user->getFormattedFollowerCount(); ?></span>
         </button>
     </div>
-    <?php 
+    <?php
         $size = getimagesize("./images/" . ($post->original ? $post->original : $post->id) . "." . $post->type);
         $height = ($size[1]/$size[0]) * 600;
     ?>
@@ -46,8 +46,9 @@ $is_self = (isset($self) && $self->id == $user->id);
         <div class="m-desc-hover">
         <div class="m-post-info">
             <div class="m-likes" onclick="upvotePost('<?=$post->id?>', this);">
-            <i class="material-icons m-icon hoverable">keyboard_arrow_up</i>
-            <h1 class="m-header"><?=shortNum($post->getUpvotes());?></h1>
+              <i class="material-icons m-icon hoverable">keyboard_arrow_up</i>
+              <h1 class="m-header"><?=shortNum($post->getUpvotes());?></h1>
+              <i class="material-icons m-icon hoverable">keyboard_arrow_down</i>
             </div>
             <div class="m-reposts" onclick="repost('<?=$post->id?>', this);">
             <i class="material-icons m-icon hoverable" style="font-size: 23px; margin-top: 1px;">repeat</i>
@@ -82,8 +83,8 @@ $is_self = (isset($self) && $self->id == $user->id);
         <div class="m-comment-bar">
             <div class="m-comment-wrapper-hover">
                 <div class="m-comments-s">
-                    <?php 
-                    
+                    <?php
+
                     $comments = $post->getComments();
                     foreach ($comments as $cmt) {
                         $cUser = user::loadFromId($cmt->user);
@@ -102,7 +103,7 @@ $is_self = (isset($self) && $self->id == $user->id);
                                 $split = explode("\n", $cmt->text);
                                 foreach ($split as $line) {
                                 ?>
-                                <p class="c-para small" style="min-height: 1em;">
+                                <p class="c-para" style="min-height: 1em;">
                                     <?=$line?>
                                 </p>
                             <?php } ?>
@@ -112,6 +113,7 @@ $is_self = (isset($self) && $self->id == $user->id);
                             <div class="m-comment-likes" onclick="upvoteComment('<?=$cmt->id?>', this);">
                                 <i class="material-icons m-comment-icon hoverable">keyboard_arrow_up</i>
                                 <h1 class="m-header-comment"><?=$cmt->getUpvotes();?></h1>
+                                <i class="material-icons m-comment-icon hoverable">keyboard_arrow_down</i>
                             </div>
                             <button class="c-op-1 c-reply" style="top: 5px; margin-left: 7px;  ">REPLY</button>
                             <i class="material-icons hoverable" style="top: 3px;">more_horiz</i>
@@ -137,19 +139,20 @@ $is_self = (isset($self) && $self->id == $user->id);
                                             <div class="m-comment-likes" onclick="upvoteComment('<?=$reply->id?>', this);">
                                                 <i class="material-icons m-comment-icon reply hoverable">keyboard_arrow_up</i>
                                                 <h1 class="m-header-comment reply"><?=$reply->getUpvotes()?></h1>
+                                                <i class="material-icons m-comment-icon reply hoverable">keyboard_arrow_down</i>
                                             </div>
                                             <button class="c-op-1 c-reply reply" style="top: 5px; margin-left: 7px;  ">REPLY</button>
                                             <i class="material-icons hoverable" style="top: 2px;   font-size: 24px;">more_horiz</i>
                                             </div>
                                         </div>
-                                    <?php 
+                                    <?php
                                         if ($i == 1) {
                                     ?>
                                         <div class="comments_hidden" id="hidden_<?=$reply->parent?>" style="display: none;">
                                     <?php
                                         }
                                         $i++;
-                                    } 
+                                    }
                                     if ($i >= 2) {
                                     ?>
                                         </div>
