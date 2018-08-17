@@ -9,6 +9,7 @@ if ($post->original != null) {
     $repost = true;
 }
 $user = user::loadFromId($post->source);
+$self = null;
 $is_self = false;
 if (isset($_GET['SID']))
     $self = user::loadFromSession($_GET['SID']);
@@ -45,17 +46,17 @@ $is_self = (isset($self) && $self->id == $user->id);
         </div>
         <div class="m-desc-hover">
         <div class="m-post-info">
-            <div class="m-likes" onclick="upvotePost('<?=$post->id?>', this);">
-              <i class="material-icons m-icon hoverable">keyboard_arrow_up</i>
-              <h1 class="m-header"><?=shortNum($post->getUpvotes());?></h1>
-              <i class="material-icons m-icon hoverable">keyboard_arrow_down</i>
+            <div class="m-likes">
+              <i class="material-icons m-icon hoverable<?= $post->getVote($self) == 1 ? " vote-selected" : "" ?>" onclick="upvotePost('<?=$post->id?>');">keyboard_arrow_up</i>
+              <h1 class="m-header" id="votes_<?=$post->id?>"><?=shortNum($post->getVotes());?></h1>
+              <i class="material-icons m-icon hoverable<?= $post->getVote($self) == -1 ? " vote-selected" : "" ?>" onclick="downvotePost('<?=$post->id?>');">keyboard_arrow_down</i>
             </div>
             <div class="m-reposts" onclick="repost('<?=$post->id?>', this);">
-            <i class="material-icons m-icon hoverable" style="font-size: 23px; margin-top: 1px;">repeat</i>
+            <i class="material-icons m-icon hoverable<?= $post->hasReposted($self) ? " vote-selected" : "" ?>" style="font-size: 23px; margin-top: 1px;">repeat</i>
             <h1 class="m-header"><?=$post->getRepostCount();?></h1>
             </div>
             <div class="m-comments">
-            <i class="material-icons m-icon hoverable" style="font-size: 22px; position: relative; top: 4px;">chat_bubble_outline</i>
+            <i class="material-icons m-icon hoverable" style="font-size: 22px; position: relative; top: 4px;" onclick="focusComment();">chat_bubble_outline</i>
             <h1 class="m-header"><?=$post->getCommentCount()?></h1>
             </div>
             <div class="m-save">
@@ -110,12 +111,12 @@ $is_self = (isset($self) && $self->id == $user->id);
                             </div>
                             <!-- <div class="comment-image"></div> -->
                             <div class="m-c-reviews">
-                            <div class="m-comment-likes" onclick="upvoteComment('<?=$cmt->id?>', this);">
-                                <i class="material-icons m-comment-icon hoverable">keyboard_arrow_up</i>
-                                <h1 class="m-header-comment"><?=$cmt->getUpvotes();?></h1>
-                                <i class="material-icons m-comment-icon hoverable">keyboard_arrow_down</i>
+                            <div class="m-comment-likes">
+                                <i class="material-icons m-comment-icon hoverable<?= $cmt->getVote($self) == 1 ? " vote-selected" : "" ?>" onclick="upvoteComment('<?=$cmt->id?>');">keyboard_arrow_up</i>
+                                <h1 class="m-header-comment" id="votes_<?=$cmt->id?>"><?=$cmt->getVotes();?></h1>
+                                <i class="material-icons m-comment-icon hoverable<?= $cmt->getVote($self) == -1 ? " vote-selected" : "" ?>" onclick="downvoteComment('<?=$cmt->id?>');">keyboard_arrow_down</i>
                             </div>
-                            <button class="c-op-1 c-reply" style="top: 5px; margin-left: 7px;  ">REPLY</button>
+                            <button class="c-op-1 c-reply" style="top: 5px; margin-left: 7px;" onclick="reply('<?=$cmt->id?>', '<?=$cUser->handle?>');">REPLY</button>
                             <i class="material-icons hoverable" style="top: 3px;">more_horiz</i>
                             </div>
                             <div class="comment-replies">
@@ -136,12 +137,12 @@ $is_self = (isset($self) && $self->id == $user->id);
                                                 </p>
                                             <?php } ?>
                                             <div class="m-c-reviews reply">
-                                            <div class="m-comment-likes" onclick="upvoteComment('<?=$reply->id?>', this);">
-                                                <i class="material-icons m-comment-icon reply hoverable">keyboard_arrow_up</i>
-                                                <h1 class="m-header-comment reply"><?=$reply->getUpvotes()?></h1>
-                                                <i class="material-icons m-comment-icon reply hoverable">keyboard_arrow_down</i>
+                                            <div class="m-comment-likes">
+                                                <i class="material-icons m-comment-icon hoverable<?= $reply->getVote($self) == 1 ? " vote-selected" : "" ?>" onclick="upvoteComment('<?=$reply->id?>');">keyboard_arrow_up</i>
+                                                <h1 class="m-header-comment" id="votes_<?=$reply->id?>"><?=$reply->getVotes();?></h1>
+                                                <i class="material-icons m-comment-icon hoverable<?= $reply->getVote($self) == -1 ? " vote-selected" : "" ?>" onclick="downvoteComment('<?=$reply->id?>');">keyboard_arrow_down</i>
                                             </div>
-                                            <button class="c-op-1 c-reply reply" style="top: 5px; margin-left: 7px;  ">REPLY</button>
+                                            <button class="c-op-1 c-reply reply" style="top: 5px; margin-left: 7px;" onclick="reply('<?=$cmt->id?>', '<?=$rUser->handle?>');">REPLY</button>
                                             <i class="material-icons hoverable" style="top: 2px;   font-size: 24px;">more_horiz</i>
                                             </div>
                                         </div>
@@ -158,6 +159,7 @@ $is_self = (isset($self) && $self->id == $user->id);
                                         </div>
                                         <div class="m-c-reviews" style="margin-left: 0px;">
                                             <button class="c-op-1 c-reply" style="top: 5px; margin-left: 0px;" onclick="showMore('<?=$reply->parent?>', this);">SHOW MORE</button>
+                                            <button class="c-op-1 c-reply" style="top: 5px; margin-left: 0px; display: none;" onclick="showLess('<?=$reply->parent?>', this);">SHOW LESS</button>
                                         </div>
                                     <?php } ?>
                             </div>
@@ -167,8 +169,8 @@ $is_self = (isset($self) && $self->id == $user->id);
             </div>
         </div>
         <div class="comment-box">
-            <h1 class="reply-header" style="display: none;">In reply to <b>@bobmandude9889</b></h1>
-            <textarea name="comment_text" id="comment_text" rows="1" cols="10" wrap="hard" class="hover-post-textarea" style="margin-top: 22px;"></textarea>
+            <h1 class="reply-header" id="reply_to" style="display: none;">In reply to <b>@bobmandude9889</b></h1>
+            <textarea name="comment_text" id="comment_text" rows="1" cols="10" wrap="hard" class="hover-post-textarea"></textarea>
             <div class="comment-options">
                 <button class="material-icons m-meme-icon">video_library</button>
                 <button class="material-icons m-meme-icon" style="margin: 0 5px;">gif</button>

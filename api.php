@@ -194,39 +194,43 @@ Command::register("get_timeline", function($user) {
 Command::register("upvote_post", function($user) {
   $id = $_POST['id'];
   $post = post::loadFromId($id);
-  $post->upvote($user);
-  jsonMessage(array("upvotes"=>$post->getUpvotes()));
+  $vote = $post->upvote($user);
+  jsonMessage(array("votes"=>$post->getVotes(), "vote"=>$vote));
 });
 
 Command::register("downvote_post", function($user) {
   $id = $_POST['id'];
   $post = post::loadFromId($id);
-  $post->downvote($user);
-  jsonMessage(array("upvotes"=>$post->getDownvotes()));
+  $vote = $post->downvote($user);
+  jsonMessage(array("votes"=>$post->getVotes(), "vote"=>$vote));
 });
 
 Command::register("repost", function($user) {
   $id = $_POST['id'];
   $post = post::loadFromId($id);
-  $post->repost($user);
-  jsonMessage(array("reposts"=>$post->getRepostCount()));
+  $reposted = $post->repost($user);
+  jsonMessage(array("reposts"=>$post->getRepostCount(), "reposted"=>$reposted));
 });
 
 Command::register("upvote_comment", function($user) {
   $id = $_POST['id'];
   $cmt = comment::loadFromId($id);
-  $cmt->upvote($user);
-  jsonMessage(array("upvotes"=>$cmt->getUpvotes()));
+  $vote = $cmt->upvote($user);
+  jsonMessage(array("votes"=>$cmt->getVotes(), "vote"=>$vote));
 });
 
 Command::register("downvote_comment", function($user) {
   $id = $_POST['id'];
   $cmt = comment::loadFromId($id);
-  $cmt->downvote($user);
-  jsonMessage(array("upvotes"=>$cmt->getDownvotes()));
+  $vote = $cmt->downvote($user);
+  jsonMessage(array("votes"=>$cmt->getVotes(), "vote"=>$vote));
 });
 
 Command::register("post_comment", function($user) {
+  if ($_POST['text'] == '') {
+    jsonError("Empty message.");
+    return;
+  }
   $id = uniqid('', true);
   $date = gmdate(DATE_ATOM);
   $conn = $GLOBALS['conn'];
@@ -752,48 +756,64 @@ class post {
     return $result->fetch_assoc()['reposts'];
   }
 
-  public function getUpvotes() {
+  public function getVotes() {
     $conn = $GLOBALS['conn'];
-    $stmt = $conn->prepare("SELECT COUNT(vote) AS upvotes FROM `votes` WHERE `vote`=1 AND `post`=?");
-    $stmt->bind_param("s", $this->id);
+    $stmt = $conn->prepare("SELECT COUNT(vote) AS votes FROM `votes` WHERE `vote`=1 AND `post`=? UNION SELECT COUNT(vote) AS votes FROM `votes` WHERE `vote`=-1 AND `post`=? ");
+    $stmt->bind_param("ss", $this->id, $this->id);
     $stmt->execute();
     $result = $stmt->get_result();
-    return $result->fetch_assoc()['upvotes'];
+    $upvotes = $result->fetch_assoc()['votes'];
+    $downvotes = $result->fetch_assoc()['votes'];
+    logger("upvotes: " . $upvotes);
+    logger("downvotes: " . $downvotes);
+    return $upvotes - $downvotes;
   }
 
-  public function getDownvotes() {
+  public function getVote($user) {
+    if ($user == null)
+      return 0;
     $conn = $GLOBALS['conn'];
-    $stmt = $conn->prepare("SELECT COUNT(id) AS downvotes FROM `votes` WHERE `vote`=-1 AND `post`=?");
+    $stmt = $conn->prepare("SELECT vote FROM `votes` WHERE post=?");
     $stmt->bind_param("s", $this->id);
     $stmt->execute();
     $result = $stmt->get_result();
-    return $result->fetch_assoc()['downvotes'];
+    if ($result->num_rows == 0)
+      return 0;
+    return $result->fetch_assoc()['vote'];
   }
 
   public function upvote($user) {
-    $this->vote(1, $user);
+    return $this->vote(1, $user);
   }
 
   public function downvote($user) {
-    $this->vote(-1, $user);
+    return $this->vote(-1, $user);
   }
 
   private function vote($vote, $user) {
     $conn = $GLOBALS['conn'];
-    $stmt = $conn->prepare("SELECT post FROM votes WHERE post=? AND vote=?");
-    $stmt->bind_param("si", $this->id, $vote);
+    $stmt = $conn->prepare("SELECT vote FROM votes WHERE post=?");
+    $stmt->bind_param("s", $this->id);
     $stmt->execute();
     $result = $stmt->get_result();
-    if ($result->num_rows == 0) {
-      $stmt = $conn->prepare("INSERT INTO `votes` (`user`, `post`, `vote`) VALUES (?, ?, ?)");
-      $stmt->bind_param("isi", $user->id, $this->id, $vote);
-      $stmt->execute();
-    } else {
+    if ($result->num_rows != 0) {
       $stmt = $conn->prepare("DELETE FROM `votes` WHERE `post`=? AND `user`=?");
       $stmt->bind_param("si", $this->id, $user->id);
       $stmt->execute();
+      if ($result->fetch_assoc()['vote'] != $vote) {
+        $stmt = $conn->prepare("INSERT INTO `votes` (`user`, `post`, `vote`) VALUES (?, ?, ?)");
+        $stmt->bind_param("isi", $user->id, $this->id, $vote);
+        $stmt->execute();
+      } else {
+        $vote = 0;
+      }
+    } else {
+      $stmt = $conn->prepare("INSERT INTO `votes` (`user`, `post`, `vote`) VALUES (?, ?, ?)");
+      $stmt->bind_param("isi", $user->id, $this->id, $vote);
+      $stmt->execute();
     }
     $post = post::loadFromId($this->id);
+    return $vote;
   }
 
   public function repost($user) {
@@ -802,6 +822,7 @@ class post {
     $stmt->bind_param("si", $this->id, $user->id);
     $stmt->execute();
     $result = $stmt->get_result();
+    $reposted = 0;
     if ($result->num_rows == 0) {
       $id = uniqid('', true);
       $date = gmdate(DATE_ATOM);
@@ -809,11 +830,24 @@ class post {
       $stmt = $conn->prepare("INSERT INTO `posts` (`id`, `caption`, `tags`, `source`, `original`, `date`, `type`, `parent`, `library`) VALUES (?, '', '', ?, ?, ?, ?, ?, ?);");
       $stmt->bind_param("sisssis", $id, $user->id, $this->id, $date, $this->type, $this->parent, $lib);
       $stmt->execute();
+      $reposted = 1;
     } else {
       $stmt = $conn->prepare("DELETE FROM `posts` WHERE `original`=? AND `source`=?");
       $stmt->bind_param("si", $this->id, $user->id);
       $stmt->execute();
     }
+    return $reposted;
+  }
+
+  public function hasReposted($user) {
+    if ($user == null)
+      return false;
+    $conn = $GLOBALS['conn'];
+    $stmt = $conn->prepare("SELECT `id` FROM `posts` WHERE `original`=? AND `source`=?");
+    $stmt->bind_param("si", $this->id, $user->id);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    return ($result->num_rows != 0);
   }
 
   public function getComments() {
@@ -842,52 +876,67 @@ class comment {
   public function fixVars() {
   }
 
-  public function getUpvotes() {
+  public function getVotes() {
     $conn = $GLOBALS['conn'];
-    $stmt = $conn->prepare("SELECT COUNT(vote) AS upvotes FROM `comment_votes` WHERE `vote`=1 AND `id`=?");
-    $stmt->bind_param("s", $this->id);
+    $stmt = $conn->prepare("SELECT COUNT(vote) AS votes FROM `comment_votes` WHERE `vote`=1 AND `id`=? UNION SELECT COUNT(vote) AS votes FROM `comment_votes` WHERE `vote`=-1 AND `id`=? ");
+    $stmt->bind_param("ss", $this->id, $this->id);
     $stmt->execute();
     $result = $stmt->get_result();
-    return $result->fetch_assoc()['upvotes'];
+    $upvotes = $result->fetch_assoc()['votes'];
+    $downvotes = $result->fetch_assoc()['votes'];
+    logger("upvotes: " . $upvotes);
+    logger("downvotes: " . $downvotes);
+    return $upvotes - $downvotes;
   }
 
-  public function getDownvotes() {
+  public function getVote($user) {
+    if ($user == null)
+      return 0;
     $conn = $GLOBALS['conn'];
-    $stmt = $conn->prepare("SELECT COUNT(id) AS downvotes FROM `comment_votes` WHERE `vote`=-1 AND `id`=?");
+    $stmt = $conn->prepare("SELECT vote FROM `comment_votes` WHERE id=?");
     $stmt->bind_param("s", $this->id);
     $stmt->execute();
     $result = $stmt->get_result();
-    return $result->fetch_assoc()['downvotes'];
+    if ($result->num_rows == 0)
+      return 0;
+    return $result->fetch_assoc()['vote'];
   }
 
   public function upvote($user) {
-    $this->vote(1, $user);
+    return $this->vote(1, $user);
   }
 
   public function downvote($user) {
-    $this->vote(-1, $user);
+    return $this->vote(-1, $user);
   }
 
   private function vote($vote, $user) {
     $conn = $GLOBALS['conn'];
-    $stmt = $conn->prepare("SELECT id FROM comment_votes WHERE id=? AND vote=?");
-    $stmt->bind_param("si", $this->id, $vote);
+    $stmt = $conn->prepare("SELECT vote FROM `comment_votes` WHERE id=?");
+    $stmt->bind_param("s", $this->id);
     $stmt->execute();
     $result = $stmt->get_result();
-    if ($result->num_rows == 0) {
-      $stmt = $conn->prepare("INSERT INTO `comment_votes` (`id`, `user`, `vote`) VALUES (?, ?, ?)");
-      $stmt->bind_param("ssi", $this->id, $user->id, $vote);
-      $stmt->execute();
-    } else {
+    if ($result->num_rows != 0) {
       $stmt = $conn->prepare("DELETE FROM `comment_votes` WHERE `id`=? AND `user`=?");
       $stmt->bind_param("si", $this->id, $user->id);
       $stmt->execute();
+      if ($result->fetch_assoc()['vote'] != $vote) {
+        $stmt = $conn->prepare("INSERT INTO `comment_votes` (`user`, `id`, `vote`) VALUES (?, ?, ?)");
+        $stmt->bind_param("isi", $user->id, $this->id, $vote);
+        $stmt->execute();
+      } else {
+        $vote = 0;
+      }
+    } else {
+      $stmt = $conn->prepare("INSERT INTO `comment_votes` (`user`, `id`, `vote`) VALUES (?, ?, ?)");
+      $stmt->bind_param("isi", $user->id, $this->id, $vote);
+      $stmt->execute();
     }
-    //$post = post::loadFromId($this->id);
+    return $vote;
   }
 
   public function getReplies() {
-    return loadDBObjects("comments", "`post`='{$this->post}' AND `parent`='{$this->id}' ORDER BY date DESC", "comment");
+    return loadDBObjects("comments", "`post`='{$this->post}' AND `parent`='{$this->id}' ORDER BY date ASC", "comment");
   }
 
 }

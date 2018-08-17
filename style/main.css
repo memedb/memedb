@@ -4206,6 +4206,10 @@ h6 {
   top: 10px;
 }
 
+.vote-selected {
+  color: #4167f1;
+}
+
 /* EXP POST */
 
 .exp-post-corridor {

@@ -254,7 +254,7 @@ if ($account == null) {
     $libCount = 0;
     $dragAttr = "ondragenter='libDrag(event);' ondragleave='libDragLeave(event);' ondragover='libDrag(event);' ondrop='libDrop(event);'";
     foreach ($libs as $lib) {
-        if ((!$lib->private || $is_self) || $lib->visibility == 2 || ($lib->visibility == 1 && ($self->id == $account->id || $self->isFollowing($account->id))) || ($lib->visibility == 0 && $self->id == $account->id)) {
+        if (($lib->private && $is_self) || $lib->visibility == 2 || ($lib->visibility == 1 && ($is_self || $self->isFollowing($account->id))) || ($lib->visibility == 0 && $is_self)) {
           ?>
           <div class="library <?=$libCount%2==0?" light":""?>" data-id="<?=$lib->id?>" <?php echo $lib->icon ? $lib->canUpload ? $dragAttr : "" : $dragAttr; ?>>
             <?php

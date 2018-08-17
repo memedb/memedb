@@ -20,7 +20,6 @@ $(document).ready(function() {
     if(toggled[this.id]) {
 			this.querySelector(".l-settings").style.transform = "";
 			this.nextElementSibling.style.height = "0px";
-      this.nextElementSibling.style.border = "0px";
 		} else {
 			this.querySelector(".l-settings").style.transform = "rotate(180deg)";
 			content = this.nextElementSibling;
@@ -28,9 +27,8 @@ $(document).ready(function() {
 			height = content.clientHeight;
 			content.style.height = "0px";
 			setTimeout(function() {
-			content.style.height = height.toString() + "px";
-      content.style.margin = "0px";
-      content.style.border = "2px solid transparent";
+        content.style.height = height.toString() + "px";
+        content.style.margin = "0px";
 			}, 10);
 		}
 		toggled[this.id] = !toggled[this.id];
@@ -315,50 +313,91 @@ function hideImagePreview() {
   $(".meme-preview-box-hover").remove();
 }
 
-function upvotePost(id, elmt) {
+function updateVotes(id, votes, vote) {
+  console.log(vote);
+  var elmt = document.getElementById("votes_" + id);
+  elmt.innerHTML = votes;
+  if (vote == -1) {
+    elmt.previousElementSibling.classList.remove("vote-selected");
+    elmt.nextElementSibling.classList.add("vote-selected");
+  } else if (vote == 1) {
+    elmt.previousElementSibling.classList.add("vote-selected");
+    elmt.nextElementSibling.classList.remove("vote-selected");
+  } else {
+    elmt.previousElementSibling.classList.remove("vote-selected");
+    elmt.nextElementSibling.classList.remove("vote-selected");
+  }
+}
+
+function upvotePost(id) {
   sendCommand("upvote_post", null, {id: id}, function(response) {
-    elmt.children[elmt.children.length-1].innerHTML = response.upvotes;
+    updateVotes(id, response.votes, response.vote);
   });
 }
 
-function downvotePost(id, elmt) {
+function downvotePost(id) {
   sendCommand("downvote_post", null, {id: id}, function(response) {
-    elmt.children[elmt.childElementCount-1].innerHTML = response.downvotes;
+    updateVotes(id, response.votes, response.vote);
   });
 }
 
-function upvoteComment(id, elmt) {
+function upvoteComment(id) {
   sendCommand("upvote_comment", null, {id: id}, function(response) {
-    console.log(response);
-    elmt.children[elmt.children.length-1].innerHTML = response.upvotes;
+    updateVotes(id, response.votes, response.vote);
   });
 }
 
-function downvoteComment(id, elmt) {
+function downvoteComment(id) {
   sendCommand("downvote_comment", null, {id: id}, function(response) {
-    elmt.children[elmt.childElementCount-1].innerHTML = response.downvotes;
+    updateVotes(id, response.votes, response.vote);
   });
 }
 
 function repost(id, elmt) {
   sendCommand("repost", null, {id: id}, function(response) {
     elmt.children[elmt.childElementCount-1].innerHTML = response.reposts;
+    if (response.reposted == 0)
+      elmt.children[0].classList.remove("vote-selected");
+    else  
+      elmt.children[0].classList.add("vote-selected"); 
   });
 }
 
 function postComment() {
-  sendCommand("post_comment", null, {text: document.getElementById("comment_text").value, post: openPost, parent: parent}, function(response) {
-    updateImagePreview();
-  });
+  var text = document.getElementById("comment_text").value;
+  if (text.length > 0) {
+    sendCommand("post_comment", null, {text: text, post: openPost, parent: parent}, function(response) {
+      updateImagePreview();
+    });
+  }
 }
 
 function setParent(id) {
   parent = id;
 }
 
-function showMore(id) {
-  console.log(id);
+function showMore(id, elmt) {
   document.getElementById("hidden_" + id).style.display = null;
+  elmt.style.display = "none";
+  elmt.nextElementSibling.style.display = null;
+}
+
+function showLess(id, elmt) {
+  document.getElementById("hidden_" + id).style.display = "none";
+  elmt.style.display = "none";
+  elmt.previousElementSibling.style.display = null;
+}
+
+function focusComment() {
+  document.getElementById("comment_text").focus();
+}
+
+function reply(id, handle) {
+  parent = id;
+  var elmt = document.getElementById("reply_to");
+  elmt.innerHTML = "In reply to <b>@" + handle + "</b>";
+  elmt.style.display = null;
+  document.getElementById("comment_text").style.marginTop = "22px";
 }
 
 function uploadFile(file, session, type, parent, library) {
