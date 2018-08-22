@@ -947,6 +947,16 @@ class user {
     return "/userimg.php?handle=" . $this->handle;
   }
 
+  public function printImage($size, $style) {
+    ?>
+    <img src="<?= $this->getImage(); ?>" style="<?=$style?>" width="<?=$size?>" height="<?=$size?>">
+    <?php
+  }
+
+  public function getLink() {
+    return "/account/" . $this->handle;
+  }
+
   public static function loadFromId($id) {
     $usr = loadDBObject("users", "id={$id}", "user");
     $usr->fixVars();
