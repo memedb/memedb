@@ -358,8 +358,8 @@ function repost(id, elmt) {
     elmt.children[elmt.childElementCount-1].innerHTML = response.reposts;
     if (response.reposted == 0)
       elmt.children[0].classList.remove("vote-selected");
-    else  
-      elmt.children[0].classList.add("vote-selected"); 
+    else
+      elmt.children[0].classList.add("vote-selected");
   });
 }
 
@@ -462,7 +462,7 @@ function uploadFile(file, session, type, parent, library) {
       } else {
         XHR = new window.XMLHttpRequest();
       }
-      
+
       XHR.upload.addEventListener("progress", function (event) {
         if(event.lengthComputable) {
           var percentage = Math.round((event.loaded / event.total) * 100);

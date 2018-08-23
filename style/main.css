@@ -771,7 +771,7 @@ input:checked+.slider:before {
 }
 
 .sidenav-home {
-  z-index: 1000000;
+  z-index: 100;
   display: block;
   position: fixed;
   float: left;
@@ -2700,8 +2700,8 @@ body {
   position: absolute;
   bottom: -24px;
   right: -17px;
-  background: #ddd;
-  padding: 6px;
+  background: #fff;
+  padding: 3px;
   border-radius: 35px;
   z-index: 10;
   box-shadow: 0 0 10px 0 #777;
@@ -2878,14 +2878,14 @@ body {
 
 .m-meme-icon {
   background: #eee;
-  width: 25px;
-  height: 25px;
+  width: 35px;
+  height: 35px;
   border-radius: 50%;
   border: none;
   position: relative;
   float: left;
   color: #222;
-  font-size: 14px;
+  font-size: 21px;
   top: 0px;
   display: table-column;
   text-align: center;
@@ -3608,7 +3608,7 @@ body {
 }
 
 .s-txt.a {
-  margin-left: 35px;
+  margin-left: 55px;
 }
 
 .s-txt.ec.highlighted {
@@ -4931,6 +4931,7 @@ h6 {
 
 @media screen and (max-width: 1200px) {
   .sidenav-home {
+    z-index: 10000000;
     display: none;
     width: 500px;
     left: -500px;
