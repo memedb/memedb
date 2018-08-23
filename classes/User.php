@@ -18,25 +18,29 @@ class User {
 
     public static function loadFromId($id) {
         $usr = loadDBObject("users", "id={$id}", "User");
-        $usr->fixVars();
+        if ($user != null)
+            $usr->fixVars();
         return $usr;
     }
 
     public static function loadFromEmail($email) {
         $usr = loadDBObject("users", "email='$email'", "User");
-        $usr->fixVars();
+        if ($user != null)
+            $usr->fixVars();
         return $usr;
     }
 
     public static function loadFromHandle($handle) {
         $usr = loadDBObject("users", "handle='$handle'", "User");
-        $usr->fixVars();
+        if ($user != null)
+            $usr->fixVars();
         return $usr;
     }
 
     public static function loadFromSession($session) {
         $usr = loadDBObject("users", "session='$session'", "User");
-        $usr->fixVars();
+        if ($user != null)
+            $usr->fixVars();
         return $usr;
     }
 

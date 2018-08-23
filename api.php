@@ -18,7 +18,9 @@ $db = "zerentha_meme";
 $GLOBALS['conn'] = new mysqli($server, $user, $pass, $db);
 
 if (!isset($_SESSION['id']) && isset($_COOKIE['PHPSESSID'])) {
-  $_SESSION['id'] = User::loadFromSession($_COOKIE['PHPSESSID'])->id;
+  $user = User::loadFromSession($_COOKIE['PHPSESSID']);
+  if ($user != null)
+    $_SESSION['id'] = $user->id;
 }
 
 if ($_SESSION['id']) {
