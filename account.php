@@ -9,7 +9,7 @@ $is_self = false;
 $self = getUser();
 
 if ($account != null) {
-  $account = user::loadFromHandle($account);
+  $account = User::loadFromHandle($account);
   $is_self = (loggedIn() && $self->id == $account->id);
 }
 
@@ -250,7 +250,7 @@ if ($account == null) {
     <?php
     topBar($self);
 
-    $libs = library::loadFromUser($account);
+    $libs = Library::loadFromUser($account);
     $libCount = 0;
     $dragAttr = "ondragenter='libDrag(event);' ondragleave='libDragLeave(event);' ondragover='libDrag(event);' ondrop='libDrop(event);'";
     foreach ($libs as $lib) {

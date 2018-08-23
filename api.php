@@ -2,6 +2,10 @@
 session_start();
 
 require('sql.php');
+require('classes/Comment.php');
+require('classes/Library.php');
+require('classes/Post.php');
+require('classes/User.php');
 
 header("Access-Control-Allow-Credentials: true");
 header("X-Frame-Options: DENY");
@@ -14,21 +18,16 @@ $db = "zerentha_meme";
 $GLOBALS['conn'] = new mysqli($server, $user, $pass, $db);
 
 if (!isset($_SESSION['id']) && isset($_COOKIE['PHPSESSID'])) {
-  $conn = $GLOBALS['conn'];
-  $stmt = $conn->prepare("SELECT id FROM users WHERE session='{$_COOKIE['PHPSESSID']}'");
-  $stmt->execute();
-  $result = $stmt->get_result();
-  if ($result->num_rows > 0) {
-    $_SESSION['id'] = $result->fetch_assoc()['id'];
-  }
+  $_SESSION['id'] = User::loadFromSession($_COOKIE['PHPSESSID'])->id;
 }
 
 if ($_SESSION['id']) {
-  $GLOBALS['user'] = user::loadFromId($_SESSION['id']);
-  $conn = $GLOBALS['conn'];
+  $GLOBALS['user'] = User::loadFromId($_SESSION['id']);
+  $user = $GLOBALS['user'];
   $ip = get_client_ip();
-  $stmt = $conn->prepare("UPDATE users SET ip = '$ip', session='".session_id()."' WHERE id = ".$user->id);
-  $stmt->execute();
+  $user->ip = $ip;
+  $user->session = session_id();
+  $user->updateFields("ip", "session");
 } else {
   $GLOBALS['user'] = null;
 }
@@ -43,9 +42,6 @@ if($_SERVER["HTTPS"] != "on") {
 }
 
 // REST api:
-
-$commands = array();
-$GLOBALS['commands'] = $commands;
 
 class Command {
 
@@ -62,6 +58,9 @@ class Command {
   }
 
 }
+
+$commands = array();
+$GLOBALS['commands'] = $commands;
 
 $conn = $GLOBALS['conn'];
 
@@ -80,13 +79,13 @@ Command::register("start_session", function($user) {
 });
 
 Command::register("follow", function($user) {
-  $account = user::loadFromHandle($_POST['handle']);
+  $account = User::loadFromHandle($_POST['handle']);
   $user->addFollowing($account->id);
   jsonMessage(array("following"=>true, "followers"=>$account->getFollowerCount()));
 });
 
 Command::register("unfollow", function($user) {
-  $account = user::loadFromHandle($_POST['handle']);
+  $account = User::loadFromHandle($_POST['handle']);
   $user->removeFollowing($account->id);
   jsonMessage(array("following"=>false, "followers"=>$account->getFollowerCount()));
 });
@@ -137,11 +136,11 @@ Command::register("create_post", function($user) {
 
 Command::register("get_post", function($user) {
   $id = $_POST['id'];
-  $post = post::loadFromId($id);
+  $post = Post::loadFromId($id);
   if ($post === null)
     jsonMessage(array("id"=>"null"));
   else {
-    $post->source = user::loadFromId($post->source)->handle;
+    $post->source = User::loadFromId($post->source)->handle;
     jsonMessage((array) $post);
   }
 });
@@ -176,7 +175,7 @@ Command::register("delete_library", function($user) {
 
 Command::register("get_library", function($user) {
   $id = $_POST['id'];
-  $lib = loadDBObject("libraries", "`id`='$id'", "library");
+  $lib = loadDBObject("libraries", "`id`='$id'", "Library");
   if ($lib === null)
     jsonMessage(array("id"=>"null"));
   else
@@ -193,35 +192,35 @@ Command::register("get_timeline", function($user) {
 
 Command::register("upvote_post", function($user) {
   $id = $_POST['id'];
-  $post = post::loadFromId($id);
+  $post = Post::loadFromId($id);
   $vote = $post->upvote($user);
   jsonMessage(array("votes"=>$post->getVotes(), "vote"=>$vote));
 });
 
 Command::register("downvote_post", function($user) {
   $id = $_POST['id'];
-  $post = post::loadFromId($id);
+  $post = Post::loadFromId($id);
   $vote = $post->downvote($user);
   jsonMessage(array("votes"=>$post->getVotes(), "vote"=>$vote));
 });
 
 Command::register("repost", function($user) {
   $id = $_POST['id'];
-  $post = post::loadFromId($id);
+  $post = Post::loadFromId($id);
   $reposted = $post->repost($user);
   jsonMessage(array("reposts"=>$post->getRepostCount(), "reposted"=>$reposted));
 });
 
 Command::register("upvote_comment", function($user) {
   $id = $_POST['id'];
-  $cmt = comment::loadFromId($id);
+  $cmt = Comment::loadFromId($id);
   $vote = $cmt->upvote($user);
   jsonMessage(array("votes"=>$cmt->getVotes(), "vote"=>$vote));
 });
 
 Command::register("downvote_comment", function($user) {
   $id = $_POST['id'];
-  $cmt = comment::loadFromId($id);
+  $cmt = Comment::loadFromId($id);
   $vote = $cmt->downvote($user);
   jsonMessage(array("votes"=>$cmt->getVotes(), "vote"=>$vote));
 });
@@ -252,7 +251,7 @@ if ($action) {
   $session = $_POST['session'];
 
   if ($session == session_id()) {
-    $user  = user::loadFromSession($session);
+    $user  = User::loadFromSession($session);
   } else if ($session) {
     $stmt = $conn->prepare("SELECT user FROM `sessions` WHERE id=?");
     $stmt->bind_param("s", $session);
@@ -260,7 +259,7 @@ if ($action) {
     $result = $stmt->get_result();
     if ($result->num_rows > 0) {
       $row = $result->fetch_assoc();
-      $user = user::loadFromId($row['user']);
+      $user = User::loadFromId($row['user']);
     }
   }
 
@@ -274,7 +273,7 @@ if ($action) {
 // Functions:
 
 function getTimeline($handle, $page, $self) {
-  $account = user::loadFromHandle($handle);
+  $account = User::loadFromHandle($handle);
 
   $conn = $GLOBALS['conn'];
   $stmt = $conn->prepare("SELECT DISTINCT `date` FROM `libraries` WHERE `user`={$account->id} UNION SELECT DISTINCT `date` FROM `posts` WHERE `source`={$account->id} AND `original` IS NULL");
@@ -315,8 +314,8 @@ function getTimeline($handle, $page, $self) {
 
   $ymd = $dates[$page];
 
-  $libs = loadDBObjects("libraries", "`user`={$account->id} AND `date` LIKE '{$ymd}%' ORDER BY `date` DESC", "library");
-  $posts = loadDBObjects("posts", "`source`={$account->id} AND `original` IS NULL AND `date` LIKE '{$ymd}%' ORDER BY `date` DESC", "post");
+  $libs = loadDBObjects("libraries", "`user`={$account->id} AND `date` LIKE '{$ymd}%' ORDER BY `date` DESC", "Library");
+  $posts = loadDBObjects("posts", "`source`={$account->id} AND `original` IS NULL AND `date` LIKE '{$ymd}%' ORDER BY `date` DESC", "Post");
   $postGroups = array();
 
   foreach ($posts as $post) {
@@ -668,532 +667,5 @@ function shortNum($num) {
   if ($num >= 1000000) return round(($num/1000000),1)."M";
   if ($num >= 1000) return round(($num/1000),1).'K';
   return $num;
-}
-
-// -------------------------------------------------------------------------------------
-
-class post {
-
-  public static function loadFromId($id) {
-    $img = loadDBObject("posts", "id='$id'", "post");
-    $img->fixVars();
-    return $img;
-  }
-
-  public function fixVars() {
-    $arr = explode(',',$this->tags);
-    if ($arr[0] === "")
-      $this->tags = array();
-    else
-      $this->tags = $arr;
-  }
-
-  public function printImage($class, $resizeHolder, $width) {
-    $size = getimagesize("./images/" . ($this->original ? $this->original : $this->id) . "." . $this->type);
-    $height = ($size[1]/$size[0]) * $width;
-    ?>
-    <img onclick="showImagePreview(event);" data-id="<?=$this->id;?>" class="<?=$class?>" src="/images/<?=($this->original ? $this->original : $this->id) . "." . $this->type?>" style="<?=$resizeHolder ? "height: ".$height."px;" : ""?>">
-    <?php
-  }
-
-  public static function printActivityContainerHtml($timestamp, $posts) {
-    $dateStr = date("d M Y", $timestamp);
-    if (sizeof($posts) == 1) {
-    ?>
-    <div class="exp-post">
-      <?php
-      $posts[0]->printImage("exp-post-image", true, 600);
-      ?>
-      <div class="exp-post-info">
-        <h6><?=$posts[0]->caption;?></h6>
-        <h2 class="card-date"><?=$dateStr?></h2>
-      </div>
-    </div>
-    <?php
-    } else {
-      if (sizeof($posts) >= 5) {
-      ?>
-      <div class="exp-card long">
-        <div class="exp-card-title">
-          <h1 class="card-title">+ <?=$posts[0]->getLibrary()->name?></h1>
-          <h2 class="card-date"><?=$dateStr?></h2>
-        </div>
-        <div class="exp-card-content">
-          <?php
-            $count = 0;
-            foreach ($posts as $post) {
-              ?>
-              <div class="small-post" style="background-image: url(/images/<?=($post->original ? $post->original : $post->id) . "." . $post->type?>);">
-              </div>
-              <?php
-              $count++;
-              if ($count >= 13)
-                break;
-            }
-          if (sizeof($posts) > 13) {
-            ?>
-            <div class="small-post"><h1 class="album-text small"><?=sizeof($posts) - 13?></h1></div>
-            <?php
-          }
-          ?>
-        </div>
-      </div>
-      <?php
-      }
-    }
-  }
-
-  public function getLibrary() {
-    return loadDBObject("libraries", "`id`='{$this->library}'", "library");
-  }
-
-  public function getRepostCount() {
-    $conn = $GLOBALS['conn'];
-    $stmt = $conn->prepare("SELECT COUNT(id) AS reposts FROM `posts` WHERE `original`=?");
-    $stmt->bind_param("s", $this->id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    return $result->fetch_assoc()['reposts'];
-  }
-
-  public function getVotes() {
-    $conn = $GLOBALS['conn'];
-    $stmt = $conn->prepare("SELECT COUNT(vote) AS votes FROM `votes` WHERE `vote`=1 AND `post`=? UNION SELECT COUNT(vote) AS votes FROM `votes` WHERE `vote`=-1 AND `post`=? ");
-    $stmt->bind_param("ss", $this->id, $this->id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $upvotes = $result->fetch_assoc()['votes'];
-    $downvotes = $result->fetch_assoc()['votes'];
-    logger("upvotes: " . $upvotes);
-    logger("downvotes: " . $downvotes);
-    return $upvotes - $downvotes;
-  }
-
-  public function getVote($user) {
-    if ($user == null)
-      return 0;
-    $conn = $GLOBALS['conn'];
-    $stmt = $conn->prepare("SELECT vote FROM `votes` WHERE post=?");
-    $stmt->bind_param("s", $this->id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    if ($result->num_rows == 0)
-      return 0;
-    return $result->fetch_assoc()['vote'];
-  }
-
-  public function upvote($user) {
-    return $this->vote(1, $user);
-  }
-
-  public function downvote($user) {
-    return $this->vote(-1, $user);
-  }
-
-  private function vote($vote, $user) {
-    $conn = $GLOBALS['conn'];
-    $stmt = $conn->prepare("SELECT vote FROM votes WHERE post=?");
-    $stmt->bind_param("s", $this->id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    if ($result->num_rows != 0) {
-      $stmt = $conn->prepare("DELETE FROM `votes` WHERE `post`=? AND `user`=?");
-      $stmt->bind_param("si", $this->id, $user->id);
-      $stmt->execute();
-      if ($result->fetch_assoc()['vote'] != $vote) {
-        $stmt = $conn->prepare("INSERT INTO `votes` (`user`, `post`, `vote`) VALUES (?, ?, ?)");
-        $stmt->bind_param("isi", $user->id, $this->id, $vote);
-        $stmt->execute();
-      } else {
-        $vote = 0;
-      }
-    } else {
-      $stmt = $conn->prepare("INSERT INTO `votes` (`user`, `post`, `vote`) VALUES (?, ?, ?)");
-      $stmt->bind_param("isi", $user->id, $this->id, $vote);
-      $stmt->execute();
-    }
-    $post = post::loadFromId($this->id);
-    return $vote;
-  }
-
-  public function repost($user) {
-    $conn = $GLOBALS['conn'];
-    $stmt = $conn->prepare("SELECT `id` FROM `posts` WHERE `original`=? AND `source`=?");
-    $stmt->bind_param("si", $this->id, $user->id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $reposted = 0;
-    if ($result->num_rows == 0) {
-      $id = uniqid('', true);
-      $date = gmdate(DATE_ATOM);
-      $lib = "POSTS";
-      $stmt = $conn->prepare("INSERT INTO `posts` (`id`, `caption`, `tags`, `source`, `original`, `date`, `type`, `parent`, `library`) VALUES (?, '', '', ?, ?, ?, ?, ?, ?);");
-      $stmt->bind_param("sisssis", $id, $user->id, $this->id, $date, $this->type, $this->parent, $lib);
-      $stmt->execute();
-      $reposted = 1;
-    } else {
-      $stmt = $conn->prepare("DELETE FROM `posts` WHERE `original`=? AND `source`=?");
-      $stmt->bind_param("si", $this->id, $user->id);
-      $stmt->execute();
-    }
-    return $reposted;
-  }
-
-  public function hasReposted($user) {
-    if ($user == null)
-      return false;
-    $conn = $GLOBALS['conn'];
-    $stmt = $conn->prepare("SELECT `id` FROM `posts` WHERE `original`=? AND `source`=?");
-    $stmt->bind_param("si", $this->id, $user->id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    return ($result->num_rows != 0);
-  }
-
-  public function getComments() {
-    return loadDBObjects("comments", "`post`='{$this->id}' AND `parent` IS NULL ORDER BY date DESC", "comment");
-  }
-
-  public function getCommentCount() {
-    $conn = $GLOBALS['conn'];
-    $stmt = $conn->prepare("SELECT COUNT(id) AS comments FROM `comments` WHERE `post`=?");
-    $stmt->bind_param("s", $this->id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    return $result->fetch_assoc()['comments'];
-  }
-
-}
-
-class comment {
-
-  public static function loadFromId($id) {
-    $cmt = loadDBObject("comments", "id='$id'", "comment");
-    $cmt->fixVars();
-    return $cmt;
-  }
- 
-  public function fixVars() {
-  }
-
-  public function getVotes() {
-    $conn = $GLOBALS['conn'];
-    $stmt = $conn->prepare("SELECT COUNT(vote) AS votes FROM `comment_votes` WHERE `vote`=1 AND `id`=? UNION SELECT COUNT(vote) AS votes FROM `comment_votes` WHERE `vote`=-1 AND `id`=? ");
-    $stmt->bind_param("ss", $this->id, $this->id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $upvotes = $result->fetch_assoc()['votes'];
-    $downvotes = $result->fetch_assoc()['votes'];
-    logger("upvotes: " . $upvotes);
-    logger("downvotes: " . $downvotes);
-    return $upvotes - $downvotes;
-  }
-
-  public function getVote($user) {
-    if ($user == null)
-      return 0;
-    $conn = $GLOBALS['conn'];
-    $stmt = $conn->prepare("SELECT vote FROM `comment_votes` WHERE id=?");
-    $stmt->bind_param("s", $this->id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    if ($result->num_rows == 0)
-      return 0;
-    return $result->fetch_assoc()['vote'];
-  }
-
-  public function upvote($user) {
-    return $this->vote(1, $user);
-  }
-
-  public function downvote($user) {
-    return $this->vote(-1, $user);
-  }
-
-  private function vote($vote, $user) {
-    $conn = $GLOBALS['conn'];
-    $stmt = $conn->prepare("SELECT vote FROM `comment_votes` WHERE id=?");
-    $stmt->bind_param("s", $this->id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    if ($result->num_rows != 0) {
-      $stmt = $conn->prepare("DELETE FROM `comment_votes` WHERE `id`=? AND `user`=?");
-      $stmt->bind_param("si", $this->id, $user->id);
-      $stmt->execute();
-      if ($result->fetch_assoc()['vote'] != $vote) {
-        $stmt = $conn->prepare("INSERT INTO `comment_votes` (`user`, `id`, `vote`) VALUES (?, ?, ?)");
-        $stmt->bind_param("isi", $user->id, $this->id, $vote);
-        $stmt->execute();
-      } else {
-        $vote = 0;
-      }
-    } else {
-      $stmt = $conn->prepare("INSERT INTO `comment_votes` (`user`, `id`, `vote`) VALUES (?, ?, ?)");
-      $stmt->bind_param("isi", $user->id, $this->id, $vote);
-      $stmt->execute();
-    }
-    return $vote;
-  }
-
-  public function getReplies() {
-    return loadDBObjects("comments", "`post`='{$this->post}' AND `parent`='{$this->id}' ORDER BY date ASC", "comment");
-  }
-
-}
-
-class user {
-
-  public function getImage() {
-    return "/userimg.php?handle=" . $this->handle;
-  }
-
-  public static function loadFromId($id) {
-    $usr = loadDBObject("users", "id={$id}", "user");
-    $usr->fixVars();
-    return $usr;
-  }
-
-  public static function loadFromEmail($email) {
-    $usr = loadDBObject("users", "email='$email'", "user");
-    $usr->fixVars();
-    return $usr;
-  }
-
-  public static function loadFromHandle($handle) {
-    $usr = loadDBObject("users", "handle='$handle'", "user");
-    $usr->fixVars();
-    return $usr;
-  }
-
-  public static function loadFromSession($session) {
-    $usr = loadDBObject("users", "session='$session'", "user");
-    $usr->fixVars();
-    return $usr;
-  }
-
-  public function fixVars() {
-    if ($usr != null) {
-      $usr->favorites = explode(",",$usr->favorites);
-      $usr->image = "/userimg.php?handle=" + $usr->handle;
-    }
-  }
-
-  public static function create($name, $email, $password, $google) {
-    if ($google)
-      $password = uniqid();
-    $conn = $GLOBALS['conn'];
-    $stmt = $conn->prepare("INSERT INTO `users`
-      (`id`, `name`, `handle`, `email`, `pwd`, `salt`, `confirmed`, `priv`, `joined`, `lastSeen`, `favorites`, `karma`, `rank`, `session`)
-      VALUES (NULL, ?, ?, ?, ?, ?, 0, 1, ?, ?, '', 0, 0, '')");
-    $stmt->bind_param("sssssss", $name, $name, $email, $hPass, $salt, $now, $now);
-    $salt = uniqid();
-    $hPass = hash("sha256", $password.$salt);
-    $now = gmdate(DATE_ATOM);
-    $stmt->execute();
-
-    $stmt = $conn-prepare("SELECT id FROM users WHERE email=?");
-    $stmt->bind_param('s', $email);
-    $stmt->execute();
-    $result = $stmt->get_result();
-
-    $id = $result->fetch_assoc()['id'];
-
-    $subject = 'MemeDB Confirmation';
-    $message = "<html>
-    <head>
-      <title>MemeDB Confirmation</title>
-    </head>
-    <body>
-      <p>Hi $name! Thank you for registering on MemeDB! To complete the registration click the link below.</p>
-
-      <a href='http://memed-db.com/confirm.php?token=$token'>
-        <div>
-          Confirm
-        </div>
-      </a>
-      <br>
-    </body>
-    </html>";
-
-    $headers[] = 'MIME-Version: 1.0';
-    $headers[] = 'Content-type: text/html; charset=iso-8859-1';
-
-    $headers[] = 'To: '.$name.' <'.$email.'>';
-    $headers[] = 'From: MemeDB Confirmation <support@memedb.io>';
-
-    mail($email, $subject, $message, implode("\r\n", $headers));
-    return $id;
-  }
-
-  public function updateField($key) {
-    $conn = $GLOBALS['conn'];
-    $stmt = $conn->prepare("UPDATE users SET {$key}=? WHERE id=?");
-    $fieldType = "";
-    $value = get_object_vars($this)[$key];
-    switch (gettype($value)) {
-    case "integer":
-      $fieldType = "i";
-      break;
-    case "string":
-      $fieldType = "s";
-      break;
-    case "array":
-      $fieldType = "s";
-      $value = implode(",", $value);
-      $value = substr($value, 0, strlen($value));
-      break;
-    }
-    $stmt->bind_param("{$fieldType}i", $value, $this->id);
-    $stmt->execute();
-  }
-
-  public function addFavorite($type) {
-    array_push($this->favorites, $type);
-    $this->updateField("favorites");
-  }
-
-  public function removeFavorite($type) {
-    $index = -1;
-    for ($i = 0; $i < count($this->favorites); $i++) {
-      if ($this->favorites[$i] == $type) {
-        $index = $i;
-        break;
-      }
-    }
-    array_splice($this->favorites, $index, 1);
-    $this->updateField("favorites");
-  }
-
-  public function getFollowerCount() {
-    $conn = $GLOBALS['conn'];
-    $stmt = $conn->prepare("SELECT count(following) as followers FROM `following` WHERE `following`=?");
-    $stmt->bind_param("i",$this->id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    return $result->fetch_assoc()['followers'];
-  }
-
-  public function getFormattedFollowerCount() {
-    $count = $this->getFollowerCount();
-    return shortNum($count);
-  }
-
-  public function getFollowers() {
-    $conn = $GLOBALS['conn'];
-    $stmt = $conn->prepare("SELECT user FROM `following` WHERE `following`=?");
-    $stmt->bind_param("i",$this->id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $followers = array();
-    while ($row = $result->fetch_assoc()) {
-      array_push($followers, $row['user']);
-    }
-    return $followers;
-  }
-
-  public function addFollowing($id) {
-    $conn = $GLOBALS['conn'];
-    $stmt = $conn->prepare("INSERT INTO `following` (`user`, `following`) VALUES (?, ?)");
-    $stmt->bind_param("ii", $this->id, $id);
-    $stmt->execute();
-  }
-
-  public function removeFollowing($id) {
-    $conn = $GLOBALS['conn'];
-    $stmt = $conn->prepare("DELETE FROM `following` WHERE user=? AND following=?");
-    $stmt->bind_param("ii", $this->id, $id);
-    $stmt->execute();
-  }
-
-  public function isFollowing($id) {
-    $conn = $GLOBALS['conn'];
-    $stmt = $conn->prepare("SELECT * FROM `following` WHERE user=? AND following=?");
-    $stmt->bind_param("ii", $this->id, $id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    return $result->num_rows > 0;
-  }
-
-  public function getAccountLink() {
-    
-  }
-
-}
-
-class library {
-
-  public static function create($name, $posts, $icon, $canUpload, $user) {
-    $lib = new library();
-    $lib->name = $name;
-    $lib->id = $name;
-    $lib->posts = $posts;
-    $lib->icon = $icon;
-    $lib->canUpload = $canUpload;
-    $lib->visibility = 2;
-    $lib->user = $user->id;
-    return $lib;
-  }
-
-  public static function loadFromUser($user) {
-    $libs = loadDBObjects("libraries", "user={$user->id}", "library");
-    array_unshift($libs,
-      library::create("POSTS", loadDBObjects("posts", "source={$user->id} AND original IS NULL", "post"), "photo_library", true, $user),
-      library::create("REPOSTS", loadDBObjects("posts", "source={$user->id} AND original IS NOT NULL", "post"), "repeat", false, $user),
-      library::create("FAVORITES", loadDBObjects("posts", "id IN (SELECT post FROM favorites WHERE user={$user->id})", "post"), "start", false, $user)
-    );
-    return $libs;
-  }
-
-  public function getPosts() {
-    if ($this->posts)
-      return $this->posts;
-    logger("library='{$this->id}' AND source={$this->user}");
-    return loadDBObjects("posts", "library='{$this->id}' AND source={$this->user}", "post");
-  }
-
-  public function fixVars() {}
-
-  public static function printActivityContainerHtml($timestamp, $libs) {
-    $dateStr = date("d M Y", $timestamp);
-    ?>
-      <div class="exp-card">
-        <div class="exp-card-title">
-          <h1 class="card-title">+ New Library</h1>
-          <h2 class="card-date"><?=$dateStr?></h2>
-        </div>
-        <div class="exp-card-content">
-          <?php
-            foreach ($libs as $lib) {
-              $lib->printActivityHtml();
-            }
-
-            if (sizeof($libs) == 1) {
-              ?>
-                <div class="c-button-hold">
-                  <a href="">
-                    <button class="post-btn closePost" style="float: right">VIEW</button>
-                  </a>
-                </div>
-              <?php
-            }
-          ?>
-        </div>
-      </div>
-    <?php
-  }
-
-  public function printActivityHtml() {
-    ?>
-    <div class="exp-card-block">
-      <div class="exp-card-square">
-        <i class="material-icons card-icon">
-        library_books
-        </i>
-      </div>
-      <h1 class="card-library-title"><?=$this->name?></h1>
-    </div>
-    <?php
-  }
-
 }
  ?>

@@ -4,7 +4,7 @@ require('api.php');
 $account = $_GET['id'];
 
 if ($account != null)
-  $account = user::loadFromId($account);
+  $account = User::loadFromId($account);
 
 if (loggedIn() && !$account) {
   $account = getUser();

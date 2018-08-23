@@ -6,7 +6,7 @@ $account = $_GET['id'];
 $self = getUser();
 
 if ($account != null)
-  $account = user::loadFromId($account);
+  $account = User::loadFromId($account);
 
 if (loggedIn() && !$account) {
   $account = getUser();

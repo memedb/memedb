@@ -280,7 +280,6 @@ function getImageHtml(id, className, type, width, height, elmtWidth) {
 
 function updateImagePreview() {
   sendCommand("get_post", null, {id: openPost}, function(response) {
-    console.log(response);
     $.ajax({
       type: 'GET',
       url: '/meme_preview.php?id=' + openPost + '&SID=' + SID,
@@ -296,7 +295,6 @@ function updateImagePreview() {
 function showImagePreview(event) {
   var id = event.target.dataset.id;
   sendCommand("get_post", null, {id: id}, function(response) {
-    console.log(response);
     $.ajax({
       type: 'GET',
       url: '/meme_preview.php?id=' + id + '&SID=' + SID,
