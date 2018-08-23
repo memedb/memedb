@@ -2,17 +2,17 @@
 require_once('api.php');
 $repost = false;
 $reposter = null;
-$post = post::loadFromId($_GET['id']);
+$post = Post::loadFromId($_GET['id']);
 if ($post->original != null) {
-    $reposter = user::loadFromId($post->source);
-    $post = post::loadFromId($post->original);
+    $reposter = User::loadFromId($post->source);
+    $post = Post::loadFromId($post->original);
     $repost = true;
 }
-$user = user::loadFromId($post->source);
+$user = User::loadFromId($post->source);
 $self = null;
 $is_self = false;
 if (isset($_GET['SID']))
-    $self = user::loadFromSession($_GET['SID']);
+    $self = User::loadFromSession($_GET['SID']);
 $is_self = (isset($self) && $self->id == $user->id);
 
 function printVotes($obj, bool $comment) {
@@ -23,8 +23,8 @@ function printVotes($obj, bool $comment) {
     <?php
 }
 
-function printComment(comment $cmt, bool $reply) {
-    $cUser = user::loadFromId($cmt->user);
+function printComment(Comment $cmt, bool $reply) {
+    $cUser = User::loadFromId($cmt->user);
     ?>
     
     <div class="<?= $reply ? "reply" : "m" ?>-comment">
@@ -67,7 +67,7 @@ function printComment(comment $cmt, bool $reply) {
                 $replies = $cmt->getReplies();
                 $i = 0;
                 foreach ($replies as $reply) {
-                    $rUser = user::loadFromId($reply->user);
+                    $rUser = User::loadFromId($reply->user);
                     printComment($reply, true);
                     if ($i == 1) {
                 ?>
@@ -161,7 +161,7 @@ function printComment(comment $cmt, bool $reply) {
 
                     $comments = $post->getComments();
                     foreach ($comments as $cmt) {
-                        $cUser = user::loadFromId($cmt->user);
+                        $cUser = User::loadFromId($cmt->user);
                         printComment($cmt, false);
                     } ?>
                 </div>

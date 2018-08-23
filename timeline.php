@@ -10,14 +10,14 @@ if ($result == NULL) {
 $libIds = $result[0];
 $postGroups = $result[1];
 
-$libs = idsToObjects($libIds, "libraries", "library");
+$libs = idsToObjects($libIds, "libraries", "Library");
 
 if (sizeof($libs) > 0)
-    library::printActivityContainerHtml(strtotime($libs[0]->date), $libs);
+Library::printActivityContainerHtml(strtotime($libs[0]->date), $libs);
 
 foreach ($postGroups as $postIds) {
-    $posts = idsToObjects($postIds, "posts", "post");
-    post::printActivityContainerHtml(strtotime($posts[0]->date), $posts);
+    $posts = idsToObjects($postIds, "posts", "Post");
+    Post::printActivityContainerHtml(strtotime($posts[0]->date), $posts);
 }
 
 function idsToObjects($ids, $table, $class) {

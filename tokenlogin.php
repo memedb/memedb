@@ -14,11 +14,11 @@ $client->setAuthConfig('secret/client_secrets.json');
 $payload = $client->verifyIdToken($id_token);
 if ($payload) {
   header("Location: https://memedb.io");
-  $usr = user::loadFromEmail($payload['email']);
+  $usr = User::loadFromEmail($payload['email']);
   if ($usr) {
     $_SESSION['id'] = $usr->id;
   } else {
-    $_SESSION['id'] = user::create($payload['name'], $payload['email'], null, true);
+    $_SESSION['id'] = User::create($payload['name'], $payload['email'], null, true);
   }
   var_dump($usr);
 } else {
