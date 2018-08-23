@@ -26,7 +26,7 @@ function printVotes($obj, bool $comment) {
 function printComment(Comment $cmt, bool $reply) {
     $cUser = User::loadFromId($cmt->user);
     ?>
-    
+
     <div class="<?= $reply ? "reply" : "m" ?>-comment">
         <?php if (!$reply) {?>
         <div class="m-c-text-box">
@@ -168,7 +168,10 @@ function printComment(Comment $cmt, bool $reply) {
             </div>
         </div>
         <div class="comment-box">
-            <h1 class="reply-header" id="reply_to" style="display: none;">In reply to <b>@bobmandude9889</b></h1>
+            <div class="reply-box">
+              <h1 class="reply-header" id="reply_to" style="display: none;">In reply to <b>@bobmandude9889</b></h1>
+              <i class="material-icons reply-icon hoverable">close</i>
+            </div>
             <textarea name="comment_text" id="comment_text" rows="1" cols="10" wrap="hard" class="hover-post-textarea"></textarea>
             <div class="comment-options">
                 <button class="material-icons m-meme-icon">video_library</button>

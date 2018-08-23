@@ -2867,13 +2867,28 @@ body {
   overflow-y: hidden;
   resize: none;
   font-size: 18px;
-  font-style: 'Rubik', sans-serif;
+  font-family: 'Rubik', sans-serif;
+}
+
+.reply-box {
+  position: absolute;
+  display: inline-block;
 }
 
 .reply-header {
   font-size: 12px;
-  font-style: 'Rubik', sans-serif;
-  position: absolute;
+  font-family: 'Rubik',sans-serif;
+  position: relative;
+  float: right;
+  top: 1.6px;
+}
+
+.reply-icon {
+  font-size: 15px;
+  position: relative;
+  float: left;
+  margin-right: 7px;
+  cursor: pointer;
 }
 
 .m-meme-icon {
