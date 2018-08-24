@@ -1,6 +1,9 @@
 <?php
 
-class Library {
+class Library extends DBObject {
+
+    public static $idType = "s";
+    public static $table = "libraries";
 
     public static function create($name, $posts, $icon, $canUpload, $user) {
         $lib = new Library();

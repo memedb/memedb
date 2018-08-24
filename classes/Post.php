@@ -1,5 +1,8 @@
 <?php
-class Post {
+class Post extends DBObject {
+
+    public static $idType = "s";
+    public static $table = "posts";
 
     public static function loadFromId($id) {
     $img = loadDBObject("posts", "id='$id'", "Post");

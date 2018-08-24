@@ -1,6 +1,9 @@
 <?php
 
-class User {
+class User extends DBObject {
+
+    public static $idType = "i";
+    public static $table = "users";
 
     public function getImage() {
         return "/userimg.php?handle=" . $this->handle;
@@ -96,52 +99,6 @@ class User {
 
         mail($email, $subject, $message, implode("\r\n", $headers));
         return $id;
-    }
-
-    public function updateFields() {
-        $keys = func_get_args();
-        $keysExtra = array();
-        $numKeys = func_num_args();
-        $updateVals = "";
-
-        for ($i = 0; $i < $numKeys; $i++) {
-            $keysExtra[$i] = $keys[$i]."=?";
-        }
-
-        $updateVals = implode(",", $keysExtra);
-
-        $conn = $GLOBALS['conn'];
-        $stmt = $conn->prepare("UPDATE users SET {$updateVals} WHERE id=?");
-
-        $fieldTypes = "";
-
-        $params = array();
-        $values = array();
-
-        for ($i = 0; $i < $numKeys; $i++) {
-            $values[$i] = get_object_vars($this)[$keys[$i]];
-            switch (gettype($values[$i])) {
-            case "integer":
-                $fieldTypes = $fieldTypes."i";
-                break;
-            case "string":
-                $fieldTypes = $fieldTypes."s";
-                break;
-            case "array":
-                $fieldTypes = $fieldTypes."s";
-                $values[$i] = implode(",", $values[$i]);
-                $values[$i] = substr($values[$i], 0, strlen($values[$i]));
-                break;
-            }
-            $params = array_merge($params, array(&$values[$i]));
-        }
-
-        $params = array_merge(array($fieldTypes."i"), $params);
-
-        $params = array_merge($params, array(&$this->id));
-
-        call_user_func_array(array($stmt, "bind_param"), $params);
-        $stmt->execute();
     }
 
     public function addFavorite($type) {

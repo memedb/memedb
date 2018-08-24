@@ -1,5 +1,8 @@
 <?php
-class Comment {
+class Comment extends DBObject {
+
+    public static $idType = "s";
+    public static $table = "comments";
 
     public static function loadFromId($id) {
         $cmt = loadDBObject("comments", "id='$id'", "Comment");
