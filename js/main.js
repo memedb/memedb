@@ -398,6 +398,13 @@ function reply(id, handle) {
   document.getElementById("comment_text").style.marginTop = "22px";
 }
 
+function cancelReply() {
+  parent = null;
+  var elmt = document.getElementById("reply_to");
+  elmt.style.display = "none";
+  document.getElementById("comment_text").style.marginTop = "0px";
+}
+
 function uploadFile(file, session, type, parent, library) {
   if (session == null) {
     var cookies = document.cookie.split("; ");

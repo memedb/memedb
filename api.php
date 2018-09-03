@@ -159,10 +159,10 @@ Command::register("create_library", function($user) {
 
 Command::register("edit_library", function($user) {
   $id = $_POST['id'];
-  $conn = $GLOBALS['conn'];
-  $stmt = $conn->prepare("UPDATE `libraries` SET `name`=?, `visibility`=? WHERE `id`=?");
-  $stmt->bind_param("sis", $_POST['name'], $_POST['visibility'], $id);
-  $stmt->execute();
+  $lib = Library::loadFromId($id);
+  $lib->name = $_POST['name'];
+  $lib->visibility = $_POST['visibility'];
+  $lib->updateFields("name", "visibility");
   jsonMessage(array("type"=>"edit","id"=>$id));
 });
 

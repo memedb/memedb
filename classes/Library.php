@@ -27,6 +27,11 @@ class Library extends DBObject {
         return $libs;
     }
 
+    public static function loadFromId($id) {
+        $lib = loadDBObject("libraries", "id={$id}", "Library");
+        return $lib;
+    }
+
     public function getPosts() {
         if ($this->posts)
         return $this->posts;

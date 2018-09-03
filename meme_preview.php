@@ -170,7 +170,7 @@ function printComment(Comment $cmt, bool $reply) {
         <div class="comment-box">
             <div class="reply-box">
               <h1 class="reply-header" id="reply_to" style="display: none;">In reply to <b>@bobmandude9889</b></h1>
-              <i class="material-icons reply-icon hoverable">close</i>
+              <i class="material-icons reply-icon hoverable" onclick="cancelReply();">close</i>
             </div>
             <textarea name="comment_text" id="comment_text" rows="1" cols="10" wrap="hard" class="hover-post-textarea"></textarea>
             <div class="comment-options">
