@@ -1,5 +1,10 @@
 <?php
 class DBObject {
+
+    function __construct($idType, $table) {
+        $this->idType = $idType;
+        $this->table = $table;
+    }
     
     public function updateFields() {
         $keys = func_get_args();
@@ -14,7 +19,9 @@ class DBObject {
         $updateVals = implode(",", $keysExtra);
 
         $conn = $GLOBALS['conn'];
-        $stmt = $conn->prepare("UPDATE {$this->table} SET {$updateVals} WHERE id=?");
+        $stmtText = "UPDATE {$this->table} SET {$updateVals} WHERE `id`=?";
+        logger($stmtText);
+        $stmt = $conn->prepare($stmtText);
 
         $fieldTypes = "";
 
@@ -47,7 +54,13 @@ class DBObject {
         $stmt->execute();
     }
 
-
+    public function delete() {
+        $conn = $GLOBALS['conn'];
+        $stmt = $conn->prepare("DELETE FROM {$this->table} WHERE `id`=?");
+        logger("DELETE FROM {$this->table} WHERE `id`=?");
+        $stmt->bind_param($this->idType, $this->id);
+        $stmt->execute();
+    }
 
 }
 ?>

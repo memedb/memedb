@@ -2,6 +2,7 @@
 session_start();
 
 require('sql.php');
+require('classes/DBObject.php');
 require('classes/Comment.php');
 require('classes/Library.php');
 require('classes/Post.php');
@@ -168,10 +169,8 @@ Command::register("edit_library", function($user) {
 
 Command::register("delete_library", function($user) {
   $id = $_POST['id'];
-  $conn = $GLOBALS['conn'];
-  $stmt = $conn->prepare("DELETE FROM `libraries` WHERE `id`=?");
-  $stmt->bind_param("s", $id);
-  $stmt->execute();
+  $lib = Library::loadFromId($id);
+  $lib->delete();
   jsonMessage(array());
 });
 

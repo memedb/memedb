@@ -2,8 +2,9 @@
 
 class Library extends DBObject {
 
-    public static $idType = "s";
-    public static $table = "libraries";
+    function __construct() {
+        parent::__construct("s", "libraries");
+    }
 
     public static function create($name, $posts, $icon, $canUpload, $user) {
         $lib = new Library();
@@ -28,7 +29,7 @@ class Library extends DBObject {
     }
 
     public static function loadFromId($id) {
-        $lib = loadDBObject("libraries", "id={$id}", "Library");
+        $lib = loadDBObject("libraries", "id='{$id}'", "Library");
         return $lib;
     }
 

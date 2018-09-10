@@ -1,8 +1,10 @@
 <?php
 class Post extends DBObject {
 
-    public static $idType = "s";
-    public static $table = "posts";
+    function __construct() {
+        parent::__construct("s", "posts");
+    }
+
 
     public static function loadFromId($id) {
     $img = loadDBObject("posts", "id='$id'", "Post");
@@ -87,16 +89,18 @@ class Post extends DBObject {
     }
 
     public function getVotes() {
-    $conn = $GLOBALS['conn'];
-    $stmt = $conn->prepare("SELECT COUNT(vote) AS votes FROM `votes` WHERE `vote`=1 AND `post`=? UNION SELECT COUNT(vote) AS votes FROM `votes` WHERE `vote`=-1 AND `post`=? ");
-    $stmt->bind_param("ss", $this->id, $this->id);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $upvotes = $result->fetch_assoc()['votes'];
-    $downvotes = $result->fetch_assoc()['votes'];
-    logger("upvotes: " . $upvotes);
-    logger("downvotes: " . $downvotes);
-    return $upvotes - $downvotes;
+        $conn = $GLOBALS['conn'];
+        $stmt = $conn->prepare("SELECT `vote` FROM `votes` WHERE `post`=?");
+        $stmt->bind_param("s", $this->id);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $votes = 0;
+        if ($result->num_rows > 0) {
+            while ($row = $result->fetch_assoc()) {
+                $votes += $row['vote'];
+            }
+        }
+        return $votes;
     }
 
     public function getVote($user) {

@@ -2,8 +2,9 @@
 
 class User extends DBObject {
 
-    public static $idType = "i";
-    public static $table = "users";
+    function __construct() {
+        parent::__construct("i", "users");
+    }
 
     public function getImage() {
         return "/userimg.php?handle=" . $this->handle;
